@@ -143,14 +143,47 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}
 .a{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}.a.v{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.r,.a{animation:none;opacity:1;transform:none;transition:none}}
+
+/* ===== PROGRESS BAR ===== */
+.pbar{position:fixed;top:0;left:0;height:3px;z-index:200;background:linear-gradient(90deg,var(--rd),var(--pk));width:0%;transition:width .3s;box-shadow:0 0 8px rgba(164,0,17,.5)}
+
+/* ===== ANIMATED GRADIENT BLOBS ===== */
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.25;pointer-events:none}
+.blob-1{width:35vw;height:35vw;background:var(--rd);top:-10%;left:-8%;animation:bfloat 18s ease-in-out infinite}
+.blob-2{width:28vw;height:28vw;background:var(--pk);bottom:-8%;right:-5%;animation:bfloat 18s ease-in-out infinite reverse}
+@keyframes bfloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(3vw,-2vh) scale(1.08)}66%{transform:translate(-2vw,3vh) scale(.93)}}
+
+/* ===== ANIMATED FLOW DOTS ===== */
+.farr{position:relative;overflow:visible}
+.farr::after{content:'';position:absolute;width:6px;height:6px;background:var(--pk);border-radius:50%;top:50%;margin-top:-3px;box-shadow:0 0 8px var(--pk);animation:flowdot 2.2s ease-in-out infinite}
+@keyframes flowdot{0%{left:-4px;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 2px);opacity:0}}
+
+/* ===== COUNTER STYLE ===== */
+.ctr{font-family:'Cormorant Garamond',serif;font-weight:700}
+
+/* ===== ANIMATED SVG BARS ===== */
+.bar-grow{transition:width 1.5s cubic-bezier(.22,1,.36,1);width:0}
+.bar-grow.v{/* width set by JS */}
+
+/* ===== LAPTOP MOCKUP ===== */
+.laptop{background:#1a1a1a;border-radius:10px 10px 0 0;padding:6px 6px 0;max-width:90%;margin:0 auto;box-shadow:0 15px 50px rgba(0,0,0,.5)}
+.laptop .bbar{display:flex;gap:5px;padding:6px 10px;background:#2a2a2a;border-radius:6px 6px 0 0}
+.laptop .bbar .dd{width:8px;height:8px;border-radius:50%}
+.laptop .bbar .dd:nth-child(1){background:#ff5f57}.laptop .bbar .dd:nth-child(2){background:#ffbd2e}.laptop .bbar .dd:nth-child(3){background:#28ca41}
+.laptop .scr{border-radius:2px 2px 0 0;overflow:hidden;aspect-ratio:16/9.5;background:#0f0f23}
+.laptop .scr img,.laptop .scr video{width:100%;height:100%;object-fit:cover}
+.lbase{width:95%;margin:0 auto;height:10px;background:linear-gradient(to bottom,#2a2a2a,#1a1a1a);border-radius:0 0 6px 6px}
 </style>
 </head>
 <body>
+<!-- Progress bar -->
+<div class="pbar" id="pb"></div>
 <nav class="dots" id="nd"></nav>
 <div class="snum" id="sn">1 / 19</div>
 
 <!-- 1. TITLE -->
 <section class="s" id="s1">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
 <div class="topline"></div><div class="botline"></div>
 <div style="text-align:center;margin:auto 0">
   <div style="width:38px;height:38px;background:var(--rd);transform:rotate(45deg);margin:0 auto 1.2vh;box-shadow:0 0 20px rgba(164,0,17,.4)" class="r"></div>
@@ -182,10 +215,10 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div class="lbl a">THE SOLUTION</div>
 <h2 class="ttl a">One Unified Platform</h2>
 <div class="g g4 mt1">
-  <div class="stat a"><div class="n">12+</div><div class="l">Modules</div></div>
-  <div class="stat a"><div class="n">5</div><div class="l">Warehouses</div></div>
-  <div class="stat a"><div class="n">70+</div><div class="l">API Endpoints</div></div>
-  <div class="stat a"><div class="n">10+</div><div class="l">Active Users</div></div>
+  <div class="stat a"><div class="n ctr" data-target="12" data-suffix="+">0</div><div class="l">Modules</div></div>
+  <div class="stat a"><div class="n ctr" data-target="5" data-suffix="">0</div><div class="l">Warehouses</div></div>
+  <div class="stat a"><div class="n ctr" data-target="70" data-suffix="+">0</div><div class="l">API Endpoints</div></div>
+  <div class="stat a"><div class="n ctr" data-target="10" data-suffix="+">0</div><div class="l">Active Users</div></div>
 </div>
 <!-- Warehouse Map Chart -->
 <div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1vh 2vw">
@@ -206,6 +239,7 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 
 <!-- 4. ARCHITECTURE -->
 <section class="s" id="s4">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
 <div class="lbl a">PLATFORM ARCHITECTURE</div>
 <h2 class="ttl a">How IM8 Hub Connects Everything</h2>
 <div class="a" style="position:relative;flex:1;display:flex;align-items:center;justify-content:center;margin-top:1vh">
@@ -397,6 +431,7 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 
 <!-- 12. AI -->
 <section class="s s--accent" id="s13">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
 <div class="lbl a">AI-POWERED DEVELOPMENT</div>
 <h2 class="ttl a">How AI Accelerated Everything</h2>
 <div class="g g2 mt1">
@@ -446,10 +481,10 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div class="lbl a">HOW WE BUILT IT</div>
 <h2 class="ttl a">6 Weeks. 1 Engineer + AI. Full Platform.</h2>
 <div class="g g4 mt1">
-  <div class="stat stat--w a"><div class="n">~6</div><div class="l">Weeks</div><div class="sm">From March 2026</div></div>
-  <div class="stat stat--w a"><div class="n">1</div><div class="l">Engineer</div><div class="sm">+ AI pair programmer</div></div>
-  <div class="stat stat--w a"><div class="n">12+</div><div class="l">Modules</div><div class="sm">Production-ready</div></div>
-  <div class="stat stat--w a"><div class="n">70+</div><div class="l">Endpoints</div><div class="sm">Complete API</div></div>
+  <div class="stat stat--w a"><div class="n ctr" data-target="6" data-prefix="~" data-suffix="">0</div><div class="l">Weeks</div><div class="sm">From March 2026</div></div>
+  <div class="stat stat--w a"><div class="n ctr" data-target="1" data-suffix="">0</div><div class="l">Engineer</div><div class="sm">+ AI pair programmer</div></div>
+  <div class="stat stat--w a"><div class="n ctr" data-target="12" data-suffix="+">0</div><div class="l">Modules</div><div class="sm">Production-ready</div></div>
+  <div class="stat stat--w a"><div class="n ctr" data-target="70" data-suffix="+">0</div><div class="l">Endpoints</div><div class="sm">Complete API</div></div>
 </div>
 <!-- Development Timeline -->
 <div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.2vh 2vw">
@@ -557,6 +592,7 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 
 <!-- 19. CLOSING -->
 <section class="s" id="s19">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
 <div class="topline"></div><div class="botline"></div>
 <div style="text-align:center;margin:auto 0">
   <div style="width:32px;height:32px;background:var(--rd);transform:rotate(45deg);margin:0 auto 1vh;box-shadow:0 0 16px rgba(164,0,17,.4)" class="r"></div>
@@ -576,15 +612,43 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 
 <script>
 (function(){
-  const S=document.querySelectorAll('.s'),N=S.length,nav=document.getElementById('nd'),num=document.getElementById('sn');
+  const S=document.querySelectorAll('.s'),N=S.length,nav=document.getElementById('nd'),num=document.getElementById('sn'),pb=document.getElementById('pb');
+
+  // Nav dots
   S.forEach((_,i)=>{const d=document.createElement('button');d.className='dot';d.onclick=()=>S[i].scrollIntoView({behavior:'smooth'});nav.appendChild(d)});
   const dots=nav.querySelectorAll('.dot');
+
+  // Slide observer
   const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const i=[...S].indexOf(e.target);
     dots.forEach((d,j)=>{d.classList.toggle('on',j===i);d.style.background=j===i?'#FF9693':'rgba(255,255,255,.2)'});
     num.textContent=`${i+1} / ${N}`;
-    e.target.querySelectorAll('.a').forEach((el,j)=>setTimeout(()=>el.classList.add('v'),j*50))})},{threshold:.25});
+    e.target.querySelectorAll('.a').forEach((el,j)=>setTimeout(()=>el.classList.add('v'),j*50));
+    // Counters
+    e.target.querySelectorAll('.ctr:not(.cd)').forEach(el=>{el.classList.add('cd');aCtr(el)});
+    // Bar grow
+    e.target.querySelectorAll('.bar-grow:not(.gd)').forEach(el=>{el.classList.add('gd');el.style.width=el.dataset.w});
+  })},{threshold:.25});
   S.forEach(s=>obs.observe(s));
-  setTimeout(()=>S[0].querySelectorAll('.a').forEach((el,i)=>setTimeout(()=>el.classList.add('v'),i*50)),100);
+
+  // First slide init
+  setTimeout(()=>{
+    S[0].querySelectorAll('.a').forEach((el,i)=>setTimeout(()=>el.classList.add('v'),i*50));
+    S[0].querySelectorAll('.ctr:not(.cd)').forEach(el=>{el.classList.add('cd');aCtr(el)});
+  },100);
+
+  // Animated counter (ease-out cubic)
+  function aCtr(el){
+    const t=parseFloat(el.dataset.target)||0,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',dur=parseInt(el.dataset.duration)||1600,isF=t%1!==0,s0=performance.now();
+    function tick(now){const p=Math.min((now-s0)/dur,1),e=1-Math.pow(1-p,3),v=e*t;
+      el.textContent=pre+(isF?v.toFixed(1):Math.floor(v).toLocaleString())+suf;
+      if(p<1)requestAnimationFrame(tick);}
+    requestAnimationFrame(tick);
+  }
+
+  // Progress bar
+  window.addEventListener('scroll',()=>{pb.style.width=scrollY/(document.body.scrollHeight-innerHeight)*100+'%'},{passive:true});
+
+  // Keyboard
   document.addEventListener('keydown',e=>{const c=Math.round(scrollY/innerHeight);
     if(['ArrowDown',' ','ArrowRight'].includes(e.key)&&c<N-1){e.preventDefault();S[c+1].scrollIntoView({behavior:'smooth'})}
     if(['ArrowUp','ArrowLeft'].includes(e.key)&&c>0){e.preventDefault();S[c-1].scrollIntoView({behavior:'smooth'})}});
