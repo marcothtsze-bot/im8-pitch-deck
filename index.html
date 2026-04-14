@@ -4,1468 +4,591 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IM8 Hub — Operations Intelligence Platform</title>
-
-<!-- Fonts: IM8 Four-Font System — Cormorant Garamond (display) + Spectral (headings) + Raleway (body) + Rajdhani (captions/labels) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&family=Spectral:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-/* === ROOT VARIABLES — IM8 BRAND === */
-:root {
-  --burgundy: #50000B;
-  --red-algae: #A40011;
-  --flamingo: #FF9693;
-  --stone: #E1CBB9;
-  --sand: #FFE9D8;
-  --off-white: #F5EAEA;
-  --white: #FFFFFF;
-  --dark-text: #50000B;
-  --muted-text: #8B6B6B;
-  --success: #22C55E;
-
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-heading: 'Spectral', Georgia, serif;
-  --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
-  --font-caption: 'Rajdhani', 'Helvetica Neue', sans-serif;
-
-  --slide-transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* === RESET & BASE === */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--dark-text);
-  background: var(--burgundy);
-  -webkit-font-smoothing: antialiased;
-}
-
-/* === SLIDE BASE === */
-.slide {
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
-  scroll-snap-align: start;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(1.5rem, 4vh, 3rem) clamp(2rem, 6vw, 5rem);
-}
-
-.slide--dark {
-  background: var(--burgundy);
-  color: var(--white);
-}
-
-.slide--light {
-  background: var(--off-white);
-  color: var(--dark-text);
-}
-
-/* === TYPOGRAPHY === */
-.section-label {
-  font-family: var(--font-caption);
-  font-size: clamp(0.8rem, 1.4vw, 1rem);
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  margin-bottom: clamp(0.3rem, 1vh, 0.6rem);
-}
-
-.slide--dark .section-label { color: var(--flamingo); }
-.slide--light .section-label { color: var(--red-algae); }
-
-.slide-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  line-height: 1.1;
-  margin-bottom: clamp(0.8rem, 2vh, 1.5rem);
-}
-
-.slide--dark .slide-title { color: var(--white); }
-.slide--light .slide-title { color: var(--burgundy); }
-
-.subtitle {
-  font-family: var(--font-heading);
-  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-/* === DECORATIVE ELEMENTS === */
-.top-bar {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: var(--red-algae);
-}
-
-.bottom-bar {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 4px;
-  background: var(--red-algae);
-}
-
-.diamond {
-  width: clamp(30px, 4vw, 50px);
-  height: clamp(30px, 4vw, 50px);
-  background: var(--red-algae);
-  transform: rotate(45deg);
-  margin: 0 auto clamp(1rem, 2vh, 2rem);
-}
-
-.divider {
-  width: clamp(100px, 20vw, 200px);
-  height: 2px;
-  background: var(--stone);
-  margin: clamp(0.8rem, 1.5vh, 1.2rem) auto;
-}
-
-/* === CARDS === */
-.card-grid {
-  display: grid;
-  gap: clamp(0.6rem, 1.5vw, 1rem);
-  margin-top: clamp(0.5rem, 1.5vh, 1rem);
-}
-
-.card-grid--3x2 { grid-template-columns: repeat(3, 1fr); }
-.card-grid--2x2 { grid-template-columns: repeat(2, 1fr); }
-.card-grid--4 { grid-template-columns: repeat(4, 1fr); }
-
-.card {
-  background: var(--white);
-  border-radius: 6px;
-  padding: clamp(0.7rem, 1.5vw, 1.2rem);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 4px; height: 100%;
-  background: var(--red-algae);
-}
-
-.card-icon {
-  width: clamp(28px, 3vw, 40px);
-  height: clamp(28px, 3vw, 40px);
-  background: var(--red-algae);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: clamp(0.3rem, 0.8vh, 0.5rem);
-  color: white;
-  font-size: clamp(0.7rem, 1.2vw, 1rem);
-}
-
-.card h3 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
-  color: var(--burgundy);
-  margin-bottom: clamp(0.15rem, 0.4vh, 0.3rem);
-}
-
-.card p {
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-  color: var(--muted-text);
-  line-height: 1.45;
-}
-
-/* === STAT BOXES === */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(0.6rem, 1.5vw, 1rem);
-  margin: clamp(0.8rem, 2vh, 1.5rem) 0;
-}
-
-.stat-box {
-  text-align: center;
-  padding: clamp(0.8rem, 1.5vw, 1.2rem);
-  border-radius: 6px;
-}
-
-.stat-box--red {
-  background: var(--red-algae);
-  color: var(--white);
-}
-
-.stat-box--white {
-  background: var(--white);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  border-top: 4px solid var(--red-algae);
-}
-
-.stat-number {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1;
-}
-
-.stat-box--red .stat-number { color: var(--white); }
-.stat-box--white .stat-number { color: var(--red-algae); }
-
-.stat-label {
-  font-family: var(--font-caption);
-  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
-  font-weight: 600;
-  margin-top: 0.2rem;
-}
-
-.stat-sub {
-  font-size: clamp(0.55rem, 0.9vw, 0.7rem);
-  color: var(--muted-text);
-  margin-top: 0.1rem;
-}
-
-.stat-box--red .stat-label { color: var(--flamingo); }
-.stat-box--red .stat-sub { color: rgba(255,255,255,0.6); }
-
-/* === BEFORE/AFTER COLUMNS === */
-.compare-cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1rem, 2.5vw, 2rem);
-  margin-top: clamp(0.5rem, 1.5vh, 1rem);
-}
-
-.compare-box {
-  background: var(--white);
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  overflow: hidden;
-}
-
-.compare-header {
-  padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.8rem, 1.5vw, 1.2rem);
-  text-align: center;
-  font-family: var(--font-caption);
-  font-weight: 700;
-  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
-  color: white;
-  letter-spacing: 0.15em;
-}
-
-.compare-header--before { background: #DC2626; }
-.compare-header--after { background: #16A34A; }
-
-.compare-body {
-  padding: clamp(0.6rem, 1.2vw, 1rem) clamp(0.8rem, 1.5vw, 1.2rem);
-}
-
-.compare-body ul {
-  list-style: none;
-  padding: 0;
-}
-
-.compare-body li {
-  font-size: clamp(0.8rem, 1.3vw, 1rem);
-  padding: clamp(0.2rem, 0.4vh, 0.3rem) 0;
-  padding-left: 1.2em;
-  position: relative;
-  line-height: 1.45;
-}
-
-.compare-body li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--red-algae);
-  font-weight: 700;
-}
-
-.compare-body li.highlight {
-  color: var(--red-algae);
-  font-weight: 700;
-}
-
-.compare-body li.highlight-green {
-  color: #16A34A;
-  font-weight: 700;
-}
-
-/* === TIME SAVING BANNER === */
-.time-banner {
-  background: var(--sand);
-  padding: clamp(0.5rem, 1vh, 0.8rem) clamp(1rem, 2vw, 1.5rem);
-  border-radius: 6px;
-  margin-top: clamp(0.5rem, 1.2vh, 1rem);
-  display: flex;
-  align-items: center;
-  gap: clamp(0.5rem, 1vw, 0.8rem);
-}
-
-.time-banner .icon { font-size: clamp(1rem, 2vw, 1.5rem); }
-
-.time-banner strong {
-  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
-  color: var(--burgundy);
-}
-
-/* === FLOW DIAGRAM === */
-.flow-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.3rem, 0.8vw, 0.5rem);
-  margin: clamp(0.5rem, 1.5vh, 1rem) 0;
-}
-
-.flow-step {
-  background: var(--white);
-  padding: clamp(0.5rem, 1vw, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);
-  border-radius: 6px;
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-  font-weight: 600;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  min-width: clamp(100px, 15vw, 160px);
-}
-
-.flow-step--active {
-  background: var(--red-algae);
-  color: white;
-}
-
-.flow-arrow {
-  color: var(--red-algae);
-  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-  font-weight: 700;
-}
-
-/* === TABLE === */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: clamp(0.5rem, 1.2vh, 0.8rem);
-  font-size: clamp(0.8rem, 1.3vw, 1rem);
-}
-
-.data-table thead th {
-  background: var(--red-algae);
-  color: white;
-  padding: clamp(0.35rem, 0.7vh, 0.5rem) clamp(0.5rem, 1vw, 0.8rem);
-  text-align: left;
-  font-weight: 600;
-}
-
-.data-table tbody tr:nth-child(odd) { background: rgba(80,0,11,0.08); }
-.data-table tbody tr:nth-child(even) { background: rgba(80,0,11,0.15); }
-
-.data-table td {
-  padding: clamp(0.3rem, 0.6vh, 0.5rem) clamp(0.5rem, 1vw, 0.8rem);
-}
-
-.slide--dark .data-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.04); }
-.slide--dark .data-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.08); }
-
-.text-green { color: #4ADE80; }
-.text-pink { color: var(--flamingo); }
-
-/* === TOTAL BAR === */
-.total-bar {
-  background: var(--red-algae);
-  text-align: center;
-  padding: clamp(0.5rem, 1vh, 0.8rem);
-  margin-top: clamp(0.4rem, 0.8vh, 0.6rem);
-  border-radius: 6px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-  color: white;
-}
-
-/* === MODULE CHECKLIST === */
-.module-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(0.2rem, 0.5vw, 0.4rem) clamp(0.5rem, 1.5vw, 1rem);
-  margin-top: clamp(0.3rem, 0.8vh, 0.5rem);
-}
-
-.module-item {
-  display: flex;
-  align-items: center;
-  gap: 0.4em;
-  font-size: clamp(0.8rem, 1.3vw, 1rem);
-}
-
-.module-item .check {
-  color: var(--success);
-  font-weight: 700;
-}
-
-.slide--dark .module-item { color: var(--stone); }
-
-/* === CARRIER BADGES === */
-.carrier-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.5rem, 1vw, 0.8rem);
-  margin: clamp(0.5rem, 1vh, 0.8rem) 0;
-}
-
-.carrier-badge {
-  background: var(--red-algae);
-  color: white;
-  text-align: center;
-  padding: clamp(0.5rem, 1vh, 0.8rem);
-  border-radius: 6px;
-}
-
-.carrier-badge strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
-}
-
-.carrier-badge span {
-  font-size: clamp(0.55rem, 0.9vw, 0.75rem);
-  opacity: 0.8;
-}
-
-/* === USER GROUP COLUMNS === */
-.user-cols {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(0.6rem, 1.5vw, 1rem);
-  margin-top: clamp(0.5rem, 1.5vh, 1rem);
-}
-
-.user-col {
-  background: var(--white);
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  text-align: center;
-  padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(0.5rem, 1vw, 0.8rem);
-}
-
-.user-col .avatar {
-  width: clamp(36px, 5vw, 50px);
-  height: clamp(36px, 5vw, 50px);
-  background: var(--red-algae);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: clamp(1rem, 2vw, 1.4rem);
-  margin: 0 auto clamp(0.3rem, 0.6vh, 0.5rem);
-}
-
-.user-col h3 {
-  font-family: var(--font-heading);
-  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
-  font-weight: 600;
-  color: var(--burgundy);
-}
-
-.user-col .role {
-  font-size: clamp(0.55rem, 0.8vw, 0.7rem);
-  color: var(--red-algae);
-  font-style: italic;
-  margin-bottom: 0.3rem;
-}
-
-.user-col .sep {
-  width: 60%;
-  height: 1px;
-  background: var(--stone);
-  margin: 0.3rem auto;
-}
-
-.user-col p {
-  font-size: clamp(0.7rem, 1vw, 0.85rem);
-  color: var(--muted-text);
-  line-height: 1.45;
-}
-
-/* === ROADMAP === */
-.roadmap-cols {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.8rem, 2vw, 1.5rem);
-  margin-top: clamp(0.5rem, 1.5vh, 1rem);
-}
-
-.roadmap-col {
-  background: var(--white);
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  padding: clamp(0.8rem, 1.5vw, 1.2rem);
-  text-align: center;
-}
-
-.roadmap-badge {
-  display: inline-block;
-  padding: clamp(0.2rem, 0.4vh, 0.3rem) clamp(0.6rem, 1.2vw, 1rem);
-  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: white;
-  border-radius: 3px;
-  margin-bottom: clamp(0.3rem, 0.6vh, 0.5rem);
-}
-
-.roadmap-badge--now { background: var(--red-algae); }
-.roadmap-badge--next { background: var(--burgundy); }
-.roadmap-badge--future { background: var(--stone); color: var(--burgundy); }
-
-.roadmap-col h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-  font-weight: 700;
-  color: var(--burgundy);
-  margin-bottom: 0.3rem;
-}
-
-.roadmap-col .sep {
-  width: 50%;
-  height: 1px;
-  background: var(--stone);
-  margin: 0.3rem auto 0.5rem;
-}
-
-.roadmap-col ul {
-  list-style: none;
-  padding: 0;
-  text-align: left;
-}
-
-.roadmap-col li {
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-  color: var(--muted-text);
-  padding: 0.2rem 0;
-  padding-left: 1.2em;
-  position: relative;
-}
-
-.roadmap-col li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--red-algae);
-}
-
-/* === TECH STACK PILLS === */
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(0.4rem, 0.8vw, 0.6rem);
-  margin-top: clamp(0.3rem, 0.6vh, 0.5rem);
-}
-
-.tech-pill {
-  background: var(--white);
-  border-left: 4px solid var(--red-algae);
-  padding: clamp(0.4rem, 0.7vh, 0.6rem) clamp(0.6rem, 1vw, 0.8rem);
-  border-radius: 4px;
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-  color: var(--muted-text);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-/* === TWO-COL FEATURE === */
-.feature-cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(0.8rem, 2vw, 1.5rem);
-}
-
-.feature-box {
-  background: var(--white);
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  overflow: hidden;
-}
-
-.feature-box-header {
-  padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.8rem, 1.5vw, 1rem);
-  color: white;
-  font-family: var(--font-caption);
-  font-weight: 700;
-  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  letter-spacing: 0.05em;
-}
-
-.feature-box-header--burgundy { background: var(--burgundy); }
-.feature-box-header--red { background: var(--red-algae); }
-
-.feature-box-body {
-  padding: clamp(0.5rem, 1vw, 0.8rem) clamp(0.8rem, 1.5vw, 1rem);
-}
-
-.feature-box-body ul { list-style: none; padding: 0; }
-
-.feature-box-body li {
-  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
-  padding: clamp(0.15rem, 0.3vh, 0.25rem) 0;
-  padding-left: 1.2em;
-  position: relative;
-  color: var(--dark-text);
-  line-height: 1.45;
-}
-
-.feature-box-body li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--success);
-  font-weight: 700;
-}
-
-/* === CLOSING SLIDE TAKEAWAYS === */
-.takeaway-list {
-  list-style: none;
-  padding: 0;
-  margin: clamp(0.8rem, 2vh, 1.5rem) auto;
-  max-width: 700px;
-}
-
-.takeaway-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
-  color: var(--stone);
-  padding: clamp(0.2rem, 0.5vh, 0.35rem) 0;
-}
-
-.takeaway-list .check { color: var(--success); font-size: 1.1em; }
-
-/* === ANIMATIONS === */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-30px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(30px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.reveal {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.reveal-delay-1 { animation-delay: 0.1s; }
-.reveal-delay-2 { animation-delay: 0.2s; }
-.reveal-delay-3 { animation-delay: 0.3s; }
-.reveal-delay-4 { animation-delay: 0.4s; }
-.reveal-delay-5 { animation-delay: 0.5s; }
-.reveal-delay-6 { animation-delay: 0.6s; }
-
-.reveal-left { animation-name: slideInLeft; }
-.reveal-right { animation-name: slideInRight; }
-.reveal-scale { animation-name: scaleIn; }
-
-/* Scroll-triggered animations */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* === NAVIGATION DOTS === */
-.nav-dots {
-  position: fixed;
-  right: clamp(0.5rem, 1.5vw, 1rem);
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 100;
-}
-
-.nav-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.3);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.nav-dot:hover { background: var(--flamingo); transform: scale(1.3); }
-.nav-dot.active { background: var(--flamingo); transform: scale(1.3); }
-
-/* === SLIDE COUNTER === */
-.slide-counter {
-  position: fixed;
-  bottom: clamp(0.5rem, 1.5vh, 1rem);
-  right: clamp(0.8rem, 2vw, 1.5rem);
-  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
-  color: rgba(255,255,255,0.4);
-  font-family: var(--font-body);
-  font-weight: 500;
-  z-index: 100;
-  letter-spacing: 0.1em;
-}
-
-/* === REDUCED MOTION === */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal, .animate-on-scroll { animation: none; opacity: 1; transform: none; transition: none; }
-}
-
-/* === RESPONSIVE HEIGHT ADJUSTMENTS === */
-@media (max-height: 700px) {
-  .slide { padding: clamp(1rem, 3vh, 2rem) clamp(1.5rem, 5vw, 4rem); }
-  .card-grid--3x2 { gap: 0.4rem; }
-  .card { padding: 0.5rem; }
-}
-
-@media (max-height: 600px) {
-  .slide-title { font-size: clamp(1.4rem, 3.5vw, 2.2rem); }
-  .stat-number { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
-}
-
-@media (max-height: 500px) {
-  .slide { padding: 0.8rem 2rem; }
-  .card-grid { gap: 0.3rem; }
-}
-
-/* === MOBILE === */
-@media (max-width: 768px) {
-  .card-grid--3x2 { grid-template-columns: repeat(2, 1fr); }
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .module-grid { grid-template-columns: repeat(2, 1fr); }
-  .user-cols { grid-template-columns: repeat(2, 1fr); }
-  .roadmap-cols { grid-template-columns: 1fr; }
-  .carrier-row { grid-template-columns: 1fr; }
-  .nav-dots { display: none; }
-}
+:root{--dk:#50000B;--rd:#A40011;--pk:#FF9693;--st:#E1CBB9;--sd:#FFE9D8;--wh:#fff;--gn:#4ADE80;--gnd:#16A34A}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:antialiased;color:#fff}
+
+/* ===== ALL SLIDES DARK GRADIENT ===== */
+.s{width:100vw;height:100vh;height:100dvh;overflow:hidden;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;justify-content:center;padding:3vh 5vw;background:linear-gradient(160deg,#50000B 0%,#2D0006 55%,#1A0004 100%);color:#fff}
+.s--accent{background:linear-gradient(160deg,#6B0010 0%,#3D0008 55%,#1A0004 100%)}
+
+/* ===== TYPOGRAPHY ===== */
+.lbl{font-family:'Rajdhani',sans-serif;font-size:1.1vw;font-weight:600;letter-spacing:.35em;text-transform:uppercase;margin-bottom:.4vh;color:var(--pk)}
+.ttl{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3.6vw;line-height:1.05;margin-bottom:1.2vh;color:#fff}
+.body{font-size:1.05vw;line-height:1.5;color:rgba(255,255,255,.65)}
+.cap{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.95vw;letter-spacing:.2em;text-transform:uppercase;color:var(--st)}
+
+/* ===== LAYOUT ===== */
+.g{display:grid;gap:1.1vw}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:1fr 1fr 1fr 1fr}
+.row{display:flex;gap:1.3vw;align-items:stretch}.col{flex:1;min-width:0}
+.mt1{margin-top:1.2vh}.mt2{margin-top:2vh}
+
+/* ===== DECORATIVE ===== */
+.topline{position:absolute;top:0;left:0;right:0;height:5px;background:var(--rd)}
+.botline{position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--rd)}
+
+/* ===== GLASS CARDS (the premium look) ===== */
+.glass{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5vh 1.2vw;backdrop-filter:blur(4px)}
+.glass h3{font-family:'Spectral',serif;font-weight:600;font-size:1.3vw;color:#fff;margin-bottom:.3vh}
+.glass p{font-size:1vw;color:rgba(255,255,255,.6);line-height:1.5}
+.glass--accent{border-left:4px solid var(--rd)}
+.glass--glow{box-shadow:0 0 20px rgba(164,0,17,.15),0 4px 20px rgba(0,0,0,.3)}
+.ico{width:2.5vw;height:2.5vw;background:var(--rd);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:1.2vw;margin-bottom:.4vh;box-shadow:0 0 12px rgba(164,0,17,.3)}
+
+/* ===== FLOW DIAGRAMS ===== */
+.flow-dia{display:flex;align-items:center;justify-content:center;gap:.6vw;padding:1.2vh 0;flex-wrap:wrap}
+.flow-col{display:flex;flex-direction:column;gap:.4vh;align-items:center}
+.fp{display:inline-flex;align-items:center;gap:.3em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.5vh .7vw;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.95vw;color:rgba(255,255,255,.85);white-space:nowrap}
+.fp--hub{background:var(--rd);border-color:var(--rd);color:#fff;font-size:1.1vw;padding:.7vh 1.2vw;box-shadow:0 0 30px rgba(164,0,17,.4)}
+.fp--out{background:rgba(255,150,147,.1);border-color:rgba(255,150,147,.25);color:var(--pk)}
+.fp--slack{background:rgba(74,21,75,.6);border-color:rgba(74,21,75,.8);color:#fff}
+.fp--green{background:rgba(22,163,74,.15);border-color:rgba(22,163,74,.3);color:var(--gn)}
+.farr{color:var(--pk);font-size:1.6vw;font-weight:700;flex-shrink:0;opacity:.6}
+.flow-label{font-family:'Rajdhani',sans-serif;font-size:.7vw;color:rgba(255,255,255,.3);letter-spacing:.12em;text-transform:uppercase;text-align:center}
+
+/* ===== STATS ===== */
+.stat{text-align:center;padding:1.8vh 1vw;border-radius:12px;background:rgba(164,0,17,.25);border:1px solid rgba(164,0,17,.4)}
+.stat .n{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:4.2vw;line-height:1;color:#fff}
+.stat .l{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1.15vw;margin-top:.1vh;color:var(--pk)}
+.stat .sm{font-size:.8vw;color:rgba(255,255,255,.35);margin-top:.1vh}
+.stat--w{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.stat--w .n{color:var(--pk)}
+
+/* ===== BEFORE/AFTER ===== */
+.vs{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.vs-h{padding:.8vh 0;text-align:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1vw;color:#fff;letter-spacing:.2em;text-transform:uppercase}
+.vs-h--b{background:rgba(185,28,28,.6)}.vs-h--a{background:rgba(22,163,74,.5)}
+.vs-body{padding:1.2vh 1.3vw;flex:1}
+.vs-body li{font-size:1.05vw;padding:.35vh 0;padding-left:1.4em;position:relative;list-style:none;line-height:1.4;color:rgba(255,255,255,.75)}
+.vs-body li::before{content:'•';position:absolute;left:.3em;color:var(--pk);font-weight:700;font-size:1.1em}
+.hi-r{color:var(--pk);font-weight:700}.hi-g{color:var(--gn);font-weight:700}
+
+/* ===== BANNER ===== */
+.ban{background:rgba(164,0,17,.15);border:1px solid rgba(164,0,17,.3);padding:1vh 1.3vw;border-radius:10px;display:flex;align-items:center;gap:.8vw}
+.ban .ic{font-size:1.5vw;flex-shrink:0}
+.ban strong{font-size:1.15vw;color:var(--pk)}
+.ban span{font-size:1vw;color:rgba(255,255,255,.7)}
+
+/* ===== FEATURE BOXES ===== */
+.feat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.feat-h{padding:.8vh 1.2vw;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05vw;letter-spacing:.1em;display:flex;align-items:center;gap:.4em;color:#fff}
+.feat-h--d{background:rgba(80,0,11,.6)}.feat-h--r{background:rgba(164,0,17,.5)}
+.feat-b{padding:1vh 1.2vw;flex:1}
+.feat-b li{font-size:.95vw;padding:.3vh 0;padding-left:1.4em;position:relative;list-style:none;line-height:1.4;color:rgba(255,255,255,.7)}
+.feat-b li::before{content:'✓';position:absolute;left:0;color:var(--gn);font-weight:700}
+
+/* ===== TABLE ===== */
+.tbl{width:100%;border-collapse:collapse;font-size:1.1vw}
+.tbl thead th{background:rgba(164,0,17,.5);color:#fff;padding:.7vh .9vw;text-align:left;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1vw;letter-spacing:.08em;text-transform:uppercase}
+.tbl tbody tr:nth-child(odd){background:rgba(255,255,255,.03)}.tbl tbody tr:nth-child(even){background:rgba(255,255,255,.07)}
+.tbl td{padding:.6vh .9vw}
+.tg{color:var(--gn)}.tp{color:var(--pk)}.tb{font-weight:700}
+.tbar{background:var(--rd);text-align:center;padding:1vh;border-radius:10px;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5vw;color:#fff;margin-top:.8vh;box-shadow:0 0 20px rgba(164,0,17,.3)}
+
+/* ===== CARRIERS ===== */
+.carrier{background:rgba(164,0,17,.3);border:1px solid rgba(164,0,17,.5);color:#fff;text-align:center;padding:1vh;border-radius:10px}
+.carrier strong{display:block;font-family:'Spectral',serif;font-size:1.4vw}
+.carrier span{font-family:'Rajdhani',sans-serif;font-size:.85vw;color:var(--pk)}
+
+/* ===== USER CARDS ===== */
+.ucard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;text-align:center;padding:1.5vh .8vw}
+.ucard .av{width:3vw;height:3vw;background:var(--rd);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3vw;margin:0 auto .4vh;box-shadow:0 0 12px rgba(164,0,17,.3)}
+.ucard h3{font-family:'Spectral',serif;font-size:1.1vw;font-weight:600;color:#fff}
+.ucard .rl{font-family:'Rajdhani',sans-serif;font-size:.8vw;color:var(--pk);letter-spacing:.1em;text-transform:uppercase}
+.ucard .sep{width:40%;height:1px;background:rgba(255,255,255,.1);margin:.3vh auto}
+.ucard p{font-size:.85vw;color:rgba(255,255,255,.55);line-height:1.4}
+
+/* ===== ROADMAP ===== */
+.rcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5vh 1.2vw;text-align:center}
+.rbadge{display:inline-block;padding:.2vh .7vw;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8vw;letter-spacing:.25em;text-transform:uppercase;border-radius:4px;margin-bottom:.4vh}
+.rb-now{background:var(--rd);color:#fff}.rb-next{background:rgba(255,255,255,.15);color:#fff}.rb-fut{background:rgba(225,203,185,.2);color:var(--st)}
+.rcard h3{font-family:'Cormorant Garamond',serif;font-size:1.4vw;font-weight:700;color:#fff;margin-bottom:.2vh}
+.rcard .rsep{width:35%;height:1px;background:rgba(255,255,255,.1);margin:.2vh auto .4vh}
+.rcard li{font-size:.95vw;color:rgba(255,255,255,.55);padding:.2vh 0;padding-left:1.2em;position:relative;text-align:left;list-style:none;line-height:1.35}
+.rcard li::before{content:'→';position:absolute;left:0;color:var(--pk);font-weight:700}
+
+/* ===== TECH PILLS ===== */
+.tpill{background:rgba(255,255,255,.06);border-left:4px solid var(--rd);border-radius:8px;padding:.7vh .9vw;font-size:.95vw;color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)}
+.tpill strong{color:var(--pk)}
+
+/* ===== CHECKLIST ===== */
+.chk{display:grid;grid-template-columns:repeat(4,1fr);gap:.3vh 1.3vw}
+.chk-i{display:flex;align-items:center;gap:.4em;font-size:1.05vw;color:var(--st)}
+.chk-i .c{color:var(--gn);font-weight:700;font-size:1.1em}
+
+/* ===== AI CARDS ===== */
+.ai-card{background:rgba(164,0,17,.1);border:2px solid rgba(164,0,17,.4);border-radius:14px;padding:1.5vh 1.3vw;box-shadow:0 0 20px rgba(164,0,17,.1)}
+.ai-card h3{font-family:'Spectral',serif;font-weight:600;font-size:1.35vw;color:#fff;margin-bottom:.3vh}
+.ai-card p{font-size:1vw;color:rgba(255,255,255,.6);line-height:1.5}
+.ai-badge{display:inline-block;background:var(--rd);color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85vw;letter-spacing:.15em;padding:.2vh .6vw;border-radius:4px;margin-bottom:.4vh;box-shadow:0 0 10px rgba(164,0,17,.3)}
+
+/* ===== TAKEAWAYS ===== */
+.tk{display:flex;align-items:center;gap:.5em;padding:.35vh 0}
+.tk .c{color:var(--gn);font-size:1.2em}
+.tk span{font-size:1.15vw;color:var(--st)}
+
+/* ===== NAV ===== */
+.dots{position:fixed;right:.8vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:100}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:.3s;padding:0}
+.dot:hover,.dot.on{background:var(--pk);transform:scale(1.4)}
+.snum{position:fixed;bottom:.8vh;right:1.3vw;font-family:'Rajdhani',sans-serif;font-size:.7vw;color:rgba(255,255,255,.25);z-index:100;letter-spacing:.15em}
+
+/* ===== ANIMATIONS ===== */
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.r{opacity:0;animation:up .6s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}
+.a{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}.a.v{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.r,.a{animation:none;opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
+<nav class="dots" id="nd"></nav>
+<div class="snum" id="sn">1 / 19</div>
 
-<!-- === NAVIGATION DOTS === -->
-<nav class="nav-dots" id="navDots"></nav>
-<div class="slide-counter" id="slideCounter">1 / 15</div>
-
-<!-- ============================================================ -->
-<!-- SLIDE 1: TITLE -->
-<!-- ============================================================ -->
-<section class="slide slide--dark" id="slide-1">
-  <div class="top-bar"></div>
-  <div class="bottom-bar"></div>
-  <div style="text-align:center;">
-    <div class="diamond reveal"></div>
-    <!-- IM8 official SVG wordmark (I◆M◆8®) -->
-    <div class="reveal reveal-delay-1" style="display:flex;justify-content:center;margin-bottom:clamp(0.3rem,0.8vh,0.5rem);">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" aria-label="IM8" style="width:clamp(200px,28vw,380px);height:auto;">
-        <path fill="#ffffff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/>
-      </svg>
-    </div>
-    <h2 style="font-family:var(--font-caption);font-size:clamp(1rem,2vw,1.4rem);font-weight:600;letter-spacing:0.3em;color:var(--flamingo);text-transform:uppercase;" class="reveal reveal-delay-1">HUB</h2>
-    <p class="subtitle reveal reveal-delay-2" style="color:var(--flamingo);font-size:clamp(1.1rem,2.2vw,1.5rem);">Operations Intelligence Platform</p>
-    <div class="divider reveal reveal-delay-3"></div>
-    <p class="reveal reveal-delay-4" style="font-style:italic;color:var(--stone);font-size:clamp(0.8rem,1.4vw,1rem);margin-top:clamp(0.5rem,1.5vh,1rem);">One platform. Every operation. Zero manual work.</p>
-    <p class="reveal reveal-delay-5" style="color:var(--stone);opacity:0.6;font-size:clamp(0.6rem,1vw,0.8rem);margin-top:clamp(1.5rem,4vh,3rem);">Presented to CEO &nbsp;|&nbsp; April 2026</p>
-  </div>
+<!-- 1. TITLE -->
+<section class="s" id="s1">
+<div class="topline"></div><div class="botline"></div>
+<div style="text-align:center;margin:auto 0">
+  <div style="width:38px;height:38px;background:var(--rd);transform:rotate(45deg);margin:0 auto 1.2vh;box-shadow:0 0 20px rgba(164,0,17,.4)" class="r"></div>
+  <div class="r d1" style="display:flex;justify-content:center;margin-bottom:.4vh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" style="width:26vw;height:auto"><path fill="#fff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/></svg></div>
+  <p class="r d2" style="font-family:'Rajdhani',sans-serif;font-size:1.7vw;font-weight:600;letter-spacing:.45em;color:var(--pk);text-transform:uppercase">HUB</p>
+  <p class="r d3" style="font-family:'Spectral',serif;font-size:1.9vw;color:var(--pk);margin-top:1.2vh">Operations Intelligence Platform</p>
+  <div style="width:14vw;height:2px;background:rgba(225,203,185,.3);margin:1.2vh auto" class="r d3"></div>
+  <p class="r d4" style="font-style:italic;color:var(--st);font-size:1.3vw;margin-top:.8vh">One platform. Every operation. Zero manual work.</p>
+  <p class="r d5" style="font-family:'Rajdhani',sans-serif;color:rgba(225,203,185,.3);font-size:.85vw;margin-top:3.5vh;letter-spacing:.25em">PRESENTED TO CEO &nbsp;|&nbsp; APRIL 2026</p>
+</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 2: THE PROBLEM -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-2">
-  <div class="section-label animate-on-scroll">THE PROBLEM</div>
-  <h2 class="slide-title animate-on-scroll">Too Many Platforms, Too Much Manual Work</h2>
-
-  <div class="card-grid card-grid--3x2">
-    <div class="card animate-on-scroll">
-      <div class="card-icon">📦</div>
-      <h3>Inventory</h3>
-      <p>Log into D365, Stord, GPS, XLWMS separately — 10 min per SKU across 5 warehouses</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">🛒</div>
-      <h3>Sales Data</h3>
-      <p>Export from Shopify manually with long wait times, then build analysis in spreadsheets</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">📋</div>
-      <h3>Order Status</h3>
-      <p>Cross-reference Shopify orders, Stord fulfillment, and D365 records to find stuck orders</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">🎁</div>
-      <h3>Gifting</h3>
-      <p>Ops manually places each gift on the correct warehouse platform — Stord, Spaceship, or XLWMS</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">💰</div>
-      <h3>Shipping Costs</h3>
-      <p>Invoices from 3 carriers (Stord, FedEx, Rexville) reconciled manually — no overcharge detection</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">⚙️</div>
-      <h3>Stord Operations</h3>
-      <p>Stord's own portal is hard to navigate — production orders, kitting status, ASNs scattered</p>
-    </div>
-  </div>
+<!-- 2. PROBLEM -->
+<section class="s" id="s2">
+<div class="lbl a">THE PROBLEM</div>
+<h2 class="ttl a">Too Many Platforms, Too Much Manual Work</h2>
+<div class="g g3 mt1">
+  <div class="glass glass--accent a"><div class="ico">📦</div><h3>Inventory</h3><p>Log into D365, Stord, GPS, XLWMS separately — 10 min per SKU across 5 warehouses.</p></div>
+  <div class="glass glass--accent a"><div class="ico">🛒</div><h3>Sales Data</h3><p>Export from Shopify with long waits. Manual Excel analysis — no role-specific views.</p></div>
+  <div class="glass glass--accent a"><div class="ico">📋</div><h3>Order Status</h3><p>Cross-reference Shopify, Stord, D365 manually to find stuck orders.</p></div>
+  <div class="glass glass--accent a"><div class="ico">🎁</div><h3>Gifting</h3><p>Ops manually places each gift on the correct warehouse platform by hand.</p></div>
+  <div class="glass glass--accent a"><div class="ico">💰</div><h3>Shipping Costs</h3><p>3 carriers, different formats — no reconciliation, no duplicate detection.</p></div>
+  <div class="glass glass--accent a"><div class="ico">⚙️</div><h3>Stord Operations</h3><p>Limited portal visibility — orders, kitting, ASN details scattered.</p></div>
+</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 3: THE SOLUTION -->
-<!-- ============================================================ -->
-<section class="slide slide--dark" id="slide-3">
-  <div class="section-label animate-on-scroll">THE SOLUTION</div>
-  <h2 class="slide-title animate-on-scroll">One Unified Platform</h2>
-
-  <div class="stats-row">
-    <div class="stat-box stat-box--red animate-on-scroll">
-      <div class="stat-number" data-count="12">12+</div>
-      <div class="stat-label">Modules</div>
-    </div>
-    <div class="stat-box stat-box--red animate-on-scroll">
-      <div class="stat-number">5</div>
-      <div class="stat-label">Warehouses</div>
-    </div>
-    <div class="stat-box stat-box--red animate-on-scroll">
-      <div class="stat-number">70+</div>
-      <div class="stat-label">API Endpoints</div>
-    </div>
-    <div class="stat-box stat-box--red animate-on-scroll">
-      <div class="stat-number">10+</div>
-      <div class="stat-label">Active Users</div>
-    </div>
-  </div>
-
-  <div style="margin-top:clamp(0.3rem,0.8vh,0.5rem);">
-    <p class="animate-on-scroll" style="font-weight:600;color:var(--stone);font-size:clamp(0.7rem,1.1vw,0.85rem);margin-bottom:clamp(0.3rem,0.6vh,0.5rem);">All Modules:</p>
-    <div class="module-grid">
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Inventory</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Sales & Usage</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Order Consolidation</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Delivery Performance</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Gifting</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Shipping & Invoices</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Demand Forecast</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> BOM Master</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Inbound / PO</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> HK Fulfilment</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Stord Operations</div>
-      <div class="module-item animate-on-scroll"><span class="check">✓</span> Admin & RBAC</div>
-    </div>
-  </div>
+<!-- 3. SOLUTION -->
+<section class="s s--accent" id="s3">
+<div class="lbl a">THE SOLUTION</div>
+<h2 class="ttl a">One Unified Platform</h2>
+<div class="g g4 mt1">
+  <div class="stat a"><div class="n">12+</div><div class="l">Modules</div></div>
+  <div class="stat a"><div class="n">5</div><div class="l">Warehouses</div></div>
+  <div class="stat a"><div class="n">70+</div><div class="l">API Endpoints</div></div>
+  <div class="stat a"><div class="n">10+</div><div class="l">Active Users</div></div>
+</div>
+<!-- Warehouse Map Chart -->
+<div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1vh 2vw">
+<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <style>text{font-family:'Rajdhani',sans-serif;fill:#fff;font-size:10px}.loc{font-weight:600;font-size:11px}</style>
+  <line x1="120" y1="90" x2="250" y2="110" stroke="rgba(164,0,17,.3)" stroke-width="1" stroke-dasharray="4,3"/><line x1="280" y1="80" x2="250" y2="110" stroke="rgba(164,0,17,.3)" stroke-width="1" stroke-dasharray="4,3"/><line x1="350" y1="120" x2="250" y2="110" stroke="rgba(164,0,17,.3)" stroke-width="1" stroke-dasharray="4,3"/><line x1="400" y1="80" x2="250" y2="110" stroke="rgba(164,0,17,.3)" stroke-width="1" stroke-dasharray="4,3"/><line x1="440" y1="140" x2="250" y2="110" stroke="rgba(164,0,17,.3)" stroke-width="1" stroke-dasharray="4,3"/>
+  <circle cx="250" cy="110" r="18" fill="#A40011" opacity=".8"/><text x="250" y="114" text-anchor="middle" font-size="9" font-weight="700">HUB</text>
+  <circle cx="100" cy="80" r="10" fill="rgba(164,0,17,.5)" stroke="rgba(255,150,147,.4)" stroke-width="1"/><text x="100" y="84" text-anchor="middle" font-size="8" font-weight="700">US</text><text x="100" y="105" text-anchor="middle" class="loc">ATL + RENO</text><text x="100" y="117" text-anchor="middle" fill="rgba(255,255,255,.4)">Stord</text>
+  <circle cx="140" cy="95" r="6" fill="rgba(164,0,17,.3)" stroke="rgba(255,150,147,.3)" stroke-width="1"/>
+  <circle cx="280" cy="70" r="10" fill="rgba(164,0,17,.5)" stroke="rgba(255,150,147,.4)" stroke-width="1"/><text x="280" y="74" text-anchor="middle" font-size="8" font-weight="700">UK</text><text x="280" y="55" text-anchor="middle" class="loc">REX (LHR)</text><text x="280" y="43" text-anchor="middle" fill="rgba(255,255,255,.4)">GPS/XLWMS</text>
+  <circle cx="350" cy="110" r="10" fill="rgba(164,0,17,.5)" stroke="rgba(255,150,147,.4)" stroke-width="1"/><text x="350" y="114" text-anchor="middle" font-size="8" font-weight="700">EU</text><text x="350" y="135" text-anchor="middle" class="loc">AMS</text><text x="350" y="147" text-anchor="middle" fill="rgba(255,255,255,.4)">Stord</text>
+  <circle cx="400" cy="70" r="10" fill="rgba(164,0,17,.5)" stroke="rgba(255,150,147,.4)" stroke-width="1"/><text x="400" y="74" text-anchor="middle" font-size="8" font-weight="700">HK</text><text x="400" y="55" text-anchor="middle" class="loc">APAC</text><text x="400" y="43" text-anchor="middle" fill="rgba(255,255,255,.4)">D365 + Spaceship</text>
+  <circle cx="440" cy="130" r="10" fill="rgba(164,0,17,.5)" stroke="rgba(255,150,147,.4)" stroke-width="1"/><text x="440" y="134" text-anchor="middle" font-size="8" font-weight="700">ME</text><text x="440" y="155" text-anchor="middle" class="loc">GPS-US (JFK)</text><text x="440" y="167" text-anchor="middle" fill="rgba(255,255,255,.4)">XLWMS</text>
+  <text x="250" y="205" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.35)" style="letter-spacing:.15em">5 WAREHOUSE REGIONS — UNIFIED IN IM8 HUB</text>
+</svg>
+</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 4: INVENTORY -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-4">
-  <div class="section-label animate-on-scroll">INVENTORY</div>
-  <h2 class="slide-title animate-on-scroll">Real-Time Cross-Warehouse Visibility</h2>
-
-  <div class="compare-cols">
-    <div class="compare-box animate-on-scroll">
-      <div class="compare-header compare-header--before">BEFORE</div>
-      <div class="compare-body">
-        <ul>
-          <li>Log into D365 for HK inventory</li>
-          <li>Log into Stord for US (ATL + RENO)</li>
-          <li>Log into GPS portal for UK warehouse</li>
-          <li>Log into XLWMS for EU (AMS)</li>
-          <li>Manually compile into spreadsheet</li>
-          <li class="highlight">~10 min per SKU, per check</li>
-        </ul>
-      </div>
-    </div>
-    <div class="compare-box animate-on-scroll">
-      <div class="compare-header compare-header--after">AFTER — IM8 HUB</div>
-      <div class="compare-body">
-        <ul>
-          <li>One page — all 5 warehouses</li>
-          <li>Real-time sync with all platforms</li>
-          <li>Per-SKU drill-down by warehouse</li>
-          <li>Search & filter instantly</li>
-          <li class="highlight-green">Instant — zero manual work</li>
-        </ul>
-      </div>
+<!-- 4. ARCHITECTURE -->
+<section class="s" id="s4">
+<div class="lbl a">PLATFORM ARCHITECTURE</div>
+<h2 class="ttl a">How IM8 Hub Connects Everything</h2>
+<div class="a" style="position:relative;flex:1;display:flex;align-items:center;justify-content:center;margin-top:1vh">
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;text-align:center">
+    <div style="width:10vw;height:10vw;background:var(--rd);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(164,0,17,.5),0 0 80px rgba(164,0,17,.2)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" style="width:6vw;height:auto"><path fill="#fff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7Z"/></svg>
+      <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1vw;letter-spacing:.2em;color:#fff;margin-top:.3vh">HUB</span>
     </div>
   </div>
-
-  <div class="time-banner animate-on-scroll">
-    <span class="icon">⏱️</span>
-    <strong>Time saved: 10 min per SKU check × multiple checks daily = hours saved every week</strong>
-  </div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+    <line x1="120" y1="80" x2="430" y2="220" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <line x1="500" y1="50" x2="500" y2="200" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <line x1="880" y1="80" x2="570" y2="220" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <line x1="60" y1="250" x2="400" y2="250" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <line x1="940" y1="250" x2="600" y2="250" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <line x1="120" y1="420" x2="430" y2="280" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <line x1="500" y1="450" x2="500" y2="300" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <line x1="880" y1="420" x2="570" y2="280" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
+    <circle cx="500" cy="250" r="120" fill="none" stroke="var(--pk)" stroke-width="1" opacity=".12"/>
+    <circle cx="500" cy="250" r="180" fill="none" stroke="var(--pk)" stroke-width="1" opacity=".06"/>
+  </svg>
+  <div style="position:absolute;left:4%;top:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U2hvcGlmeTwvdGl0bGU+PHBhdGggZD0iTTE1LjMzNyAyMy45NzlsNy4yMTYtMS41NjFzLTIuNjA0LTE3LjYxMy0yLjYyNS0xNy43M2MtLjAxOC0uMTE2LS4xMTQtLjE5Mi0uMjExLS4xOTJzLTEuOTI5LS4xMzYtMS45MjktLjEzNi0xLjI3NS0xLjI3NC0xLjQzOS0xLjQxMWMtLjA0NS0uMDM3LS4wNzUtLjA1Ny0uMTIxLS4wNzRsLS45MTQgMjEuMTA0aC4wMjN6TTExLjcxIDExLjMwNXMtLjgxLS40MjQtMS43NzQtLjQyNGMtMS40NDcgMC0xLjUwNC45MDYtMS41MDQgMS4xNDEgMCAxLjIzMiAzLjI0IDEuNzE1IDMuMjQgNC42MjkgMCAyLjI5NS0xLjQ0IDMuNzYtMy40MDYgMy43Ni0yLjM1NCAwLTMuNTQtMS40NjUtMy41NC0xLjQ2NWwuNjQ2LTIuMDg2czEuMjQ1IDEuMDY2IDIuMjggMS4wNjZjLjY3NSAwIC45NzUtLjU0NS45NzUtLjkzMiAwLTEuNjE5LTIuNjU0LTEuNjk0LTIuNjU0LTQuMzU5LS4wMzQtMi4yMzcgMS41NzEtNC40MTYgNC44MjctNC40MTYgMS4yNTcgMCAxLjg3NS4zNjEgMS44NzUuMzYxbC0uOTQ1IDIuNzE1LS4wMi4wMXpNMTEuMTcuODNjLjEzNiAwIC4yNzEuMDM4LjQwNS4xMzUtLjk4NC40NjUtMi4wNjQgMS42MzktMi41MDggMy45OTItLjY1Ni4yMTMtMS4yOTMuNDA1LTEuODg5LjU3OEM3LjY5NyAzLjc1IDguOTUxLjg0IDExLjE3Ljg0Vi44M3ptMS4yMzUgMi45NDl2LjEzNWMtLjc1NC4yMzItMS41ODMuNDg0LTIuMzk0LjczNi40NjYtMS43NzcgMS4zMzMtMi42NDUgMi4wODUtMi45NzEuMTkzLjUwMS4zMDkgMS4xNzYuMzA5IDIuMXptLjUzOS0yLjIzNGMuNjk0LjA3NCAxLjE0MS44NjcgMS40MjkgMS43NTUtLjM0OS4xMTQtLjczNS4yMzEtMS4xNTguMzY2di0uMjUyYzAtLjc1Mi0uMDk2LTEuMzcxLS4yNzEtMS44NzF2LjAwMnptMi45OTIgMS4yODljLS4wMiAwLS4wNi4wMjEtLjA3OC4wMjFzLS4yODkuMDc1LS43MTQuMjFjLS40MjMtMS4yMzMtMS4xNzYtMi4zNy0yLjUwOC0yLjM3aC0uMTE1QzEyLjEzNS4yMDkgMTEuNjY5IDAgMTEuMjY1IDAgOC4xNTkgMCA2LjY3NSAzLjg3NyA2LjIxIDUuODQ2Yy0xLjE5NC4zNjUtMi4wNjMuNjM2LTIuMTYuNjc0LS42NzUuMjEzLS42OTQuMjMyLS43NzIuODctLjA3NS40NjItMS44MyAxNC4wNjMtMS44MyAxNC4wNjNMMTUuMDA5IDI0bC45MjctMjEuMTY2eiIvPjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Shopify</span><br><span style="font-size:.7vw;color:var(--pk)">Orders · Products · Customers</span></div>
+  <div style="position:absolute;left:50%;top:2%;transform:translateX(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QWZ0ZXJTaGlwPC90aXRsZT48cGF0aCBkPSJNMjIuNTQ5IDkuNjA0YTEwLjQ2MiAxMC40NjIgMCAwIDAtMy4zODgtNi44MzhBMTAuNjMyIDEwLjYzMiAwIDAgMCAxMiAwYTEwLjY0IDEwLjY0IDAgMCAwLTcuMTYgMi43NjQgMTAuNDY1IDEwLjQ2NSAwIDAgMC0zLjQyOCA3Ljc0YzAgMi4zNzEuODEgNC42NzIgMi4yOTggNi41MjlhMTAuNjE3IDEwLjYxNyAwIDAgMCA1Ljg5NSAzLjY5OEwxMiAyNGwyLjM5NS0zLjI3YTEwLjU5MyAxMC41OTMgMCAwIDAgNS44OTUtMy42OTcgMTAuNDQyIDEwLjQ0MiAwIDAgMCAyLjI2LTcuNDN6bS0xMS4zMDYgNi4yOGEuMjYuMjYgMCAwIDEtLjAzNC4xMjUuMjU0LjI1NCAwIDAgMS0uMzQ3LjA5MmwtMy45MDYtMi4yMzdhMS4wMDUgMS4wMDUgMCAwIDEtLjUwNS0uODY1VjguNjI0YS4yNi4yNiAwIDAgMSAuMDMzLS4xMjYuMjU0LjI1NCAwIDAgMSAuMzQ3LS4wOTJsMy45MDcgMi4yMzdjLjE1Mi4wODkuMjgxLjIxNC4zNjguMzY2LjA5LjE1MS4xMzUuMzI0LjEzNS41djQuMzcyek0xMiA5LjQ4Yy0uMTc2IDAtLjM1LS4wNDctLjUwMy0uMTMzTDcuNSA3LjA1N2EuMjQxLjI0MSAwIDAgMS0uMDktLjA5Mi4yNDkuMjQ5IDAgMCAxIC4wOS0uMzQybDMuOTk3LTIuMjg5YTEuMDI1IDEuMDI1IDAgMCAxIDEuMDA3IDBsMy45OTYgMi4yOWEuMjQuMjQgMCAwIDEgLjA5LjA5Mi4yNDcuMjQ3IDAgMCAxIDAgLjI1LjI3MS4yNzEgMCAwIDEtLjA5LjA5MmwtMy45OTcgMi4yODlBMS4wMDUgMS4wMDUgMCAwIDEgMTIgOS40OFpNMTcuNTQ2IDEzYS45OTYuOTk2IDAgMCAxLS41MDMuODY2bC0zLjkwOCAyLjIzN2EuMjU0LjI1NCAwIDAgMS0uMzgtLjIxOFYxMS41MWMwLS4xNzUuMDQ3LS4zNDguMTM1LS41MDEuMDg5LS4xNTIuMjE2LS4yOC4zNjgtLjM2NmwzLjkwNy0yLjIzOGEuMjU0LjI1NCAwIDAgMSAuMzguMjE5eiIvPjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">AfterShip</span><br><span style="font-size:.7vw;color:var(--pk)">Delivery Tracking</span></div>
+  <div style="position:absolute;right:4%;top:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzAwNzhENCIvPjx0ZXh0IHg9IjEyIiB5PSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjUiIGZvbnQtd2VpZ2h0PSI3MDAiPkQzNjU8L3RleHQ+PHRleHQgeD0iMTIiIHk9IjE3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC43KSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQiPk1pY3Jvc29mdDwvdGV4dD48L3N2Zz4=" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">D365</span><br><span style="font-size:.7vw;color:var(--pk)">HK Inventory · Finance</span></div>
+  <div style="position:absolute;left:0%;top:50%;transform:translateY(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzFCMTQ2NCIvPjx0ZXh0IHg9IjEyIiB5PSIxNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjYiIGZvbnQtd2VpZ2h0PSI3MDAiPlNUT1JEPC90ZXh0Pjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Stord</span><br><span style="font-size:.7vw;color:var(--pk)">US Fulfilment · Inventory · POs</span></div>
+  <div style="position:absolute;right:0%;top:50%;transform:translateY(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+RmVkRXg8L3RpdGxlPjxwYXRoIGQ9Ik0yMi40OTggMTQuMjk4Yy0uMDE2LS40MTQuMzQ1LS43NTEuNzUtLjc1NWEuNzQ1Ljc0NSAwIDAgMSAuNzUyLjc1NS43NTUuNzU1IDAgMCAxLS43NTEuNzQ1Yy0uMzk1LjAwMi0uNzU5LS4zNDYtLjc1MS0uNzQ1em0uNzU5LS4wODNjLjA2Ny0uMDIuMTY0LS4wNDIuMTYyLS4xMy4wMDctLjA5LS4wODYtLjEzMy0uMTYyLS4xMzRoLS4xNjN2LjI2M2MwIC4wMDEuMTY1LS4wMDIuMTYzLjAwMXptLS4xNjMuMTA3di40MThoLS4xNHYtLjkxaC4zMjdjLjE1Ni0uMDIxLjI5NC4wOTIuMjg2LjI1M2EuMjE4LjIxOCAwIDAgMS0uMTU2LjE5Yy4xNjIuMDgzLjEwOC4zMjIuMTczLjQ2N2gtLjE1NmEyLjM1NSAyLjM1NSAwIDAgMS0uMDQtLjIwNWMtLjAxOC0uMDkzLS4wNDctLjIyOS0uMTctLjIxM2gtLjEyNHptLjc2LS4wMjRhLjYwMy42MDMgMCAwIDAtLjYwNS0uNjMyYy0uMzM4LS4wMTItLjYyLjMwMi0uNjA1LjYzMmEuNjE5LjYxOSAwIDAgMCAuNjA1LjYyMi42MS42MSAwIDAgMCAuNjA1LS42MjJ6bS01LjA1Mi0uNTc5bC0uODc4IDEuMDA4aC0xLjMwNmwxLjU1OS0xLjc0NS0xLjU2LTEuNzVoMS4zNTVsLjkwMi45OTcuODc4LS45OThoMS4zMDZsLTEuNTQzIDEuNzQzIDEuNTU5IDEuNzUzaC0xLjM3MWwtLjkwMS0xLjAwOHptLTQuNzAzLS4zNTJ2LS44MjdoMS45MDR2LTEuNTA2bDEuNzI0IDEuOTQ4LTEuNzI0IDEuOTQxdi0xLjU1NmgtMS45MDR6bTEuNTYgMS4zNmgtMy4yVjkuMDQ0aDMuMjI0djEuMDI0SDEzLjc3djEuMTYzaDEuODg4di45NThoLTEuOTA0djEuNTIyaDEuOTA0djEuMDE2em0tNS43MDUtLjY1NWMtLjU0LjAxNy0uODc4LS41NTItLjg3Ny0xLjA0LS4wMS0uNTA3LjMwNy0xLjEyMy44NzgtMS4xMDUuNTc5LS4wMjUuODcxLjYuODQ1IDEuMTAzLjAyMy41MDEtLjI5IDEuMDYyLS44NDYgMS4wNDJ6TTQuNzQzIDEyLjQxYy4wNzYtLjM1OC40MDMtLjY3Ljc4LS42NjNhLjc4OC43ODggMCAwIDEgLjgwMy42NjNINC43NDN6bTE1LjE4Mi41NjRsMS44MTUtMi4wNDdoLTIuMTI1bC0uNzQuODQ0LS43NjMtLjg0NGgtNC4wMzd2LS41NDhoMS45MTJWOC43NDFIMTAuODR2Mi41OGMtLjM2Mi0uNDQ4LS45ODEtLjU1OS0xLjUyNi0uNDkyLS43ODIuMTIzLTEuNDI3Ljc2Mi0xLjYzNCAxLjUxNC0uMjU0LS45NTgtMS4xNzktMS41ODgtMi4xNTctMS41NTQtLjc4MS4wMDktMS42LjM2NS0xLjk4NyAxLjA3MXYtLjgxOGgtMS44N3YtLjloMi4wNDN2LTEuNEgwdjYuMjg3aDEuNjY2di0yLjY0NGgxLjY2NmE3LjU5IDcuNTkgMCAwIDAtLjA4Mi42MjJjLS4wMTMgMS4yMzIgMS4wNDIgMi4yNyAyLjI3NCAyLjIzNmEyLjIwNCAyLjIwNCAwIDAgMCAyLjE1Ny0xLjQzMkg2LjI1NGMtLjE0LjI2OC0uNDQxLjM4LS43My4zNi0uNDU3LjAwOS0uODMtLjQxNy0uODI5LS44NmgyLjkxNGMuMDgzIDEuMDI3Ljk4OCAxLjk2NiAyLjA0MyAxLjk0N2ExLjUzIDEuNTMgMCAwIDAgMS4xOS0uNjM5di40MWg3LjIxNWwuNzU0LS44Ni43NTQuODZoMi4xOTJsLTEuODMyLTIuMDU1eiIvPjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">FedEx</span><br><span style="font-size:.7vw;color:var(--pk)">Shipping Invoices (2 Accts)</span></div>
+  <div style="position:absolute;left:4%;bottom:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U3BhY2VzaGlwPC90aXRsZT48cGF0aCBkPSJNMTEuOTk5NyAxLjI1MjljMS4wNDQ1IDAgMS45NTYuNTY4OSAyLjQ0MSAxLjQxMjVsNC41ODgzIDcuOTMxNCA0LjQ1IDcuNjkxNWMuMDQ2Ni4wNzQuMjEwNS4zNTg1LjI3LjQ5MzguMjIxNi40Njc3LjI1MDUuOTQ3Mi4yNTEgMS4xNTk1IDAgMS41NDk2LTEuMjU4NyAyLjgwNTYtMi44MTE2IDIuODA1Ni0uMjk0OSAwLS41NzktLjA0NS0uODQ1Ny0uMTI5bC03LjkwMTEtMi42MDYxYTEuNDA2IDEuNDA2IDAgMCAwLS40NDEzLS4wNzA1IDEuNDEzIDEuNDEzIDAgMCAwLS40NDIuMDcwNUwzLjY1OCAyMi42MTgzbC0uMTYyMy4wNDU2YTIuODM5OCAyLjgzOTggMCAwIDEtLjY4MzguMDgzMWMtMS41NTMxIDAtMi44MTE5LTEuMjU2LTIuODExOS0yLjgwNTYuMDAyLS4yNDMuMDIzNC0uNTUzMy4xNjgtLjk1NzguMDI5NC0uMDkxMS4wNzQzLS4xNzYuMTExNS0uMjY0LjA3MTItLjE0ODcuMTYwNy0uMjg3NS4yNDExLS40MzEzbDQuNDQ5My03LjY5MTYgNC41ODgzLTcuOTMxM2MuNDg1LS44NDM3IDEuMzk3MS0xLjQxMjYgMi40NDE2LTEuNDEyNnoiLz48L3N2Zz4=" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Spaceship</span><br><span style="font-size:.7vw;color:var(--pk)">HK AWB · SF Express</span></div>
+  <div style="position:absolute;left:50%;bottom:2%;transform:translateX(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzRBMTU0QiIvPjxjaXJjbGUgY3g9IjciIGN5PSI3IiByPSIyLjUiIGZpbGw9IiNFMDFFNUEiLz48Y2lyY2xlIGN4PSIxNyIgY3k9IjciIHI9IjIuNSIgZmlsbD0iIzM2QzVGMCIvPjxjaXJjbGUgY3g9IjciIGN5PSIxNyIgcj0iMi41IiBmaWxsPSIjMkVCNjdEIi8+PGNpcmNsZSBjeD0iMTciIGN5PSIxNyIgcj0iMi41IiBmaWxsPSIjRUNCMjJFIi8+PC9zdmc+" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Slack + Google Drive</span><br><span style="font-size:.7vw;color:var(--pk)">Alerts · Invoices · Approvals</span></div>
+  <div style="position:absolute;right:4%;bottom:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzJENUYyRCIvPjx0ZXh0IHg9IjEyIiB5PSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQiIGZvbnQtd2VpZ2h0PSI3MDAiPlhMV01TPC90ZXh0Pjx0ZXh0IHg9IjEyIiB5PSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwuNykiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzLjUiPkdQUzwvdGV4dD48L3N2Zz4=" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">GPS / XLWMS</span><br><span style="font-size:.7vw;color:var(--pk)">UK · EU · MENA Warehouses</span></div>
+</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 5: SALES & ORDER CONSOLIDATION -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-5">
-  <div class="section-label animate-on-scroll">SALES & ORDER CONSOLIDATION</div>
-  <h2 class="slide-title animate-on-scroll">From Manual Downloads to Instant Insights</h2>
+<!-- 5. INVENTORY -->
+<section class="s" id="s5">
+<div class="lbl a">INVENTORY MODULE</div>
+<h2 class="ttl a">Real-Time Cross-Warehouse Visibility</h2>
+<div class="flow-dia a">
+  <div class="flow-col"><div class="fp">🏢 D365 (HK)</div><div class="fp">📦 Stord (US)</div><div class="fp">🌐 GPS (UK)</div><div class="fp">🏭 XLWMS (EU)</div><div class="flow-label">DATA SOURCES</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Inventory</div><div class="flow-label">UNIFIED VIEW</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--out">📊 Per-SKU Dashboard</div><div class="fp fp--out">🔍 Search & Filter</div><div class="fp fp--out">📈 Stock Alerts</div><div class="flow-label">OUTPUT</div></div>
+</div>
+<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>Before:</strong> 10 min per SKU across 4 platforms → <strong>After:</strong> Instant, one page, all 5 warehouses</span></div>
 
-  <div class="feature-cols" style="margin-top:clamp(0.4rem,1vh,0.8rem);">
-    <div class="card animate-on-scroll" style="padding:clamp(0.6rem,1.2vw,1rem);">
-      <div class="card-icon">📊</div>
-      <h3>Sales & Usage</h3>
-      <p style="margin-top:0.3rem;"><strong style="color:var(--burgundy);">Before:</strong> Download Shopify data (long wait), manual analysis</p>
-      <p style="margin-top:0.2rem;"><strong style="color:var(--burgundy);">After:</strong> Pre-built dashboards tailored for each team role</p>
-    </div>
-    <div class="card animate-on-scroll" style="padding:clamp(0.6rem,1.2vw,1rem);">
-      <div class="card-icon">📋</div>
-      <h3>SO Consolidation</h3>
-      <p style="margin-top:0.3rem;"><strong style="color:var(--burgundy);">Before:</strong> Manually cross-check Shopify + Stord + D365</p>
-      <p style="margin-top:0.2rem;"><strong style="color:var(--burgundy);">After:</strong> One view for Finance & Ops to find orders needing action</p>
-    </div>
-  </div>
-
-  <div class="time-banner animate-on-scroll">
-    <span class="icon">⏱️</span>
-    <div>
-      <strong style="font-size:clamp(0.85rem,1.4vw,1.1rem);">3+ hours saved per week</strong><br>
-      <span style="font-size:clamp(0.6rem,1vw,0.8rem);color:var(--muted-text);">on Sales Order Consolidation alone — no more manual cross-checking across platforms</span>
-    </div>
-  </div>
-
-  <div style="margin-top:clamp(0.5rem,1.2vh,0.8rem);">
-    <div class="section-label animate-on-scroll" style="font-size:clamp(0.55rem,0.9vw,0.7rem);">WHO BENEFITS</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(0.5rem,1vw,0.8rem);">
-      <div class="animate-on-scroll" style="display:flex;align-items:center;gap:0.5em;">
-        <span style="color:var(--success);font-weight:700;">✓</span>
-        <div><strong style="font-size:clamp(0.65rem,1vw,0.8rem);">Finance Team</strong><br><span style="font-size:clamp(0.55rem,0.85vw,0.7rem);color:var(--muted-text);">Reconcile orders instantly</span></div>
-      </div>
-      <div class="animate-on-scroll" style="display:flex;align-items:center;gap:0.5em;">
-        <span style="color:var(--success);font-weight:700;">✓</span>
-        <div><strong style="font-size:clamp(0.65rem,1vw,0.8rem);">Ops Team</strong><br><span style="font-size:clamp(0.55rem,0.85vw,0.7rem);color:var(--muted-text);">Identify stuck orders fast</span></div>
-      </div>
-      <div class="animate-on-scroll" style="display:flex;align-items:center;gap:0.5em;">
-        <span style="color:var(--success);font-weight:700;">✓</span>
-        <div><strong style="font-size:clamp(0.65rem,1vw,0.8rem);">Procurement</strong><br><span style="font-size:clamp(0.55rem,0.85vw,0.7rem);color:var(--muted-text);">Track fulfillment status</span></div>
-      </div>
-    </div>
-  </div>
+<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/inventory" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 6: DELIVERY PERFORMANCE -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-6">
-  <div class="section-label animate-on-scroll">DELIVERY PERFORMANCE</div>
-  <h2 class="slide-title animate-on-scroll">Live Tracking & SLA Intelligence</h2>
+<!-- 6. SALES & SO -->
+<section class="s" id="s6">
+<div class="lbl a">SALES & ORDER CONSOLIDATION</div>
+<h2 class="ttl a">From Manual Downloads to Instant Insights</h2>
+<div class="flow-dia a">
+  <div class="flow-col"><div class="fp">🛒 Shopify</div><div class="fp">📦 Stord</div><div class="fp">🏢 D365</div><div class="flow-label">ORDER DATA</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Consolidation</div><div class="flow-label">CROSS-CHECK</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--out">📊 Sales Dashboards</div><div class="fp fp--out">📋 SO Status View</div><div class="fp fp--out">📥 Excel Export</div><div class="flow-label">TEAM VIEWS</div></div>
+</div>
+<div class="g g2 mt1">
+  <div class="glass glass--accent a"><h3>Sales & Usage</h3><p>Pre-built dashboards — SKU consumption, sticks forecast, production planning. Tailored views for Ops, Finance, Procurement.</p></div>
+  <div class="glass glass--accent a"><h3>SO Consolidation</h3><p>One view showing fulfillment gaps and D365 action items. Finance sees payment issues, Ops sees stuck orders.</p></div>
+</div>
+<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>3+ hours saved per week</strong> — no more manual cross-checking across platforms</span></div>
 
-  <div class="card-grid card-grid--2x2">
-    <div class="card animate-on-scroll">
-      <div class="card-icon">🚚</div>
-      <h3>AfterShip Sync</h3>
-      <p>Continuous sync with AfterShip tracking API — always shows the latest delivery status across all carriers and regions</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">📊</div>
-      <h3>KPI Dashboard</h3>
-      <p>On-time delivery rate, average transit times, delivery success rate — filterable by warehouse, carrier, date range</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">🗺️</div>
-      <h3>Country Analytics</h3>
-      <p>Performance breakdown by destination country with heatmap visualization — top 30 countries ranked by volume</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">📄</div>
-      <h3>PDF Export</h3>
-      <p>IM8-branded 2-page A4 landscape report — KPIs, destination chart, full country table — ready for stakeholders</p>
-    </div>
-  </div>
-
-  <div class="time-banner animate-on-scroll" style="margin-top:clamp(0.8rem,1.5vh,1.2rem);">
-    <span class="icon">💡</span>
-    <strong style="font-style:italic;">People can easily filter exactly what they need — no more digging through raw data</strong>
-  </div>
+<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/order-consolidation" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 7: GIFTING -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-7">
-  <div class="section-label animate-on-scroll">GIFTING</div>
-  <h2 class="slide-title animate-on-scroll">Self-Serve Gifting with Auto Fulfilment</h2>
+<!-- 7. DELIVERY -->
+<section class="s" id="s7">
+<div class="lbl a">DELIVERY PERFORMANCE</div>
+<h2 class="ttl a">Live Tracking & SLA Intelligence</h2>
+<div class="flow-dia a">
+  <div class="flow-col"><div class="fp">📡 AfterShip API</div><div class="flow-label">TRACKING</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Delivery</div><div class="flow-label">ANALYTICS</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--out">📊 KPI Dashboard</div><div class="fp fp--out">🗺️ Country Heatmap</div><div class="fp fp--out">📄 IM8 PDF Report</div><div class="flow-label">INSIGHTS</div></div>
+</div>
+<div class="g g2 mt1">
+  <div class="glass glass--accent a"><h3>Live KPIs</h3><p>On-time rate, transit times, delivery success — filterable by warehouse, carrier, country, date range.</p></div>
+  <div class="glass glass--accent a"><h3>Country Analytics</h3><p>Heatmap by destination. Top 30 countries by volume. Spot bottlenecks per region.</p></div>
+  <div class="glass glass--accent a"><h3>Auto-Sync</h3><p>Continuous AfterShip sync — always latest status across all carriers. No manual pulls.</p></div>
+  <div class="glass glass--accent a"><h3>Branded Reports</h3><p>2-page A4 landscape PDF — KPIs + destination chart + country table. Server-side generated.</p></div>
+</div>
 
-  <div class="flow-row animate-on-scroll">
-    <div class="flow-step">Submit Request</div>
-    <span class="flow-arrow">→</span>
-    <div class="flow-step">Ops Review</div>
-    <span class="flow-arrow">→</span>
-    <div class="flow-step flow-step--active">Auto-Route to Warehouse</div>
-    <span class="flow-arrow">→</span>
-    <div class="flow-step">Track Delivery</div>
-  </div>
-
-  <div class="feature-cols">
-    <div class="feature-box animate-on-scroll">
-      <div class="feature-box-header feature-box-header--burgundy">🎁 For Anyone Submitting a Gift</div>
-      <div class="feature-box-body">
-        <ul>
-          <li>Easy form — submit in under a minute</li>
-          <li>Track your request status in real-time</li>
-          <li>Get tracking number automatically</li>
-          <li>No need to contact Ops team</li>
-        </ul>
-      </div>
-    </div>
-    <div class="feature-box animate-on-scroll">
-      <div class="feature-box-header feature-box-header--red">⚙️ For Ops Team</div>
-      <div class="feature-box-body">
-        <ul>
-          <li>Auto-routes to correct warehouse</li>
-          <li>Syncs with Stord, Spaceship, XLWMS</li>
-          <li>Slack notifications for approvals</li>
-          <li>No manual placement — fully automated</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="time-banner animate-on-scroll">
-    <span class="icon">⏱️</span>
-    <strong>5+ minutes saved per gift order × dozens of gifts monthly = significant Ops time recovered</strong>
-  </div>
+<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/outbound/delivery" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 8: SHIPPING & INVOICES -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-8">
-  <div class="section-label animate-on-scroll">SHIPPING & INVOICES</div>
-  <h2 class="slide-title animate-on-scroll">Automated Cost Tracking Across All Carriers</h2>
+<!-- 8. GIFTING -->
+<section class="s" id="s8">
+<div class="lbl a">GIFTING MODULE</div>
+<h2 class="ttl a">Self-Serve Gifting with Auto Fulfilment</h2>
+<div class="flow-dia a">
+  <div class="flow-col"><div class="fp">👤 Staff Submits</div><div class="flow-label">REQUEST</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Gifting</div><div class="flow-label">ROUTING</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp">📦 Stord (US)</div><div class="fp">🚀 Spaceship (HK)</div><div class="fp">🏭 XLWMS (UK/EU)</div><div class="flow-label">WAREHOUSES</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--green">📍 Tracking #</div><div class="fp fp--slack">💬 Slack Alert</div><div class="flow-label">NOTIFY</div></div>
+</div>
+<div class="g g2 mt1">
+  <div class="feat a"><div class="feat-h feat-h--d">🎁 FOR SUBMITTERS</div><div class="feat-b"><ul><li>Simple form — submit in under a minute</li><li>Track status and approval in real-time</li><li>Tracking number delivered automatically</li><li>View all past requests</li></ul></div></div>
+  <div class="feat a"><div class="feat-h feat-h--r">⚙️ FOR OPS</div><div class="feat-b"><ul><li>Auto-routes to correct warehouse</li><li>Syncs order + tracking with APIs</li><li>Slack notifications for approvals</li><li>Inventory check prevents OOS</li></ul></div></div>
+</div>
+<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>5+ min saved per gift</strong> × dozens monthly — no manual placement</span></div>
 
-  <div class="carrier-row">
-    <div class="carrier-badge animate-on-scroll"><strong>Stord</strong><span>Parcel + Fulfilment</span></div>
-    <div class="carrier-badge animate-on-scroll"><strong>FedEx</strong><span>2 Accounts</span></div>
-    <div class="carrier-badge animate-on-scroll"><strong>Rexville</strong><span>UK / GPS</span></div>
-  </div>
-
-  <div class="card-grid card-grid--2x2">
-    <div class="card animate-on-scroll">
-      <h3>Auto-Ingest Every 4 Hours</h3>
-      <p>Cron pulls invoices from Google Drive, parses Excel & PDF, loads to DB automatically</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <h3>Duplicate Detection</h3>
-      <p>Catches true duplicates vs. adjustments — sends Slack alerts with dollar amounts</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <h3>Rate Card Validation</h3>
-      <p>Cross-checks carrier charges against contracted rates — flags overcharges</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <h3>Cost Analytics</h3>
-      <p>Breakdown by carrier, warehouse, SKU — discrepancy reports & manual adjustments</p>
-    </div>
-  </div>
-
-  <div class="time-banner animate-on-scroll">
-    <span class="icon">⏱️</span>
-    <strong>3+ hours saved per week on invoice reconciliation — fully automated pipeline</strong>
-  </div>
+<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/gifting/manage" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 9: STORD OPS & INBOUND -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-9">
-  <div class="section-label animate-on-scroll">STORD OPERATIONS & INBOUND</div>
-  <h2 class="slide-title animate-on-scroll">Better Visibility Than the Portals Themselves</h2>
+<!-- 9. SHIPPING -->
+<section class="s" id="s9">
+<div class="lbl a">SHIPPING & INVOICES</div>
+<h2 class="ttl a">Automated Cost Tracking</h2>
+<div class="flow-dia a">
+  <div class="flow-col"><div class="fp">📁 Google Drive</div><div class="flow-label">INVOICES</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp">📊 Stord (xlsx)</div><div class="fp">📄 FedEx (PDF)</div><div class="fp">📊 Rexville (xlsx)</div><div class="flow-label">PARSE</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Shipping</div><div class="flow-label">VALIDATE</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--green">✅ Rate Check</div><div class="fp fp--out">🔍 Duplicates</div><div class="fp fp--slack">💬 Slack Alert</div><div class="flow-label">OUTPUT</div></div>
+</div>
+<div class="g g2 mt1">
+  <div class="glass glass--accent a"><h3>Auto-Ingest (Every 4h)</h3><p>Cron pulls from Drive, parses each carrier's unique format, loads to DB.</p></div>
+  <div class="glass glass--accent a"><h3>Duplicate Detection</h3><p>True duplicates vs adjustments. Slack alerts with $ amounts.</p></div>
+  <div class="glass glass--accent a"><h3>Rate Card Validation</h3><p>Cross-checks charges against contracted rates. Flags overcharges.</p></div>
+  <div class="glass glass--accent a"><h3>Cost Analytics</h3><p>Breakdown by carrier, warehouse, SKU. Discrepancy reports + audit trail.</p></div>
+</div>
+<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>3+ hours saved per week</strong> — fully automated pipeline</span></div>
 
-  <div class="feature-cols" style="margin-top:clamp(0.5rem,1vh,0.8rem);">
-    <div class="feature-box animate-on-scroll">
-      <div class="feature-box-header feature-box-header--burgundy">⚙️ Work Order Management</div>
-      <div class="feature-box-body">
-        <ul>
-          <li>All production / kitting orders in one view</li>
-          <li>Full detail: ASN, items, quantities, status</li>
-          <li>Easier to check than Stord's own portal</li>
-          <li>Inventory sync with real-time updates</li>
-        </ul>
-      </div>
-    </div>
-    <div class="feature-box animate-on-scroll">
-      <div class="feature-box-header feature-box-header--burgundy">🏭 Inbound / PO Management</div>
-      <div class="feature-box-body">
-        <ul>
-          <li>Create POs, Transfer Orders, Cross-Region SOs</li>
-          <li>Auto-sync with Stord API</li>
-          <li>2-way receipt status tracking</li>
-          <li>RECEIVED_SHORT / RECEIVED_OVER alerts</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/shipping" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 10: MORE MODULES -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-10">
-  <div class="section-label animate-on-scroll">AND MORE</div>
-  <h2 class="slide-title animate-on-scroll">Additional Modules Powering Operations</h2>
-
-  <div class="card-grid card-grid--2x2">
-    <div class="card animate-on-scroll">
-      <div class="card-icon">📈</div>
-      <h3>Demand Forecast</h3>
-      <p>Projects demand across 3 billing cycles (90 days) using SKIO subscription data. Includes RM & Concentrate runway analysis, marketing campaign calendar, and per-flavor sales trends by warehouse.</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">🧱</div>
-      <h3>BOM Master</h3>
-      <p>Version-controlled Bill of Materials with draft → publish workflow. Compare any two versions with a visual diff. Risk analysis flags single-source components and long lead times.</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">📅</div>
-      <h3>HK Fulfilment</h3>
-      <p>Batch AWB management for Hong Kong orders via Spaceship Pro. Auto-buy cron at 9 AM HKT, carrier-split PDF downloads, D365 SKU mapping with cross-check, Excel export for accounting.</p>
-    </div>
-    <div class="card animate-on-scroll">
-      <div class="card-icon">🗄️</div>
-      <h3>Master Data</h3>
-      <p>Central SKU catalog with active/inactive toggle (controls forecast inclusion). Product Bible for content, vendor management, and geographic warehouse routing rules for order allocation.</p>
-    </div>
-  </div>
+<!-- 10. STORD & INBOUND -->
+<section class="s" id="s10">
+<div class="lbl a">STORD OPERATIONS & INBOUND</div>
+<h2 class="ttl a">Better Visibility Than the Portals</h2>
+<div class="flow-dia a">
+  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Inbound</div><div class="flow-label">CREATE</div></div>
+  <span class="farr">⇄</span>
+  <div class="flow-col"><div class="fp">📦 Stord API</div><div class="flow-label">SYNC</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--out">🏭 ATL</div><div class="fp fp--out">🏭 RENO</div><div class="fp fp--out">🏭 AMS</div><div class="flow-label">FACILITIES</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--green">✅ Receipts</div><div class="fp fp--slack">💬 Summary</div><div class="flow-label">STATUS</div></div>
+</div>
+<div class="g g2 mt1">
+  <div class="feat a"><div class="feat-h feat-h--d">⚙️ WORK ORDERS</div><div class="feat-b"><ul><li>All production/kitting orders in one view</li><li>Full detail: ASN, items, quantities, status</li><li>Better than Stord's own portal</li><li>Daily Slack summary at 9:30 AM HKT</li></ul></div></div>
+  <div class="feat a"><div class="feat-h feat-h--d">🏭 INBOUND / PO</div><div class="feat-b"><ul><li>POs, Transfer Orders, Cross-Region SO+POs</li><li>Auto-sync with Stord API instantly</li><li>2-way receipt: RECEIVED / SHORT / OVER</li><li>6-hourly cron syncs status back</li></ul></div></div>
+</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 11: TIME SAVINGS TABLE -->
-<!-- ============================================================ -->
-<section class="slide slide--dark" id="slide-11">
-  <div class="section-label animate-on-scroll">TIME SAVED</div>
-  <h2 class="slide-title animate-on-scroll">Hours Recovered, Every Single Week</h2>
+<!-- 11. DEMAND FORECAST & RUNWAY -->
+<section class="s" id="s11">
+<div class="lbl a">DEMAND FORECAST & RUNWAY</div>
+<h2 class="ttl a">Predicting Demand, Preventing Stockouts</h2>
+<div class="flow-dia a">
+  <div class="flow-col"><div class="fp">📊 SKIO Subs</div><div class="fp">🛒 Shopify OTP</div><div class="fp">📅 Marketing Events</div><div class="flow-label">DEMAND SIGNALS</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>V4 Forecast</div><div class="flow-label">AI MODEL</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--out">📈 FG Demand Table</div><div class="fp fp--out">🧱 BOM Explosion</div><div class="flow-label">FORECAST</div></div>
+  <span class="farr">→</span>
+  <div class="flow-col"><div class="fp fp--green">✅ RM Runway</div><div class="fp fp--green">✅ Stockout Alerts</div><div class="fp fp--out">📋 PO Recommendations</div><div class="flow-label">ACTION</div></div>
+</div>
+<div class="g g3 mt1">
+  <div class="glass glass--accent a"><h3>V4 Forecast Engine</h3><p>EWMA + day-of-week seasonality + trend factor + event overlays. Multi-cycle subscription projection (6 billing cycles) with empirical survival rates. Auto-backtest with WAPE, bias, hit rate alerts.</p></div>
+  <div class="glass glass--accent a"><h3>RM / CON / FG Runway</h3><p>BOM explosion maps FG demand → raw materials. Calculates days-of-cover per component per warehouse. 5-tier action cascade: No Action → Expedite → Vendor Delivery → Internal Transfer → Create POs. Risk color-coded RED/AMBER/GREEN.</p></div>
+  <div class="glass glass--accent a"><h3>Campaign Calendar</h3><p>Register promotions, launches, influencer pushes with lift factors (1.2×–2.0×) and additive units. Demand calendar with daily breakdown by product line. Flavor velocity tracking and launch performance monitoring.</p></div>
+</div>
+<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/demand-forecast" target="_blank" style="font-family:'Rajdhani',sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 
-  <table class="data-table animate-on-scroll">
-    <thead>
-      <tr>
-        <th>Module</th>
-        <th>Before</th>
-        <th>After — IM8 Hub</th>
-        <th>Time Saved</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Inventory Checks</strong></td>
-        <td class="text-pink">10 min / SKU / check</td>
-        <td class="text-green">Instant</td>
-        <td><strong>Hours / week</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Shipping Invoices</strong></td>
-        <td class="text-pink">3+ hours manual</td>
-        <td class="text-green">Fully Automated</td>
-        <td><strong>3+ hrs / week</strong></td>
-      </tr>
-      <tr>
-        <td><strong>SO Consolidation</strong></td>
-        <td class="text-pink">3+ hours cross-check</td>
-        <td class="text-green">One-Click View</td>
-        <td><strong>3+ hrs / week</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Gifting Placement</strong></td>
-        <td class="text-pink">5+ min / gift order</td>
-        <td class="text-green">Auto-Routed</td>
-        <td><strong>Hours / month</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Sales Analysis</strong></td>
-        <td class="text-pink">Manual Shopify download</td>
-        <td class="text-green">Pre-Built Dashboards</td>
-        <td><strong>Hours / week</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Delivery Reports</strong></td>
-        <td class="text-pink">Manual data compile</td>
-        <td class="text-green">Live + PDF Export</td>
-        <td><strong>Hours / week</strong></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="total-bar animate-on-scroll">
-    Estimated 10+ hours saved per week across all modules
-  </div>
+<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/stord-operations" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 12: HOW WE BUILT IT -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-12">
-  <div class="section-label animate-on-scroll">HOW WE BUILT IT</div>
-  <h2 class="slide-title animate-on-scroll">6 Weeks. 1 Engineer. Full Platform.</h2>
-
-  <div class="stats-row">
-    <div class="stat-box stat-box--white animate-on-scroll">
-      <div class="stat-number">~6</div>
-      <div class="stat-label">Weeks</div>
-      <div class="stat-sub">Start of March 2026</div>
-    </div>
-    <div class="stat-box stat-box--white animate-on-scroll">
-      <div class="stat-number">1</div>
-      <div class="stat-label">Engineer</div>
-      <div class="stat-sub">Full-stack development</div>
-    </div>
-    <div class="stat-box stat-box--white animate-on-scroll">
-      <div class="stat-number">12+</div>
-      <div class="stat-label">Modules</div>
-      <div class="stat-sub">All production-ready</div>
-    </div>
-    <div class="stat-box stat-box--white animate-on-scroll">
-      <div class="stat-number">70+</div>
-      <div class="stat-label">API Endpoints</div>
-      <div class="stat-sub">Complete backend</div>
-    </div>
-  </div>
-
-  <div class="section-label animate-on-scroll" style="margin-top:clamp(0.3rem,0.8vh,0.5rem);font-size:clamp(0.55rem,0.9vw,0.7rem);">TECH STACK</div>
-  <div class="tech-grid">
-    <div class="tech-pill animate-on-scroll"><strong>Frontend:</strong> Next.js 15, React, Tailwind CSS</div>
-    <div class="tech-pill animate-on-scroll"><strong>Backend:</strong> Node.js, PostgreSQL (Supabase)</div>
-    <div class="tech-pill animate-on-scroll"><strong>Integrations:</strong> Stord, Shopify, AfterShip, FedEx, D365</div>
-    <div class="tech-pill animate-on-scroll"><strong>Infrastructure:</strong> Railway (auto-deploy), Google Drive, Slack</div>
-    <div class="tech-pill animate-on-scroll"><strong>Security:</strong> Google SSO, RBAC (6 roles), audit trail</div>
-  </div>
+<!-- 12. MORE MODULES -->
+<section class="s" id="s11">
+<div class="lbl a">MORE MODULES</div>
+<h2 class="ttl a">Additional Modules Powering Operations</h2>
+<div class="g g2 mt1">
+  <div class="glass glass--accent glass--glow a"><div class="ico">📈</div><h3>Demand Forecast</h3><p>3-cycle SKIO projection (90 days). RM & Concentrate runway per warehouse. Campaign calendar. Per-flavor trends. BOM join for raw material needs.</p></div>
+  <div class="glass glass--accent glass--glow a"><div class="ico">🧱</div><h3>BOM Master</h3><p>Version-controlled with draft→publish. Visual diff between versions. Risk analysis for single-source components. GLOBAL/UK/EU regions.</p></div>
+  <div class="glass glass--accent glass--glow a"><div class="ico">📅</div><h3>HK Fulfilment</h3><p>Batch AWB via Spaceship Pro. Auto-buy cron 9AM HKT. Carrier-split PDFs. D365 SKU mapping. Excel export with cover page.</p></div>
+  <div class="glass glass--accent glass--glow a"><div class="ico">🗄️</div><h3>Master Data Hub</h3><p>SKU catalog (controls forecast). Product Bible. Vendor management. Geographic warehouse routing — auto-determines serving warehouse.</p></div>
+</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 13: WHO USES IT -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-13">
-  <div class="section-label animate-on-scroll">WHO USES IT</div>
-  <h2 class="slide-title animate-on-scroll">Serving Multiple Teams Across the Organization</h2>
-
-  <div class="user-cols">
-    <div class="user-col animate-on-scroll">
-      <div class="avatar">⚙️</div>
-      <h3>Operations (6)</h3>
-      <div class="role">Primary power users</div>
-      <div class="sep"></div>
-      <p>Inventory, fulfillment, gifting management, work orders, delivery tracking, inbound shipments</p>
-    </div>
-    <div class="user-col animate-on-scroll">
-      <div class="avatar">💰</div>
-      <h3>Finance (2)</h3>
-      <div class="role">Cost control & audit</div>
-      <div class="sep"></div>
-      <p>Shipping cost analytics, invoice reconciliation, SO consolidation, duplicate detection</p>
-    </div>
-    <div class="user-col animate-on-scroll">
-      <div class="avatar">📋</div>
-      <h3>Procurement (2)</h3>
-      <div class="role">Supply chain visibility</div>
-      <div class="sep"></div>
-      <p>BOM management, vendor tracking, PO creation, inbound receipt status</p>
-    </div>
-    <div class="user-col animate-on-scroll">
-      <div class="avatar">🎁</div>
-      <h3>All Staff</h3>
-      <div class="role">Company-wide access</div>
-      <div class="sep"></div>
-      <p>Self-serve gifting requests, product quiz, request tracking</p>
-    </div>
-  </div>
+<!-- 12. AI -->
+<section class="s s--accent" id="s13">
+<div class="lbl a">AI-POWERED DEVELOPMENT</div>
+<h2 class="ttl a">How AI Accelerated Everything</h2>
+<div class="g g2 mt1">
+  <div class="ai-card a"><div class="ai-badge">AI CODING ASSISTANT</div><h3>Claude Code — AI Pair Programmer</h3><p>Built with <strong style="color:#fff">Claude Code (Anthropic)</strong> as AI pair-programmer. Claude reads the full codebase, understands architecture, and generates production-ready TypeScript, SQL, React — complete features end-to-end.</p></div>
+  <div class="ai-card a"><div class="ai-badge">10× DEVELOPMENT SPEED</div><h3>6 Weeks Instead of 6 Months</h3><p>What typically needs <strong style="color:#fff">3-5 engineers over 6+ months</strong> — built by 1 engineer in 6 weeks. AI handles boilerplate, complex queries, API integrations, UI components, debugging.</p></div>
+</div>
+<div class="g g3 mt1">
+  <div class="glass glass--accent a"><h3>🤖 AI-Generated Code</h3><p>Full-stack: Next.js pages, API routes, SQL, React, Tailwind — all AI-generated with human review.</p></div>
+  <div class="glass glass--accent a"><h3>📊 AI-Built Pipelines</h3><p>Invoice parsers for 3 carriers, cost validators, duplicate detectors, cron jobs — AI wrote each.</p></div>
+  <div class="glass glass--accent a"><h3>🔄 AI Integrations</h3><p>7+ APIs (Stord, Shopify, AfterShip, FedEx, D365, Spaceship, XLWMS) — AI handles contracts + errors.</p></div>
+</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 14: WHAT'S NEXT -->
-<!-- ============================================================ -->
-<section class="slide slide--light" id="slide-14">
-  <div class="section-label animate-on-scroll">WHAT'S NEXT</div>
-  <h2 class="slide-title animate-on-scroll">Continuous Improvement, Zero Downtime</h2>
-
-  <div class="roadmap-cols">
-    <div class="roadmap-col animate-on-scroll">
-      <div class="roadmap-badge roadmap-badge--now">NOW</div>
-      <h3>Live & Growing</h3>
-      <div class="sep"></div>
-      <ul>
-        <li>12+ modules in production</li>
-        <li>10+ active daily users</li>
-        <li>Automated data pipelines running 24/7</li>
-      </ul>
-    </div>
-    <div class="roadmap-col animate-on-scroll">
-      <div class="roadmap-badge roadmap-badge--next">NEXT</div>
-      <h3>Expanding Scope</h3>
-      <div class="sep"></div>
-      <ul>
-        <li>Full PO management & allocation</li>
-        <li>Advanced demand forecasting with churn</li>
-        <li>More carrier integrations</li>
-      </ul>
-    </div>
-    <div class="roadmap-col animate-on-scroll">
-      <div class="roadmap-badge roadmap-badge--future">FUTURE</div>
-      <h3>Platform Vision</h3>
-      <div class="sep"></div>
-      <ul>
-        <li>Cross-team workflow automation</li>
-        <li>AI-powered demand intelligence</li>
-        <li>Full supply chain visibility</li>
-      </ul>
-    </div>
-  </div>
+<!-- 14. TIME SAVINGS -->
+<section class="s" id="s14">
+<div class="lbl a">TIME SAVED</div>
+<h2 class="ttl a">Hours Recovered, Every Single Week</h2>
+<table class="tbl mt1 a">
+  <thead><tr><th>Module</th><th>Before</th><th>After — IM8 Hub</th><th>Time Saved</th></tr></thead>
+  <tbody>
+    <tr><td class="tb">Inventory Checks</td><td class="tp">10 min / SKU / check</td><td class="tg">Instant — one page</td><td class="tb">Hours / week</td></tr>
+    <tr><td class="tb">Shipping Invoices</td><td class="tp">3+ hours manual</td><td class="tg">Fully automated</td><td class="tb">3+ hrs / week</td></tr>
+    <tr><td class="tb">SO Consolidation</td><td class="tp">3+ hours cross-check</td><td class="tg">One-click view</td><td class="tb">3+ hrs / week</td></tr>
+    <tr><td class="tb">Gifting</td><td class="tp">5+ min per gift</td><td class="tg">Auto-routed</td><td class="tb">Hours / month</td></tr>
+    <tr><td class="tb">Sales Analysis</td><td class="tp">Manual Shopify + Excel</td><td class="tg">Pre-built dashboards</td><td class="tb">Hours / week</td></tr>
+    <tr><td class="tb">Delivery Reports</td><td class="tp">Manual compile</td><td class="tg">Live + PDF</td><td class="tb">Hours / week</td></tr>
+  </tbody>
+</table>
+<!-- Time Savings Bar Chart -->
+<div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5vh 2vw">
+<svg viewBox="0 0 500 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <style>text{font-family:'Raleway',sans-serif;fill:rgba(255,255,255,.75);font-size:11px}.val{fill:#4ADE80;font-weight:700;font-size:12px}.label{fill:rgba(255,255,255,.5);font-size:10px}</style>
+  <text x="0" y="20">Inventory</text><rect x="120" y="8" width="280" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="8" width="40" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="22" class="val">~85% faster</text>
+  <text x="0" y="58">Shipping</text><rect x="120" y="46" width="250" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="46" width="0" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="60" class="val">3+ hrs saved</text>
+  <text x="0" y="96">SO Consol.</text><rect x="120" y="84" width="250" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="84" width="0" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="98" class="val">3+ hrs saved</text>
+  <text x="0" y="134">Gifting</text><rect x="120" y="122" width="200" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="122" width="30" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="136" class="val">5+ min/gift</text>
+  <text x="0" y="172">Sales</text><rect x="120" y="160" width="220" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="160" width="20" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="174" class="val">Hours saved</text>
+  <rect x="120" y="210" width="12" height="12" rx="2" fill="rgba(164,0,17,.5)"/><text x="137" y="221" class="label">Before (manual time)</text>
+  <rect x="270" y="210" width="12" height="12" rx="2" fill="#4ADE80" opacity=".7"/><text x="287" y="221" class="label">After (IM8 Hub)</text>
+</svg>
+</div>
+<div class="tbar a">Estimated 10+ hours saved per week across all modules</div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 15: THANK YOU -->
-<!-- ============================================================ -->
-<section class="slide slide--dark" id="slide-15">
-  <div class="top-bar"></div>
-  <div class="bottom-bar"></div>
-  <div style="text-align:center;">
-    <div class="diamond reveal"></div>
-    <div class="reveal reveal-delay-1" style="display:flex;justify-content:center;margin-bottom:clamp(0.2rem,0.5vh,0.3rem);">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" aria-label="IM8" style="width:clamp(160px,22vw,300px);height:auto;">
-        <path fill="#ffffff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/>
-      </svg>
-    </div>
-    <h2 style="font-family:var(--font-caption);font-size:clamp(0.9rem,1.6vw,1.2rem);font-weight:600;letter-spacing:0.3em;color:var(--flamingo);text-transform:uppercase;" class="reveal reveal-delay-1">HUB</h2>
-    <div class="divider reveal reveal-delay-2"></div>
-    <p class="reveal reveal-delay-3" style="font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--flamingo);margin-top:clamp(0.5rem,1.5vh,1rem);">Built in 6 weeks. Saving 10+ hours every week.</p>
-    <p class="reveal reveal-delay-4" style="font-size:clamp(0.8rem,1.3vw,1rem);color:var(--stone);font-style:italic;margin-top:clamp(0.3rem,0.8vh,0.5rem);">One platform replacing dozens of manual workflows.</p>
-
-    <ul class="takeaway-list">
-      <li class="reveal reveal-delay-4"><span class="check">✓</span> 12+ modules serving Ops, Finance, Procurement & all staff</li>
-      <li class="reveal reveal-delay-5"><span class="check">✓</span> 5 warehouses unified — Stord, D365, GPS, Spaceship, XLWMS</li>
-      <li class="reveal reveal-delay-5"><span class="check">✓</span> Automated pipelines running 24/7 — zero manual intervention</li>
-    </ul>
-
-    <p class="reveal reveal-delay-6" style="font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.8rem);color:var(--flamingo);font-style:italic;margin-top:clamp(0.5rem,1.5vh,1rem);">Thank You</p>
-  </div>
+<!-- 15. HOW WE BUILT -->
+<section class="s" id="s15">
+<div class="lbl a">HOW WE BUILT IT</div>
+<h2 class="ttl a">6 Weeks. 1 Engineer + AI. Full Platform.</h2>
+<div class="g g4 mt1">
+  <div class="stat stat--w a"><div class="n">~6</div><div class="l">Weeks</div><div class="sm">From March 2026</div></div>
+  <div class="stat stat--w a"><div class="n">1</div><div class="l">Engineer</div><div class="sm">+ AI pair programmer</div></div>
+  <div class="stat stat--w a"><div class="n">12+</div><div class="l">Modules</div><div class="sm">Production-ready</div></div>
+  <div class="stat stat--w a"><div class="n">70+</div><div class="l">Endpoints</div><div class="sm">Complete API</div></div>
+</div>
+<!-- Development Timeline -->
+<div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.2vh 2vw">
+<svg viewBox="0 0 600 85" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+  <style>text{font-family:'Rajdhani',sans-serif;fill:rgba(255,255,255,.7);font-size:10px}.week{fill:#fff;font-size:11px;font-weight:600}</style>
+  <line x1="30" y1="30" x2="570" y2="30" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
+  <line x1="30" y1="30" x2="570" y2="30" stroke="#A40011" stroke-width="3"/>
+  <circle cx="30" cy="30" r="6" fill="#A40011"/><text x="30" y="52" text-anchor="middle" class="week">Wk 1</text><text x="30" y="65" text-anchor="middle">Core Setup</text>
+  <circle cx="120" cy="30" r="6" fill="#A40011"/><text x="120" y="52" text-anchor="middle" class="week">Wk 2</text><text x="120" y="65" text-anchor="middle">Inventory</text>
+  <circle cx="210" cy="30" r="6" fill="#A40011"/><text x="210" y="52" text-anchor="middle" class="week">Wk 3</text><text x="210" y="65" text-anchor="middle">Sales + SO</text>
+  <circle cx="300" cy="30" r="6" fill="#A40011"/><text x="300" y="52" text-anchor="middle" class="week">Wk 4</text><text x="300" y="65" text-anchor="middle">Gifting</text>
+  <circle cx="390" cy="30" r="6" fill="#A40011"/><text x="390" y="52" text-anchor="middle" class="week">Wk 5</text><text x="390" y="65" text-anchor="middle">Shipping</text>
+  <circle cx="480" cy="30" r="6" fill="#A40011"/><text x="480" y="52" text-anchor="middle" class="week">Wk 6</text><text x="480" y="65" text-anchor="middle">Forecast+BOM</text>
+  <circle cx="570" cy="30" r="8" fill="#4ADE80" stroke="#fff" stroke-width="2"/><text x="570" y="52" text-anchor="middle" class="week" style="fill:#4ADE80">LIVE</text><text x="570" y="65" text-anchor="middle">Production</text>
+  <text x="300" y="12" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" style="letter-spacing:.15em">DEVELOPMENT TIMELINE — MARCH TO APRIL 2026</text>
+</svg>
+</div>
+<p class="cap mt1 a">TECH STACK</p>
+<div class="g g2 mt1">
+  <div class="tpill a"><strong>Frontend:</strong> Next.js 15, React, TypeScript, Tailwind, shadcn/ui</div>
+  <div class="tpill a"><strong>Backend:</strong> Node.js, PostgreSQL (Supabase), direct SQL</div>
+  <div class="tpill a"><strong>Integrations:</strong> Stord, Shopify, AfterShip, FedEx, D365, Spaceship, XLWMS</div>
+  <div class="tpill a"><strong>Infra:</strong> Railway (auto-deploy), Google Drive API, Slack webhooks</div>
+  <div class="tpill a"><strong>Security:</strong> Google SSO, RBAC (6 roles), audit trail</div>
+  <div class="tpill a"><strong>AI:</strong> Claude Code — 10× velocity, production-quality output</div>
+</div>
 </section>
 
-<!-- === JAVASCRIPT === -->
+<!-- 16. WHO USES IT -->
+<section class="s" id="s16">
+<div class="lbl a">WHO USES IT</div>
+<h2 class="ttl a">Serving Multiple Teams Daily</h2>
+<div class="a" style="display:flex;align-items:center;justify-content:center;gap:3vw;margin-top:1vh">
+  <!-- Donut chart -->
+  <div style="width:12vw;flex-shrink:0">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="25"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(164,0,17,.7)" stroke-width="25" stroke-dasharray="264 176" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,150,147,.6)" stroke-width="25" stroke-dasharray="72 368" stroke-dashoffset="-264" transform="rotate(-90 100 100)"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(225,203,185,.5)" stroke-width="25" stroke-dasharray="72 368" stroke-dashoffset="-336" transform="rotate(-90 100 100)"/>
+      <text x="100" y="92" text-anchor="middle" font-size="28" font-weight="700" fill="#fff" font-family="'Cormorant Garamond',serif">10+</text>
+      <text x="100" y="118" text-anchor="middle" font-size="13" fill="rgba(255,255,255,.5)" font-family="'Rajdhani',sans-serif">DAILY USERS</text>
+    </svg>
+    <!-- Legend -->
+    <div style="display:flex;flex-direction:column;gap:.3vh;margin-top:.5vh">
+      <div style="display:flex;align-items:center;gap:.3vw"><div style="width:10px;height:10px;border-radius:2px;background:rgba(164,0,17,.7)"></div><span style="font-size:.8vw;color:rgba(255,255,255,.6)">Ops (60%)</span></div>
+      <div style="display:flex;align-items:center;gap:.3vw"><div style="width:10px;height:10px;border-radius:2px;background:rgba(255,150,147,.6)"></div><span style="font-size:.8vw;color:rgba(255,255,255,.6)">Finance (20%)</span></div>
+      <div style="display:flex;align-items:center;gap:.3vw"><div style="width:10px;height:10px;border-radius:2px;background:rgba(225,203,185,.5)"></div><span style="font-size:.8vw;color:rgba(255,255,255,.6)">Procurement (20%)</span></div>
+    </div>
+  </div>
+  <!-- User cards beside chart -->
+  <div style="flex:1">
+<div class="g g4">
+  <div class="ucard a"><div class="av">⚙️</div><h3>Operations (6)</h3><div class="rl">Power Users</div><div class="sep"></div><p>Inventory, fulfillment, gifting, work orders, delivery, inbound, daily summary</p></div>
+  <div class="ucard a"><div class="av">💰</div><h3>Finance (2)</h3><div class="rl">Cost Control</div><div class="sep"></div><p>Invoice reconciliation, cost analytics, duplicates, SO consolidation</p></div>
+  <div class="ucard a"><div class="av">📋</div><h3>Procurement (2)</h3><div class="rl">Supply Chain</div><div class="sep"></div><p>BOM, vendors, PO creation, inbound receipts, RM runway</p></div>
+  <div class="ucard a"><div class="av">🎁</div><h3>All Staff</h3><div class="rl">Company-Wide</div><div class="sep"></div><p>Self-serve gifting, product quiz, request tracking</p></div>
+</div>
+  </div>
+</div>
+</section>
+
+<!-- 17. COST -->
+<section class="s s--accent" id="s17">
+<div class="lbl a">COST ANALYSIS</div>
+<h2 class="ttl a">The Build vs. Buy Equation</h2>
+<div class="a" style="display:flex;align-items:center;gap:2vw;margin-top:1.5vh">
+  <!-- Cost comparison chart -->
+  <div style="width:28vw;flex-shrink:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5vh 1.5vw">
+    <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+      <style>text{font-family:'Raleway',sans-serif;fill:rgba(255,255,255,.75)}.big{font-family:'Cormorant Garamond',serif;font-weight:700}</style>
+      <rect x="60" y="20" width="120" height="150" rx="8" fill="rgba(164,0,17,.4)" stroke="rgba(164,0,17,.6)" stroke-width="1"/>
+      <text x="120" y="100" text-anchor="middle" font-size="26" class="big" fill="#FF9693">$400K</text>
+      <text x="120" y="125" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.4)">avg estimate</text>
+      <text x="120" y="190" text-anchor="middle" font-size="12" fill="rgba(255,255,255,.6)">Traditional</text>
+      <text x="120" y="208" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)">3-5 engineers × 6mo</text>
+      <rect x="220" y="130" width="120" height="40" rx="8" fill="rgba(74,222,128,.2)" stroke="rgba(74,222,128,.4)" stroke-width="1"/>
+      <text x="280" y="157" text-anchor="middle" font-size="20" class="big" fill="#4ADE80">~90%↓</text>
+      <text x="280" y="190" text-anchor="middle" font-size="12" fill="rgba(255,255,255,.6)">AI-Powered</text>
+      <text x="280" y="208" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)">1 engineer × 6wk</text>
+      <text x="195" y="85" text-anchor="middle" font-size="16" fill="rgba(255,255,255,.2)">→</text>
+    </svg>
+  </div>
+  <!-- Detail cards -->
+  <div style="flex:1">
+<div class="g g2">
+  <div class="glass glass--accent glass--glow a"><h3>💰 Traditional Approach</h3><p style="font-size:1.1vw;color:rgba(255,255,255,.7);margin-top:.5vh">• 2-3 Full-stack engineers × 6 months<br>• 1 Designer × 3 months<br>• 1 Project manager × 6 months<br>• External API consultants<br><br><strong style="color:var(--pk);font-size:1.25vw">Estimated: $300K–$500K+</strong></p></div>
+  <div class="glass glass--accent glass--glow a"><h3>🚀 AI-Powered (What We Did)</h3><p style="font-size:1.1vw;color:rgba(255,255,255,.7);margin-top:.5vh">• 1 Engineer × 6 weeks<br>• Claude Code AI subscription<br>• Railway hosting (minimal)<br>• Supabase database (existing)<br><br><strong style="color:var(--gn);font-size:1.25vw">90%+ cost reduction</strong></p></div>
+</div>
+  </div>
+</div>
+<div class="tbar a" style="margin-top:1.5vh">AI-powered development: faster delivery, lower cost, same production quality</div>
+</section>
+
+<!-- 18. ROADMAP -->
+<section class="s" id="s18">
+<div class="lbl a">WHAT'S NEXT</div>
+<h2 class="ttl a">Continuous Improvement</h2>
+<div class="g g3 mt2">
+  <div class="rcard a"><div class="rbadge rb-now">NOW</div><h3>Live & Growing</h3><div class="rsep"></div><ul><li>12+ modules, 10+ daily users</li><li>Automated pipelines 24/7</li><li>Google SSO + 6-tier RBAC</li><li>Staging + Production</li></ul></div>
+  <div class="rcard a"><div class="rbadge rb-next">NEXT</div><h3>Expanding Scope</h3><div class="rsep"></div><ul><li>Full PO management + allocation</li><li>Forecast with churn modelling</li><li>More carrier integrations</li><li>Deeper D365 sync</li></ul></div>
+  <div class="rcard a"><div class="rbadge rb-fut">FUTURE</div><h3>Platform Vision</h3><div class="rsep"></div><ul><li>AI-powered demand intelligence</li><li>Cross-team automation</li><li>Full supply chain visibility</li><li>Mobile dashboards</li></ul></div>
+</div>
+</section>
+
+<!-- 19. CLOSING -->
+<section class="s" id="s19">
+<div class="topline"></div><div class="botline"></div>
+<div style="text-align:center;margin:auto 0">
+  <div style="width:32px;height:32px;background:var(--rd);transform:rotate(45deg);margin:0 auto 1vh;box-shadow:0 0 16px rgba(164,0,17,.4)" class="r"></div>
+  <div class="r d1" style="display:flex;justify-content:center;margin-bottom:.3vh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" style="width:20vw;height:auto"><path fill="#fff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7Z"/></svg></div>
+  <p class="r d1" style="font-family:'Rajdhani',sans-serif;font-size:1.4vw;font-weight:600;letter-spacing:.4em;color:var(--pk);text-transform:uppercase">HUB</p>
+  <div style="width:11vw;height:2px;background:rgba(225,203,185,.3);margin:1vh auto" class="r d2"></div>
+  <p class="r d3" style="font-family:'Spectral',serif;font-size:1.8vw;color:var(--pk);margin-top:.8vh">Built in 6 weeks. Saving 10+ hours every week.</p>
+  <p class="r d4" style="font-style:italic;color:var(--st);font-size:1.2vw;margin-top:.4vh">One engineer + AI replacing an entire development team's output.</p>
+  <div style="max-width:50vw;margin:1.5vh auto 0">
+    <div class="tk r d4"><span class="c">✓</span><span>12+ modules serving Ops, Finance, Procurement & all staff</span></div>
+    <div class="tk r d5"><span class="c">✓</span><span>5 warehouses unified — Stord, D365, GPS, Spaceship, XLWMS</span></div>
+    <div class="tk r d5"><span class="c">✓</span><span>AI-powered development — 90%+ cost reduction vs traditional</span></div>
+  </div>
+  <p class="r d6" style="font-family:'Cormorant Garamond',serif;font-size:2.5vw;color:var(--pk);font-style:italic;margin-top:2vh">Thank You</p>
+</div>
+</section>
+
 <script>
-(function() {
-  const slides = document.querySelectorAll('.slide');
-  const totalSlides = slides.length;
-  const navDots = document.getElementById('navDots');
-  const counter = document.getElementById('slideCounter');
-
-  /* --- Nav dots --- */
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'nav-dot';
-    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    dot.addEventListener('click', () => {
-      slides[i].scrollIntoView({ behavior: 'smooth' });
-    });
-    navDots.appendChild(dot);
-  });
-
-  const dots = navDots.querySelectorAll('.nav-dot');
-
-  /* --- Intersection Observer for active slide --- */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const idx = Array.from(slides).indexOf(entry.target);
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-        counter.textContent = `${idx + 1} / ${totalSlides}`;
-
-        /* Update dot colors based on slide theme */
-        const isDark = entry.target.classList.contains('slide--dark');
-        navDots.style.setProperty('--dot-bg', isDark ? 'rgba(255,255,255,0.3)' : 'rgba(80,0,11,0.2)');
-        dots.forEach(d => {
-          if (!d.classList.contains('active')) {
-            d.style.background = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(80,0,11,0.2)';
-          } else {
-            d.style.background = '#FF9693';
-          }
-        });
-        counter.style.color = isDark ? 'rgba(255,255,255,0.4)' : 'rgba(80,0,11,0.3)';
-      }
-    });
-  }, { threshold: 0.5 });
-
-  slides.forEach(s => observer.observe(s));
-
-  /* --- Scroll-triggered animations --- */
-  const animObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        /* Stagger children */
-        const els = entry.target.querySelectorAll('.animate-on-scroll');
-        els.forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 80);
-        });
-      }
-    });
-  }, { threshold: 0.2 });
-
-  slides.forEach(s => animObserver.observe(s));
-
-  /* --- Keyboard navigation --- */
-  document.addEventListener('keydown', (e) => {
-    const current = Math.round(window.scrollY / window.innerHeight);
-    if ((e.key === 'ArrowDown' || e.key === ' ' || e.key === 'ArrowRight') && current < totalSlides - 1) {
-      e.preventDefault();
-      slides[current + 1].scrollIntoView({ behavior: 'smooth' });
-    } else if ((e.key === 'ArrowUp' || e.key === 'ArrowLeft') && current > 0) {
-      e.preventDefault();
-      slides[current - 1].scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-
-  /* --- Trigger first slide animations --- */
-  setTimeout(() => {
-    slides[0].querySelectorAll('.animate-on-scroll').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 80);
-    });
-  }, 100);
+(function(){
+  const S=document.querySelectorAll('.s'),N=S.length,nav=document.getElementById('nd'),num=document.getElementById('sn');
+  S.forEach((_,i)=>{const d=document.createElement('button');d.className='dot';d.onclick=()=>S[i].scrollIntoView({behavior:'smooth'});nav.appendChild(d)});
+  const dots=nav.querySelectorAll('.dot');
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const i=[...S].indexOf(e.target);
+    dots.forEach((d,j)=>{d.classList.toggle('on',j===i);d.style.background=j===i?'#FF9693':'rgba(255,255,255,.2)'});
+    num.textContent=`${i+1} / ${N}`;
+    e.target.querySelectorAll('.a').forEach((el,j)=>setTimeout(()=>el.classList.add('v'),j*50))})},{threshold:.25});
+  S.forEach(s=>obs.observe(s));
+  setTimeout(()=>S[0].querySelectorAll('.a').forEach((el,i)=>setTimeout(()=>el.classList.add('v'),i*50)),100);
+  document.addEventListener('keydown',e=>{const c=Math.round(scrollY/innerHeight);
+    if(['ArrowDown',' ','ArrowRight'].includes(e.key)&&c<N-1){e.preventDefault();S[c+1].scrollIntoView({behavior:'smooth'})}
+    if(['ArrowUp','ArrowLeft'].includes(e.key)&&c>0){e.preventDefault();S[c-1].scrollIntoView({behavior:'smooth'})}});
 })();
 </script>
-
 </body>
 </html>
