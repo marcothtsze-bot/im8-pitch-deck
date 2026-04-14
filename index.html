@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IM8 Hub — Operations Intelligence Platform</title>
 
-<!-- Fonts: Cormorant Garamond (display) + Raleway (body) — matching IM8 brand -->
+<!-- Fonts: IM8 Four-Font System — Cormorant Garamond (display) + Spectral (headings) + Raleway (body) + Rajdhani (captions/labels) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&family=Spectral:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&family=Spectral:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* === ROOT VARIABLES — IM8 BRAND === */
@@ -26,6 +26,7 @@
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-heading: 'Spectral', Georgia, serif;
   --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
+  --font-caption: 'Rajdhani', 'Helvetica Neue', sans-serif;
 
   --slide-transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -72,10 +73,10 @@ body {
 
 /* === TYPOGRAPHY === */
 .section-label {
-  font-family: var(--font-body);
-  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
-  font-weight: 700;
-  letter-spacing: 0.25em;
+  font-family: var(--font-caption);
+  font-size: clamp(0.8rem, 1.4vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   margin-bottom: clamp(0.3rem, 1vh, 0.6rem);
 }
@@ -86,7 +87,7 @@ body {
 .slide-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
   line-height: 1.1;
   margin-bottom: clamp(0.8rem, 2vh, 1.5rem);
 }
@@ -95,9 +96,9 @@ body {
 .slide--light .slide-title { color: var(--burgundy); }
 
 .subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.8vw, 1.25rem);
-  font-weight: 300;
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 400;
   line-height: 1.5;
 }
 
@@ -173,17 +174,17 @@ body {
 }
 
 .card h3 {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(0.75rem, 1.3vw, 1rem);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
   color: var(--burgundy);
   margin-bottom: clamp(0.15rem, 0.4vh, 0.3rem);
 }
 
 .card p {
-  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
   color: var(--muted-text);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* === STAT BOXES === */
@@ -214,7 +215,7 @@ body {
 .stat-number {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 1;
 }
 
@@ -222,7 +223,8 @@ body {
 .stat-box--white .stat-number { color: var(--red-algae); }
 
 .stat-label {
-  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-family: var(--font-caption);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
   font-weight: 600;
   margin-top: 0.2rem;
 }
@@ -254,10 +256,11 @@ body {
 .compare-header {
   padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.8rem, 1.5vw, 1.2rem);
   text-align: center;
+  font-family: var(--font-caption);
   font-weight: 700;
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
   color: white;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
 }
 
 .compare-header--before { background: #DC2626; }
@@ -273,11 +276,11 @@ body {
 }
 
 .compare-body li {
-  font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+  font-size: clamp(0.8rem, 1.3vw, 1rem);
   padding: clamp(0.2rem, 0.4vh, 0.3rem) 0;
   padding-left: 1.2em;
   position: relative;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .compare-body li::before {
@@ -312,7 +315,7 @@ body {
 .time-banner .icon { font-size: clamp(1rem, 2vw, 1.5rem); }
 
 .time-banner strong {
-  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
   color: var(--burgundy);
 }
 
@@ -329,7 +332,7 @@ body {
   background: var(--white);
   padding: clamp(0.5rem, 1vw, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);
   border-radius: 6px;
-  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
   font-weight: 600;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
@@ -352,7 +355,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: clamp(0.5rem, 1.2vh, 0.8rem);
-  font-size: clamp(0.6rem, 1.1vw, 0.85rem);
+  font-size: clamp(0.8rem, 1.3vw, 1rem);
 }
 
 .data-table thead th {
@@ -385,7 +388,7 @@ body {
   border-radius: 6px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   color: white;
 }
 
@@ -401,7 +404,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.4em;
-  font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+  font-size: clamp(0.8rem, 1.3vw, 1rem);
 }
 
 .module-item .check {
@@ -429,7 +432,8 @@ body {
 
 .carrier-badge strong {
   display: block;
-  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
 }
 
 .carrier-badge span {
@@ -467,8 +471,9 @@ body {
 }
 
 .user-col h3 {
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  font-weight: 600;
   color: var(--burgundy);
 }
 
@@ -487,9 +492,9 @@ body {
 }
 
 .user-col p {
-  font-size: clamp(0.55rem, 0.9vw, 0.72rem);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
   color: var(--muted-text);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* === ROADMAP === */
@@ -525,7 +530,7 @@ body {
 
 .roadmap-col h3 {
   font-family: var(--font-display);
-  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
   font-weight: 700;
   color: var(--burgundy);
   margin-bottom: 0.3rem;
@@ -545,7 +550,7 @@ body {
 }
 
 .roadmap-col li {
-  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
   color: var(--muted-text);
   padding: 0.2rem 0;
   padding-left: 1.2em;
@@ -570,9 +575,9 @@ body {
 .tech-pill {
   background: var(--white);
   border-left: 4px solid var(--red-algae);
-  padding: clamp(0.3rem, 0.6vh, 0.5rem) clamp(0.6rem, 1vw, 0.8rem);
+  padding: clamp(0.4rem, 0.7vh, 0.6rem) clamp(0.6rem, 1vw, 0.8rem);
   border-radius: 4px;
-  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
   color: var(--muted-text);
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
@@ -594,11 +599,13 @@ body {
 .feature-box-header {
   padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.8rem, 1.5vw, 1rem);
   color: white;
+  font-family: var(--font-caption);
   font-weight: 700;
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
   display: flex;
   align-items: center;
   gap: 0.5em;
+  letter-spacing: 0.05em;
 }
 
 .feature-box-header--burgundy { background: var(--burgundy); }
@@ -611,12 +618,12 @@ body {
 .feature-box-body ul { list-style: none; padding: 0; }
 
 .feature-box-body li {
-  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
   padding: clamp(0.15rem, 0.3vh, 0.25rem) 0;
   padding-left: 1.2em;
   position: relative;
   color: var(--dark-text);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .feature-box-body li::before {
@@ -793,8 +800,14 @@ body {
   <div class="bottom-bar"></div>
   <div style="text-align:center;">
     <div class="diamond reveal"></div>
-    <h1 style="font-family:var(--font-display);font-size:clamp(3rem,7vw,5rem);font-weight:700;letter-spacing:0.1em;color:var(--white);" class="reveal reveal-delay-1">IM8 HUB</h1>
-    <p class="subtitle reveal reveal-delay-2" style="color:var(--flamingo);font-size:clamp(1rem,2.2vw,1.5rem);">Operations Intelligence Platform</p>
+    <!-- IM8 official SVG wordmark (I◆M◆8®) -->
+    <div class="reveal reveal-delay-1" style="display:flex;justify-content:center;margin-bottom:clamp(0.3rem,0.8vh,0.5rem);">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" aria-label="IM8" style="width:clamp(200px,28vw,380px);height:auto;">
+        <path fill="#ffffff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/>
+      </svg>
+    </div>
+    <h2 style="font-family:var(--font-caption);font-size:clamp(1rem,2vw,1.4rem);font-weight:600;letter-spacing:0.3em;color:var(--flamingo);text-transform:uppercase;" class="reveal reveal-delay-1">HUB</h2>
+    <p class="subtitle reveal reveal-delay-2" style="color:var(--flamingo);font-size:clamp(1.1rem,2.2vw,1.5rem);">Operations Intelligence Platform</p>
     <div class="divider reveal reveal-delay-3"></div>
     <p class="reveal reveal-delay-4" style="font-style:italic;color:var(--stone);font-size:clamp(0.8rem,1.4vw,1rem);margin-top:clamp(0.5rem,1.5vh,1rem);">One platform. Every operation. Zero manual work.</p>
     <p class="reveal reveal-delay-5" style="color:var(--stone);opacity:0.6;font-size:clamp(0.6rem,1vw,0.8rem);margin-top:clamp(1.5rem,4vh,3rem);">Presented to CEO &nbsp;|&nbsp; April 2026</p>
@@ -812,32 +825,32 @@ body {
     <div class="card animate-on-scroll">
       <div class="card-icon">📦</div>
       <h3>Inventory</h3>
-      <p>Check D365, Stord, GPS separately for each SKU across 5 warehouses</p>
+      <p>Log into D365, Stord, GPS, XLWMS separately — 10 min per SKU across 5 warehouses</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">🛒</div>
       <h3>Sales Data</h3>
-      <p>Download from Shopify manually, long wait times, manual analysis</p>
+      <p>Export from Shopify manually with long wait times, then build analysis in spreadsheets</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">📋</div>
       <h3>Order Status</h3>
-      <p>Cross-check Shopify, Stord, D365 manually to find issues</p>
+      <p>Cross-reference Shopify orders, Stord fulfillment, and D365 records to find stuck orders</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">🎁</div>
       <h3>Gifting</h3>
-      <p>Manual placement on each warehouse platform separately</p>
+      <p>Ops manually places each gift on the correct warehouse platform — Stord, Spaceship, or XLWMS</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">💰</div>
       <h3>Shipping Costs</h3>
-      <p>No automated reconciliation, no duplicate detection</p>
+      <p>Invoices from 3 carriers (Stord, FedEx, Rexville) reconciled manually — no overcharge detection</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">⚙️</div>
       <h3>Stord Operations</h3>
-      <p>Limited visibility in Stord portal, hard to track production orders</p>
+      <p>Stord's own portal is hard to navigate — production orders, kitting status, ASNs scattered</p>
     </div>
   </div>
 </section>
@@ -988,22 +1001,22 @@ body {
     <div class="card animate-on-scroll">
       <div class="card-icon">🚚</div>
       <h3>AfterShip Sync</h3>
-      <p>Auto-sync tracking data for the most up-to-date delivery status</p>
+      <p>Continuous sync with AfterShip tracking API — always shows the latest delivery status across all carriers and regions</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">📊</div>
       <h3>KPI Dashboard</h3>
-      <p>On-time rate, transit times, delivery success — at a glance</p>
+      <p>On-time delivery rate, average transit times, delivery success rate — filterable by warehouse, carrier, date range</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">🗺️</div>
-      <h3>Country Heatmap</h3>
-      <p>Drill down by destination country, filter by any dimension</p>
+      <h3>Country Analytics</h3>
+      <p>Performance breakdown by destination country with heatmap visualization — top 30 countries ranked by volume</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">📄</div>
       <h3>PDF Export</h3>
-      <p>IM8-branded performance reports — ready for stakeholders</p>
+      <p>IM8-branded 2-page A4 landscape report — KPIs, destination chart, full country table — ready for stakeholders</p>
     </div>
   </div>
 
@@ -1143,22 +1156,22 @@ body {
     <div class="card animate-on-scroll">
       <div class="card-icon">📈</div>
       <h3>Demand Forecast</h3>
-      <p>3-cycle subscription projection (90 days), RM & Concentrate runway, campaign calendar, per-flavor sales trends</p>
+      <p>Projects demand across 3 billing cycles (90 days) using SKIO subscription data. Includes RM & Concentrate runway analysis, marketing campaign calendar, and per-flavor sales trends by warehouse.</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">🧱</div>
       <h3>BOM Master</h3>
-      <p>Version-controlled Bill of Materials, draft → publish workflow, version compare with diff view, risk analysis</p>
+      <p>Version-controlled Bill of Materials with draft → publish workflow. Compare any two versions with a visual diff. Risk analysis flags single-source components and long lead times.</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">📅</div>
       <h3>HK Fulfilment</h3>
-      <p>Batch AWB management with DB persistence, carrier-split PDF generation, auto-buy cron, D365 SKU mapping</p>
+      <p>Batch AWB management for Hong Kong orders via Spaceship Pro. Auto-buy cron at 9 AM HKT, carrier-split PDF downloads, D365 SKU mapping with cross-check, Excel export for accounting.</p>
     </div>
     <div class="card animate-on-scroll">
       <div class="card-icon">🗄️</div>
       <h3>Master Data</h3>
-      <p>SKU catalog with active/inactive toggle, Product Bible, vendor management, warehouse routing rules</p>
+      <p>Central SKU catalog with active/inactive toggle (controls forecast inclusion). Product Bible for content, vendor management, and geographic warehouse routing rules for order allocation.</p>
     </div>
   </div>
 </section>
@@ -1352,9 +1365,14 @@ body {
   <div class="bottom-bar"></div>
   <div style="text-align:center;">
     <div class="diamond reveal"></div>
-    <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4rem);font-weight:700;letter-spacing:0.08em;color:var(--white);" class="reveal reveal-delay-1">IM8 HUB</h1>
+    <div class="reveal reveal-delay-1" style="display:flex;justify-content:center;margin-bottom:clamp(0.2rem,0.5vh,0.3rem);">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" aria-label="IM8" style="width:clamp(160px,22vw,300px);height:auto;">
+        <path fill="#ffffff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/>
+      </svg>
+    </div>
+    <h2 style="font-family:var(--font-caption);font-size:clamp(0.9rem,1.6vw,1.2rem);font-weight:600;letter-spacing:0.3em;color:var(--flamingo);text-transform:uppercase;" class="reveal reveal-delay-1">HUB</h2>
     <div class="divider reveal reveal-delay-2"></div>
-    <p class="reveal reveal-delay-3" style="font-size:clamp(1rem,2vw,1.4rem);color:var(--flamingo);margin-top:clamp(0.5rem,1.5vh,1rem);">Built in 6 weeks. Saving 10+ hours every week.</p>
+    <p class="reveal reveal-delay-3" style="font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--flamingo);margin-top:clamp(0.5rem,1.5vh,1rem);">Built in 6 weeks. Saving 10+ hours every week.</p>
     <p class="reveal reveal-delay-4" style="font-size:clamp(0.8rem,1.3vw,1rem);color:var(--stone);font-style:italic;margin-top:clamp(0.3rem,0.8vh,0.5rem);">One platform replacing dozens of manual workflows.</p>
 
     <ul class="takeaway-list">
