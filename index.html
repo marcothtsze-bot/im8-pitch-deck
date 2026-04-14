@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IM8 Hub — Operations Intelligence Platform</title>
+
+<!-- Fonts: Cormorant Garamond (display) + Raleway (body) — matching IM8 brand -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&family=Spectral:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* === ROOT VARIABLES — IM8 BRAND === */
+:root {
+  --burgundy: #50000B;
+  --red-algae: #A40011;
+  --flamingo: #FF9693;
+  --stone: #E1CBB9;
+  --sand: #FFE9D8;
+  --off-white: #F5EAEA;
+  --white: #FFFFFF;
+  --dark-text: #50000B;
+  --muted-text: #8B6B6B;
+  --success: #22C55E;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Spectral', Georgia, serif;
+  --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
+
+  --slide-transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark-text);
+  background: var(--burgundy);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === SLIDE BASE === */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(2rem, 6vw, 5rem);
+}
+
+.slide--dark {
+  background: var(--burgundy);
+  color: var(--white);
+}
+
+.slide--light {
+  background: var(--off-white);
+  color: var(--dark-text);
+}
+
+/* === TYPOGRAPHY === */
+.section-label {
+  font-family: var(--font-body);
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: clamp(0.3rem, 1vh, 0.6rem);
+}
+
+.slide--dark .section-label { color: var(--flamingo); }
+.slide--light .section-label { color: var(--red-algae); }
+
+.slide-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  line-height: 1.1;
+  margin-bottom: clamp(0.8rem, 2vh, 1.5rem);
+}
+
+.slide--dark .slide-title { color: var(--white); }
+.slide--light .slide-title { color: var(--burgundy); }
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* === DECORATIVE ELEMENTS === */
+.top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--red-algae);
+}
+
+.bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--red-algae);
+}
+
+.diamond {
+  width: clamp(30px, 4vw, 50px);
+  height: clamp(30px, 4vw, 50px);
+  background: var(--red-algae);
+  transform: rotate(45deg);
+  margin: 0 auto clamp(1rem, 2vh, 2rem);
+}
+
+.divider {
+  width: clamp(100px, 20vw, 200px);
+  height: 2px;
+  background: var(--stone);
+  margin: clamp(0.8rem, 1.5vh, 1.2rem) auto;
+}
+
+/* === CARDS === */
+.card-grid {
+  display: grid;
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+  margin-top: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.card-grid--3x2 { grid-template-columns: repeat(3, 1fr); }
+.card-grid--2x2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+.card {
+  background: var(--white);
+  border-radius: 6px;
+  padding: clamp(0.7rem, 1.5vw, 1.2rem);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--red-algae);
+}
+
+.card-icon {
+  width: clamp(28px, 3vw, 40px);
+  height: clamp(28px, 3vw, 40px);
+  background: var(--red-algae);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(0.3rem, 0.8vh, 0.5rem);
+  color: white;
+  font-size: clamp(0.7rem, 1.2vw, 1rem);
+}
+
+.card h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.3vw, 1rem);
+  color: var(--burgundy);
+  margin-bottom: clamp(0.15rem, 0.4vh, 0.3rem);
+}
+
+.card p {
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  color: var(--muted-text);
+  line-height: 1.4;
+}
+
+/* === STAT BOXES === */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+  margin: clamp(0.8rem, 2vh, 1.5rem) 0;
+}
+
+.stat-box {
+  text-align: center;
+  padding: clamp(0.8rem, 1.5vw, 1.2rem);
+  border-radius: 6px;
+}
+
+.stat-box--red {
+  background: var(--red-algae);
+  color: var(--white);
+}
+
+.stat-box--white {
+  background: var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-top: 4px solid var(--red-algae);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1;
+}
+
+.stat-box--red .stat-number { color: var(--white); }
+.stat-box--white .stat-number { color: var(--red-algae); }
+
+.stat-label {
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.stat-sub {
+  font-size: clamp(0.55rem, 0.9vw, 0.7rem);
+  color: var(--muted-text);
+  margin-top: 0.1rem;
+}
+
+.stat-box--red .stat-label { color: var(--flamingo); }
+.stat-box--red .stat-sub { color: rgba(255,255,255,0.6); }
+
+/* === BEFORE/AFTER COLUMNS === */
+.compare-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  margin-top: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.compare-box {
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.compare-header {
+  padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.8rem, 1.5vw, 1.2rem);
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  color: white;
+  letter-spacing: 0.1em;
+}
+
+.compare-header--before { background: #DC2626; }
+.compare-header--after { background: #16A34A; }
+
+.compare-body {
+  padding: clamp(0.6rem, 1.2vw, 1rem) clamp(0.8rem, 1.5vw, 1.2rem);
+}
+
+.compare-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.compare-body li {
+  font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+  padding: clamp(0.2rem, 0.4vh, 0.3rem) 0;
+  padding-left: 1.2em;
+  position: relative;
+  line-height: 1.4;
+}
+
+.compare-body li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--red-algae);
+  font-weight: 700;
+}
+
+.compare-body li.highlight {
+  color: var(--red-algae);
+  font-weight: 700;
+}
+
+.compare-body li.highlight-green {
+  color: #16A34A;
+  font-weight: 700;
+}
+
+/* === TIME SAVING BANNER === */
+.time-banner {
+  background: var(--sand);
+  padding: clamp(0.5rem, 1vh, 0.8rem) clamp(1rem, 2vw, 1.5rem);
+  border-radius: 6px;
+  margin-top: clamp(0.5rem, 1.2vh, 1rem);
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+}
+
+.time-banner .icon { font-size: clamp(1rem, 2vw, 1.5rem); }
+
+.time-banner strong {
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  color: var(--burgundy);
+}
+
+/* === FLOW DIAGRAM === */
+.flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.3rem, 0.8vw, 0.5rem);
+  margin: clamp(0.5rem, 1.5vh, 1rem) 0;
+}
+
+.flow-step {
+  background: var(--white);
+  padding: clamp(0.5rem, 1vw, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);
+  border-radius: 6px;
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  min-width: clamp(100px, 15vw, 160px);
+}
+
+.flow-step--active {
+  background: var(--red-algae);
+  color: white;
+}
+
+.flow-arrow {
+  color: var(--red-algae);
+  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+  font-weight: 700;
+}
+
+/* === TABLE === */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: clamp(0.5rem, 1.2vh, 0.8rem);
+  font-size: clamp(0.6rem, 1.1vw, 0.85rem);
+}
+
+.data-table thead th {
+  background: var(--red-algae);
+  color: white;
+  padding: clamp(0.35rem, 0.7vh, 0.5rem) clamp(0.5rem, 1vw, 0.8rem);
+  text-align: left;
+  font-weight: 600;
+}
+
+.data-table tbody tr:nth-child(odd) { background: rgba(80,0,11,0.08); }
+.data-table tbody tr:nth-child(even) { background: rgba(80,0,11,0.15); }
+
+.data-table td {
+  padding: clamp(0.3rem, 0.6vh, 0.5rem) clamp(0.5rem, 1vw, 0.8rem);
+}
+
+.slide--dark .data-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.04); }
+.slide--dark .data-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.08); }
+
+.text-green { color: #4ADE80; }
+.text-pink { color: var(--flamingo); }
+
+/* === TOTAL BAR === */
+.total-bar {
+  background: var(--red-algae);
+  text-align: center;
+  padding: clamp(0.5rem, 1vh, 0.8rem);
+  margin-top: clamp(0.4rem, 0.8vh, 0.6rem);
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+  color: white;
+}
+
+/* === MODULE CHECKLIST === */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.2rem, 0.5vw, 0.4rem) clamp(0.5rem, 1.5vw, 1rem);
+  margin-top: clamp(0.3rem, 0.8vh, 0.5rem);
+}
+
+.module-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+}
+
+.module-item .check {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.slide--dark .module-item { color: var(--stone); }
+
+/* === CARRIER BADGES === */
+.carrier-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+  margin: clamp(0.5rem, 1vh, 0.8rem) 0;
+}
+
+.carrier-badge {
+  background: var(--red-algae);
+  color: white;
+  text-align: center;
+  padding: clamp(0.5rem, 1vh, 0.8rem);
+  border-radius: 6px;
+}
+
+.carrier-badge strong {
+  display: block;
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+}
+
+.carrier-badge span {
+  font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+  opacity: 0.8;
+}
+
+/* === USER GROUP COLUMNS === */
+.user-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+  margin-top: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.user-col {
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  text-align: center;
+  padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(0.5rem, 1vw, 0.8rem);
+}
+
+.user-col .avatar {
+  width: clamp(36px, 5vw, 50px);
+  height: clamp(36px, 5vw, 50px);
+  background: var(--red-algae);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  margin: 0 auto clamp(0.3rem, 0.6vh, 0.5rem);
+}
+
+.user-col h3 {
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  font-weight: 700;
+  color: var(--burgundy);
+}
+
+.user-col .role {
+  font-size: clamp(0.55rem, 0.8vw, 0.7rem);
+  color: var(--red-algae);
+  font-style: italic;
+  margin-bottom: 0.3rem;
+}
+
+.user-col .sep {
+  width: 60%;
+  height: 1px;
+  background: var(--stone);
+  margin: 0.3rem auto;
+}
+
+.user-col p {
+  font-size: clamp(0.55rem, 0.9vw, 0.72rem);
+  color: var(--muted-text);
+  line-height: 1.4;
+}
+
+/* === ROADMAP === */
+.roadmap-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.8rem, 2vw, 1.5rem);
+  margin-top: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.roadmap-col {
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: clamp(0.8rem, 1.5vw, 1.2rem);
+  text-align: center;
+}
+
+.roadmap-badge {
+  display: inline-block;
+  padding: clamp(0.2rem, 0.4vh, 0.3rem) clamp(0.6rem, 1.2vw, 1rem);
+  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: white;
+  border-radius: 3px;
+  margin-bottom: clamp(0.3rem, 0.6vh, 0.5rem);
+}
+
+.roadmap-badge--now { background: var(--red-algae); }
+.roadmap-badge--next { background: var(--burgundy); }
+.roadmap-badge--future { background: var(--stone); color: var(--burgundy); }
+
+.roadmap-col h3 {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  font-weight: 700;
+  color: var(--burgundy);
+  margin-bottom: 0.3rem;
+}
+
+.roadmap-col .sep {
+  width: 50%;
+  height: 1px;
+  background: var(--stone);
+  margin: 0.3rem auto 0.5rem;
+}
+
+.roadmap-col ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.roadmap-col li {
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  color: var(--muted-text);
+  padding: 0.2rem 0;
+  padding-left: 1.2em;
+  position: relative;
+}
+
+.roadmap-col li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--red-algae);
+}
+
+/* === TECH STACK PILLS === */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.4rem, 0.8vw, 0.6rem);
+  margin-top: clamp(0.3rem, 0.6vh, 0.5rem);
+}
+
+.tech-pill {
+  background: var(--white);
+  border-left: 4px solid var(--red-algae);
+  padding: clamp(0.3rem, 0.6vh, 0.5rem) clamp(0.6rem, 1vw, 0.8rem);
+  border-radius: 4px;
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  color: var(--muted-text);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+/* === TWO-COL FEATURE === */
+.feature-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.8rem, 2vw, 1.5rem);
+}
+
+.feature-box {
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.feature-box-header {
+  padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.8rem, 1.5vw, 1rem);
+  color: white;
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.feature-box-header--burgundy { background: var(--burgundy); }
+.feature-box-header--red { background: var(--red-algae); }
+
+.feature-box-body {
+  padding: clamp(0.5rem, 1vw, 0.8rem) clamp(0.8rem, 1.5vw, 1rem);
+}
+
+.feature-box-body ul { list-style: none; padding: 0; }
+
+.feature-box-body li {
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  padding: clamp(0.15rem, 0.3vh, 0.25rem) 0;
+  padding-left: 1.2em;
+  position: relative;
+  color: var(--dark-text);
+  line-height: 1.4;
+}
+
+.feature-box-body li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* === CLOSING SLIDE TAKEAWAYS === */
+.takeaway-list {
+  list-style: none;
+  padding: 0;
+  margin: clamp(0.8rem, 2vh, 1.5rem) auto;
+  max-width: 700px;
+}
+
+.takeaway-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  color: var(--stone);
+  padding: clamp(0.2rem, 0.5vh, 0.35rem) 0;
+}
+
+.takeaway-list .check { color: var(--success); font-size: 1.1em; }
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.reveal-delay-1 { animation-delay: 0.1s; }
+.reveal-delay-2 { animation-delay: 0.2s; }
+.reveal-delay-3 { animation-delay: 0.3s; }
+.reveal-delay-4 { animation-delay: 0.4s; }
+.reveal-delay-5 { animation-delay: 0.5s; }
+.reveal-delay-6 { animation-delay: 0.6s; }
+
+.reveal-left { animation-name: slideInLeft; }
+.reveal-right { animation-name: slideInRight; }
+.reveal-scale { animation-name: scaleIn; }
+
+/* Scroll-triggered animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === NAVIGATION DOTS === */
+.nav-dots {
+  position: fixed;
+  right: clamp(0.5rem, 1.5vw, 1rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.nav-dot:hover { background: var(--flamingo); transform: scale(1.3); }
+.nav-dot.active { background: var(--flamingo); transform: scale(1.3); }
+
+/* === SLIDE COUNTER === */
+.slide-counter {
+  position: fixed;
+  bottom: clamp(0.5rem, 1.5vh, 1rem);
+  right: clamp(0.8rem, 2vw, 1.5rem);
+  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  color: rgba(255,255,255,0.4);
+  font-family: var(--font-body);
+  font-weight: 500;
+  z-index: 100;
+  letter-spacing: 0.1em;
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .animate-on-scroll { animation: none; opacity: 1; transform: none; transition: none; }
+}
+
+/* === RESPONSIVE HEIGHT ADJUSTMENTS === */
+@media (max-height: 700px) {
+  .slide { padding: clamp(1rem, 3vh, 2rem) clamp(1.5rem, 5vw, 4rem); }
+  .card-grid--3x2 { gap: 0.4rem; }
+  .card { padding: 0.5rem; }
+}
+
+@media (max-height: 600px) {
+  .slide-title { font-size: clamp(1.4rem, 3.5vw, 2.2rem); }
+  .stat-number { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
+}
+
+@media (max-height: 500px) {
+  .slide { padding: 0.8rem 2rem; }
+  .card-grid { gap: 0.3rem; }
+}
+
+/* === MOBILE === */
+@media (max-width: 768px) {
+  .card-grid--3x2 { grid-template-columns: repeat(2, 1fr); }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .module-grid { grid-template-columns: repeat(2, 1fr); }
+  .user-cols { grid-template-columns: repeat(2, 1fr); }
+  .roadmap-cols { grid-template-columns: 1fr; }
+  .carrier-row { grid-template-columns: 1fr; }
+  .nav-dots { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- === NAVIGATION DOTS === -->
+<nav class="nav-dots" id="navDots"></nav>
+<div class="slide-counter" id="slideCounter">1 / 15</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITLE -->
+<!-- ============================================================ -->
+<section class="slide slide--dark" id="slide-1">
+  <div class="top-bar"></div>
+  <div class="bottom-bar"></div>
+  <div style="text-align:center;">
+    <div class="diamond reveal"></div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(3rem,7vw,5rem);font-weight:700;letter-spacing:0.1em;color:var(--white);" class="reveal reveal-delay-1">IM8 HUB</h1>
+    <p class="subtitle reveal reveal-delay-2" style="color:var(--flamingo);font-size:clamp(1rem,2.2vw,1.5rem);">Operations Intelligence Platform</p>
+    <div class="divider reveal reveal-delay-3"></div>
+    <p class="reveal reveal-delay-4" style="font-style:italic;color:var(--stone);font-size:clamp(0.8rem,1.4vw,1rem);margin-top:clamp(0.5rem,1.5vh,1rem);">One platform. Every operation. Zero manual work.</p>
+    <p class="reveal reveal-delay-5" style="color:var(--stone);opacity:0.6;font-size:clamp(0.6rem,1vw,0.8rem);margin-top:clamp(1.5rem,4vh,3rem);">Presented to CEO &nbsp;|&nbsp; April 2026</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: THE PROBLEM -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-2">
+  <div class="section-label animate-on-scroll">THE PROBLEM</div>
+  <h2 class="slide-title animate-on-scroll">Too Many Platforms, Too Much Manual Work</h2>
+
+  <div class="card-grid card-grid--3x2">
+    <div class="card animate-on-scroll">
+      <div class="card-icon">📦</div>
+      <h3>Inventory</h3>
+      <p>Check D365, Stord, GPS separately for each SKU across 5 warehouses</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">🛒</div>
+      <h3>Sales Data</h3>
+      <p>Download from Shopify manually, long wait times, manual analysis</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">📋</div>
+      <h3>Order Status</h3>
+      <p>Cross-check Shopify, Stord, D365 manually to find issues</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">🎁</div>
+      <h3>Gifting</h3>
+      <p>Manual placement on each warehouse platform separately</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">💰</div>
+      <h3>Shipping Costs</h3>
+      <p>No automated reconciliation, no duplicate detection</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">⚙️</div>
+      <h3>Stord Operations</h3>
+      <p>Limited visibility in Stord portal, hard to track production orders</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: THE SOLUTION -->
+<!-- ============================================================ -->
+<section class="slide slide--dark" id="slide-3">
+  <div class="section-label animate-on-scroll">THE SOLUTION</div>
+  <h2 class="slide-title animate-on-scroll">One Unified Platform</h2>
+
+  <div class="stats-row">
+    <div class="stat-box stat-box--red animate-on-scroll">
+      <div class="stat-number" data-count="12">12+</div>
+      <div class="stat-label">Modules</div>
+    </div>
+    <div class="stat-box stat-box--red animate-on-scroll">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Warehouses</div>
+    </div>
+    <div class="stat-box stat-box--red animate-on-scroll">
+      <div class="stat-number">70+</div>
+      <div class="stat-label">API Endpoints</div>
+    </div>
+    <div class="stat-box stat-box--red animate-on-scroll">
+      <div class="stat-number">10+</div>
+      <div class="stat-label">Active Users</div>
+    </div>
+  </div>
+
+  <div style="margin-top:clamp(0.3rem,0.8vh,0.5rem);">
+    <p class="animate-on-scroll" style="font-weight:600;color:var(--stone);font-size:clamp(0.7rem,1.1vw,0.85rem);margin-bottom:clamp(0.3rem,0.6vh,0.5rem);">All Modules:</p>
+    <div class="module-grid">
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Inventory</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Sales & Usage</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Order Consolidation</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Delivery Performance</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Gifting</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Shipping & Invoices</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Demand Forecast</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> BOM Master</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Inbound / PO</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> HK Fulfilment</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Stord Operations</div>
+      <div class="module-item animate-on-scroll"><span class="check">✓</span> Admin & RBAC</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: INVENTORY -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-4">
+  <div class="section-label animate-on-scroll">INVENTORY</div>
+  <h2 class="slide-title animate-on-scroll">Real-Time Cross-Warehouse Visibility</h2>
+
+  <div class="compare-cols">
+    <div class="compare-box animate-on-scroll">
+      <div class="compare-header compare-header--before">BEFORE</div>
+      <div class="compare-body">
+        <ul>
+          <li>Log into D365 for HK inventory</li>
+          <li>Log into Stord for US (ATL + RENO)</li>
+          <li>Log into GPS portal for UK warehouse</li>
+          <li>Log into XLWMS for EU (AMS)</li>
+          <li>Manually compile into spreadsheet</li>
+          <li class="highlight">~10 min per SKU, per check</li>
+        </ul>
+      </div>
+    </div>
+    <div class="compare-box animate-on-scroll">
+      <div class="compare-header compare-header--after">AFTER — IM8 HUB</div>
+      <div class="compare-body">
+        <ul>
+          <li>One page — all 5 warehouses</li>
+          <li>Real-time sync with all platforms</li>
+          <li>Per-SKU drill-down by warehouse</li>
+          <li>Search & filter instantly</li>
+          <li class="highlight-green">Instant — zero manual work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-banner animate-on-scroll">
+    <span class="icon">⏱️</span>
+    <strong>Time saved: 10 min per SKU check × multiple checks daily = hours saved every week</strong>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: SALES & ORDER CONSOLIDATION -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-5">
+  <div class="section-label animate-on-scroll">SALES & ORDER CONSOLIDATION</div>
+  <h2 class="slide-title animate-on-scroll">From Manual Downloads to Instant Insights</h2>
+
+  <div class="feature-cols" style="margin-top:clamp(0.4rem,1vh,0.8rem);">
+    <div class="card animate-on-scroll" style="padding:clamp(0.6rem,1.2vw,1rem);">
+      <div class="card-icon">📊</div>
+      <h3>Sales & Usage</h3>
+      <p style="margin-top:0.3rem;"><strong style="color:var(--burgundy);">Before:</strong> Download Shopify data (long wait), manual analysis</p>
+      <p style="margin-top:0.2rem;"><strong style="color:var(--burgundy);">After:</strong> Pre-built dashboards tailored for each team role</p>
+    </div>
+    <div class="card animate-on-scroll" style="padding:clamp(0.6rem,1.2vw,1rem);">
+      <div class="card-icon">📋</div>
+      <h3>SO Consolidation</h3>
+      <p style="margin-top:0.3rem;"><strong style="color:var(--burgundy);">Before:</strong> Manually cross-check Shopify + Stord + D365</p>
+      <p style="margin-top:0.2rem;"><strong style="color:var(--burgundy);">After:</strong> One view for Finance & Ops to find orders needing action</p>
+    </div>
+  </div>
+
+  <div class="time-banner animate-on-scroll">
+    <span class="icon">⏱️</span>
+    <div>
+      <strong style="font-size:clamp(0.85rem,1.4vw,1.1rem);">3+ hours saved per week</strong><br>
+      <span style="font-size:clamp(0.6rem,1vw,0.8rem);color:var(--muted-text);">on Sales Order Consolidation alone — no more manual cross-checking across platforms</span>
+    </div>
+  </div>
+
+  <div style="margin-top:clamp(0.5rem,1.2vh,0.8rem);">
+    <div class="section-label animate-on-scroll" style="font-size:clamp(0.55rem,0.9vw,0.7rem);">WHO BENEFITS</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(0.5rem,1vw,0.8rem);">
+      <div class="animate-on-scroll" style="display:flex;align-items:center;gap:0.5em;">
+        <span style="color:var(--success);font-weight:700;">✓</span>
+        <div><strong style="font-size:clamp(0.65rem,1vw,0.8rem);">Finance Team</strong><br><span style="font-size:clamp(0.55rem,0.85vw,0.7rem);color:var(--muted-text);">Reconcile orders instantly</span></div>
+      </div>
+      <div class="animate-on-scroll" style="display:flex;align-items:center;gap:0.5em;">
+        <span style="color:var(--success);font-weight:700;">✓</span>
+        <div><strong style="font-size:clamp(0.65rem,1vw,0.8rem);">Ops Team</strong><br><span style="font-size:clamp(0.55rem,0.85vw,0.7rem);color:var(--muted-text);">Identify stuck orders fast</span></div>
+      </div>
+      <div class="animate-on-scroll" style="display:flex;align-items:center;gap:0.5em;">
+        <span style="color:var(--success);font-weight:700;">✓</span>
+        <div><strong style="font-size:clamp(0.65rem,1vw,0.8rem);">Procurement</strong><br><span style="font-size:clamp(0.55rem,0.85vw,0.7rem);color:var(--muted-text);">Track fulfillment status</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: DELIVERY PERFORMANCE -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-6">
+  <div class="section-label animate-on-scroll">DELIVERY PERFORMANCE</div>
+  <h2 class="slide-title animate-on-scroll">Live Tracking & SLA Intelligence</h2>
+
+  <div class="card-grid card-grid--2x2">
+    <div class="card animate-on-scroll">
+      <div class="card-icon">🚚</div>
+      <h3>AfterShip Sync</h3>
+      <p>Auto-sync tracking data for the most up-to-date delivery status</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">📊</div>
+      <h3>KPI Dashboard</h3>
+      <p>On-time rate, transit times, delivery success — at a glance</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">🗺️</div>
+      <h3>Country Heatmap</h3>
+      <p>Drill down by destination country, filter by any dimension</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">📄</div>
+      <h3>PDF Export</h3>
+      <p>IM8-branded performance reports — ready for stakeholders</p>
+    </div>
+  </div>
+
+  <div class="time-banner animate-on-scroll" style="margin-top:clamp(0.8rem,1.5vh,1.2rem);">
+    <span class="icon">💡</span>
+    <strong style="font-style:italic;">People can easily filter exactly what they need — no more digging through raw data</strong>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: GIFTING -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-7">
+  <div class="section-label animate-on-scroll">GIFTING</div>
+  <h2 class="slide-title animate-on-scroll">Self-Serve Gifting with Auto Fulfilment</h2>
+
+  <div class="flow-row animate-on-scroll">
+    <div class="flow-step">Submit Request</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">Ops Review</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step flow-step--active">Auto-Route to Warehouse</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">Track Delivery</div>
+  </div>
+
+  <div class="feature-cols">
+    <div class="feature-box animate-on-scroll">
+      <div class="feature-box-header feature-box-header--burgundy">🎁 For Anyone Submitting a Gift</div>
+      <div class="feature-box-body">
+        <ul>
+          <li>Easy form — submit in under a minute</li>
+          <li>Track your request status in real-time</li>
+          <li>Get tracking number automatically</li>
+          <li>No need to contact Ops team</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feature-box animate-on-scroll">
+      <div class="feature-box-header feature-box-header--red">⚙️ For Ops Team</div>
+      <div class="feature-box-body">
+        <ul>
+          <li>Auto-routes to correct warehouse</li>
+          <li>Syncs with Stord, Spaceship, XLWMS</li>
+          <li>Slack notifications for approvals</li>
+          <li>No manual placement — fully automated</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-banner animate-on-scroll">
+    <span class="icon">⏱️</span>
+    <strong>5+ minutes saved per gift order × dozens of gifts monthly = significant Ops time recovered</strong>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: SHIPPING & INVOICES -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-8">
+  <div class="section-label animate-on-scroll">SHIPPING & INVOICES</div>
+  <h2 class="slide-title animate-on-scroll">Automated Cost Tracking Across All Carriers</h2>
+
+  <div class="carrier-row">
+    <div class="carrier-badge animate-on-scroll"><strong>Stord</strong><span>Parcel + Fulfilment</span></div>
+    <div class="carrier-badge animate-on-scroll"><strong>FedEx</strong><span>2 Accounts</span></div>
+    <div class="carrier-badge animate-on-scroll"><strong>Rexville</strong><span>UK / GPS</span></div>
+  </div>
+
+  <div class="card-grid card-grid--2x2">
+    <div class="card animate-on-scroll">
+      <h3>Auto-Ingest Every 4 Hours</h3>
+      <p>Cron pulls invoices from Google Drive, parses Excel & PDF, loads to DB automatically</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <h3>Duplicate Detection</h3>
+      <p>Catches true duplicates vs. adjustments — sends Slack alerts with dollar amounts</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <h3>Rate Card Validation</h3>
+      <p>Cross-checks carrier charges against contracted rates — flags overcharges</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <h3>Cost Analytics</h3>
+      <p>Breakdown by carrier, warehouse, SKU — discrepancy reports & manual adjustments</p>
+    </div>
+  </div>
+
+  <div class="time-banner animate-on-scroll">
+    <span class="icon">⏱️</span>
+    <strong>3+ hours saved per week on invoice reconciliation — fully automated pipeline</strong>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: STORD OPS & INBOUND -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-9">
+  <div class="section-label animate-on-scroll">STORD OPERATIONS & INBOUND</div>
+  <h2 class="slide-title animate-on-scroll">Better Visibility Than the Portals Themselves</h2>
+
+  <div class="feature-cols" style="margin-top:clamp(0.5rem,1vh,0.8rem);">
+    <div class="feature-box animate-on-scroll">
+      <div class="feature-box-header feature-box-header--burgundy">⚙️ Work Order Management</div>
+      <div class="feature-box-body">
+        <ul>
+          <li>All production / kitting orders in one view</li>
+          <li>Full detail: ASN, items, quantities, status</li>
+          <li>Easier to check than Stord's own portal</li>
+          <li>Inventory sync with real-time updates</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feature-box animate-on-scroll">
+      <div class="feature-box-header feature-box-header--burgundy">🏭 Inbound / PO Management</div>
+      <div class="feature-box-body">
+        <ul>
+          <li>Create POs, Transfer Orders, Cross-Region SOs</li>
+          <li>Auto-sync with Stord API</li>
+          <li>2-way receipt status tracking</li>
+          <li>RECEIVED_SHORT / RECEIVED_OVER alerts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: MORE MODULES -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-10">
+  <div class="section-label animate-on-scroll">AND MORE</div>
+  <h2 class="slide-title animate-on-scroll">Additional Modules Powering Operations</h2>
+
+  <div class="card-grid card-grid--2x2">
+    <div class="card animate-on-scroll">
+      <div class="card-icon">📈</div>
+      <h3>Demand Forecast</h3>
+      <p>3-cycle subscription projection (90 days), RM & Concentrate runway, campaign calendar, per-flavor sales trends</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">🧱</div>
+      <h3>BOM Master</h3>
+      <p>Version-controlled Bill of Materials, draft → publish workflow, version compare with diff view, risk analysis</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">📅</div>
+      <h3>HK Fulfilment</h3>
+      <p>Batch AWB management with DB persistence, carrier-split PDF generation, auto-buy cron, D365 SKU mapping</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <div class="card-icon">🗄️</div>
+      <h3>Master Data</h3>
+      <p>SKU catalog with active/inactive toggle, Product Bible, vendor management, warehouse routing rules</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: TIME SAVINGS TABLE -->
+<!-- ============================================================ -->
+<section class="slide slide--dark" id="slide-11">
+  <div class="section-label animate-on-scroll">TIME SAVED</div>
+  <h2 class="slide-title animate-on-scroll">Hours Recovered, Every Single Week</h2>
+
+  <table class="data-table animate-on-scroll">
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th>Before</th>
+        <th>After — IM8 Hub</th>
+        <th>Time Saved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Inventory Checks</strong></td>
+        <td class="text-pink">10 min / SKU / check</td>
+        <td class="text-green">Instant</td>
+        <td><strong>Hours / week</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Shipping Invoices</strong></td>
+        <td class="text-pink">3+ hours manual</td>
+        <td class="text-green">Fully Automated</td>
+        <td><strong>3+ hrs / week</strong></td>
+      </tr>
+      <tr>
+        <td><strong>SO Consolidation</strong></td>
+        <td class="text-pink">3+ hours cross-check</td>
+        <td class="text-green">One-Click View</td>
+        <td><strong>3+ hrs / week</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Gifting Placement</strong></td>
+        <td class="text-pink">5+ min / gift order</td>
+        <td class="text-green">Auto-Routed</td>
+        <td><strong>Hours / month</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Sales Analysis</strong></td>
+        <td class="text-pink">Manual Shopify download</td>
+        <td class="text-green">Pre-Built Dashboards</td>
+        <td><strong>Hours / week</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Delivery Reports</strong></td>
+        <td class="text-pink">Manual data compile</td>
+        <td class="text-green">Live + PDF Export</td>
+        <td><strong>Hours / week</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="total-bar animate-on-scroll">
+    Estimated 10+ hours saved per week across all modules
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: HOW WE BUILT IT -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-12">
+  <div class="section-label animate-on-scroll">HOW WE BUILT IT</div>
+  <h2 class="slide-title animate-on-scroll">6 Weeks. 1 Engineer. Full Platform.</h2>
+
+  <div class="stats-row">
+    <div class="stat-box stat-box--white animate-on-scroll">
+      <div class="stat-number">~6</div>
+      <div class="stat-label">Weeks</div>
+      <div class="stat-sub">Start of March 2026</div>
+    </div>
+    <div class="stat-box stat-box--white animate-on-scroll">
+      <div class="stat-number">1</div>
+      <div class="stat-label">Engineer</div>
+      <div class="stat-sub">Full-stack development</div>
+    </div>
+    <div class="stat-box stat-box--white animate-on-scroll">
+      <div class="stat-number">12+</div>
+      <div class="stat-label">Modules</div>
+      <div class="stat-sub">All production-ready</div>
+    </div>
+    <div class="stat-box stat-box--white animate-on-scroll">
+      <div class="stat-number">70+</div>
+      <div class="stat-label">API Endpoints</div>
+      <div class="stat-sub">Complete backend</div>
+    </div>
+  </div>
+
+  <div class="section-label animate-on-scroll" style="margin-top:clamp(0.3rem,0.8vh,0.5rem);font-size:clamp(0.55rem,0.9vw,0.7rem);">TECH STACK</div>
+  <div class="tech-grid">
+    <div class="tech-pill animate-on-scroll"><strong>Frontend:</strong> Next.js 15, React, Tailwind CSS</div>
+    <div class="tech-pill animate-on-scroll"><strong>Backend:</strong> Node.js, PostgreSQL (Supabase)</div>
+    <div class="tech-pill animate-on-scroll"><strong>Integrations:</strong> Stord, Shopify, AfterShip, FedEx, D365</div>
+    <div class="tech-pill animate-on-scroll"><strong>Infrastructure:</strong> Railway (auto-deploy), Google Drive, Slack</div>
+    <div class="tech-pill animate-on-scroll"><strong>Security:</strong> Google SSO, RBAC (6 roles), audit trail</div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: WHO USES IT -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-13">
+  <div class="section-label animate-on-scroll">WHO USES IT</div>
+  <h2 class="slide-title animate-on-scroll">Serving Multiple Teams Across the Organization</h2>
+
+  <div class="user-cols">
+    <div class="user-col animate-on-scroll">
+      <div class="avatar">⚙️</div>
+      <h3>Operations (6)</h3>
+      <div class="role">Primary power users</div>
+      <div class="sep"></div>
+      <p>Inventory, fulfillment, gifting management, work orders, delivery tracking, inbound shipments</p>
+    </div>
+    <div class="user-col animate-on-scroll">
+      <div class="avatar">💰</div>
+      <h3>Finance (2)</h3>
+      <div class="role">Cost control & audit</div>
+      <div class="sep"></div>
+      <p>Shipping cost analytics, invoice reconciliation, SO consolidation, duplicate detection</p>
+    </div>
+    <div class="user-col animate-on-scroll">
+      <div class="avatar">📋</div>
+      <h3>Procurement (2)</h3>
+      <div class="role">Supply chain visibility</div>
+      <div class="sep"></div>
+      <p>BOM management, vendor tracking, PO creation, inbound receipt status</p>
+    </div>
+    <div class="user-col animate-on-scroll">
+      <div class="avatar">🎁</div>
+      <h3>All Staff</h3>
+      <div class="role">Company-wide access</div>
+      <div class="sep"></div>
+      <p>Self-serve gifting requests, product quiz, request tracking</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: WHAT'S NEXT -->
+<!-- ============================================================ -->
+<section class="slide slide--light" id="slide-14">
+  <div class="section-label animate-on-scroll">WHAT'S NEXT</div>
+  <h2 class="slide-title animate-on-scroll">Continuous Improvement, Zero Downtime</h2>
+
+  <div class="roadmap-cols">
+    <div class="roadmap-col animate-on-scroll">
+      <div class="roadmap-badge roadmap-badge--now">NOW</div>
+      <h3>Live & Growing</h3>
+      <div class="sep"></div>
+      <ul>
+        <li>12+ modules in production</li>
+        <li>10+ active daily users</li>
+        <li>Automated data pipelines running 24/7</li>
+      </ul>
+    </div>
+    <div class="roadmap-col animate-on-scroll">
+      <div class="roadmap-badge roadmap-badge--next">NEXT</div>
+      <h3>Expanding Scope</h3>
+      <div class="sep"></div>
+      <ul>
+        <li>Full PO management & allocation</li>
+        <li>Advanced demand forecasting with churn</li>
+        <li>More carrier integrations</li>
+      </ul>
+    </div>
+    <div class="roadmap-col animate-on-scroll">
+      <div class="roadmap-badge roadmap-badge--future">FUTURE</div>
+      <h3>Platform Vision</h3>
+      <div class="sep"></div>
+      <ul>
+        <li>Cross-team workflow automation</li>
+        <li>AI-powered demand intelligence</li>
+        <li>Full supply chain visibility</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15: THANK YOU -->
+<!-- ============================================================ -->
+<section class="slide slide--dark" id="slide-15">
+  <div class="top-bar"></div>
+  <div class="bottom-bar"></div>
+  <div style="text-align:center;">
+    <div class="diamond reveal"></div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4rem);font-weight:700;letter-spacing:0.08em;color:var(--white);" class="reveal reveal-delay-1">IM8 HUB</h1>
+    <div class="divider reveal reveal-delay-2"></div>
+    <p class="reveal reveal-delay-3" style="font-size:clamp(1rem,2vw,1.4rem);color:var(--flamingo);margin-top:clamp(0.5rem,1.5vh,1rem);">Built in 6 weeks. Saving 10+ hours every week.</p>
+    <p class="reveal reveal-delay-4" style="font-size:clamp(0.8rem,1.3vw,1rem);color:var(--stone);font-style:italic;margin-top:clamp(0.3rem,0.8vh,0.5rem);">One platform replacing dozens of manual workflows.</p>
+
+    <ul class="takeaway-list">
+      <li class="reveal reveal-delay-4"><span class="check">✓</span> 12+ modules serving Ops, Finance, Procurement & all staff</li>
+      <li class="reveal reveal-delay-5"><span class="check">✓</span> 5 warehouses unified — Stord, D365, GPS, Spaceship, XLWMS</li>
+      <li class="reveal reveal-delay-5"><span class="check">✓</span> Automated pipelines running 24/7 — zero manual intervention</li>
+    </ul>
+
+    <p class="reveal reveal-delay-6" style="font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.8rem);color:var(--flamingo);font-style:italic;margin-top:clamp(0.5rem,1.5vh,1rem);">Thank You</p>
+  </div>
+</section>
+
+<!-- === JAVASCRIPT === -->
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  const navDots = document.getElementById('navDots');
+  const counter = document.getElementById('slideCounter');
+
+  /* --- Nav dots --- */
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.addEventListener('click', () => {
+      slides[i].scrollIntoView({ behavior: 'smooth' });
+    });
+    navDots.appendChild(dot);
+  });
+
+  const dots = navDots.querySelectorAll('.nav-dot');
+
+  /* --- Intersection Observer for active slide --- */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(slides).indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        counter.textContent = `${idx + 1} / ${totalSlides}`;
+
+        /* Update dot colors based on slide theme */
+        const isDark = entry.target.classList.contains('slide--dark');
+        navDots.style.setProperty('--dot-bg', isDark ? 'rgba(255,255,255,0.3)' : 'rgba(80,0,11,0.2)');
+        dots.forEach(d => {
+          if (!d.classList.contains('active')) {
+            d.style.background = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(80,0,11,0.2)';
+          } else {
+            d.style.background = '#FF9693';
+          }
+        });
+        counter.style.color = isDark ? 'rgba(255,255,255,0.4)' : 'rgba(80,0,11,0.3)';
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(s => observer.observe(s));
+
+  /* --- Scroll-triggered animations --- */
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        /* Stagger children */
+        const els = entry.target.querySelectorAll('.animate-on-scroll');
+        els.forEach((el, i) => {
+          setTimeout(() => el.classList.add('visible'), i * 80);
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+
+  slides.forEach(s => animObserver.observe(s));
+
+  /* --- Keyboard navigation --- */
+  document.addEventListener('keydown', (e) => {
+    const current = Math.round(window.scrollY / window.innerHeight);
+    if ((e.key === 'ArrowDown' || e.key === ' ' || e.key === 'ArrowRight') && current < totalSlides - 1) {
+      e.preventDefault();
+      slides[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if ((e.key === 'ArrowUp' || e.key === 'ArrowLeft') && current > 0) {
+      e.preventDefault();
+      slides[current - 1].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  /* --- Trigger first slide animations --- */
+  setTimeout(() => {
+    slides[0].querySelectorAll('.animate-on-scroll').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
+    });
+  }, 100);
+})();
+</script>
+
+</body>
+</html>
