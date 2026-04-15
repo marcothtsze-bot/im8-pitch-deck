@@ -3,965 +3,1053 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IM8 Hub — Operations Intelligence Platform</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&family=Spectral:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>IM8 Hub — Pitch Deck</title>
+
+<!-- IM8 Brand Fonts: Cormorant Garamond (titles) + Raleway (body) + Rajdhani (captions) -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-:root{--dk:#50000B;--rd:#A40011;--pk:#FF9693;--st:#E1CBB9;--sd:#FFE9D8;--wh:#fff;--gn:#4ADE80;--gnd:#16A34A}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:antialiased;color:#fff}
+/* === IM8 BRAND COLORS (Brand Book v1.0) === */
+:root {
+  --im8-burgundy: #50000B;
+  --im8-red-algae: #A40011;
+  --im8-flamingo: #FF9693;
+  --im8-stone: #E1CBB9;
+  --im8-sand: #FFE9D8;
+  --im8-off-white: #F5EAEA;
 
-/* ===== ALL SLIDES DARK GRADIENT ===== */
-.s{width:100vw;height:100vh;height:100dvh;overflow:hidden;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;justify-content:center;padding:3vh 5vw;background:linear-gradient(160deg,#50000B 0%,#2D0006 55%,#1A0004 100%);color:#fff}
-.s--accent{background:linear-gradient(160deg,#6B0010 0%,#3D0008 55%,#1A0004 100%)}
+  /* Extended palette */
+  --bg-primary: #50000B;
+  --bg-secondary: #3a0008;
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --bg-card-hover: rgba(255, 255, 255, 0.1);
+  --accent: #FF9693;
+  --accent-secondary: #E1CBB9;
+  --accent-warm: #FFE9D8;
+  --text-primary: #F5EAEA;
+  --text-secondary: rgba(245, 234, 234, 0.75);
+  --text-muted: rgba(225, 203, 185, 0.5);
+  --border: rgba(255, 150, 147, 0.15);
 
-/* ===== TYPOGRAPHY ===== */
-.lbl{font-family:'Rajdhani',sans-serif;font-size:1.1vw;font-weight:600;letter-spacing:.35em;text-transform:uppercase;margin-bottom:.4vh;color:var(--pk)}
-.ttl{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3.6vw;line-height:1.05;margin-bottom:1.2vh;color:#fff}
-.body{font-size:1.05vw;line-height:1.5;color:rgba(255,255,255,.65)}
-.cap{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.95vw;letter-spacing:.2em;text-transform:uppercase;color:var(--st)}
+  --font-title: 'Cormorant Garamond', serif;
+  --font-body: 'Raleway', sans-serif;
+  --font-caption: 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
-/* ===== LAYOUT ===== */
-.g{display:grid;gap:1.1vw}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:1fr 1fr 1fr 1fr}
-.row{display:flex;gap:1.3vw;align-items:stretch}.col{flex:1;min-width:0}
-.mt1{margin-top:1.2vh}.mt2{margin-top:2vh}
+/* === RESET & BASE === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* ===== DECORATIVE ===== */
-.topline{position:absolute;top:0;left:0;right:0;height:5px;background:var(--rd)}
-.botline{position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--rd)}
+/* === SLIDE BASE === */
+.slide {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(2rem, 6vw, 6rem);
+}
 
-/* ===== GLASS CARDS (the premium look) ===== */
-.glass{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5vh 1.2vw;backdrop-filter:blur(4px)}
-#s2 .glass{padding:.8vh .8vw}#s2 .glass h3{font-size:1.1vw;margin-bottom:.1vh}#s2 .glass p{font-size:.85vw;line-height:1.35}#s2 .ico{width:1.8vw;height:1.8vw;font-size:.9vw;margin-bottom:.2vh}
-.glass h3{font-family:'Spectral',serif;font-weight:600;font-size:1.3vw;color:#fff;margin-bottom:.3vh}
-.glass p{font-size:1vw;color:rgba(255,255,255,.6);line-height:1.5}
-.glass--accent{border-left:4px solid var(--rd)}
-.glass--glow{box-shadow:0 0 20px rgba(164,0,17,.15),0 4px 20px rgba(0,0,0,.3)}
-.ico{width:2.5vw;height:2.5vw;background:var(--rd);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:1.2vw;margin-bottom:.4vh;box-shadow:0 0 12px rgba(164,0,17,.3)}
+/* === VIEWPORT FITTING === */
+@media (max-height: 700px) {
+  .slide { padding: 1.2rem 2rem; }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.6rem) !important; }
+  h2 { font-size: clamp(1.2rem, 3.5vw, 1.8rem) !important; }
+}
+@media (max-height: 600px) {
+  .slide { padding: 1rem 1.5rem; }
+  .card { padding: 0.8rem !important; }
+}
+@media (max-height: 500px) {
+  .slide { padding: 0.8rem 1rem; }
+  .grid-3, .grid-2 { gap: 0.5rem !important; }
+}
 
-/* ===== FLOW DIAGRAMS ===== */
-.flow-dia{display:flex;align-items:center;justify-content:center;gap:.6vw;padding:1.2vh 0;flex-wrap:wrap}
-.flow-col{display:flex;flex-direction:column;gap:.4vh;align-items:center}
-.fp{display:inline-flex;align-items:center;gap:.3em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.5vh .7vw;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.95vw;color:rgba(255,255,255,.85);white-space:nowrap}
-.fp--hub{background:var(--rd);border-color:var(--rd);color:#fff;font-size:1.1vw;padding:.7vh 1.2vw;box-shadow:0 0 30px rgba(164,0,17,.4)}
-.fp--out{background:rgba(255,150,147,.1);border-color:rgba(255,150,147,.25);color:var(--pk)}
-.fp--slack{background:rgba(74,21,75,.6);border-color:rgba(74,21,75,.8);color:#fff}
-.fp--green{background:rgba(22,163,74,.15);border-color:rgba(22,163,74,.3);color:var(--gn)}
-.farr{color:var(--pk);font-size:1.6vw;font-weight:700;flex-shrink:0;opacity:.6}
-.flow-label{font-family:'Rajdhani',sans-serif;font-size:.7vw;color:rgba(255,255,255,.3);letter-spacing:.12em;text-transform:uppercase;text-align:center}
+/* === BACKGROUNDS === */
+.bg-burgundy {
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(164, 0, 17, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(255, 150, 147, 0.08) 0%, transparent 50%),
+    var(--im8-burgundy);
+}
+.bg-dark {
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(80, 0, 11, 0.9) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 30%, rgba(164, 0, 17, 0.2) 0%, transparent 50%),
+    #2a0006;
+}
+.bg-sand {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 233, 216, 0.15) 0%, transparent 60%),
+    var(--im8-burgundy);
+}
+.bg-pattern {
+  background-image:
+    linear-gradient(rgba(255, 150, 147, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 150, 147, 0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
 
-/* ===== STATS ===== */
-.stat{text-align:center;padding:1.8vh 1vw;border-radius:12px;background:rgba(164,0,17,.25);border:1px solid rgba(164,0,17,.4)}
-.stat .n{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:4.2vw;line-height:1;color:#fff}
-.stat .l{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1.15vw;margin-top:.1vh;color:var(--pk)}
-.stat .sm{font-size:.8vw;color:rgba(255,255,255,.35);margin-top:.1vh}
-.stat--w{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
-.stat--w .n{color:var(--pk)}
+/* === TYPOGRAPHY === */
+h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+h3 {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+p, li {
+  font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.mono { font-family: var(--font-mono); }
+.caption { font-family: var(--font-caption); font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; }
+.flamingo { color: var(--im8-flamingo); }
+.sand { color: var(--im8-sand); }
+.stone { color: var(--im8-stone); }
+.red-algae { color: var(--im8-red-algae); }
+.muted { color: var(--text-muted); }
+.text-center { text-align: center; }
 
-/* ===== BEFORE/AFTER ===== */
-.vs{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.vs-h{padding:.8vh 0;text-align:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1vw;color:#fff;letter-spacing:.2em;text-transform:uppercase}
-.vs-h--b{background:rgba(185,28,28,.6)}.vs-h--a{background:rgba(22,163,74,.5)}
-.vs-body{padding:1.2vh 1.3vw;flex:1}
-.vs-body li{font-size:1.05vw;padding:.35vh 0;padding-left:1.4em;position:relative;list-style:none;line-height:1.4;color:rgba(255,255,255,.75)}
-.vs-body li::before{content:'•';position:absolute;left:.3em;color:var(--pk);font-weight:700;font-size:1.1em}
-.hi-r{color:var(--pk);font-weight:700}.hi-g{color:var(--gn);font-weight:700}
+/* === LAYOUT === */
+.content { max-width: 1100px; width: 100%; }
+.flex-col { display: flex; flex-direction: column; }
+.gap-sm { gap: clamp(0.5rem, 1.5vh, 1rem); }
+.gap-md { gap: clamp(1rem, 2.5vh, 1.5rem); }
+.gap-lg { gap: clamp(1.5rem, 3.5vh, 2.5rem); }
 
-/* ===== BANNER ===== */
-.ban{background:rgba(164,0,17,.15);border:1px solid rgba(164,0,17,.3);padding:1vh 1.3vw;border-radius:10px;display:flex;align-items:center;gap:.8vw}
-.ban .ic{font-size:1.5vw;flex-shrink:0}
-.ban strong{font-size:1.15vw;color:var(--pk)}
-.ban span{font-size:1vw;color:rgba(255,255,255,.7)}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.8rem, 2vw, 1.5rem);
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.8rem, 2vw, 1.5rem);
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+}
 
-/* ===== FEATURE BOXES ===== */
-.feat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.feat-h{padding:.8vh 1.2vw;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05vw;letter-spacing:.1em;display:flex;align-items:center;gap:.4em;color:#fff}
-.feat-h--d{background:rgba(80,0,11,.6)}.feat-h--r{background:rgba(164,0,17,.5)}
-.feat-b{padding:1vh 1.2vw;flex:1}
-.feat-b li{font-size:.95vw;padding:.3vh 0;padding-left:1.4em;position:relative;list-style:none;line-height:1.4;color:rgba(255,255,255,.7)}
-.feat-b li::before{content:'✓';position:absolute;left:0;color:var(--gn);font-weight:700}
+/* === CARDS === */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: clamp(0.5rem, 1vw, 0.8rem);
+  padding: clamp(1rem, 2.5vh, 1.5rem);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 150, 147, 0.3);
+  transform: translateY(-2px);
+}
+.card-icon {
+  width: clamp(2rem, 4vh, 2.8rem);
+  height: clamp(2rem, 4vh, 2.8rem);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 2vh, 1.4rem);
+  margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
+}
 
-/* ===== TABLE ===== */
-.tbl{width:100%;border-collapse:collapse;font-size:1.1vw}
-.tbl thead th{background:rgba(164,0,17,.5);color:#fff;padding:.7vh .9vw;text-align:left;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1vw;letter-spacing:.08em;text-transform:uppercase}
-.tbl tbody tr:nth-child(odd){background:rgba(255,255,255,.03)}.tbl tbody tr:nth-child(even){background:rgba(255,255,255,.07)}
-.tbl td{padding:.6vh .9vw}
-.tg{color:var(--gn)}.tp{color:var(--pk)}.tb{font-weight:700}
-.tbar{background:var(--rd);text-align:center;padding:1vh;border-radius:10px;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5vw;color:#fff;margin-top:.8vh;box-shadow:0 0 20px rgba(164,0,17,.3)}
+/* === BADGES === */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-family: var(--font-caption);
+  font-size: clamp(0.6rem, 1vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.badge-flamingo { background: rgba(255, 150, 147, 0.15); color: var(--im8-flamingo); border: 1px solid rgba(255, 150, 147, 0.25); }
+.badge-sand { background: rgba(255, 233, 216, 0.12); color: var(--im8-sand); border: 1px solid rgba(255, 233, 216, 0.2); }
+.badge-stone { background: rgba(225, 203, 185, 0.12); color: var(--im8-stone); border: 1px solid rgba(225, 203, 185, 0.2); }
+.badge-green { background: rgba(52, 211, 153, 0.12); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); }
+.badge-amber { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+.badge-rose { background: rgba(164, 0, 17, 0.2); color: #ff6b6b; border: 1px solid rgba(164, 0, 17, 0.3); }
 
-/* ===== CARRIERS ===== */
-.carrier{background:rgba(164,0,17,.3);border:1px solid rgba(164,0,17,.5);color:#fff;text-align:center;padding:1vh;border-radius:10px}
-.carrier strong{display:block;font-family:'Spectral',serif;font-size:1.4vw}
-.carrier span{font-family:'Rajdhani',sans-serif;font-size:.85vw;color:var(--pk)}
+/* === FLOW DIAGRAM === */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 1.5vw, 1.2rem);
+  flex-wrap: wrap;
+}
+.flow-node {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  padding: clamp(0.6rem, 1.5vh, 1rem) clamp(0.8rem, 2vw, 1.4rem);
+  text-align: center;
+  min-width: clamp(80px, 12vw, 130px);
+  backdrop-filter: blur(10px);
+}
+.flow-node .icon { font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem; }
+.flow-node .label { font-size: clamp(0.65rem, 1.1vw, 0.8rem); font-weight: 600; }
+.flow-node .sub { font-size: clamp(0.55rem, 0.9vw, 0.65rem); color: var(--text-muted); }
+.flow-center {
+  background: linear-gradient(135deg, rgba(255, 150, 147, 0.15), rgba(225, 203, 185, 0.1));
+  border: 1px solid rgba(255, 150, 147, 0.35);
+  box-shadow: 0 0 40px rgba(164, 0, 17, 0.3);
+}
 
-/* ===== USER CARDS ===== */
-.ucard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;text-align:center;padding:1.5vh .8vw}
-.ucard .av{width:3vw;height:3vw;background:var(--rd);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3vw;margin:0 auto .4vh;box-shadow:0 0 12px rgba(164,0,17,.3)}
-.ucard h3{font-family:'Spectral',serif;font-size:1.1vw;font-weight:600;color:#fff}
-.ucard .rl{font-family:'Rajdhani',sans-serif;font-size:.8vw;color:var(--pk);letter-spacing:.1em;text-transform:uppercase}
-.ucard .sep{width:40%;height:1px;background:rgba(255,255,255,.1);margin:.3vh auto}
-.ucard p{font-size:.85vw;color:rgba(255,255,255,.55);line-height:1.4}
+/* === BULLET LIST === */
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.2vh, 0.8rem);
+}
+.bullet-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.bullet-list li::before {
+  content: '◆';
+  color: var(--im8-flamingo);
+  font-size: 0.6em;
+  flex-shrink: 0;
+  margin-top: 0.4em;
+}
 
-/* ===== ROADMAP ===== */
-.rcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5vh 1.2vw;text-align:center}
-.rbadge{display:inline-block;padding:.2vh .7vw;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8vw;letter-spacing:.25em;text-transform:uppercase;border-radius:4px;margin-bottom:.4vh}
-.rb-now{background:var(--rd);color:#fff}.rb-next{background:rgba(255,255,255,.15);color:#fff}.rb-fut{background:rgba(225,203,185,.2);color:var(--st)}
-.rcard h3{font-family:'Cormorant Garamond',serif;font-size:1.4vw;font-weight:700;color:#fff;margin-bottom:.2vh}
-.rcard .rsep{width:35%;height:1px;background:rgba(255,255,255,.1);margin:.2vh auto .4vh}
-.rcard li{font-size:.95vw;color:rgba(255,255,255,.55);padding:.2vh 0;padding-left:1.2em;position:relative;text-align:left;list-style:none;line-height:1.35}
-.rcard li::before{content:'→';position:absolute;left:0;color:var(--pk);font-weight:700}
+/* === ROADMAP === */
+.roadmap-track {
+  display: flex;
+  gap: clamp(0.3rem, 0.8vw, 0.5rem);
+  flex-wrap: wrap;
+}
+.roadmap-item {
+  padding: clamp(0.3rem, 0.8vh, 0.5rem) clamp(0.6rem, 1.2vw, 1rem);
+  border-radius: 0.5rem;
+  font-size: clamp(0.65rem, 1vw, 0.78rem);
+  font-weight: 500;
+}
+.roadmap-live { background: rgba(52, 211, 153, 0.12); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); }
+.roadmap-soon { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
 
-/* ===== TECH PILLS ===== */
-.tpill{background:rgba(255,255,255,.06);border-left:4px solid var(--rd);border-radius:8px;padding:.7vh .9vw;font-size:.95vw;color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)}
-.tpill strong{color:var(--pk)}
+/* === TECH GRID === */
+.tech-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: clamp(0.6rem, 1.5vh, 1rem);
+  text-align: center;
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
 
-/* ===== CHECKLIST ===== */
-.chk{display:grid;grid-template-columns:repeat(4,1fr);gap:.3vh 1.3vw}
-.chk-i{display:flex;align-items:center;gap:.4em;font-size:1.05vw;color:var(--st)}
-.chk-i .c{color:var(--gn);font-weight:700;font-size:1.1em}
+/* === DIVIDER === */
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--im8-flamingo), var(--im8-stone));
+  border-radius: 999px;
+}
 
-/* ===== AI CARDS ===== */
-.ai-card{background:rgba(164,0,17,.1);border:2px solid rgba(164,0,17,.4);border-radius:14px;padding:1.5vh 1.3vw;box-shadow:0 0 20px rgba(164,0,17,.1)}
-.ai-card h3{font-family:'Spectral',serif;font-weight:600;font-size:1.35vw;color:#fff;margin-bottom:.3vh}
-.ai-card p{font-size:1vw;color:rgba(255,255,255,.6);line-height:1.5}
-.ai-badge{display:inline-block;background:var(--rd);color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85vw;letter-spacing:.15em;padding:.2vh .6vw;border-radius:4px;margin-bottom:.4vh;box-shadow:0 0 10px rgba(164,0,17,.3)}
+/* === IM8 LOGO === */
+.im8-logo {
+  height: clamp(1.8rem, 4vh, 2.5rem);
+  fill: var(--im8-off-white);
+}
+.im8-logo-large {
+  height: clamp(3rem, 8vh, 5rem);
+  fill: var(--im8-off-white);
+}
+.im8-logo-flamingo { fill: var(--im8-flamingo); }
 
-/* ===== TAKEAWAYS ===== */
-.tk{display:flex;align-items:center;gap:.5em;padding:.35vh 0}
-.tk .c{color:var(--gn);font-size:1.2em}
-.tk span{font-size:1.15vw;color:var(--st)}
+/* === ANIMATIONS === */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+.reveal-delay-5 { transition-delay: 0.6s; }
 
-/* ===== NAV ===== */
-.dots{position:fixed;right:.8vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:100}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:.3s;padding:0}
-.dot:hover,.dot.on{background:var(--pk);transform:scale(1.4)}
-.snum{position:fixed;bottom:.8vh;right:1.3vw;font-family:'Rajdhani',sans-serif;font-size:.7vw;color:rgba(255,255,255,.25);z-index:100;letter-spacing:.15em}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
 
-/* ===== ANIMATIONS ===== */
-@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.r{opacity:0;animation:up .6s ease forwards}
-.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}
-.a{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}.a.v{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.r,.a{animation:none;opacity:1;transform:none;transition:none}}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(164, 0, 17, 0.2); }
+  50% { box-shadow: 0 0 50px rgba(164, 0, 17, 0.35); }
+}
+.pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 
-/* ===== PROGRESS BAR ===== */
-.pbar{position:fixed;top:0;left:0;height:3px;z-index:200;background:linear-gradient(90deg,var(--rd),var(--pk));width:0%;transition:width .3s;box-shadow:0 0 8px rgba(164,0,17,.5)}
+/* Gradient text with IM8 brand */
+.gradient-text {
+  background: linear-gradient(135deg, var(--im8-flamingo) 0%, var(--im8-sand) 50%, var(--im8-stone) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-/* ===== ANIMATED GRADIENT BLOBS ===== */
-.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.25;pointer-events:none}
-.blob-1{width:35vw;height:35vw;background:var(--rd);top:-10%;left:-8%;animation:bfloat 18s ease-in-out infinite}
-.blob-2{width:28vw;height:28vw;background:var(--pk);bottom:-8%;right:-5%;animation:bfloat 18s ease-in-out infinite reverse}
-@keyframes bfloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(3vw,-2vh) scale(1.08)}66%{transform:translate(-2vw,3vh) scale(.93)}}
+/* Slide number */
+.slide-num {
+  position: absolute;
+  bottom: clamp(0.8rem, 2vh, 1.5rem);
+  right: clamp(1rem, 3vw, 2rem);
+  font-family: var(--font-caption);
+  font-size: clamp(0.6rem, 1vw, 0.7rem);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
 
-/* ===== ANIMATED FLOW DOTS ===== */
-.farr{position:relative;overflow:visible}
-.farr::after{content:'';position:absolute;width:6px;height:6px;background:var(--pk);border-radius:50%;top:50%;margin-top:-3px;box-shadow:0 0 8px var(--pk);animation:flowdot 2.2s ease-in-out infinite}
-@keyframes flowdot{0%{left:-4px;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 2px);opacity:0}}
+/* Module badge */
+.module-badge {
+  font-family: var(--font-caption);
+  font-size: clamp(0.6rem, 1vw, 0.72rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: clamp(0.3rem, 0.8vh, 0.5rem);
+}
 
-/* ===== COUNTER STYLE ===== */
-.ctr{font-family:'Cormorant Garamond',serif;font-weight:700}
+/* Highlight box */
+.highlight-box {
+  background: rgba(255, 150, 147, 0.06);
+  border: 1px solid rgba(255, 150, 147, 0.18);
+  border-radius: 0.6rem;
+  padding: clamp(0.6rem, 1.5vh, 1rem);
+}
 
-/* ===== ANIMATED SVG BARS ===== */
-.bar-grow{transition:width 1.5s cubic-bezier(.22,1,.36,1);width:0}
-.bar-grow.v{/* width set by JS */}
+/* Nav dots */
+.nav-dots {
+  position: fixed;
+  right: clamp(0.8rem, 2vw, 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 100;
+}
+.nav-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--im8-stone);
+  opacity: 0.25;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+.nav-dot.active {
+  opacity: 1;
+  background: var(--im8-flamingo);
+  box-shadow: 0 0 8px rgba(255, 150, 147, 0.5);
+  width: 6px;
+  height: 6px;
+}
 
-/* ===== LAPTOP MOCKUP ===== */
-.laptop{background:#1a1a1a;border-radius:10px 10px 0 0;padding:6px 6px 0;max-width:90%;margin:0 auto;box-shadow:0 15px 50px rgba(0,0,0,.5)}
-.laptop .bbar{display:flex;gap:5px;padding:6px 10px;background:#2a2a2a;border-radius:6px 6px 0 0}
-.laptop .bbar .dd{width:8px;height:8px;border-radius:50%}
-.laptop .bbar .dd:nth-child(1){background:#ff5f57}.laptop .bbar .dd:nth-child(2){background:#ffbd2e}.laptop .bbar .dd:nth-child(3){background:#28ca41}
-.laptop .scr{border-radius:2px 2px 0 0;overflow:hidden;aspect-ratio:16/9.5;background:#0f0f23}
-.laptop .scr img,.laptop .scr video{width:100%;height:100%;object-fit:cover}
-.lbase{width:95%;margin:0 auto;height:10px;background:linear-gradient(to bottom,#2a2a2a,#1a1a1a);border-radius:0 0 6px 6px}
+/* === COUNTER NUMBERS === */
+.counter {
+  font-size: clamp(3rem, 10vh, 6rem);
+  font-family: var(--font-title);
+  font-weight: 300;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--im8-flamingo) 0%, var(--im8-sand) 50%, var(--im8-stone) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.counter-label {
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 1.4vw, 1rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: clamp(0.3rem, 0.8vh, 0.5rem);
+}
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-/* ===== PAY TO UNLOCK GATE ===== */
-.gate{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.gate-lock{font-size:6vw;animation:lockBounce 2s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(164,0,17,.5))}
-@keyframes lockBounce{0%,100%{transform:rotate(-5deg) scale(1)}25%{transform:rotate(5deg) scale(1.05)}50%{transform:rotate(-3deg) scale(1)}75%{transform:rotate(3deg) scale(1.02)}}
-.gate-module{font-family:'Rajdhani',sans-serif;font-size:1.4vw;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--pk);margin-top:2vh}
-.gate-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3.8vw;color:#fff;margin-top:1vh;text-shadow:0 0 40px rgba(164,0,17,.4)}
-.gate-price{font-family:'Rajdhani',sans-serif;font-size:1.8vw;color:var(--st);margin-top:1.5vh;letter-spacing:.1em}
-.gate-price span{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3vw;color:var(--pk)}
-.gate-btns{display:flex;gap:2vw;margin-top:3vh}
-.gate-btn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.5vw;letter-spacing:.15em;text-transform:uppercase;border:none;border-radius:12px;padding:1.5vh 3vw;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
-.gate-btn--yes{background:linear-gradient(135deg,var(--rd),#D4003A);color:#fff;box-shadow:0 0 30px rgba(164,0,17,.5),0 4px 20px rgba(0,0,0,.4)}
-.gate-btn--yes:hover{transform:scale(1.08);box-shadow:0 0 50px rgba(164,0,17,.7),0 8px 30px rgba(0,0,0,.5)}
-.gate-btn--no{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5)}
-.gate-btn--no:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);transform:scale(1.05)}
-.gate-coins{position:absolute;pointer-events:none;width:100%;height:100%;top:0;left:0;overflow:hidden}
-.coin{position:absolute;font-size:1.8vw;opacity:0;animation:coinFall 3s ease-in infinite}
-@keyframes coinFall{0%{opacity:0;transform:translateY(-5vh) rotate(0deg)}10%{opacity:.8}80%{opacity:.6}100%{opacity:0;transform:translateY(105vh) rotate(720deg)}}
-.gate-sparkle{position:absolute;width:4px;height:4px;background:var(--pk);border-radius:50%;animation:sparkle 1.5s ease-in-out infinite;box-shadow:0 0 6px var(--pk)}
-@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .float { animation: none; }
+  .pulse-glow { animation: none; }
+  html { scroll-behavior: auto; }
+}
 </style>
 </head>
 <body>
-<!-- Progress bar -->
-<div class="pbar" id="pb"></div>
-<nav class="dots" id="nd"></nav>
-<div class="snum" id="sn">1 / 19</div>
 
-<!-- 1. TITLE -->
-<section class="s" id="s1">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="topline"></div><div class="botline"></div>
-<div style="text-align:center;margin:auto 0">
-  <div class="r d1" style="display:flex;justify-content:center;margin-bottom:.4vh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" style="width:26vw;height:auto"><path fill="#fff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/></svg></div>
-  <p class="r d2" style="font-family:'Rajdhani',sans-serif;font-size:3.5vw;font-weight:700;letter-spacing:.45em;color:var(--pk);text-transform:uppercase">IM8 HUB</p>
-  <p class="r d3" style="font-family:'Spectral',serif;font-size:1.9vw;color:var(--pk);margin-top:1.2vh">Operations Intelligence Platform</p>
-  <div style="width:14vw;height:2px;background:rgba(225,203,185,.3);margin:1.2vh auto" class="r d3"></div>
-  <p class="r d4" style="font-style:italic;color:var(--st);font-size:1.3vw;margin-top:.8vh">One platform. Every operation. Zero manual work.</p>
-</div>
-</section>
+<!-- Nav dots -->
+<nav class="nav-dots" id="navDots"></nav>
 
-<!-- 2. PROBLEM -->
-<section class="s" id="s2" style="padding:2vh 4vw">
-<div class="lbl a" style="margin-bottom:0">THE PROBLEM</div>
-<h2 class="ttl a" style="font-size:2.8vw;margin-bottom:.6vh">Too Many Platforms, Too Much Manual Work</h2>
-<div class="g g3" style="gap:.7vw">
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg></div><h3>Inventory</h3><p>Log into D365, Stord, GPS, XLWMS separately — 10 min per SKU across 5 warehouses.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg></div><h3>Sales Data</h3><p>Export from Shopify with long waits. Manual Excel analysis — no role-specific views.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h3>Order Status</h3><p>Cross-reference Shopify, Stord, D365 manually to find stuck orders.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><h3>No Supply Chain Visibility</h3><p>No single system shows end-to-end supply chain — POs, inbound, inventory, orders all in separate platforms.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div><h3>HK AWB Manual Process</h3><p>HK fulfilment AWBs handled manually — copy-paste tracking numbers, no batch processing, no carrier-split PDFs.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><h3>Duplicate Work Across Systems</h3><p>Same data entered into multiple platforms — D365, Shopify, warehouse portals. Errors from re-keying, no single source of truth.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div><h3>Gifting</h3><p>Ops manually places each gift on the correct warehouse platform by hand.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>Shipping Costs</h3><p>3 carriers, different formats — no reconciliation, no duplicate detection.</p></div>
-  <div class="glass glass--accent a"><div class="ico"><svg width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div><h3>Stord Operations</h3><p>Limited portal visibility — orders, kitting, ASN details scattered.</p></div>
-</div>
-</section>
-
-<!-- 3. SOLUTION -->
-<section class="s s--accent" id="s3">
-<div class="lbl a">THE SOLUTION</div>
-<h2 class="ttl a">One Unified Platform</h2>
-<div class="g g4 mt1">
-  <div class="stat a"><div class="n ctr" data-target="12" data-suffix="+">0</div><div class="l">Modules</div></div>
-  <div class="stat a"><div class="n ctr" data-target="5" data-suffix="">0</div><div class="l">Warehouses</div></div>
-  <div class="stat a"><div class="n ctr" data-target="70" data-suffix="+">0</div><div class="l">API Endpoints</div></div>
-  <div class="stat a"><div class="n ctr" data-target="10" data-suffix="+">0</div><div class="l">Active Users</div></div>
-</div>
-<!-- World Map with Warehouse Locations -->
-<div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.8vh 1.5vw;max-height:42vh">
-<svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-height:38vh">
-  <defs>
-    <radialGradient id="glow"><stop offset="0%" stop-color="#A40011" stop-opacity=".6"/><stop offset="100%" stop-color="#A40011" stop-opacity="0"/></radialGradient>
-    <filter id="pulse"><feGaussianBlur stdDeviation="3"/></filter>
-  </defs>
-  <style>
-    text{font-family:'Rajdhani',sans-serif;fill:#fff}
-    .land{fill:rgba(255,255,255,.08);stroke:rgba(255,255,255,.12);stroke-width:.5}
-    .conn{stroke:#A40011;stroke-width:1.2;stroke-dasharray:5,4;opacity:.4}
-    .pin-glow{fill:url(#glow)}
-    .pin{fill:#A40011;stroke:var(--pk);stroke-width:1.5}
-    .loc-name{font-weight:700;font-size:11px;fill:#fff}
-    .loc-detail{font-size:9px;fill:rgba(255,255,255,.5)}
-    .loc-label{font-weight:600;font-size:10px;fill:var(--pk)}
-  </style>
-
-  <!-- Simplified world map continents -->
-  <!-- North America -->
-  <path class="land" d="M80,60 L130,45 L175,50 L210,55 L240,70 L255,90 L260,120 L250,150 L235,170 L220,180 L195,185 L170,175 L145,180 L120,195 L105,185 L90,170 L75,150 L65,120 L60,95 L65,75 Z"/>
-  <!-- Central America -->
-  <path class="land" d="M145,180 L155,190 L165,205 L170,215 L160,220 L150,215 L140,200 L135,190 Z"/>
-  <!-- South America -->
-  <path class="land" d="M190,220 L215,215 L240,225 L255,245 L260,275 L255,305 L240,330 L220,345 L200,340 L185,320 L175,295 L170,265 L175,240 Z"/>
-  <!-- Europe -->
-  <path class="land" d="M390,55 L410,48 L430,50 L460,55 L480,60 L490,70 L485,85 L475,100 L460,110 L440,115 L420,110 L405,105 L395,95 L385,80 L385,65 Z"/>
-  <!-- Africa -->
-  <path class="land" d="M400,120 L430,115 L460,120 L480,135 L490,160 L495,190 L490,225 L475,260 L455,280 L435,285 L415,275 L400,255 L390,225 L385,195 L385,165 L390,140 Z"/>
-  <!-- UK/Ireland -->
-  <path class="land" d="M385,55 L395,50 L400,55 L398,65 L390,70 L383,65 Z"/>
-  <!-- Middle East -->
-  <path class="land" d="M500,100 L530,95 L555,100 L565,115 L560,130 L545,140 L520,142 L505,135 L495,120 Z"/>
-  <!-- Russia/North Asia -->
-  <path class="land" d="M490,30 L550,25 L620,28 L690,32 L740,38 L780,45 L790,55 L780,65 L750,70 L700,68 L650,65 L600,60 L550,55 L510,50 L495,45 Z"/>
-  <!-- India -->
-  <path class="land" d="M570,110 L600,105 L625,115 L635,140 L630,170 L615,190 L595,195 L580,185 L568,165 L560,140 Z"/>
-  <!-- China / East Asia -->
-  <path class="land" d="M650,60 L700,55 L740,60 L770,70 L785,85 L780,105 L765,120 L740,130 L710,135 L680,130 L660,118 L645,100 L640,80 Z"/>
-  <!-- Southeast Asia -->
-  <path class="land" d="M680,140 L710,138 L735,145 L750,155 L745,170 L730,180 L705,182 L685,175 L675,160 Z"/>
-  <!-- Japan -->
-  <path class="land" d="M790,70 L800,65 L810,70 L815,85 L810,100 L800,105 L795,95 L790,80 Z"/>
-  <!-- Australia -->
-  <path class="land" d="M720,240 L760,230 L800,235 L830,250 L840,275 L830,300 L805,310 L775,305 L750,290 L735,270 L725,255 Z"/>
-
-  <!-- Connection lines from warehouses to HUB center (approx 450,160) -->
-  <!-- US ATL to HUB -->
-  <line class="conn" x1="195" y1="155" x2="450" y2="160"/>
-  <!-- US RENO to HUB -->
-  <line class="conn" x1="120" y1="120" x2="450" y2="160"/>
-  <!-- UK LHR to HUB -->
-  <line class="conn" x1="392" y1="62" x2="450" y2="160"/>
-  <!-- EU AMS to HUB -->
-  <line class="conn" x1="420" y1="55" x2="450" y2="160"/>
-  <!-- HK to HUB -->
-  <line class="conn" x1="730" y1="120" x2="450" y2="160"/>
-  <!-- ME JFK (serving MENA from US) to HUB -->
-  <line class="conn" x1="225" y1="135" x2="450" y2="160"/>
-
-  <!-- HUB center glow -->
-  <circle cx="450" cy="160" r="40" class="pin-glow"/>
-
-  <!-- Warehouse pins with pulse -->
-  <!-- US — Atlanta -->
-  <circle cx="195" cy="155" r="12" fill="#A40011" opacity=".2" filter="url(#pulse)">
-    <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="195" cy="155" r="7" class="pin"/>
-  <text x="195" y="175" text-anchor="middle" class="loc-name">ATL</text>
-  <text x="195" y="186" text-anchor="middle" class="loc-label">Stord</text>
-
-  <!-- US — Reno -->
-  <circle cx="120" cy="120" r="12" fill="#A40011" opacity=".2" filter="url(#pulse)">
-    <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" begin=".5s"/>
-  </circle>
-  <circle cx="120" cy="120" r="7" class="pin"/>
-  <text x="120" y="140" text-anchor="middle" class="loc-name">RENO</text>
-  <text x="120" y="151" text-anchor="middle" class="loc-label">Stord</text>
-
-  <!-- US — JFK (MENA) -->
-  <circle cx="225" cy="135" r="12" fill="#A40011" opacity=".2" filter="url(#pulse)">
-    <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" begin="1s"/>
-  </circle>
-  <circle cx="225" cy="135" r="7" class="pin"/>
-  <text x="240" y="128" class="loc-name">JFK</text>
-  <text x="240" y="139" class="loc-label">GPS/XLWMS</text>
-  <text x="240" y="150" class="loc-detail">MENA Region</text>
-
-  <!-- UK — LHR (Rexville) -->
-  <circle cx="392" cy="62" r="12" fill="#A40011" opacity=".2" filter="url(#pulse)">
-    <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" begin="1.5s"/>
-  </circle>
-  <circle cx="392" cy="62" r="7" class="pin"/>
-  <text x="370" y="50" text-anchor="middle" class="loc-name">LHR</text>
-  <text x="370" y="40" text-anchor="middle" class="loc-label">GPS/XLWMS</text>
-
-  <!-- EU — Amsterdam -->
-  <circle cx="420" cy="55" r="12" fill="#A40011" opacity=".2" filter="url(#pulse)">
-    <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" begin="2s"/>
-  </circle>
-  <circle cx="420" cy="55" r="7" class="pin"/>
-  <text x="438" y="47" class="loc-name">AMS</text>
-  <text x="438" y="37" class="loc-label">Stord</text>
-
-  <!-- HK — Hong Kong -->
-  <circle cx="730" cy="120" r="12" fill="#A40011" opacity=".2" filter="url(#pulse)">
-    <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" begin="2.5s"/>
-  </circle>
-  <circle cx="730" cy="120" r="7" class="pin"/>
-  <text x="748" y="115" class="loc-name">HK</text>
-  <text x="748" y="126" class="loc-label">D365 + Spaceship</text>
-
-  <!-- HUB center badge -->
-  <circle cx="450" cy="160" r="18" fill="#A40011" stroke="var(--pk)" stroke-width="2"/>
-  <text x="450" y="164" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">HUB</text>
-
-  <!-- Footer -->
-  <text x="450" y="370" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.3)" style="letter-spacing:.15em">5 WAREHOUSE REGIONS — 6 FACILITIES — UNIFIED IN IM8 HUB</text>
+<!-- SVG Logo (hidden, referenced by use) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+  <symbol id="im8-logo" viewBox="0 0 1052 272">
+    <path d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/>
+  </symbol>
 </svg>
-</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 1: COVER                               -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-1">
+  <div class="content flex-col gap-md text-center" style="align-items: center;">
+    <div class="reveal float">
+      <svg class="im8-logo-large"><use href="#im8-logo"/></svg>
+    </div>
+    <h1 class="reveal reveal-delay-1" style="margin-top: clamp(0.5rem, 2vh, 1rem);">
+      <span class="gradient-text">Hub</span>
+    </h1>
+    <p class="reveal reveal-delay-2" style="font-family: var(--font-title); font-size: clamp(1.1rem, 2.2vw, 1.6rem); color: var(--im8-stone); font-weight: 300;">
+      Unified Operations Platform
+    </p>
+    <div class="divider reveal reveal-delay-3" style="margin: clamp(0.5rem, 1.5vh, 1rem) auto;"></div>
+    <p class="reveal reveal-delay-4 caption muted" style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">
+      One platform &nbsp;·&nbsp; All operations &nbsp;·&nbsp; Real-time visibility
+    </p>
+  </div>
+  <span class="slide-num">01 / 17</span>
 </section>
 
-<!-- 4. ARCHITECTURE -->
-<section class="s" id="s4">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="lbl a">PLATFORM ARCHITECTURE</div>
-<h2 class="ttl a">How IM8 Hub Connects Everything</h2>
-<div class="a" style="position:relative;flex:1;display:flex;align-items:center;justify-content:center;margin-top:1vh">
-  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;text-align:center">
-    <div style="width:10vw;height:10vw;background:var(--rd);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(164,0,17,.5),0 0 80px rgba(164,0,17,.2)">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" style="width:6vw;height:auto"><path fill="#fff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7Z"/></svg>
-      <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1vw;letter-spacing:.2em;color:#fff;margin-top:.3vh">HUB</span>
+<!-- ============================================ -->
+<!-- SLIDE 2: THE PROBLEM                         -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-2">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="badge badge-rose reveal caption">The Problem</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">Fragmented Data.<br>Manual Processes. <span class="flamingo">Slow Decisions.</span></h2>
+    </div>
+    <div class="grid-2 reveal reveal-delay-2" style="margin-top: clamp(0.5rem, 1.5vh, 1rem);">
+      <div class="card">
+        <div class="card-icon" style="background: rgba(255, 150, 147, 0.1);">🛒</div>
+        <h3>Shopify</h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Orders scattered across admin panels</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background: rgba(225, 203, 185, 0.1);">📦</div>
+        <h3>Stord</h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Inventory in separate warehouse portal</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background: rgba(255, 233, 216, 0.1);">🏭</div>
+        <h3>D365</h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Production orders in ERP silo</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background: rgba(255, 150, 147, 0.1);">📊</div>
+        <h3>Google Sheets</h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Manual tracking, stale data, version chaos</p>
+      </div>
+    </div>
+    <p class="reveal reveal-delay-3 muted text-center" style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">
+      Every decision requires jumping between 4+ systems — no single source of truth
+    </p>
+  </div>
+  <span class="slide-num">02 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 3: THE SOLUTION                        -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-3">
+  <div class="content flex-col gap-lg text-center" style="align-items: center;">
+    <div>
+      <span class="badge badge-flamingo reveal caption">The Solution</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">
+        One Dashboard.<br><span class="gradient-text">All Systems Connected.</span>
+      </h2>
+    </div>
+    <p class="reveal reveal-delay-2" style="max-width: 620px; font-size: clamp(0.85rem, 1.4vw, 1rem);">
+      IM8 Hub pulls real-time data from Shopify, Stord, D365, and Skio into a single operations dashboard — eliminating manual syncing, spreadsheet chaos, and blind spots.
+    </p>
+    <div class="grid-3 reveal reveal-delay-3" style="max-width: 680px;">
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.4rem, 3vh, 2rem); margin-bottom: 0.3rem;">⚡</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Real-Time</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Webhook-driven data</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.4rem, 3vh, 2rem); margin-bottom: 0.3rem;">◆</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Unified</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">One source of truth</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.4rem, 3vh, 2rem); margin-bottom: 0.3rem;">🔔</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Proactive</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Slack alerts & flags</p>
+      </div>
     </div>
   </div>
-  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
-    <line x1="120" y1="80" x2="430" y2="220" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <line x1="500" y1="50" x2="500" y2="200" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <line x1="880" y1="80" x2="570" y2="220" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <line x1="60" y1="250" x2="400" y2="250" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <line x1="940" y1="250" x2="600" y2="250" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <line x1="120" y1="420" x2="430" y2="280" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <line x1="500" y1="450" x2="500" y2="300" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <line x1="880" y1="420" x2="570" y2="280" stroke="#A40011" stroke-width="2" stroke-dasharray="6,4" opacity=".35"/>
-    <circle cx="500" cy="250" r="120" fill="none" stroke="var(--pk)" stroke-width="1" opacity=".12"/>
-    <circle cx="500" cy="250" r="180" fill="none" stroke="var(--pk)" stroke-width="1" opacity=".06"/>
-  </svg>
-  <div style="position:absolute;left:4%;top:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U2hvcGlmeTwvdGl0bGU+PHBhdGggZD0iTTE1LjMzNyAyMy45NzlsNy4yMTYtMS41NjFzLTIuNjA0LTE3LjYxMy0yLjYyNS0xNy43M2MtLjAxOC0uMTE2LS4xMTQtLjE5Mi0uMjExLS4xOTJzLTEuOTI5LS4xMzYtMS45MjktLjEzNi0xLjI3NS0xLjI3NC0xLjQzOS0xLjQxMWMtLjA0NS0uMDM3LS4wNzUtLjA1Ny0uMTIxLS4wNzRsLS45MTQgMjEuMTA0aC4wMjN6TTExLjcxIDExLjMwNXMtLjgxLS40MjQtMS43NzQtLjQyNGMtMS40NDcgMC0xLjUwNC45MDYtMS41MDQgMS4xNDEgMCAxLjIzMiAzLjI0IDEuNzE1IDMuMjQgNC42MjkgMCAyLjI5NS0xLjQ0IDMuNzYtMy40MDYgMy43Ni0yLjM1NCAwLTMuNTQtMS40NjUtMy41NC0xLjQ2NWwuNjQ2LTIuMDg2czEuMjQ1IDEuMDY2IDIuMjggMS4wNjZjLjY3NSAwIC45NzUtLjU0NS45NzUtLjkzMiAwLTEuNjE5LTIuNjU0LTEuNjk0LTIuNjU0LTQuMzU5LS4wMzQtMi4yMzcgMS41NzEtNC40MTYgNC44MjctNC40MTYgMS4yNTcgMCAxLjg3NS4zNjEgMS44NzUuMzYxbC0uOTQ1IDIuNzE1LS4wMi4wMXpNMTEuMTcuODNjLjEzNiAwIC4yNzEuMDM4LjQwNS4xMzUtLjk4NC40NjUtMi4wNjQgMS42MzktMi41MDggMy45OTItLjY1Ni4yMTMtMS4yOTMuNDA1LTEuODg5LjU3OEM3LjY5NyAzLjc1IDguOTUxLjg0IDExLjE3Ljg0Vi44M3ptMS4yMzUgMi45NDl2LjEzNWMtLjc1NC4yMzItMS41ODMuNDg0LTIuMzk0LjczNi40NjYtMS43NzcgMS4zMzMtMi42NDUgMi4wODUtMi45NzEuMTkzLjUwMS4zMDkgMS4xNzYuMzA5IDIuMXptLjUzOS0yLjIzNGMuNjk0LjA3NCAxLjE0MS44NjcgMS40MjkgMS43NTUtLjM0OS4xMTQtLjczNS4yMzEtMS4xNTguMzY2di0uMjUyYzAtLjc1Mi0uMDk2LTEuMzcxLS4yNzEtMS44NzF2LjAwMnptMi45OTIgMS4yODljLS4wMiAwLS4wNi4wMjEtLjA3OC4wMjFzLS4yODkuMDc1LS43MTQuMjFjLS40MjMtMS4yMzMtMS4xNzYtMi4zNy0yLjUwOC0yLjM3aC0uMTE1QzEyLjEzNS4yMDkgMTEuNjY5IDAgMTEuMjY1IDAgOC4xNTkgMCA2LjY3NSAzLjg3NyA2LjIxIDUuODQ2Yy0xLjE5NC4zNjUtMi4wNjMuNjM2LTIuMTYuNjc0LS42NzUuMjEzLS42OTQuMjMyLS43NzIuODctLjA3NS40NjItMS44MyAxNC4wNjMtMS44MyAxNC4wNjNMMTUuMDA5IDI0bC45MjctMjEuMTY2eiIvPjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Shopify</span><br><span style="font-size:.7vw;color:var(--pk)">Orders · Products · Customers</span></div>
-  <div style="position:absolute;left:50%;top:2%;transform:translateX(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QWZ0ZXJTaGlwPC90aXRsZT48cGF0aCBkPSJNMjIuNTQ5IDkuNjA0YTEwLjQ2MiAxMC40NjIgMCAwIDAtMy4zODgtNi44MzhBMTAuNjMyIDEwLjYzMiAwIDAgMCAxMiAwYTEwLjY0IDEwLjY0IDAgMCAwLTcuMTYgMi43NjQgMTAuNDY1IDEwLjQ2NSAwIDAgMC0zLjQyOCA3Ljc0YzAgMi4zNzEuODEgNC42NzIgMi4yOTggNi41MjlhMTAuNjE3IDEwLjYxNyAwIDAgMCA1Ljg5NSAzLjY5OEwxMiAyNGwyLjM5NS0zLjI3YTEwLjU5MyAxMC41OTMgMCAwIDAgNS44OTUtMy42OTcgMTAuNDQyIDEwLjQ0MiAwIDAgMCAyLjI2LTcuNDN6bS0xMS4zMDYgNi4yOGEuMjYuMjYgMCAwIDEtLjAzNC4xMjUuMjU0LjI1NCAwIDAgMS0uMzQ3LjA5MmwtMy45MDYtMi4yMzdhMS4wMDUgMS4wMDUgMCAwIDEtLjUwNS0uODY1VjguNjI0YS4yNi4yNiAwIDAgMSAuMDMzLS4xMjYuMjU0LjI1NCAwIDAgMSAuMzQ3LS4wOTJsMy45MDcgMi4yMzdjLjE1Mi4wODkuMjgxLjIxNC4zNjguMzY2LjA5LjE1MS4xMzUuMzI0LjEzNS41djQuMzcyek0xMiA5LjQ4Yy0uMTc2IDAtLjM1LS4wNDctLjUwMy0uMTMzTDcuNSA3LjA1N2EuMjQxLjI0MSAwIDAgMS0uMDktLjA5Mi4yNDkuMjQ5IDAgMCAxIC4wOS0uMzQybDMuOTk3LTIuMjg5YTEuMDI1IDEuMDI1IDAgMCAxIDEuMDA3IDBsMy45OTYgMi4yOWEuMjQuMjQgMCAwIDEgLjA5LjA5Mi4yNDcuMjQ3IDAgMCAxIDAgLjI1LjI3MS4yNzEgMCAwIDEtLjA5LjA5MmwtMy45OTcgMi4yODlBMS4wMDUgMS4wMDUgMCAwIDEgMTIgOS40OFpNMTcuNTQ2IDEzYS45OTYuOTk2IDAgMCAxLS41MDMuODY2bC0zLjkwOCAyLjIzN2EuMjU0LjI1NCAwIDAgMS0uMzgtLjIxOFYxMS41MWMwLS4xNzUuMDQ3LS4zNDguMTM1LS41MDEuMDg5LS4xNTIuMjE2LS4yOC4zNjgtLjM2NmwzLjkwNy0yLjIzOGEuMjU0LjI1NCAwIDAgMSAuMzguMjE5eiIvPjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">AfterShip</span><br><span style="font-size:.7vw;color:var(--pk)">Delivery Tracking</span></div>
-  <div style="position:absolute;right:4%;top:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzAwNzhENCIvPjx0ZXh0IHg9IjEyIiB5PSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjUiIGZvbnQtd2VpZ2h0PSI3MDAiPkQzNjU8L3RleHQ+PHRleHQgeD0iMTIiIHk9IjE3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC43KSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQiPk1pY3Jvc29mdDwvdGV4dD48L3N2Zz4=" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">D365</span><br><span style="font-size:.7vw;color:var(--pk)">HK Inventory · Finance</span></div>
-  <div style="position:absolute;left:0%;top:50%;transform:translateY(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzFCMTQ2NCIvPjx0ZXh0IHg9IjEyIiB5PSIxNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjYiIGZvbnQtd2VpZ2h0PSI3MDAiPlNUT1JEPC90ZXh0Pjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Stord</span><br><span style="font-size:.7vw;color:var(--pk)">US Fulfilment · Inventory · POs</span></div>
-  <div style="position:absolute;right:0%;top:50%;transform:translateY(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+RmVkRXg8L3RpdGxlPjxwYXRoIGQ9Ik0yMi40OTggMTQuMjk4Yy0uMDE2LS40MTQuMzQ1LS43NTEuNzUtLjc1NWEuNzQ1Ljc0NSAwIDAgMSAuNzUyLjc1NS43NTUuNzU1IDAgMCAxLS43NTEuNzQ1Yy0uMzk1LjAwMi0uNzU5LS4zNDYtLjc1MS0uNzQ1em0uNzU5LS4wODNjLjA2Ny0uMDIuMTY0LS4wNDIuMTYyLS4xMy4wMDctLjA5LS4wODYtLjEzMy0uMTYyLS4xMzRoLS4xNjN2LjI2M2MwIC4wMDEuMTY1LS4wMDIuMTYzLjAwMXptLS4xNjMuMTA3di40MThoLS4xNHYtLjkxaC4zMjdjLjE1Ni0uMDIxLjI5NC4wOTIuMjg2LjI1M2EuMjE4LjIxOCAwIDAgMS0uMTU2LjE5Yy4xNjIuMDgzLjEwOC4zMjIuMTczLjQ2N2gtLjE1NmEyLjM1NSAyLjM1NSAwIDAgMS0uMDQtLjIwNWMtLjAxOC0uMDkzLS4wNDctLjIyOS0uMTctLjIxM2gtLjEyNHptLjc2LS4wMjRhLjYwMy42MDMgMCAwIDAtLjYwNS0uNjMyYy0uMzM4LS4wMTItLjYyLjMwMi0uNjA1LjYzMmEuNjE5LjYxOSAwIDAgMCAuNjA1LjYyMi42MS42MSAwIDAgMCAuNjA1LS42MjJ6bS01LjA1Mi0uNTc5bC0uODc4IDEuMDA4aC0xLjMwNmwxLjU1OS0xLjc0NS0xLjU2LTEuNzVoMS4zNTVsLjkwMi45OTcuODc4LS45OThoMS4zMDZsLTEuNTQzIDEuNzQzIDEuNTU5IDEuNzUzaC0xLjM3MWwtLjkwMS0xLjAwOHptLTQuNzAzLS4zNTJ2LS44MjdoMS45MDR2LTEuNTA2bDEuNzI0IDEuOTQ4LTEuNzI0IDEuOTQxdi0xLjU1NmgtMS45MDR6bTEuNTYgMS4zNmgtMy4yVjkuMDQ0aDMuMjI0djEuMDI0SDEzLjc3djEuMTYzaDEuODg4di45NThoLTEuOTA0djEuNTIyaDEuOTA0djEuMDE2em0tNS43MDUtLjY1NWMtLjU0LjAxNy0uODc4LS41NTItLjg3Ny0xLjA0LS4wMS0uNTA3LjMwNy0xLjEyMy44NzgtMS4xMDUuNTc5LS4wMjUuODcxLjYuODQ1IDEuMTAzLjAyMy41MDEtLjI5IDEuMDYyLS44NDYgMS4wNDJ6TTQuNzQzIDEyLjQxYy4wNzYtLjM1OC40MDMtLjY3Ljc4LS42NjNhLjc4OC43ODggMCAwIDEgLjgwMy42NjNINC43NDN6bTE1LjE4Mi41NjRsMS44MTUtMi4wNDdoLTIuMTI1bC0uNzQuODQ0LS43NjMtLjg0NGgtNC4wMzd2LS41NDhoMS45MTJWOC43NDFIMTAuODR2Mi41OGMtLjM2Mi0uNDQ4LS45ODEtLjU1OS0xLjUyNi0uNDkyLS43ODIuMTIzLTEuNDI3Ljc2Mi0xLjYzNCAxLjUxNC0uMjU0LS45NTgtMS4xNzktMS41ODgtMi4xNTctMS41NTQtLjc4MS4wMDktMS42LjM2NS0xLjk4NyAxLjA3MXYtLjgxOGgtMS44N3YtLjloMi4wNDN2LTEuNEgwdjYuMjg3aDEuNjY2di0yLjY0NGgxLjY2NmE3LjU5IDcuNTkgMCAwIDAtLjA4Mi42MjJjLS4wMTMgMS4yMzIgMS4wNDIgMi4yNyAyLjI3NCAyLjIzNmEyLjIwNCAyLjIwNCAwIDAgMCAyLjE1Ny0xLjQzMkg2LjI1NGMtLjE0LjI2OC0uNDQxLjM4LS43My4zNi0uNDU3LjAwOS0uODMtLjQxNy0uODI5LS44NmgyLjkxNGMuMDgzIDEuMDI3Ljk4OCAxLjk2NiAyLjA0MyAxLjk0N2ExLjUzIDEuNTMgMCAwIDAgMS4xOS0uNjM5di40MWg3LjIxNWwuNzU0LS44Ni43NTQuODZoMi4xOTJsLTEuODMyLTIuMDU1eiIvPjwvc3ZnPg==" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">FedEx</span><br><span style="font-size:.7vw;color:var(--pk)">Shipping Invoices (2 Accts)</span></div>
-  <div style="position:absolute;left:4%;bottom:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U3BhY2VzaGlwPC90aXRsZT48cGF0aCBkPSJNMTEuOTk5NyAxLjI1MjljMS4wNDQ1IDAgMS45NTYuNTY4OSAyLjQ0MSAxLjQxMjVsNC41ODgzIDcuOTMxNCA0LjQ1IDcuNjkxNWMuMDQ2Ni4wNzQuMjEwNS4zNTg1LjI3LjQ5MzguMjIxNi40Njc3LjI1MDUuOTQ3Mi4yNTEgMS4xNTk1IDAgMS41NDk2LTEuMjU4NyAyLjgwNTYtMi44MTE2IDIuODA1Ni0uMjk0OSAwLS41NzktLjA0NS0uODQ1Ny0uMTI5bC03LjkwMTEtMi42MDYxYTEuNDA2IDEuNDA2IDAgMCAwLS40NDEzLS4wNzA1IDEuNDEzIDEuNDEzIDAgMCAwLS40NDIuMDcwNUwzLjY1OCAyMi42MTgzbC0uMTYyMy4wNDU2YTIuODM5OCAyLjgzOTggMCAwIDEtLjY4MzguMDgzMWMtMS41NTMxIDAtMi44MTE5LTEuMjU2LTIuODExOS0yLjgwNTYuMDAyLS4yNDMuMDIzNC0uNTUzMy4xNjgtLjk1NzguMDI5NC0uMDkxMS4wNzQzLS4xNzYuMTExNS0uMjY0LjA3MTItLjE0ODcuMTYwNy0uMjg3NS4yNDExLS40MzEzbDQuNDQ5My03LjY5MTYgNC41ODgzLTcuOTMxM2MuNDg1LS44NDM3IDEuMzk3MS0xLjQxMjYgMi40NDE2LTEuNDEyNnoiLz48L3N2Zz4=" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Spaceship</span><br><span style="font-size:.7vw;color:var(--pk)">HK AWB · SF Express</span></div>
-  <div style="position:absolute;left:50%;bottom:2%;transform:translateX(-50%);z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzRBMTU0QiIvPjxjaXJjbGUgY3g9IjciIGN5PSI3IiByPSIyLjUiIGZpbGw9IiNFMDFFNUEiLz48Y2lyY2xlIGN4PSIxNyIgY3k9IjciIHI9IjIuNSIgZmlsbD0iIzM2QzVGMCIvPjxjaXJjbGUgY3g9IjciIGN5PSIxNyIgcj0iMi41IiBmaWxsPSIjMkVCNjdEIi8+PGNpcmNsZSBjeD0iMTciIGN5PSIxNyIgcj0iMi41IiBmaWxsPSIjRUNCMjJFIi8+PC9zdmc+" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">Slack + Google Drive</span><br><span style="font-size:.7vw;color:var(--pk)">Alerts · Invoices · Approvals</span></div>
-  <div style="position:absolute;right:4%;bottom:6%;z-index:5;text-align:center"><div style="width:5vw;height:5vw;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .3vh"><span style="font-size:2.5vw"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzJENUYyRCIvPjx0ZXh0IHg9IjEyIiB5PSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQiIGZvbnQtd2VpZ2h0PSI3MDAiPlhMV01TPC90ZXh0Pjx0ZXh0IHg9IjEyIiB5PSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwuNykiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzLjUiPkdQUzwvdGV4dD48L3N2Zz4=" style="width:2.5vw;height:2.5vw"></span></div><span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1vw;color:#fff">GPS / XLWMS</span><br><span style="font-size:.7vw;color:var(--pk)">UK · EU · MENA Warehouses</span></div>
-</div>
+  <span class="slide-num">03 / 17</span>
 </section>
 
-<!-- GATE: INVENTORY -->
-<section class="s gate-slide" id="g5">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:10%;animation-delay:0s">💰</span><span class="coin" style="left:25%;animation-delay:.7s">🪙</span><span class="coin" style="left:45%;animation-delay:1.4s">💰</span><span class="coin" style="left:65%;animation-delay:.3s">🪙</span><span class="coin" style="left:80%;animation-delay:1.8s">💰</span><span class="coin" style="left:90%;animation-delay:1.1s">🪙</span></div>
-<div class="gate-sparkle" style="top:20%;left:15%;animation-delay:0s"></div>
-<div class="gate-sparkle" style="top:30%;right:20%;animation-delay:.5s"></div>
-<div class="gate-sparkle" style="bottom:25%;left:25%;animation-delay:1s"></div>
-<div class="gate-sparkle" style="top:15%;right:10%;animation-delay:1.5s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 1</div>
-  <div class="gate-title">Inventory</div>
-  <div class="gate-price">Unlock for <span>$49,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s5','g5')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('g6')">🚫 No Thanks</a>
+<!-- ============================================ -->
+<!-- SLIDE 4: EXECUTIVE SUMMARY (NEW)             -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-4">
+  <div class="content flex-col gap-lg text-center" style="align-items: center;">
+    <div>
+      <span class="badge badge-flamingo reveal caption">At a Glance</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">
+        Executive <span class="gradient-text">Summary</span>
+      </h2>
+    </div>
+    <div class="counter-grid reveal reveal-delay-2">
+      <div>
+        <div class="counter" data-target="12" data-suffix="+">0</div>
+        <div class="counter-label">Modules</div>
+      </div>
+      <div>
+        <div class="counter" data-target="5" data-suffix="">0</div>
+        <div class="counter-label">Warehouses</div>
+      </div>
+      <div>
+        <div class="counter" data-target="70" data-suffix="+">0</div>
+        <div class="counter-label">API Integrations</div>
+      </div>
+      <div>
+        <div class="counter" data-target="10" data-suffix="+">0</div>
+        <div class="counter-label">Active Users</div>
+      </div>
+    </div>
+    <p class="reveal reveal-delay-3" style="max-width: 650px; font-size: clamp(0.85rem, 1.4vw, 1.05rem); font-family: var(--font-title); font-weight: 300; color: var(--im8-stone);">
+      From scattered spreadsheets to a unified operations platform — in months, not years.
+    </p>
   </div>
-</div>
+  <span class="slide-num">04 / 17</span>
 </section>
 
-<!-- 5. INVENTORY -->
-<section class="s module-slide" id="s5">
-<div class="lbl a">INVENTORY MODULE</div>
-<h2 class="ttl a">Real-Time Cross-Warehouse Visibility</h2>
-<div class="flow-dia a">
-  <div class="flow-col"><div class="fp">🏢 D365 (HK)</div><div class="fp">📦 Stord (US)</div><div class="fp">🌐 GPS (UK)</div><div class="fp">🏭 XLWMS (EU)</div><div class="flow-label">DATA SOURCES</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Inventory</div><div class="flow-label">UNIFIED VIEW</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--out">📊 Per-SKU Dashboard</div><div class="fp fp--out">🔍 Search & Filter</div><div class="fp fp--out">📈 Stock Alerts</div><div class="flow-label">OUTPUT</div></div>
-</div>
-<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>Before:</strong> 10 min per SKU across 4 platforms → <strong>After:</strong> Instant, one page, all 5 warehouses</span></div>
-
-<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/inventory" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
-</section>
-
-<!-- GATE: SALES -->
-<section class="s gate-slide" id="g6">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:12%;animation-delay:.2s">💰</span><span class="coin" style="left:35%;animation-delay:1s">🪙</span><span class="coin" style="left:55%;animation-delay:.5s">💰</span><span class="coin" style="left:75%;animation-delay:1.6s">🪙</span><span class="coin" style="left:88%;animation-delay:.8s">💰</span></div>
-<div class="gate-sparkle" style="top:18%;left:20%;animation-delay:.3s"></div>
-<div class="gate-sparkle" style="top:35%;right:15%;animation-delay:.8s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 2</div>
-  <div class="gate-title">Sales & Orders</div>
-  <div class="gate-price">Unlock for <span>$39,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s6','g6')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('g7')">🚫 No Thanks</a>
-  </div>
-</div>
-</section>
-
-<!-- 6. SALES & SO -->
-<section class="s module-slide" id="s6">
-<div class="lbl a">SALES & ORDER CONSOLIDATION</div>
-<h2 class="ttl a">From Manual Downloads to Instant Insights</h2>
-<div class="flow-dia a">
-  <div class="flow-col"><div class="fp">🛒 Shopify</div><div class="fp">📦 Stord</div><div class="fp">🏢 D365</div><div class="flow-label">ORDER DATA</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Consolidation</div><div class="flow-label">CROSS-CHECK</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--out">📊 Sales Dashboards</div><div class="fp fp--out">📋 SO Status View</div><div class="fp fp--out">📥 Excel Export</div><div class="flow-label">TEAM VIEWS</div></div>
-</div>
-<div class="g g2 mt1">
-  <div class="glass glass--accent a"><h3>Sales & Usage</h3><p>Pre-built dashboards — SKU consumption, sticks forecast, production planning. Tailored views for Ops, Finance, Procurement.</p></div>
-  <div class="glass glass--accent a"><h3>SO Consolidation</h3><p>One view showing fulfillment gaps and D365 action items. Finance sees payment issues, Ops sees stuck orders.</p></div>
-</div>
-<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>3+ hours saved per week</strong> — no more manual cross-checking across platforms</span></div>
-
-<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/order-consolidation" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
-</section>
-
-<!-- GATE: DELIVERY -->
-<section class="s gate-slide" id="g7">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:8%;animation-delay:.4s">💰</span><span class="coin" style="left:30%;animation-delay:1.2s">🪙</span><span class="coin" style="left:50%;animation-delay:.1s">💰</span><span class="coin" style="left:70%;animation-delay:1.5s">🪙</span><span class="coin" style="left:92%;animation-delay:.6s">💰</span></div>
-<div class="gate-sparkle" style="top:22%;right:25%;animation-delay:.2s"></div>
-<div class="gate-sparkle" style="bottom:20%;left:18%;animation-delay:1.2s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 3</div>
-  <div class="gate-title">Delivery Performance</div>
-  <div class="gate-price">Unlock for <span>$29,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s7','g7')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('g8')">🚫 No Thanks</a>
-  </div>
-</div>
-</section>
-
-<!-- 7. DELIVERY -->
-<section class="s module-slide" id="s7">
-<div class="lbl a">DELIVERY PERFORMANCE</div>
-<h2 class="ttl a">Live Tracking & SLA Intelligence</h2>
-<div class="flow-dia a">
-  <div class="flow-col"><div class="fp">📡 AfterShip API</div><div class="flow-label">TRACKING</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Delivery</div><div class="flow-label">ANALYTICS</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--out">📊 KPI Dashboard</div><div class="fp fp--out">🗺️ Country Heatmap</div><div class="fp fp--out">📄 IM8 PDF Report</div><div class="flow-label">INSIGHTS</div></div>
-</div>
-<div class="g g2 mt1">
-  <div class="glass glass--accent a"><h3>Live KPIs</h3><p>On-time rate, transit times, delivery success — filterable by warehouse, carrier, country, date range.</p></div>
-  <div class="glass glass--accent a"><h3>Country Analytics</h3><p>Heatmap by destination. Top 30 countries by volume. Spot bottlenecks per region.</p></div>
-  <div class="glass glass--accent a"><h3>Auto-Sync</h3><p>Continuous AfterShip sync — always latest status across all carriers. No manual pulls.</p></div>
-  <div class="glass glass--accent a"><h3>Branded Reports</h3><p>2-page A4 landscape PDF — KPIs + destination chart + country table. Server-side generated.</p></div>
-</div>
-
-<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/outbound/delivery" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
-</section>
-
-<!-- GATE: GIFTING -->
-<section class="s gate-slide" id="g8">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:15%;animation-delay:.9s">🎁</span><span class="coin" style="left:40%;animation-delay:.3s">💰</span><span class="coin" style="left:60%;animation-delay:1.3s">🪙</span><span class="coin" style="left:82%;animation-delay:.5s">🎁</span></div>
-<div class="gate-sparkle" style="top:25%;left:30%;animation-delay:.6s"></div>
-<div class="gate-sparkle" style="bottom:30%;right:22%;animation-delay:1.1s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 4</div>
-  <div class="gate-title">Gifting</div>
-  <div class="gate-price">Unlock for <span>$19,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s8','g8')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('g9')">🚫 No Thanks</a>
-  </div>
-</div>
-</section>
-
-<!-- 8. GIFTING -->
-<section class="s module-slide" id="s8">
-<div class="lbl a">GIFTING MODULE</div>
-<h2 class="ttl a">Self-Serve Gifting with Auto Fulfilment</h2>
-<div class="flow-dia a">
-  <div class="flow-col"><div class="fp">👤 Staff Submits</div><div class="flow-label">REQUEST</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Gifting</div><div class="flow-label">ROUTING</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp">📦 Stord (US)</div><div class="fp">🚀 Spaceship (HK)</div><div class="fp">🏭 XLWMS (UK/EU)</div><div class="flow-label">WAREHOUSES</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--green">📍 Tracking #</div><div class="fp fp--slack">💬 Slack Alert</div><div class="flow-label">NOTIFY</div></div>
-</div>
-<div class="g g2 mt1">
-  <div class="feat a"><div class="feat-h feat-h--d">🎁 FOR SUBMITTERS</div><div class="feat-b"><ul><li>Simple form — submit in under a minute</li><li>Track status and approval in real-time</li><li>Tracking number delivered automatically</li><li>View all past requests</li></ul></div></div>
-  <div class="feat a"><div class="feat-h feat-h--r">⚙️ FOR OPS</div><div class="feat-b"><ul><li>Auto-routes to correct warehouse</li><li>Syncs order + tracking with APIs</li><li>Slack notifications for approvals</li><li>Inventory check prevents OOS</li></ul></div></div>
-</div>
-<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>5+ min saved per gift</strong> × dozens monthly — no manual placement</span></div>
-
-<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/gifting/manage" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
-</section>
-
-<!-- GATE: SHIPPING (ALREADY UNLOCKED) -->
-<section class="s gate-slide" id="g9">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:18%;animation-delay:.1s">🎉</span><span class="coin" style="left:38%;animation-delay:1.1s">✨</span><span class="coin" style="left:58%;animation-delay:.7s">🎉</span><span class="coin" style="left:78%;animation-delay:1.4s">✨</span><span class="coin" style="left:88%;animation-delay:.4s">🎉</span></div>
-<div class="gate-sparkle" style="top:20%;right:18%;animation-delay:.4s"></div>
-<div class="gate-sparkle" style="bottom:22%;left:12%;animation-delay:.9s"></div>
-<div class="gate-sparkle" style="top:30%;left:30%;animation-delay:.7s"></div>
-<div class="gate-sparkle" style="bottom:15%;right:25%;animation-delay:1.2s"></div>
-<div class="gate">
-  <div class="gate-lock" style="animation:none;filter:drop-shadow(0 0 40px rgba(74,222,128,.5))">🔓</div>
-  <div class="gate-module" style="color:var(--gn)">MODULE 5</div>
-  <div class="gate-title">Shipping & Invoices</div>
-  <div style="font-family:'Rajdhani',sans-serif;font-size:2vw;color:#4ADE80;font-weight:700;letter-spacing:.2em;margin-top:2vh">🎊 ALREADY UNLOCKED — CONGRATULATIONS! 🎊</div>
-  <div style="font-family:'Spectral',serif;font-size:1.3vw;color:var(--st);margin-top:1vh;font-style:italic">Thank you for your purchase!</div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" style="background:linear-gradient(135deg,#16A34A,#4ADE80);box-shadow:0 0 30px rgba(74,222,128,.5)" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">✅ View Module</a>
-  </div>
-</div>
-</section>
-
-<!-- 9. SHIPPING -->
-<section class="s module-slide" id="s9">
-<div class="lbl a">SHIPPING & INVOICES</div>
-<h2 class="ttl a">Automated Cost Tracking</h2>
-<div class="flow-dia a">
-  <div class="flow-col"><div class="fp">📁 Google Drive</div><div class="flow-label">INVOICES</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp">📊 Stord (xlsx)</div><div class="fp">📄 FedEx (PDF)</div><div class="fp">📊 Rexville (xlsx)</div><div class="flow-label">PARSE</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Shipping</div><div class="flow-label">VALIDATE</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--green">✅ Rate Check</div><div class="fp fp--out">🔍 Duplicates</div><div class="fp fp--slack">💬 Slack Alert</div><div class="flow-label">OUTPUT</div></div>
-</div>
-<div class="g g2 mt1">
-  <div class="glass glass--accent a"><h3>Auto-Ingest (Every 4h)</h3><p>Cron pulls from Drive, parses each carrier's unique format, loads to DB.</p></div>
-  <div class="glass glass--accent a"><h3>Duplicate Detection</h3><p>True duplicates vs adjustments. Slack alerts with $ amounts.</p></div>
-  <div class="glass glass--accent a"><h3>Rate Card Validation</h3><p>Cross-checks charges against contracted rates. Flags overcharges.</p></div>
-  <div class="glass glass--accent a"><h3>Cost Analytics</h3><p>Breakdown by carrier, warehouse, SKU. Discrepancy reports + audit trail.</p></div>
-</div>
-<div class="ban mt1 a"><span class="ic">⏱️</span><span><strong>3+ hours saved per week</strong> — fully automated pipeline</span></div>
-
-<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/shipping" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
-</section>
-
-<!-- GATE: STORD & INBOUND -->
-<section class="s gate-slide" id="g10">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:20%;animation-delay:.6s">🏭</span><span class="coin" style="left:42%;animation-delay:1.3s">💰</span><span class="coin" style="left:62%;animation-delay:.2s">🪙</span><span class="coin" style="left:85%;animation-delay:1s">🏭</span></div>
-<div class="gate-sparkle" style="top:28%;left:22%;animation-delay:.7s"></div>
-<div class="gate-sparkle" style="bottom:18%;right:28%;animation-delay:1.3s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 6</div>
-  <div class="gate-title">Stord & Inbound</div>
-  <div class="gate-price">Unlock for <span>$44,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s10','g10')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('g11')">🚫 No Thanks</a>
-  </div>
-</div>
-</section>
-
-<!-- 10. STORD & INBOUND -->
-<section class="s" id="s10">
-<div class="lbl a">STORD OPERATIONS & INBOUND</div>
-<h2 class="ttl a">Better Visibility Than the Portals</h2>
-<div class="flow-dia a">
-  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>Inbound</div><div class="flow-label">CREATE</div></div>
-  <span class="farr">⇄</span>
-  <div class="flow-col"><div class="fp">📦 Stord API</div><div class="flow-label">SYNC</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--out">🏭 ATL</div><div class="fp fp--out">🏭 RENO</div><div class="fp fp--out">🏭 AMS</div><div class="flow-label">FACILITIES</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--green">✅ Receipts</div><div class="fp fp--slack">💬 Summary</div><div class="flow-label">STATUS</div></div>
-</div>
-<div class="g g2 mt1">
-  <div class="feat a"><div class="feat-h feat-h--d">⚙️ WORK ORDERS</div><div class="feat-b"><ul><li>All production/kitting orders in one view</li><li>Full detail: ASN, items, quantities, status</li><li>Better than Stord's own portal</li><li>Daily Slack summary at 9:30 AM HKT</li></ul></div></div>
-  <div class="feat a"><div class="feat-h feat-h--d">🏭 INBOUND / PO</div><div class="feat-b"><ul><li>POs, Transfer Orders, Cross-Region SO+POs</li><li>Auto-sync with Stord API instantly</li><li>2-way receipt: RECEIVED / SHORT / OVER</li><li>6-hourly cron syncs status back</li></ul></div></div>
-</div>
-</section>
-
-<!-- GATE: DEMAND FORECAST -->
-<section class="s gate-slide" id="g11">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:14%;animation-delay:.3s">📊</span><span class="coin" style="left:36%;animation-delay:1.5s">💰</span><span class="coin" style="left:56%;animation-delay:.8s">🪙</span><span class="coin" style="left:76%;animation-delay:.1s">📊</span><span class="coin" style="left:90%;animation-delay:1.2s">💰</span></div>
-<div class="gate-sparkle" style="top:16%;left:28%;animation-delay:.5s"></div>
-<div class="gate-sparkle" style="bottom:24%;right:16%;animation-delay:1s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 7</div>
-  <div class="gate-title">Demand Forecast</div>
-  <div class="gate-price">Unlock for <span>$99,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s11','g11')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('g12')">🚫 No Thanks</a>
-  </div>
-</div>
-</section>
-
-<!-- 11. DEMAND FORECAST & RUNWAY -->
-<section class="s" id="s11">
-<div class="lbl a">DEMAND FORECAST & RUNWAY</div>
-<h2 class="ttl a">Predicting Demand, Preventing Stockouts</h2>
-<div class="flow-dia a">
-  <div class="flow-col"><div class="fp">📊 SKIO Subs</div><div class="fp">🛒 Shopify OTP</div><div class="fp">📅 Marketing Events</div><div class="flow-label">DEMAND SIGNALS</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--hub">IM8 HUB<br>V4 Forecast</div><div class="flow-label">AI MODEL</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--out">📈 FG Demand Table</div><div class="fp fp--out">🧱 BOM Explosion</div><div class="flow-label">FORECAST</div></div>
-  <span class="farr">→</span>
-  <div class="flow-col"><div class="fp fp--green">✅ RM Runway</div><div class="fp fp--green">✅ Stockout Alerts</div><div class="fp fp--out">📋 PO Recommendations</div><div class="flow-label">ACTION</div></div>
-</div>
-<div class="g g3 mt1">
-  <div class="glass glass--accent a"><h3>V4 Forecast Engine</h3><p>EWMA + day-of-week seasonality + trend factor + event overlays. Multi-cycle subscription projection (6 billing cycles) with empirical survival rates. Auto-backtest with WAPE, bias, hit rate alerts.</p></div>
-  <div class="glass glass--accent a"><h3>RM / CON / FG Runway</h3><p>BOM explosion maps FG demand → raw materials. Calculates days-of-cover per component per warehouse. 5-tier action cascade: No Action → Expedite → Vendor Delivery → Internal Transfer → Create POs. Risk color-coded RED/AMBER/GREEN.</p></div>
-  <div class="glass glass--accent a"><h3>Campaign Calendar</h3><p>Register promotions, launches, influencer pushes with lift factors (1.2×–2.0×) and additive units. Demand calendar with daily breakdown by product line. Flavor velocity tracking and launch performance monitoring.</p></div>
-</div>
-<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/demand-forecast" target="_blank" style="font-family:'Rajdhani',sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
-
-<div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/stord-operations" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
-</section>
-
-<!-- GATE: MORE MODULES -->
-<section class="s gate-slide" id="g12">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="gate-coins"><span class="coin" style="left:10%;animation-delay:.5s">✨</span><span class="coin" style="left:32%;animation-delay:1.1s">💰</span><span class="coin" style="left:52%;animation-delay:.2s">🪙</span><span class="coin" style="left:72%;animation-delay:1.6s">✨</span><span class="coin" style="left:88%;animation-delay:.7s">💰</span></div>
-<div class="gate-sparkle" style="top:20%;right:20%;animation-delay:.3s"></div>
-<div class="gate-sparkle" style="bottom:28%;left:15%;animation-delay:1.4s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">BONUS PACK</div>
-  <div class="gate-title">More Modules</div>
-  <div class="gate-price">Unlock for <span>$9,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s12','g12')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('s13')">🚫 No Thanks</a>
-  </div>
-</div>
-</section>
-
-<!-- 12. MORE MODULES -->
-<section class="s" id="s11">
-<div class="lbl a">MORE MODULES</div>
-<h2 class="ttl a">Additional Modules Powering Operations</h2>
-<div class="g g2 mt1">
-  <div class="glass glass--accent glass--glow a"><div class="ico">📈</div><h3>Demand Forecast</h3><p>3-cycle SKIO projection (90 days). RM & Concentrate runway per warehouse. Campaign calendar. Per-flavor trends. BOM join for raw material needs.</p></div>
-  <div class="glass glass--accent glass--glow a"><div class="ico">🧱</div><h3>BOM Master</h3><p>Version-controlled with draft→publish. Visual diff between versions. Risk analysis for single-source components. GLOBAL/UK/EU regions.</p></div>
-  <div class="glass glass--accent glass--glow a"><div class="ico">📅</div><h3>HK Fulfilment</h3><p>Batch AWB via Spaceship Pro. Auto-buy cron 9AM HKT. Carrier-split PDFs. D365 SKU mapping. Excel export with cover page.</p></div>
-  <div class="glass glass--accent glass--glow a"><div class="ico">🗄️</div><h3>Master Data Hub</h3><p>SKU catalog (controls forecast). Product Bible. Vendor management. Geographic warehouse routing — auto-determines serving warehouse.</p></div>
-</div>
-</section>
-
-<!-- 12. AI -->
-<section class="s s--accent" id="s13">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="lbl a">AI-POWERED DEVELOPMENT</div>
-<h2 class="ttl a">How AI Accelerated Everything</h2>
-<div class="g g2 mt1">
-  <div class="ai-card a"><div class="ai-badge">AI CODING ASSISTANT</div><h3>Claude Code — AI Pair Programmer</h3><p>Built with <strong style="color:#fff">Claude Code (Anthropic)</strong> as AI pair-programmer. Claude reads the full codebase, understands architecture, and generates production-ready TypeScript, SQL, React — complete features end-to-end.</p></div>
-  <div class="ai-card a"><div class="ai-badge">10× DEVELOPMENT SPEED</div><h3>6 Weeks Instead of 6 Months</h3><p>What typically needs <strong style="color:#fff">3-5 engineers over 6+ months</strong> — built by 1 engineer in 6 weeks. AI handles boilerplate, complex queries, API integrations, UI components, debugging.</p></div>
-</div>
-<div class="g g3 mt1">
-  <div class="glass glass--accent a"><h3>🤖 AI-Generated Code</h3><p>Full-stack: Next.js pages, API routes, SQL, React, Tailwind — all AI-generated with human review.</p></div>
-  <div class="glass glass--accent a"><h3>📊 AI-Built Pipelines</h3><p>Invoice parsers for 3 carriers, cost validators, duplicate detectors, cron jobs — AI wrote each.</p></div>
-  <div class="glass glass--accent a"><h3>🔄 AI Integrations</h3><p>7+ APIs (Stord, Shopify, AfterShip, FedEx, D365, Spaceship, XLWMS) — AI handles contracts + errors.</p></div>
-</div>
-</section>
-
-<!-- 14. TIME SAVINGS -->
-<section class="s" id="s14">
-<div class="lbl a">TIME SAVED</div>
-<h2 class="ttl a">Hours Recovered, Every Single Week</h2>
-<table class="tbl mt1 a">
-  <thead><tr><th>Module</th><th>Before</th><th>After — IM8 Hub</th><th>Time Saved</th></tr></thead>
-  <tbody>
-    <tr><td class="tb">Inventory Checks</td><td class="tp">10 min / SKU / check</td><td class="tg">Instant — one page</td><td class="tb">Hours / week</td></tr>
-    <tr><td class="tb">Shipping Invoices</td><td class="tp">3+ hours manual</td><td class="tg">Fully automated</td><td class="tb">3+ hrs / week</td></tr>
-    <tr><td class="tb">SO Consolidation</td><td class="tp">3+ hours cross-check</td><td class="tg">One-click view</td><td class="tb">3+ hrs / week</td></tr>
-    <tr><td class="tb">Gifting</td><td class="tp">5+ min per gift</td><td class="tg">Auto-routed</td><td class="tb">Hours / month</td></tr>
-    <tr><td class="tb">Sales Analysis</td><td class="tp">Manual Shopify + Excel</td><td class="tg">Pre-built dashboards</td><td class="tb">Hours / week</td></tr>
-    <tr><td class="tb">Delivery Reports</td><td class="tp">Manual compile</td><td class="tg">Live + PDF</td><td class="tb">Hours / week</td></tr>
-  </tbody>
-</table>
-<!-- Time Savings Bar Chart -->
-<div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5vh 2vw">
-<svg viewBox="0 0 500 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-  <style>text{font-family:'Raleway',sans-serif;fill:rgba(255,255,255,.75);font-size:11px}.val{fill:#4ADE80;font-weight:700;font-size:12px}.label{fill:rgba(255,255,255,.5);font-size:10px}</style>
-  <text x="0" y="20">Inventory</text><rect x="120" y="8" width="280" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="8" width="40" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="22" class="val">~85% faster</text>
-  <text x="0" y="58">Shipping</text><rect x="120" y="46" width="250" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="46" width="0" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="60" class="val">3+ hrs saved</text>
-  <text x="0" y="96">SO Consol.</text><rect x="120" y="84" width="250" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="84" width="0" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="98" class="val">3+ hrs saved</text>
-  <text x="0" y="134">Gifting</text><rect x="120" y="122" width="200" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="122" width="30" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="136" class="val">5+ min/gift</text>
-  <text x="0" y="172">Sales</text><rect x="120" y="160" width="220" height="18" rx="4" fill="rgba(164,0,17,.5)"/><rect x="120" y="160" width="20" height="18" rx="4" fill="#4ADE80" opacity=".7"/><text x="425" y="174" class="val">Hours saved</text>
-  <rect x="120" y="210" width="12" height="12" rx="2" fill="rgba(164,0,17,.5)"/><text x="137" y="221" class="label">Before (manual time)</text>
-  <rect x="270" y="210" width="12" height="12" rx="2" fill="#4ADE80" opacity=".7"/><text x="287" y="221" class="label">After (IM8 Hub)</text>
-</svg>
-</div>
-<div class="tbar a">Estimated 10+ hours saved per week across all modules</div>
-</section>
-
-<!-- 15. HOW WE BUILT -->
-<section class="s" id="s15">
-<div class="lbl a">HOW WE BUILT IT</div>
-<h2 class="ttl a">6 Weeks. 1 Engineer + AI. Full Platform.</h2>
-<div class="g g4 mt1">
-  <div class="stat stat--w a"><div class="n ctr" data-target="6" data-prefix="~" data-suffix="">0</div><div class="l">Weeks</div><div class="sm">From March 2026</div></div>
-  <div class="stat stat--w a"><div class="n ctr" data-target="1" data-suffix="">0</div><div class="l">Engineer</div><div class="sm">+ AI pair programmer</div></div>
-  <div class="stat stat--w a"><div class="n ctr" data-target="12" data-suffix="+">0</div><div class="l">Modules</div><div class="sm">Production-ready</div></div>
-  <div class="stat stat--w a"><div class="n ctr" data-target="70" data-suffix="+">0</div><div class="l">Endpoints</div><div class="sm">Complete API</div></div>
-</div>
-<!-- Development Timeline -->
-<div class="a mt1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.2vh 2vw">
-<svg viewBox="0 0 600 85" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-  <style>text{font-family:'Rajdhani',sans-serif;fill:rgba(255,255,255,.7);font-size:10px}.week{fill:#fff;font-size:11px;font-weight:600}</style>
-  <line x1="30" y1="30" x2="570" y2="30" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
-  <line x1="30" y1="30" x2="570" y2="30" stroke="#A40011" stroke-width="3"/>
-  <circle cx="30" cy="30" r="6" fill="#A40011"/><text x="30" y="52" text-anchor="middle" class="week">Wk 1</text><text x="30" y="65" text-anchor="middle">Core Setup</text>
-  <circle cx="120" cy="30" r="6" fill="#A40011"/><text x="120" y="52" text-anchor="middle" class="week">Wk 2</text><text x="120" y="65" text-anchor="middle">Inventory</text>
-  <circle cx="210" cy="30" r="6" fill="#A40011"/><text x="210" y="52" text-anchor="middle" class="week">Wk 3</text><text x="210" y="65" text-anchor="middle">Sales + SO</text>
-  <circle cx="300" cy="30" r="6" fill="#A40011"/><text x="300" y="52" text-anchor="middle" class="week">Wk 4</text><text x="300" y="65" text-anchor="middle">Gifting</text>
-  <circle cx="390" cy="30" r="6" fill="#A40011"/><text x="390" y="52" text-anchor="middle" class="week">Wk 5</text><text x="390" y="65" text-anchor="middle">Shipping</text>
-  <circle cx="480" cy="30" r="6" fill="#A40011"/><text x="480" y="52" text-anchor="middle" class="week">Wk 6</text><text x="480" y="65" text-anchor="middle">Forecast+BOM</text>
-  <circle cx="570" cy="30" r="8" fill="#4ADE80" stroke="#fff" stroke-width="2"/><text x="570" y="52" text-anchor="middle" class="week" style="fill:#4ADE80">LIVE</text><text x="570" y="65" text-anchor="middle">Production</text>
-  <text x="300" y="12" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" style="letter-spacing:.15em">DEVELOPMENT TIMELINE — MARCH TO APRIL 2026</text>
-</svg>
-</div>
-<p class="cap mt1 a">TECH STACK</p>
-<div class="g g2 mt1">
-  <div class="tpill a"><strong>Frontend:</strong> Next.js 15, React, TypeScript, Tailwind, shadcn/ui</div>
-  <div class="tpill a"><strong>Backend:</strong> Node.js, PostgreSQL (Supabase), direct SQL</div>
-  <div class="tpill a"><strong>Integrations:</strong> Stord, Shopify, AfterShip, FedEx, D365, Spaceship, XLWMS</div>
-  <div class="tpill a"><strong>Infra:</strong> Railway (auto-deploy), Google Drive API, Slack webhooks</div>
-  <div class="tpill a"><strong>Security:</strong> Google SSO, RBAC (6 roles), audit trail</div>
-  <div class="tpill a"><strong>AI:</strong> Claude Code — 10× velocity, production-quality output</div>
-</div>
-</section>
-
-<!-- 16. WHO USES IT -->
-<section class="s" id="s16">
-<div class="lbl a">WHO USES IT</div>
-<h2 class="ttl a">Serving Multiple Teams Daily</h2>
-<div class="a" style="display:flex;align-items:center;justify-content:center;gap:3vw;margin-top:1vh">
-  <!-- Donut chart -->
-  <div style="width:12vw;flex-shrink:0">
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="25"/>
-      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(164,0,17,.7)" stroke-width="25" stroke-dasharray="264 176" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
-      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,150,147,.6)" stroke-width="25" stroke-dasharray="72 368" stroke-dashoffset="-264" transform="rotate(-90 100 100)"/>
-      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(225,203,185,.5)" stroke-width="25" stroke-dasharray="72 368" stroke-dashoffset="-336" transform="rotate(-90 100 100)"/>
-      <text x="100" y="92" text-anchor="middle" font-size="28" font-weight="700" fill="#fff" font-family="'Cormorant Garamond',serif">10+</text>
-      <text x="100" y="118" text-anchor="middle" font-size="13" fill="rgba(255,255,255,.5)" font-family="'Rajdhani',sans-serif">DAILY USERS</text>
-    </svg>
-    <!-- Legend -->
-    <div style="display:flex;flex-direction:column;gap:.3vh;margin-top:.5vh">
-      <div style="display:flex;align-items:center;gap:.3vw"><div style="width:10px;height:10px;border-radius:2px;background:rgba(164,0,17,.7)"></div><span style="font-size:.8vw;color:rgba(255,255,255,.6)">Ops (60%)</span></div>
-      <div style="display:flex;align-items:center;gap:.3vw"><div style="width:10px;height:10px;border-radius:2px;background:rgba(255,150,147,.6)"></div><span style="font-size:.8vw;color:rgba(255,255,255,.6)">Finance (20%)</span></div>
-      <div style="display:flex;align-items:center;gap:.3vw"><div style="width:10px;height:10px;border-radius:2px;background:rgba(225,203,185,.5)"></div><span style="font-size:.8vw;color:rgba(255,255,255,.6)">Procurement (20%)</span></div>
+<!-- ============================================ -->
+<!-- SLIDE 5: KEY IMPACT (moved from 13)          -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-5">
+  <div class="content flex-col gap-md">
+    <div class="text-center">
+      <span class="badge badge-green reveal caption">Impact</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">What IM8 Hub <span class="gradient-text">Delivers</span></h2>
+    </div>
+    <div class="flex-col gap-sm reveal reveal-delay-2" style="max-width: 750px; margin: 0 auto;">
+      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
+        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">📊</span>
+        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Eliminated manual spreadsheet tracking</strong> — all data flows automatically</p>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
+        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">🌍</span>
+        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Real-time visibility across 5 warehouses</strong> — globally, in one view</p>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
+        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">💰</span>
+        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Automated invoice validation</strong> — catches overcharges in hours, not weeks</p>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
+        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">⚡</span>
+        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Webhook-driven data</strong> — no manual syncing, always current</p>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
+        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">🛡️</span>
+        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">One-click BOM risk assessment</strong> — proactive stockout prevention</p>
+      </div>
     </div>
   </div>
-  <!-- User cards beside chart -->
-  <div style="flex:1">
-<div class="g g4">
-  <div class="ucard a"><div class="av">⚙️</div><h3>Operations (6)</h3><div class="rl">Power Users</div><div class="sep"></div><p>Inventory, fulfillment, gifting, work orders, delivery, inbound, daily summary</p></div>
-  <div class="ucard a"><div class="av">💰</div><h3>Finance (2)</h3><div class="rl">Cost Control</div><div class="sep"></div><p>Invoice reconciliation, cost analytics, duplicates, SO consolidation</p></div>
-  <div class="ucard a"><div class="av">📋</div><h3>Procurement (2)</h3><div class="rl">Supply Chain</div><div class="sep"></div><p>BOM, vendors, PO creation, inbound receipts, RM runway</p></div>
-  <div class="ucard a"><div class="av">🎁</div><h3>All Staff</h3><div class="rl">Company-Wide</div><div class="sep"></div><p>Self-serve gifting, product quiz, request tracking</p></div>
-</div>
-  </div>
-</div>
+  <span class="slide-num">05 / 17</span>
 </section>
 
-<!-- 17. COST -->
-<section class="s s--accent" id="s17">
-<div class="lbl a">COST ANALYSIS</div>
-<h2 class="ttl a">The Build vs. Buy Equation</h2>
-<div class="a" style="display:flex;align-items:center;gap:2vw;margin-top:1.5vh">
-  <!-- Cost comparison chart -->
-  <div style="width:28vw;flex-shrink:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5vh 1.5vw">
-    <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-      <style>text{font-family:'Raleway',sans-serif;fill:rgba(255,255,255,.75)}.big{font-family:'Cormorant Garamond',serif;font-weight:700}</style>
-      <rect x="60" y="20" width="120" height="150" rx="8" fill="rgba(164,0,17,.4)" stroke="rgba(164,0,17,.6)" stroke-width="1"/>
-      <text x="120" y="100" text-anchor="middle" font-size="26" class="big" fill="#FF9693">$400K</text>
-      <text x="120" y="125" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.4)">avg estimate</text>
-      <text x="120" y="190" text-anchor="middle" font-size="12" fill="rgba(255,255,255,.6)">Traditional</text>
-      <text x="120" y="208" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)">3-5 engineers × 6mo</text>
-      <rect x="220" y="130" width="120" height="40" rx="8" fill="rgba(74,222,128,.2)" stroke="rgba(74,222,128,.4)" stroke-width="1"/>
-      <text x="280" y="157" text-anchor="middle" font-size="20" class="big" fill="#4ADE80">~90%↓</text>
-      <text x="280" y="190" text-anchor="middle" font-size="12" fill="rgba(255,255,255,.6)">AI-Powered</text>
-      <text x="280" y="208" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)">1 engineer × 6wk</text>
-      <text x="195" y="85" text-anchor="middle" font-size="16" fill="rgba(255,255,255,.2)">→</text>
-    </svg>
+<!-- ============================================ -->
+<!-- SLIDE 6: ARCHITECTURE                        -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-6">
+  <div class="content flex-col gap-md">
+    <div class="text-center">
+      <span class="badge badge-stone reveal caption">Architecture</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">How It All Connects</h2>
+    </div>
+    <div class="flow reveal reveal-delay-2" style="margin-top: clamp(0.3rem, 1vh, 0.5rem);">
+      <div class="flow-node"><div class="icon">🛒</div><div class="label">Shopify</div><div class="sub">Orders & Products</div></div>
+      <div class="flow-node"><div class="icon">📦</div><div class="label">Stord</div><div class="sub">Inventory & 3PL</div></div>
+      <div class="flow-node"><div class="icon">🏭</div><div class="label">D365</div><div class="sub">Production</div></div>
+      <div class="flow-node"><div class="icon">🔄</div><div class="label">Skio</div><div class="sub">Subscriptions</div></div>
+    </div>
+    <div class="text-center reveal reveal-delay-3" style="font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--im8-flamingo); opacity: 0.4;">▼</div>
+    <div class="flow reveal reveal-delay-3">
+      <div class="flow-node flow-center pulse-glow" style="min-width: clamp(140px, 20vw, 220px); padding: clamp(1rem, 2vh, 1.5rem);">
+        <svg style="height: clamp(1.2rem, 2.5vh, 1.8rem); fill: var(--im8-flamingo); margin-bottom: 0.3rem;"><use href="#im8-logo"/></svg>
+        <div class="label gradient-text" style="font-size: clamp(0.9rem, 1.5vw, 1.1rem); font-weight: 700;">Hub</div>
+        <div class="sub" style="color: var(--text-secondary);">Unified Dashboard</div>
+      </div>
+    </div>
+    <div class="text-center reveal reveal-delay-4" style="font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--im8-flamingo); opacity: 0.4;">▼</div>
+    <div class="flow reveal reveal-delay-4">
+      <div class="flow-node"><div class="icon">💬</div><div class="label">Slack Alerts</div><div class="sub">Real-time notifications</div></div>
+      <div class="flow-node"><div class="icon">📊</div><div class="label">Analytics</div><div class="sub">Charts & KPIs</div></div>
+      <div class="flow-node"><div class="icon">⚠️</div><div class="label">Risk Flags</div><div class="sub">Proactive alerts</div></div>
+    </div>
   </div>
-  <!-- Detail cards -->
-  <div style="flex:1">
-<div class="g g2">
-  <div class="glass glass--accent glass--glow a"><h3>💰 Traditional Approach</h3><p style="font-size:1.1vw;color:rgba(255,255,255,.7);margin-top:.5vh">• 2-3 Full-stack engineers × 6 months<br>• 1 Designer × 3 months<br>• 1 Project manager × 6 months<br>• External API consultants<br><br><strong style="color:var(--pk);font-size:1.25vw">Estimated: $300K–$500K+</strong></p></div>
-  <div class="glass glass--accent glass--glow a"><h3>🚀 AI-Powered (What We Did)</h3><p style="font-size:1.1vw;color:rgba(255,255,255,.7);margin-top:.5vh">• 1 Engineer × 6 weeks<br>• Claude Code AI subscription<br>• Railway hosting (minimal)<br>• Supabase database (existing)<br><br><strong style="color:var(--gn);font-size:1.25vw">90%+ cost reduction</strong></p></div>
-</div>
-  </div>
-</div>
-<div class="tbar a" style="margin-top:1.5vh">AI-powered development: faster delivery, lower cost, same production quality</div>
+  <span class="slide-num">06 / 17</span>
 </section>
 
-<!-- 18. ROADMAP -->
-<section class="s" id="s18">
-<div class="lbl a">WHAT'S NEXT</div>
-<h2 class="ttl a">Continuous Improvement</h2>
-<div class="g g3 mt2">
-  <div class="rcard a"><div class="rbadge rb-now">NOW</div><h3>Live & Growing</h3><div class="rsep"></div><ul><li>12+ modules, 10+ daily users</li><li>Automated pipelines 24/7</li><li>Google SSO + 6-tier RBAC</li><li>Staging + Production</li></ul></div>
-  <div class="rcard a"><div class="rbadge rb-next">NEXT</div><h3>Expanding Scope</h3><div class="rsep"></div><ul><li>Full PO management + allocation</li><li>Forecast with churn modelling</li><li>More carrier integrations</li><li>Deeper D365 sync</li></ul></div>
-  <div class="rcard a"><div class="rbadge rb-fut">FUTURE</div><h3>Platform Vision</h3><div class="rsep"></div><ul><li>AI-powered demand intelligence</li><li>Cross-team automation</li><li>Full supply chain visibility</li><li>Mobile dashboards</li></ul></div>
-</div>
-</section>
-
-<!-- 19. CLOSING -->
-<section class="s" id="s19">
-<div class="blob blob-1"></div><div class="blob blob-2"></div>
-<div class="topline"></div><div class="botline"></div>
-<div style="text-align:center;margin:auto 0">
-  <div style="width:32px;height:32px;background:var(--rd);transform:rotate(45deg);margin:0 auto 1vh;box-shadow:0 0 16px rgba(164,0,17,.4)" class="r"></div>
-  <div class="r d1" style="display:flex;justify-content:center;margin-bottom:.3vh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" style="width:20vw;height:auto"><path fill="#fff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7Z"/></svg></div>
-  <p class="r d1" style="font-family:'Rajdhani',sans-serif;font-size:1.4vw;font-weight:600;letter-spacing:.4em;color:var(--pk);text-transform:uppercase">HUB</p>
-  <div style="width:11vw;height:2px;background:rgba(225,203,185,.3);margin:1vh auto" class="r d2"></div>
-  <p class="r d3" style="font-family:'Spectral',serif;font-size:1.8vw;color:var(--pk);margin-top:.8vh">Built in 6 weeks. Saving 10+ hours every week.</p>
-  <p class="r d4" style="font-style:italic;color:var(--st);font-size:1.2vw;margin-top:.4vh">One engineer + AI replacing an entire development team's output.</p>
-  <div style="max-width:50vw;margin:1.5vh auto 0">
-    <div class="tk r d4"><span class="c">✓</span><span>12+ modules serving Ops, Finance, Procurement & all staff</span></div>
-    <div class="tk r d5"><span class="c">✓</span><span>5 warehouses unified — Stord, D365, GPS, Spaceship, XLWMS</span></div>
-    <div class="tk r d5"><span class="c">✓</span><span>AI-powered development — 90%+ cost reduction vs traditional</span></div>
+<!-- ============================================ -->
+<!-- SLIDE 7: MASTER DATA                         -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-7">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-flamingo reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">Master Data</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Single source of truth for all product data</p>
+    </div>
+    <div class="grid-2 reveal reveal-delay-3">
+      <div class="card">
+        <h3><span class="flamingo">SKU Master</span></h3>
+        <ul class="bullet-list" style="margin-top: 0.5rem;">
+          <li>Product catalog synced from Shopify</li>
+          <li>Active/inactive status controls forecast inclusion</li>
+          <li>Product groups, flavors, warehouse routing</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="stone">Bill of Materials</span></h3>
+        <ul class="bullet-list" style="margin-top: 0.5rem;">
+          <li>Version-controlled BOM with draft workflow</li>
+          <li>Side-by-side version comparison</li>
+          <li>FG + RM component breakdown</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box reveal reveal-delay-4">
+      <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Replaced Airtable — all creates/updates now go through Hub with full audit trail</p>
+    </div>
   </div>
-  <p class="r d6" style="font-family:'Cormorant Garamond',serif;font-size:2.5vw;color:var(--pk);font-style:italic;margin-top:2vh">Thank You</p>
-</div>
+  <span class="slide-num">07 / 17</span>
 </section>
 
+<!-- ============================================ -->
+<!-- SLIDE 8: INVENTORY & RISK                    -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-8">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-green reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">Inventory & Risk</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Global visibility across 5 warehouses with proactive risk assessment</p>
+    </div>
+    <div class="grid-3 reveal reveal-delay-3">
+      <div class="card text-center">
+        <div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">🌎</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">5 Warehouses</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">ATL · RENO · AMS · HK · UK</p>
+      </div>
+      <div class="card text-center">
+        <div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">⚠️</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">BOM Risk</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Component-level risk scoring</p>
+      </div>
+      <div class="card text-center">
+        <div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">🚨</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Survival Mode</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Critical SKU alerts & essentials</p>
+      </div>
+    </div>
+    <ul class="bullet-list reveal reveal-delay-4">
+      <li>Real-time inventory from Stord network</li>
+      <li>Dynamic ATL/RENO split ratios — per-SKU, not hardcoded</li>
+      <li>One-click BOM risk assessment across all finished goods</li>
+    </ul>
+  </div>
+  <span class="slide-num">08 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 9: DEMAND FORECAST                     -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-9">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-amber reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">Demand Forecast</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Data-driven demand planning with subscription intelligence</p>
+    </div>
+    <div class="grid-2 reveal reveal-delay-3">
+      <div class="card">
+        <h3><span class="sand">📈 Subscription Forecast</span></h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">3-cycle (90-day) projection from Skio with per-warehouse breakdown</p>
+      </div>
+      <div class="card">
+        <h3><span class="sand">🧪 Flavor Mix Analysis</span></h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">Track flavor trends and optimize production mix</p>
+      </div>
+      <div class="card">
+        <h3><span class="sand">🧱 RM Runway</span></h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">Raw material runway — reorder before stockouts</p>
+      </div>
+      <div class="card">
+        <h3><span class="sand">🚚 Lead Time</span></h3>
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">Shipment lead time tracking for delivery planning</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">09 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 10: WORK ORDERS                        -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-10">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-flamingo reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">Stord Work Orders</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Real-time kitting WO tracking with D365 mapping</p>
+    </div>
+    <div class="grid-2 reveal reveal-delay-3">
+      <ul class="bullet-list">
+        <li>Live webhook sync from Stord</li>
+        <li>Assembly completion % monitoring</li>
+        <li>Full BOM breakdown: output, FG, RM</li>
+      </ul>
+      <ul class="bullet-list">
+        <li>Inline D365 Production Order # mapping</li>
+        <li>Missing PO alerts for completed WOs</li>
+        <li>Multi-select filters: status, facility, SKU</li>
+      </ul>
+    </div>
+    <div class="highlight-box reveal reveal-delay-4">
+      <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); text-align: center;">
+        <span class="badge badge-flamingo" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">Open</span>
+        &nbsp;→&nbsp; <span class="badge badge-stone" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">Released</span>
+        &nbsp;→&nbsp; <span class="badge badge-amber" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">In Progress</span>
+        &nbsp;→&nbsp; <span class="badge badge-green" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">Completed</span>
+      </p>
+    </div>
+  </div>
+  <span class="slide-num">10 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 11: ASN INBOUND                        -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-11">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-stone reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">ASN Inbound Shipments</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Full lifecycle tracking from planning to receipt</p>
+    </div>
+    <div class="highlight-box reveal reveal-delay-3" style="text-align: center;">
+      <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">
+        <span class="badge badge-flamingo" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">Planned</span>
+        → <span class="badge badge-stone" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">Confirmed</span>
+        → <span class="badge badge-amber" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">In Transit</span>
+        → <span class="badge badge-rose" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">Customs</span>
+        → <span class="badge badge-green" style="font-size: clamp(0.55rem, 0.85vw, 0.65rem);">Received</span>
+      </p>
+    </div>
+    <div class="grid-3 reveal reveal-delay-4">
+      <div class="card text-center">
+        <div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">✏️</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Inline Editing</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">HAWB, MAWB, B/L, PO#</p>
+      </div>
+      <div class="card text-center">
+        <div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">📅</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Calendar View</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Visual shipment timeline</p>
+      </div>
+      <div class="card text-center">
+        <div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">📊</div>
+        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">KPI Dashboard</h3>
+        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">In transit, customs, discrepancies</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">11 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 12: HK FULFILMENT                      -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-12">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-green reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">HK Fulfilment</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Batch AWB processing for Hong Kong order fulfilment</p>
+    </div>
+    <div class="grid-2 reveal reveal-delay-3">
+      <div class="card"><h3><span style="color: #34d399;">📋 Smart Batching</span></h3><p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">Groups orders by SKU combo for efficient label printing</p></div>
+      <div class="card"><h3><span style="color: #34d399;">🏷️ Bulk Labels</span></h3><p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">Bulk shipping labels via Spaceship integration</p></div>
+      <div class="card"><h3><span style="color: #34d399;">📄 Carrier-Split PDFs</span></h3><p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">Auto-generated PDFs grouped by carrier for handoff</p></div>
+      <div class="card"><h3><span style="color: #34d399;">📥 Excel Export</span></h3><p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">D365 fulfillment with OTP SKU mapping</p></div>
+    </div>
+  </div>
+  <span class="slide-num">12 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 13: SHIPPING & COST                    -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-13">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-amber reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">Shipping & Cost</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Automated invoice validation and cost analytics</p>
+    </div>
+    <div class="grid-3 reveal reveal-delay-3">
+      <div class="card text-center"><div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">📦</div><h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Stord</h3><p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Fulfillment invoice ingestion</p></div>
+      <div class="card text-center"><div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">✈️</div><h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">FedEx</h3><p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Rate card validation & comparison</p></div>
+      <div class="card text-center"><div style="font-size: clamp(1.2rem, 2.5vh, 1.8rem); margin-bottom: 0.3rem;">🇬🇧</div><h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Rexville</h3><p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">UK carrier cost tracking</p></div>
+    </div>
+    <ul class="bullet-list reveal reveal-delay-4">
+      <li>Every-4-hour invoice ingestion via cron</li>
+      <li>Duplicate charge detection with adjustment tracking</li>
+      <li>Slack alerts for cost anomalies and overcharges</li>
+    </ul>
+  </div>
+  <span class="slide-num">13 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 14: PO MANAGEMENT                      -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-14">
+  <div class="content flex-col gap-md">
+    <div>
+      <span class="module-badge badge badge-stone reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">PO Management</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">End-to-end purchase order lifecycle with warehouse integration</p>
+    </div>
+    <div class="grid-2 reveal reveal-delay-3">
+      <ul class="bullet-list">
+        <li>Create POs and allocate to warehouses</li>
+        <li>Auto-create inbound shipments from POs</li>
+        <li>Stord PO sync for 3PL receiving</li>
+      </ul>
+      <ul class="bullet-list">
+        <li>Transfer orders between warehouses</li>
+        <li>Cross-region SO+PO for inter-warehouse moves</li>
+        <li>Inventory alerts trigger reorder</li>
+      </ul>
+    </div>
+    <div class="highlight-box reveal reveal-delay-4">
+      <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> 2-way Stord sync — RECEIVED_SHORT and RECEIVED_OVER auto-update</p>
+    </div>
+  </div>
+  <span class="slide-num">14 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 15: TECH STACK                         -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-15">
+  <div class="content flex-col gap-md">
+    <div class="text-center">
+      <span class="badge badge-flamingo reveal caption">Tech Stack</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">Built with Modern Tools</h2>
+    </div>
+    <div class="grid-4 reveal reveal-delay-2" style="margin-top: clamp(0.3rem, 1vh, 0.5rem);">
+      <div class="tech-item">⚡ Next.js 15</div>
+      <div class="tech-item">🔷 TypeScript</div>
+      <div class="tech-item">🐘 PostgreSQL</div>
+      <div class="tech-item">📊 Recharts</div>
+      <div class="tech-item">📋 TanStack Table</div>
+      <div class="tech-item">🎨 Tailwind CSS</div>
+      <div class="tech-item">🐳 Railway</div>
+      <div class="tech-item">🔐 Google SSO</div>
+    </div>
+    <div class="grid-3 reveal reveal-delay-3">
+      <div class="card text-center" style="padding: clamp(0.6rem, 1.2vh, 0.8rem);">
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">Webhooks</span></p>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">Shopify · Stord · Skio</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.6rem, 1.2vh, 0.8rem);">
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="stone">CI/CD</span></p>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">main → staging · release → prod</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.6rem, 1.2vh, 0.8rem);">
+        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="sand">Cron Jobs</span></p>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">Every 4h sync + daily summaries</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">15 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 16: ROADMAP                            -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-16">
+  <div class="content flex-col gap-md">
+    <div class="text-center">
+      <span class="badge badge-amber reveal caption">Roadmap</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">What's Live & What's Next</h2>
+    </div>
+    <div class="flex-col gap-md reveal reveal-delay-2" style="max-width: 800px; margin: clamp(0.5rem, 2vh, 1rem) auto 0;">
+      <div>
+        <h3 style="margin-bottom: clamp(0.4rem, 1vh, 0.6rem);"><span style="color: #34d399;">● Live on Production</span></h3>
+        <div class="roadmap-track">
+          <span class="roadmap-item roadmap-live">Master Data</span>
+          <span class="roadmap-item roadmap-live">Work Orders</span>
+          <span class="roadmap-item roadmap-live">ASN Inbound</span>
+          <span class="roadmap-item roadmap-live">HK Fulfilment</span>
+          <span class="roadmap-item roadmap-live">Shipping & Cost</span>
+          <span class="roadmap-item roadmap-live">PO Management</span>
+          <span class="roadmap-item roadmap-live">Gifting</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom: clamp(0.4rem, 1vh, 0.6rem);"><span style="color: #f59e0b;">◐ Coming Soon</span></h3>
+        <div class="roadmap-track">
+          <span class="roadmap-item roadmap-soon">Inventory</span>
+          <span class="roadmap-item roadmap-soon">Forecast</span>
+          <span class="roadmap-item roadmap-soon">RM Analysis & Alert</span>
+        </div>
+      </div>
+    </div>
+    <div class="highlight-box reveal reveal-delay-3 text-center" style="max-width: 800px; margin: 0 auto;">
+      <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Continuously evolving — new modules ship every sprint</p>
+    </div>
+  </div>
+  <span class="slide-num">16 / 17</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 17: THANK YOU                          -->
+<!-- ============================================ -->
+<section class="slide bg-dark" id="slide-17">
+  <div class="content flex-col gap-md text-center" style="align-items: center;">
+    <div class="reveal float">
+      <svg class="im8-logo-large im8-logo-flamingo"><use href="#im8-logo"/></svg>
+    </div>
+    <h1 class="reveal reveal-delay-1" style="font-family: var(--font-title); font-weight: 300;">
+      <span class="gradient-text">Thank You</span>
+    </h1>
+    <div class="divider reveal reveal-delay-2" style="margin: clamp(0.3rem, 1vh, 0.5rem) auto;"></div>
+    <p class="reveal reveal-delay-3" style="font-family: var(--font-title); font-size: clamp(1rem, 1.8vw, 1.3rem); font-weight: 300; max-width: 450px;">
+      Built by a small team,<br>delivering <strong style="color: var(--text-primary); font-weight: 500;">big impact</strong>.
+    </p>
+    <p class="reveal reveal-delay-4 caption muted" style="font-size: clamp(0.65rem, 1vw, 0.75rem); margin-top: clamp(0.5rem, 1.5vh, 1rem);">
+      im8hub.com
+    </p>
+  </div>
+  <span class="slide-num">17 / 17</span>
+</section>
+
+<!-- === JAVASCRIPT === -->
 <script>
-// Pay-to-unlock gate logic
-function unlockModule(moduleId, gateId) {
-  const gate = document.getElementById(gateId);
-  const mod = document.getElementById(moduleId);
-  if (!gate || !mod) return;
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Fun "payment processing" animation
-  const lock = gate.querySelector('.gate-lock');
-  const btns = gate.querySelector('.gate-btns');
-  if (lock) {
-    lock.style.transition = 'all .6s';
-    lock.style.transform = 'scale(1.5) rotate(20deg)';
-    lock.innerHTML = '🔓';
-  }
-  if (btns) btns.style.opacity = '0.3';
+const slides = document.querySelectorAll('.slide');
+const navDots = document.getElementById('navDots');
+slides.forEach((slide, i) => {
+  const dot = document.createElement('button');
+  dot.classList.add('nav-dot');
+  dot.title = 'Slide ' + (i + 1);
+  dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+  navDots.appendChild(dot);
+});
+const dotEls = navDots.querySelectorAll('.nav-dot');
+const slideObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(slides).indexOf(entry.target);
+      dotEls.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => slideObs.observe(s));
 
-  const msg = document.createElement('div');
-  msg.style.cssText = 'font-family:Rajdhani,sans-serif;font-size:2vw;color:#4ADE80;font-weight:700;letter-spacing:.2em;margin-top:2vh;animation:up .4s ease forwards';
-  msg.textContent = '✅ PAYMENT ACCEPTED';
-  gate.querySelector('.gate').appendChild(msg);
+document.addEventListener('keydown', (e) => {
+  const cur = Array.from(slides).findIndex(s => { const r = s.getBoundingClientRect(); return r.top >= -100 && r.top <= 100; });
+  if ((e.key === 'ArrowDown' || e.key === ' ' || e.key === 'ArrowRight') && cur < slides.length - 1) { e.preventDefault(); slides[cur + 1].scrollIntoView({ behavior: 'smooth' }); }
+  else if ((e.key === 'ArrowUp' || e.key === 'ArrowLeft') && cur > 0) { e.preventDefault(); slides[cur - 1].scrollIntoView({ behavior: 'smooth' }); }
+});
 
-  setTimeout(() => {
-    mod.scrollIntoView({ behavior: 'smooth' });
-  }, 1200);
-}
+/* === ANIMATED COUNTERS === */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counters = entry.target.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        if (counter.dataset.animated) return;
+        counter.dataset.animated = 'true';
+        const target = parseInt(counter.dataset.target, 10);
+        const suffix = counter.dataset.suffix || '';
+        const duration = 1500;
+        const startTime = performance.now();
 
-function skipModule(nextGateId) {
-  const next = document.getElementById(nextGateId);
-  if (next) {
-    next.scrollIntoView({ behavior: 'smooth' });
-  }
-}
+        function easeOutCubic(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
 
-(function(){
-  const S=document.querySelectorAll('.s'),N=S.length,nav=document.getElementById('nd'),num=document.getElementById('sn'),pb=document.getElementById('pb');
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easedProgress = easeOutCubic(progress);
+          const current = Math.round(easedProgress * target);
+          counter.textContent = current + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          }
+        }
 
-  // Nav dots
-  S.forEach((_,i)=>{const d=document.createElement('button');d.className='dot';d.onclick=()=>S[i].scrollIntoView({behavior:'smooth'});nav.appendChild(d)});
-  const dots=nav.querySelectorAll('.dot');
+        requestAnimationFrame(updateCounter);
+      });
+    }
+  });
+}, { threshold: 0.3 });
 
-  // Slide observer
-  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const i=[...S].indexOf(e.target);
-    dots.forEach((d,j)=>{d.classList.toggle('on',j===i);d.style.background=j===i?'#FF9693':'rgba(255,255,255,.2)'});
-    num.textContent=`${i+1} / ${N}`;
-    e.target.querySelectorAll('.a').forEach((el,j)=>setTimeout(()=>el.classList.add('v'),j*50));
-    // Counters
-    e.target.querySelectorAll('.ctr:not(.cd)').forEach(el=>{el.classList.add('cd');aCtr(el)});
-    // Bar grow
-    e.target.querySelectorAll('.bar-grow:not(.gd)').forEach(el=>{el.classList.add('gd');el.style.width=el.dataset.w});
-  })},{threshold:.25});
-  S.forEach(s=>obs.observe(s));
-
-  // First slide init
-  setTimeout(()=>{
-    S[0].querySelectorAll('.a').forEach((el,i)=>setTimeout(()=>el.classList.add('v'),i*50));
-    S[0].querySelectorAll('.ctr:not(.cd)').forEach(el=>{el.classList.add('cd');aCtr(el)});
-  },100);
-
-  // Animated counter (ease-out cubic)
-  function aCtr(el){
-    const t=parseFloat(el.dataset.target)||0,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',dur=parseInt(el.dataset.duration)||1600,isF=t%1!==0,s0=performance.now();
-    function tick(now){const p=Math.min((now-s0)/dur,1),e=1-Math.pow(1-p,3),v=e*t;
-      el.textContent=pre+(isF?v.toFixed(1):Math.floor(v).toLocaleString())+suf;
-      if(p<1)requestAnimationFrame(tick);}
-    requestAnimationFrame(tick);
-  }
-
-  // Progress bar
-  window.addEventListener('scroll',()=>{pb.style.width=scrollY/(document.body.scrollHeight-innerHeight)*100+'%'},{passive:true});
-
-  // Keyboard
-  document.addEventListener('keydown',e=>{const c=Math.round(scrollY/innerHeight);
-    if(['ArrowDown',' ','ArrowRight'].includes(e.key)&&c<N-1){e.preventDefault();S[c+1].scrollIntoView({behavior:'smooth'})}
-    if(['ArrowUp','ArrowLeft'].includes(e.key)&&c>0){e.preventDefault();S[c-1].scrollIntoView({behavior:'smooth'})}});
-})();
+document.querySelectorAll('.counter-grid').forEach(grid => counterObserver.observe(grid));
 </script>
 </body>
 </html>
