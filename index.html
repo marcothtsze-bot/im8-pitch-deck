@@ -174,6 +174,26 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 .laptop .scr{border-radius:2px 2px 0 0;overflow:hidden;aspect-ratio:16/9.5;background:#0f0f23}
 .laptop .scr img,.laptop .scr video{width:100%;height:100%;object-fit:cover}
 .lbase{width:95%;margin:0 auto;height:10px;background:linear-gradient(to bottom,#2a2a2a,#1a1a1a);border-radius:0 0 6px 6px}
+
+/* ===== PAY TO UNLOCK GATE ===== */
+.gate{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gate-lock{font-size:6vw;animation:lockBounce 2s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(164,0,17,.5))}
+@keyframes lockBounce{0%,100%{transform:rotate(-5deg) scale(1)}25%{transform:rotate(5deg) scale(1.05)}50%{transform:rotate(-3deg) scale(1)}75%{transform:rotate(3deg) scale(1.02)}}
+.gate-module{font-family:'Rajdhani',sans-serif;font-size:1.4vw;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--pk);margin-top:2vh}
+.gate-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3.8vw;color:#fff;margin-top:1vh;text-shadow:0 0 40px rgba(164,0,17,.4)}
+.gate-price{font-family:'Rajdhani',sans-serif;font-size:1.8vw;color:var(--st);margin-top:1.5vh;letter-spacing:.1em}
+.gate-price span{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3vw;color:var(--pk)}
+.gate-btns{display:flex;gap:2vw;margin-top:3vh}
+.gate-btn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.5vw;letter-spacing:.15em;text-transform:uppercase;border:none;border-radius:12px;padding:1.5vh 3vw;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.gate-btn--yes{background:linear-gradient(135deg,var(--rd),#D4003A);color:#fff;box-shadow:0 0 30px rgba(164,0,17,.5),0 4px 20px rgba(0,0,0,.4)}
+.gate-btn--yes:hover{transform:scale(1.08);box-shadow:0 0 50px rgba(164,0,17,.7),0 8px 30px rgba(0,0,0,.5)}
+.gate-btn--no{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5)}
+.gate-btn--no:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);transform:scale(1.05)}
+.gate-coins{position:absolute;pointer-events:none;width:100%;height:100%;top:0;left:0;overflow:hidden}
+.coin{position:absolute;font-size:1.8vw;opacity:0;animation:coinFall 3s ease-in infinite}
+@keyframes coinFall{0%{opacity:0;transform:translateY(-5vh) rotate(0deg)}10%{opacity:.8}80%{opacity:.6}100%{opacity:0;transform:translateY(105vh) rotate(720deg)}}
+.gate-sparkle{position:absolute;width:4px;height:4px;background:var(--pk);border-radius:50%;animation:sparkle 1.5s ease-in-out infinite;box-shadow:0 0 6px var(--pk)}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -188,11 +208,10 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div class="topline"></div><div class="botline"></div>
 <div style="text-align:center;margin:auto 0">
   <div class="r d1" style="display:flex;justify-content:center;margin-bottom:.4vh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1052 272" style="width:26vw;height:auto"><path fill="#fff" d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/></svg></div>
-  <p class="r d2" style="font-family:'Rajdhani',sans-serif;font-size:1.7vw;font-weight:600;letter-spacing:.45em;color:var(--pk);text-transform:uppercase">HUB</p>
+  <p class="r d2" style="font-family:'Rajdhani',sans-serif;font-size:3.5vw;font-weight:700;letter-spacing:.45em;color:var(--pk);text-transform:uppercase">IM8 HUB</p>
   <p class="r d3" style="font-family:'Spectral',serif;font-size:1.9vw;color:var(--pk);margin-top:1.2vh">Operations Intelligence Platform</p>
   <div style="width:14vw;height:2px;background:rgba(225,203,185,.3);margin:1.2vh auto" class="r d3"></div>
   <p class="r d4" style="font-style:italic;color:var(--st);font-size:1.3vw;margin-top:.8vh">One platform. Every operation. Zero manual work.</p>
-  <p class="r d5" style="font-family:'Rajdhani',sans-serif;color:rgba(225,203,185,.3);font-size:.85vw;margin-top:3.5vh;letter-spacing:.25em">PRESENTED TO CEO &nbsp;|&nbsp; APRIL 2026</p>
 </div>
 </section>
 
@@ -381,8 +400,28 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 </div>
 </section>
 
+<!-- GATE: INVENTORY -->
+<section class="s gate-slide" id="g5">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:10%;animation-delay:0s">💰</span><span class="coin" style="left:25%;animation-delay:.7s">🪙</span><span class="coin" style="left:45%;animation-delay:1.4s">💰</span><span class="coin" style="left:65%;animation-delay:.3s">🪙</span><span class="coin" style="left:80%;animation-delay:1.8s">💰</span><span class="coin" style="left:90%;animation-delay:1.1s">🪙</span></div>
+<div class="gate-sparkle" style="top:20%;left:15%;animation-delay:0s"></div>
+<div class="gate-sparkle" style="top:30%;right:20%;animation-delay:.5s"></div>
+<div class="gate-sparkle" style="bottom:25%;left:25%;animation-delay:1s"></div>
+<div class="gate-sparkle" style="top:15%;right:10%;animation-delay:1.5s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 1</div>
+  <div class="gate-title">Inventory</div>
+  <div class="gate-price">Unlock for <span>$49,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s5','g5')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('g6')">🚫 No Thanks</a>
+  </div>
+</div>
+</section>
+
 <!-- 5. INVENTORY -->
-<section class="s" id="s5">
+<section class="s module-slide" id="s5">
 <div class="lbl a">INVENTORY MODULE</div>
 <h2 class="ttl a">Real-Time Cross-Warehouse Visibility</h2>
 <div class="flow-dia a">
@@ -397,8 +436,26 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/inventory" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
+<!-- GATE: SALES -->
+<section class="s gate-slide" id="g6">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:12%;animation-delay:.2s">💰</span><span class="coin" style="left:35%;animation-delay:1s">🪙</span><span class="coin" style="left:55%;animation-delay:.5s">💰</span><span class="coin" style="left:75%;animation-delay:1.6s">🪙</span><span class="coin" style="left:88%;animation-delay:.8s">💰</span></div>
+<div class="gate-sparkle" style="top:18%;left:20%;animation-delay:.3s"></div>
+<div class="gate-sparkle" style="top:35%;right:15%;animation-delay:.8s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 2</div>
+  <div class="gate-title">Sales & Orders</div>
+  <div class="gate-price">Unlock for <span>$39,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s6','g6')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('g7')">🚫 No Thanks</a>
+  </div>
+</div>
+</section>
+
 <!-- 6. SALES & SO -->
-<section class="s" id="s6">
+<section class="s module-slide" id="s6">
 <div class="lbl a">SALES & ORDER CONSOLIDATION</div>
 <h2 class="ttl a">From Manual Downloads to Instant Insights</h2>
 <div class="flow-dia a">
@@ -417,8 +474,26 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/order-consolidation" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
+<!-- GATE: DELIVERY -->
+<section class="s gate-slide" id="g7">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:8%;animation-delay:.4s">💰</span><span class="coin" style="left:30%;animation-delay:1.2s">🪙</span><span class="coin" style="left:50%;animation-delay:.1s">💰</span><span class="coin" style="left:70%;animation-delay:1.5s">🪙</span><span class="coin" style="left:92%;animation-delay:.6s">💰</span></div>
+<div class="gate-sparkle" style="top:22%;right:25%;animation-delay:.2s"></div>
+<div class="gate-sparkle" style="bottom:20%;left:18%;animation-delay:1.2s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 3</div>
+  <div class="gate-title">Delivery Performance</div>
+  <div class="gate-price">Unlock for <span>$29,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s7','g7')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('g8')">🚫 No Thanks</a>
+  </div>
+</div>
+</section>
+
 <!-- 7. DELIVERY -->
-<section class="s" id="s7">
+<section class="s module-slide" id="s7">
 <div class="lbl a">DELIVERY PERFORMANCE</div>
 <h2 class="ttl a">Live Tracking & SLA Intelligence</h2>
 <div class="flow-dia a">
@@ -438,8 +513,26 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/outbound/delivery" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
+<!-- GATE: GIFTING -->
+<section class="s gate-slide" id="g8">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:15%;animation-delay:.9s">🎁</span><span class="coin" style="left:40%;animation-delay:.3s">💰</span><span class="coin" style="left:60%;animation-delay:1.3s">🪙</span><span class="coin" style="left:82%;animation-delay:.5s">🎁</span></div>
+<div class="gate-sparkle" style="top:25%;left:30%;animation-delay:.6s"></div>
+<div class="gate-sparkle" style="bottom:30%;right:22%;animation-delay:1.1s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 4</div>
+  <div class="gate-title">Gifting</div>
+  <div class="gate-price">Unlock for <span>$19,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s8','g8')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('g9')">🚫 No Thanks</a>
+  </div>
+</div>
+</section>
+
 <!-- 8. GIFTING -->
-<section class="s" id="s8">
+<section class="s module-slide" id="s8">
 <div class="lbl a">GIFTING MODULE</div>
 <h2 class="ttl a">Self-Serve Gifting with Auto Fulfilment</h2>
 <div class="flow-dia a">
@@ -460,8 +553,26 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/gifting/manage" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
+<!-- GATE: SHIPPING -->
+<section class="s gate-slide" id="g9">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:18%;animation-delay:.1s">📦</span><span class="coin" style="left:38%;animation-delay:1.1s">💰</span><span class="coin" style="left:58%;animation-delay:.7s">🪙</span><span class="coin" style="left:78%;animation-delay:1.4s">📦</span></div>
+<div class="gate-sparkle" style="top:20%;right:18%;animation-delay:.4s"></div>
+<div class="gate-sparkle" style="bottom:22%;left:12%;animation-delay:.9s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 5</div>
+  <div class="gate-title">Shipping & Invoices</div>
+  <div class="gate-price">Unlock for <span>$59,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s9','g9')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('g10')">🚫 No Thanks</a>
+  </div>
+</div>
+</section>
+
 <!-- 9. SHIPPING -->
-<section class="s" id="s9">
+<section class="s module-slide" id="s9">
 <div class="lbl a">SHIPPING & INVOICES</div>
 <h2 class="ttl a">Automated Cost Tracking</h2>
 <div class="flow-dia a">
@@ -484,6 +595,24 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/shipping" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 </section>
 
+<!-- GATE: STORD & INBOUND -->
+<section class="s gate-slide" id="g10">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:20%;animation-delay:.6s">🏭</span><span class="coin" style="left:42%;animation-delay:1.3s">💰</span><span class="coin" style="left:62%;animation-delay:.2s">🪙</span><span class="coin" style="left:85%;animation-delay:1s">🏭</span></div>
+<div class="gate-sparkle" style="top:28%;left:22%;animation-delay:.7s"></div>
+<div class="gate-sparkle" style="bottom:18%;right:28%;animation-delay:1.3s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 6</div>
+  <div class="gate-title">Stord & Inbound</div>
+  <div class="gate-price">Unlock for <span>$44,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s10','g10')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('g11')">🚫 No Thanks</a>
+  </div>
+</div>
+</section>
+
 <!-- 10. STORD & INBOUND -->
 <section class="s" id="s10">
 <div class="lbl a">STORD OPERATIONS & INBOUND</div>
@@ -500,6 +629,24 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div class="g g2 mt1">
   <div class="feat a"><div class="feat-h feat-h--d">⚙️ WORK ORDERS</div><div class="feat-b"><ul><li>All production/kitting orders in one view</li><li>Full detail: ASN, items, quantities, status</li><li>Better than Stord's own portal</li><li>Daily Slack summary at 9:30 AM HKT</li></ul></div></div>
   <div class="feat a"><div class="feat-h feat-h--d">🏭 INBOUND / PO</div><div class="feat-b"><ul><li>POs, Transfer Orders, Cross-Region SO+POs</li><li>Auto-sync with Stord API instantly</li><li>2-way receipt: RECEIVED / SHORT / OVER</li><li>6-hourly cron syncs status back</li></ul></div></div>
+</div>
+</section>
+
+<!-- GATE: DEMAND FORECAST -->
+<section class="s gate-slide" id="g11">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:14%;animation-delay:.3s">📊</span><span class="coin" style="left:36%;animation-delay:1.5s">💰</span><span class="coin" style="left:56%;animation-delay:.8s">🪙</span><span class="coin" style="left:76%;animation-delay:.1s">📊</span><span class="coin" style="left:90%;animation-delay:1.2s">💰</span></div>
+<div class="gate-sparkle" style="top:16%;left:28%;animation-delay:.5s"></div>
+<div class="gate-sparkle" style="bottom:24%;right:16%;animation-delay:1s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 7</div>
+  <div class="gate-title">Demand Forecast</div>
+  <div class="gate-price">Unlock for <span>$99,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s11','g11')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('g12')">🚫 No Thanks</a>
+  </div>
 </div>
 </section>
 
@@ -524,6 +671,24 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 <div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/demand-forecast" target="_blank" style="font-family:'Rajdhani',sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
 
 <div style="text-align:right;margin-top:.5vh"><a href="https://im8hub.com/stord-operations" target="_blank" style="font-family:Rajdhani,sans-serif;font-size:.85vw;color:var(--pk);text-decoration:none;letter-spacing:.1em;opacity:.7">▶ OPEN IN HUB →</a></div>
+</section>
+
+<!-- GATE: MORE MODULES -->
+<section class="s gate-slide" id="g12">
+<div class="blob blob-1"></div><div class="blob blob-2"></div>
+<div class="gate-coins"><span class="coin" style="left:10%;animation-delay:.5s">✨</span><span class="coin" style="left:32%;animation-delay:1.1s">💰</span><span class="coin" style="left:52%;animation-delay:.2s">🪙</span><span class="coin" style="left:72%;animation-delay:1.6s">✨</span><span class="coin" style="left:88%;animation-delay:.7s">💰</span></div>
+<div class="gate-sparkle" style="top:20%;right:20%;animation-delay:.3s"></div>
+<div class="gate-sparkle" style="bottom:28%;left:15%;animation-delay:1.4s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">BONUS PACK</div>
+  <div class="gate-title">More Modules</div>
+  <div class="gate-price">Unlock for <span>$9,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('s12','g12')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('s13')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- 12. MORE MODULES -->
@@ -720,6 +885,39 @@ body{font-family:'Raleway',sans-serif;background:#1A0004;-webkit-font-smoothing:
 </section>
 
 <script>
+// Pay-to-unlock gate logic
+function unlockModule(moduleId, gateId) {
+  const gate = document.getElementById(gateId);
+  const mod = document.getElementById(moduleId);
+  if (!gate || !mod) return;
+
+  // Fun "payment processing" animation
+  const lock = gate.querySelector('.gate-lock');
+  const btns = gate.querySelector('.gate-btns');
+  if (lock) {
+    lock.style.transition = 'all .6s';
+    lock.style.transform = 'scale(1.5) rotate(20deg)';
+    lock.innerHTML = '🔓';
+  }
+  if (btns) btns.style.opacity = '0.3';
+
+  const msg = document.createElement('div');
+  msg.style.cssText = 'font-family:Rajdhani,sans-serif;font-size:2vw;color:#4ADE80;font-weight:700;letter-spacing:.2em;margin-top:2vh;animation:up .4s ease forwards';
+  msg.textContent = '✅ PAYMENT ACCEPTED';
+  gate.querySelector('.gate').appendChild(msg);
+
+  setTimeout(() => {
+    mod.scrollIntoView({ behavior: 'smooth' });
+  }, 1200);
+}
+
+function skipModule(nextGateId) {
+  const next = document.getElementById(nextGateId);
+  if (next) {
+    next.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
 (function(){
   const S=document.querySelectorAll('.s'),N=S.length,nav=document.getElementById('nd'),num=document.getElementById('sn'),pb=document.getElementById('pb');
 
