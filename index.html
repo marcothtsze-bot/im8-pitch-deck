@@ -574,8 +574,27 @@ p, li {
   transform: translateY(-2px);
 }
 .mod-ico {
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
-  line-height: 1;
+  width: clamp(30px, 3.4vw, 42px);
+  height: clamp(30px, 3.4vw, 42px);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 150, 147, 0.16), rgba(164, 0, 17, 0.12));
+  border: 1px solid rgba(255, 150, 147, 0.28);
+  color: var(--im8-flamingo);
+  flex-shrink: 0;
+  transition: transform 0.3s, background 0.3s, border-color 0.3s;
+}
+.mod-card:hover .mod-ico {
+  background: linear-gradient(135deg, rgba(255, 150, 147, 0.28), rgba(164, 0, 17, 0.2));
+  border-color: rgba(255, 150, 147, 0.45);
+  transform: scale(1.06);
+}
+.mod-ico svg {
+  width: 62%;
+  height: 62%;
+  display: block;
 }
 .mod-name {
   font-family: var(--font-title);
@@ -678,6 +697,120 @@ p, li {
 @keyframes baPulse {
   0%, 100% { transform: scale(1); opacity: 0.8; }
   50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* === INTEGRATIONS HUB (slide-6b) === */
+.integ-wrap {
+  position: relative;
+  width: min(85vw, 920px);
+  aspect-ratio: 920 / 600;
+  max-height: 66vh;
+  margin: 0 auto;
+}
+.integ-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  display: block;
+}
+.cline-glow {
+  stroke: rgba(255, 150, 147, 0.1);
+  stroke-width: 7;
+  fill: none;
+  stroke-linecap: round;
+}
+.cline {
+  stroke: rgba(255, 150, 147, 0.4);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 6 5;
+  stroke-linecap: round;
+  animation: dashFlow 2.2s linear infinite;
+}
+@keyframes dashFlow { to { stroke-dashoffset: -22; } }
+
+.integ-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(80px, 10vw, 120px);
+  height: clamp(80px, 10vw, 120px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 150, 147, 0.35), rgba(164, 0, 17, 0.85) 60%, rgba(80, 0, 11, 0.95) 100%);
+  border: 2px solid rgba(255, 150, 147, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow: 0 0 50px rgba(164, 0, 17, 0.5), inset 0 0 20px rgba(255, 150, 147, 0.2);
+}
+.integ-hub-logo {
+  height: clamp(1.1rem, 2vw, 1.6rem);
+  fill: var(--im8-flamingo);
+  filter: drop-shadow(0 0 6px rgba(255, 150, 147, 0.5));
+}
+.integ-hub-label {
+  font-family: var(--font-caption);
+  font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #fff;
+  margin-top: 3px;
+}
+
+.integ-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 4;
+  width: clamp(75px, 9vw, 110px);
+}
+.integ-icon {
+  width: clamp(42px, 5vw, 56px);
+  height: clamp(42px, 5vw, 56px);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto clamp(3px, 0.6vh, 5px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+.integ-node:hover .integ-icon {
+  transform: translateY(-2px) scale(1.05);
+  border-color: rgba(255, 150, 147, 0.4);
+  box-shadow: 0 6px 18px rgba(164, 0, 17, 0.3);
+}
+.integ-icon svg {
+  width: clamp(22px, 2.6vw, 30px);
+  height: clamp(22px, 2.6vw, 30px);
+}
+.integ-icon .badge-svg {
+  width: clamp(32px, 3.8vw, 44px);
+  height: auto;
+}
+.integ-name {
+  display: block;
+  font-family: var(--font-caption);
+  font-weight: 600;
+  font-size: clamp(0.62rem, 0.95vw, 0.78rem);
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+.integ-sub {
+  display: block;
+  font-size: clamp(0.5rem, 0.72vw, 0.62rem);
+  color: var(--im8-flamingo);
+  opacity: 0.85;
+  line-height: 1.25;
+  margin-top: 2px;
+  letter-spacing: 0.04em;
 }
 
 /* === PRODUCT TOUR MOSAIC (slide-6c) === */
@@ -785,10 +918,95 @@ p, li {
 <!-- Nav dots -->
 <nav class="nav-dots" id="navDots"></nav>
 
-<!-- SVG Logo (hidden, referenced by use) -->
+<!-- SVG Logo + module icons (hidden, referenced by use) -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
   <symbol id="im8-logo" viewBox="0 0 1052 272">
     <path d="M908.7,271.4c-18.9,0-35.5-3.1-50.1-9.2-14.3-6.4-25.4-15.4-33.3-26.9-7.9-11.5-11.8-24.9-11.8-40s5.2-29.4,15.7-41.1c10.7-11.8,25.6-20,44.7-24.6v-1.5c-16.1-4.9-28.5-12.4-37.5-22.7-8.7-10.3-13-22.6-13-36.9s3.4-23.2,10.3-33.5c6.9-10.5,16.8-18.8,29.8-25,13-6.2,28-9.2,45.1-9.2,17.1,0,32,3.1,44.7,9.2,13,6.2,22.9,14.5,29.8,25,6.9,10.3,10.3,21.4,10.3,33.5s-4.5,27-13.4,37.3c-8.7,10.3-21,17.7-37.1,22.3v1.5c19.4,4.6,34.3,12.8,44.7,24.6,10.7,11.8,16.1,25.5,16.1,41.1s-3.9,28.5-11.8,40c-7.9,11.5-19.1,20.5-33.6,26.9-14.3,6.2-30.8,9.2-49.7,9.2ZM908.7,245.2c11.2,0,21-2.2,29.4-6.5,8.7-4.4,15.3-10.4,19.9-18.1,4.8-7.7,7.3-16.4,7.3-26.1,0-15.4-5.2-27.8-15.7-37.3-10.4-9.7-24.1-14.6-40.9-14.6s-21.1,2.2-29.8,6.5c-8.4,4.4-15,10.5-19.9,18.5-4.6,7.7-6.9,16.7-6.9,26.9,0,14.9,5.2,27,15.7,36.5,10.4,9.5,24.1,14.2,40.9,14.2ZM908.7,116.8c9.4,0,17.6-1.9,24.5-5.8,7.1-3.8,12.6-9.2,16.4-16.1,3.8-6.9,5.7-14.9,5.7-23.8,0-13.6-4.2-24.4-12.6-32.3-8.4-7.9-19.7-11.9-34-11.9s-17.7,1.8-24.8,5.4c-6.9,3.6-12.2,8.7-16.1,15.4-3.8,6.7-5.7,14.5-5.7,23.5,0,13.6,4.2,24.6,12.6,33.1,8.4,8.5,19.7,12.7,34,12.7ZM0,268.4c4.6-6.7,7.8-14.2,9.6-22.7,1.8-8.7,2.7-20.4,2.7-35V62c0-14.6-.9-26.3-2.7-35C7.8,18.2,4.6,10.7,0,4.3v-1.5h61.9v1.5c-4.6,6.4-7.8,14-9.6,22.7-1.8,8.7-2.7,20.4-2.7,35v148.8c0,14.6.9,26.3,2.7,35,1.8,8.5,5,16,9.6,22.7v1.5H0v-1.5ZM327.4,44.3v166.1c0,14.6.9,26.4,2.7,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-53.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V61.6c0-14.6-.9-26.3-2.7-35-1.5-8.7-4.7-16.1-9.6-22.3v-1.5h65s88.7,220.7,88.7,220.7h1.5L528.5,2.7h62.7v1.5c-4.6,6.2-7.8,13.7-9.6,22.7-1.5,8.7-2.3,20.3-2.3,34.6v148.8c0,14.9.8,26.7,2.3,35.4,1.8,8.7,5,16.3,9.6,22.7v1.5h-61.5v-1.5c4.8-6.4,8-14,9.6-22.7,1.8-8.7,2.7-20.5,2.7-35.4V44.6h-1.9l-88.3,225.3h-31.7l-90.6-225.7h-1.9ZM189.3,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM719.9,120.3l-15.7-6.5-15.7,6.5-6.5,15.7,6.5,15.7,15.7,6.5,15.7-6.5,6.5-15.7-6.5-15.7ZM1017.9,3.6c-3.5,1.9-6.2,4.7-8.1,8.1-1.9,3.5-2.9,7.3-2.9,11.4s1,7.9,2.9,11.3c2,3.4,4.7,6,8.1,7.9,3.5,1.9,7.3,2.9,11.5,2.9s8-1,11.5-2.9c3.5-1.9,6.2-4.5,8.1-7.9,1.9-3.4,3-7.1,3-11.4s-1.1-7.9-3-11.4c-2-3.4-4.7-6.1-8.1-8-3.5-1.9-7.3-2.9-11.5-2.9-4.2,0-8,1-11.5,2.9ZM1038.5,7.4c2.7,1.5,4.9,3.7,6.4,6.4,1.5,2.8,2.3,5.8,2.3,9.2s-.8,6.5-2.3,9.2c-1.5,2.7-3.7,4.9-6.4,6.4-2.7,1.5-5.7,2.3-9.1,2.3s-6.4-.8-9.1-2.3c-2.7-1.5-4.8-3.6-6.3-6.3-1.5-2.7-2.3-5.7-2.3-9.2s.8-6.5,2.3-9.3c1.5-2.7,3.6-4.9,6.3-6.4,2.7-1.5,5.7-2.4,9.1-2.4s6.4.9,9.1,2.4ZM1037.3,12.8c-1.7-1.4-4.1-2.2-6.9-2.2h-9.4v24.7h4.8v-8.8h3.8l5.2,8.8h5.3l-5.9-9.7c1.7-.4,3.1-1.3,4.2-2.6,1-1.2,1.5-2.7,1.5-4.5s-.9-4.1-2.6-5.6ZM1030.1,22.5h-4.4v-7.9h4.4c1.4,0,2.6.3,3.5,1,.9.6,1.3,1.6,1.3,2.8s-.5,2.4-1.4,3c-.9.8-2.1,1.1-3.4,1.1Z"/>
+  </symbol>
+
+  <!-- Module icons: line-style, currentColor stroke -->
+  <symbol id="ico-master-data" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="8" height="8" rx="1.5"/>
+    <rect x="13" y="3" width="8" height="8" rx="1.5"/>
+    <rect x="3" y="13" width="8" height="8" rx="1.5"/>
+    <rect x="13" y="13" width="8" height="8" rx="1.5"/>
+    <circle cx="7" cy="7" r="1.2" fill="currentColor" stroke="none"/>
+    <circle cx="17" cy="17" r="1.2" fill="currentColor" stroke="none"/>
+  </symbol>
+
+  <symbol id="ico-inventory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.5L3 7v10l9 4.5L21 17V7L12 2.5z"/>
+    <path d="M3 7l9 4.5L21 7M12 11.5V21.5"/>
+    <path d="M7.5 4.75L16.5 9.25" opacity="0.5"/>
+  </symbol>
+
+  <symbol id="ico-sales" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="21" x2="21" y2="21"/>
+    <rect x="4.5" y="13" width="3.5" height="8" rx="0.5" fill="currentColor" opacity="0.35" stroke="none"/>
+    <rect x="10.25" y="9" width="3.5" height="12" rx="0.5" fill="currentColor" opacity="0.6" stroke="none"/>
+    <rect x="16" y="5" width="3.5" height="16" rx="0.5" fill="currentColor" stroke="none"/>
+  </symbol>
+
+  <symbol id="ico-consolidation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="5" cy="5" r="2"/>
+    <circle cx="5" cy="19" r="2"/>
+    <circle cx="5" cy="12" r="2"/>
+    <circle cx="19" cy="12" r="2.2" fill="currentColor" fill-opacity="0.2"/>
+    <path d="M7 5L14 11M7 12h10M7 19L14 13"/>
+  </symbol>
+
+  <symbol id="ico-forecast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="21" x2="21" y2="21" opacity="0.5"/>
+    <polyline points="3,17 8,12 12,15 20,6"/>
+    <polyline points="15,6 20,6 20,11"/>
+    <circle cx="8" cy="12" r="1.3" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="15" r="1.3" fill="currentColor" stroke="none"/>
+  </symbol>
+
+  <symbol id="ico-delivery" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="1.5" y="7" width="11.5" height="9" rx="1"/>
+    <path d="M13 10h4.5l3.5 4.3V16H13V10z"/>
+    <circle cx="7" cy="18" r="2"/>
+    <circle cx="17" cy="18" r="2"/>
+  </symbol>
+
+  <symbol id="ico-gifting" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="10" width="18" height="11" rx="1"/>
+    <path d="M3 14h18M12 10v11"/>
+    <path d="M12 10c-1.2-2.5-3-4-4.5-3.2-1.5.8-.8 3.2 1.2 3.2H12zM12 10c1.2-2.5 3-4 4.5-3.2 1.5.8.8 3.2-1.2 3.2H12z"/>
+  </symbol>
+
+  <symbol id="ico-shipping" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 3h14v18l-2.5-1.8-2.5 1.8-2-1.4-2 1.4-2.5-1.8L5 21V3z"/>
+    <line x1="8.5" y1="8" x2="15.5" y2="8"/>
+    <line x1="8.5" y1="12" x2="15.5" y2="12"/>
+    <line x1="8.5" y1="16" x2="13" y2="16"/>
+  </symbol>
+
+  <symbol id="ico-stord-ops" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+  </symbol>
+
+  <symbol id="ico-inbound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 14v5a1 1 0 001 1h16a1 1 0 001-1v-5"/>
+    <path d="M3 14h5l1.5 2h5l1.5-2h5"/>
+    <path d="M12 3v11m-4-4l4 4 4-4"/>
+  </symbol>
+
+  <symbol id="ico-fulfilment" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="5" width="18" height="16" rx="1.5"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+    <line x1="8" y1="3" x2="8" y2="7"/>
+    <line x1="16" y1="3" x2="16" y2="7"/>
+    <rect x="7" y="13" width="3" height="3" rx="0.5" fill="currentColor" opacity="0.7" stroke="none"/>
+    <rect x="14" y="13" width="3" height="3" rx="0.5" fill="currentColor" opacity="0.35" stroke="none"/>
+  </symbol>
+
+  <symbol id="ico-build" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.5L2 8l10 5 10-5-10-5.5z"/>
+    <path d="M2 13l10 5 10-5" opacity="0.7"/>
+    <path d="M2 18l10 5 10-5" opacity="0.4"/>
   </symbol>
 </svg>
 
@@ -946,20 +1164,20 @@ p, li {
 
     <!-- Module grid: 4 cols × 3 rows = 12 modules -->
     <div class="mod-grid reveal reveal-delay-2">
-      <div class="mod-card"><div class="mod-ico">🗂</div><div class="mod-name">Master Data</div><div class="mod-desc">SKU Catalog · BOM · Product Bible · Vendors · Warehouse Routing · Bundles</div></div>
-      <div class="mod-card"><div class="mod-ico">📦</div><div class="mod-name">Inventory</div><div class="mod-desc">Unified view across 5 WH · Watchlist · one-click D365 upload · stockout alerts</div></div>
-      <div class="mod-card"><div class="mod-ico">📊</div><div class="mod-name">Sales &amp; Usage</div><div class="mod-desc">Shopify/Skio dashboards · SKU usage · production plan · starter distribution</div></div>
-      <div class="mod-card"><div class="mod-ico">🔄</div><div class="mod-name">SO Consolidation</div><div class="mod-desc">Auto-reconcile Shopify + Stord + D365 · discrepancy flags · D365 upload</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-master-data"/></svg></div><div class="mod-name">Master Data</div><div class="mod-desc">SKU Catalog · BOM · Product Bible · Vendors · Warehouse Routing · Bundles</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-inventory"/></svg></div><div class="mod-name">Inventory</div><div class="mod-desc">Unified view across 5 WH · Watchlist · one-click D365 upload · stockout alerts</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-sales"/></svg></div><div class="mod-name">Sales &amp; Usage</div><div class="mod-desc">Shopify/Skio dashboards · SKU usage · production plan · starter distribution</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-consolidation"/></svg></div><div class="mod-name">SO Consolidation</div><div class="mod-desc">Auto-reconcile Shopify + Stord + D365 · discrepancy flags · D365 upload</div></div>
 
-      <div class="mod-card"><div class="mod-ico">📈</div><div class="mod-name">Demand Forecast</div><div class="mod-desc">12-week projection · RM/CON runway · flavor mix · campaign calendar · Meta Ads</div></div>
-      <div class="mod-card"><div class="mod-ico">🚚</div><div class="mod-name">Delivery Performance</div><div class="mod-desc">SLA by route · P90 transit · carrier scorecard · problem-destination flags · PDF export</div></div>
-      <div class="mod-card"><div class="mod-ico">🎁</div><div class="mod-name">Gifting</div><div class="mod-desc">Self-serve form · auto-route to warehouse API · Slack approval · tracking sync</div></div>
-      <div class="mod-card"><div class="mod-ico">💰</div><div class="mod-name">Shipping &amp; Invoices</div><div class="mod-desc">3-carrier parsers · duplicate detection · rate-card validation · Slack overcharge alerts</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-forecast"/></svg></div><div class="mod-name">Demand Forecast</div><div class="mod-desc">12-week projection · RM/CON runway · flavor mix · campaign calendar · Meta Ads</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-delivery"/></svg></div><div class="mod-name">Delivery Performance</div><div class="mod-desc">SLA by route · P90 transit · carrier scorecard · problem-destination flags · PDF export</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-gifting"/></svg></div><div class="mod-name">Gifting</div><div class="mod-desc">Self-serve form · auto-route to warehouse API · Slack approval · tracking sync</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-shipping"/></svg></div><div class="mod-name">Shipping &amp; Invoices</div><div class="mod-desc">3-carrier parsers · duplicate detection · rate-card validation · Slack overcharge alerts</div></div>
 
-      <div class="mod-card"><div class="mod-ico">⚙</div><div class="mod-name">Stord Operations</div><div class="mod-desc">Live work orders · ASN tracking · D365 PO cross-check · kitting receipts</div></div>
-      <div class="mod-card"><div class="mod-ico">📥</div><div class="mod-name">Inbound</div><div class="mod-desc">PO management · Stord + XLWMS receipt sync · inbound calendar · shipment forms</div></div>
-      <div class="mod-card"><div class="mod-ico">📅</div><div class="mod-name">HK Fulfilment</div><div class="mod-desc">Batch AWB via Spaceship · auto-buy cron 9AM · carrier-split PDFs · D365 SKU mapping</div></div>
-      <div class="mod-card"><div class="mod-ico">🏗</div><div class="mod-name">Build Planner</div><div class="mod-desc">Production plan · sticks forecast · starter distribution · warehouse balance</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-stord-ops"/></svg></div><div class="mod-name">Stord Operations</div><div class="mod-desc">Live work orders · ASN tracking · D365 PO cross-check · kitting receipts</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-inbound"/></svg></div><div class="mod-name">Inbound</div><div class="mod-desc">PO management · Stord + XLWMS receipt sync · inbound calendar · shipment forms</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-fulfilment"/></svg></div><div class="mod-name">HK Fulfilment</div><div class="mod-desc">Batch AWB via Spaceship · auto-buy cron 9AM · carrier-split PDFs · D365 SKU mapping</div></div>
+      <div class="mod-card"><div class="mod-ico"><svg><use href="#ico-build"/></svg></div><div class="mod-name">Build Planner</div><div class="mod-desc">Production plan · sticks forecast · starter distribution · warehouse balance</div></div>
     </div>
 
     <p class="reveal reveal-delay-3 muted text-center" style="font-size: clamp(0.65rem, 0.95vw, 0.78rem); letter-spacing: 0.08em;">
@@ -970,163 +1188,148 @@ p, li {
 </section>
 
 <!-- ============================================ -->
-<!-- SLIDE 6: ARCHITECTURE                        -->
-<!-- ============================================ -->
-<section class="slide bg-dark bg-pattern" id="slide-6">
-  <div class="content flex-col gap-md">
-    <div class="text-center">
-      <span class="badge badge-stone reveal caption">Architecture</span>
-      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">How It All Connects</h2>
-    </div>
-    <div class="flow reveal reveal-delay-2" style="margin-top: clamp(0.3rem, 1vh, 0.5rem);">
-      <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="#95BF47"><path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/></svg></div><div class="label">Shopify</div><div class="sub">Orders & Products</div></div>
-      <div class="flow-node"><div class="icon"><svg viewBox="0 0 50 20" width="32" height="13"><rect width="50" height="20" rx="3" fill="#1B2D5B"/><text x="25" y="14" text-anchor="middle" fill="#fff" font-family="Arial" font-size="10" font-weight="700">STORD</text></svg></div><div class="label">Stord</div><div class="sub">Inventory & 3PL</div></div>
-      <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="#0B53CE"><path d="M15.805 11.322v4.889a2.536 2.536 0 0 1-1.643 2.374l-1.732.652a.507.507 0 0 1-.686-.475v-5.956l-3.392 1.239a1.015 1.015 0 0 0-.664.953v7.986c0 .705.7 1.195 1.363.953l10.161-3.713a2.535 2.535 0 0 0 1.666-2.382V7.696a2.537 2.537 0 0 1-1.666 2.381l-3.407 1.245Zm0-.532V9.323a2.537 2.537 0 0 0-1.645-2.375l-1.728-.65a.508.508 0 0 0-.686.475v4.59c0 .701-.695 1.191-1.355.956L3.795 9.963a1.015 1.015 0 0 1-.674-.956V1.015c0-.701.695-1.191 1.356-.955l14.718 5.256A2.538 2.538 0 0 1 20.83 7.21c-.136.861-1.05 2.128-1.79 2.398l-3.235 1.182Z"/></svg></div><div class="label">D365</div><div class="sub">Production</div></div>
-      <div class="flow-node"><div class="icon"><svg viewBox="0 0 40 20" width="28" height="14"><rect width="40" height="20" rx="3" fill="#6366F1"/><text x="20" y="14" text-anchor="middle" fill="#fff" font-family="Arial" font-size="10" font-weight="700">SKIO</text></svg></div><div class="label">Skio</div><div class="sub">Subscriptions</div></div>
-    </div>
-    <div class="text-center reveal reveal-delay-3" style="font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--im8-flamingo); opacity: 0.4;">▼</div>
-    <div class="flow reveal reveal-delay-3">
-      <div class="flow-node flow-center pulse-glow" style="min-width: clamp(140px, 20vw, 220px); padding: clamp(1rem, 2vh, 1.5rem);">
-        <svg style="height: clamp(1.2rem, 2.5vh, 1.8rem); fill: var(--im8-flamingo); margin-bottom: 0.3rem;"><use href="#im8-logo"/></svg>
-        <div class="label gradient-text" style="font-size: clamp(0.9rem, 1.5vw, 1.1rem); font-weight: 700;">Hub</div>
-        <div class="sub" style="color: var(--text-secondary);">Unified Dashboard</div>
-      </div>
-    </div>
-    <div class="text-center reveal reveal-delay-4" style="font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--im8-flamingo); opacity: 0.4;">▼</div>
-    <div class="flow reveal reveal-delay-4">
-      <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="#E01E5A"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg></div><div class="label">Slack Alerts</div><div class="sub">Real-time notifications</div></div>
-      <div class="flow-node"><div class="icon">📊</div><div class="label">Analytics</div><div class="sub">Charts & KPIs</div></div>
-      <div class="flow-node"><div class="icon">⚠️</div><div class="label">Risk Flags</div><div class="sub">Proactive alerts</div></div>
-    </div>
-  </div>
-  <span class="slide-num">04 / 24</span>
-</section>
-
-<!-- ============================================ -->
 <!-- SLIDE 6B: PLATFORM CONNECTIONS                -->
 <!-- ============================================ -->
 <section class="slide bg-dark bg-pattern" id="slide-6b">
-  <div class="content flex-col gap-sm text-center" style="align-items: center;">
+  <div class="content flex-col gap-sm text-center" style="align-items: center; max-width: 1100px;">
     <div>
       <span class="badge badge-flamingo reveal caption">Integrations</span>
       <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.3rem, 0.8vh, 0.5rem);">
-        <span class="gradient-text">8 Platforms</span>, One Hub
+        <span class="gradient-text">9 Platforms</span>, One Hub
       </h2>
     </div>
-    <!-- Hub-and-spoke SVG diagram -->
-    <div class="reveal reveal-delay-2" style="position: relative; width: min(80vw, 700px); height: min(65vh, 520px);">
-      <svg viewBox="0 0 700 520" width="100%" height="100%" style="overflow: visible;">
+
+    <!-- Hub-and-spoke: 920x600 viewBox, aspect-ratio locked, SVG + HTML overlays aligned -->
+    <div class="integ-wrap reveal reveal-delay-2">
+      <svg viewBox="0 0 920 600" class="integ-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <!-- Animated dash for connection lines -->
-          <style>
-            .conn-line { stroke: rgba(255,150,147,0.3); stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; }
-            .conn-line-glow { stroke: rgba(255,150,147,0.08); stroke-width: 8; fill: none; }
-            .conn-dot { fill: var(--im8-flamingo); }
-            @keyframes dashFlow { to { stroke-dashoffset: -20; } }
-            .conn-line { animation: dashFlow 2s linear infinite; }
-            .hub-ring { fill: none; stroke: rgba(255,150,147,0.1); stroke-width: 1; }
-            .hub-glow { fill: rgba(164,0,17,0.15); }
-          </style>
+          <radialGradient id="hubAura" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(255,150,147,0.35)"/>
+            <stop offset="60%" stop-color="rgba(164,0,17,0.12)"/>
+            <stop offset="100%" stop-color="rgba(164,0,17,0)"/>
+          </radialGradient>
         </defs>
 
         <!-- Orbital rings -->
-        <circle cx="350" cy="260" r="170" class="hub-ring"/>
-        <circle cx="350" cy="260" r="220" class="hub-ring" stroke-dasharray="4 6"/>
+        <circle cx="460" cy="300" r="215" fill="none" stroke="rgba(255,150,147,0.1)" stroke-width="1"/>
+        <circle cx="460" cy="300" r="255" fill="none" stroke="rgba(255,150,147,0.07)" stroke-width="1" stroke-dasharray="3 6"/>
 
-        <!-- Connection lines from each platform to center -->
-        <!-- Shopify (top) -->
-        <line x1="350" y1="50" x2="350" y2="220" class="conn-line-glow"/>
-        <line x1="350" y1="50" x2="350" y2="220" class="conn-line"/>
-        <!-- Stord (top-right) -->
-        <line x1="560" y1="110" x2="400" y2="230" class="conn-line-glow"/>
-        <line x1="560" y1="110" x2="400" y2="230" class="conn-line"/>
-        <!-- D365 (right) -->
-        <line x1="620" y1="260" x2="410" y2="260" class="conn-line-glow"/>
-        <line x1="620" y1="260" x2="410" y2="260" class="conn-line"/>
-        <!-- AfterShip (bottom-right) -->
-        <line x1="560" y1="410" x2="400" y2="290" class="conn-line-glow"/>
-        <line x1="560" y1="410" x2="400" y2="290" class="conn-line"/>
-        <!-- FedEx (bottom) -->
-        <line x1="350" y1="470" x2="350" y2="300" class="conn-line-glow"/>
-        <line x1="350" y1="470" x2="350" y2="300" class="conn-line"/>
-        <!-- Spaceship (bottom-left) -->
-        <line x1="140" y1="410" x2="300" y2="290" class="conn-line-glow"/>
-        <line x1="140" y1="410" x2="300" y2="290" class="conn-line"/>
-        <!-- GPS/XLWMS (left) -->
-        <line x1="80" y1="260" x2="290" y2="260" class="conn-line-glow"/>
-        <line x1="80" y1="260" x2="290" y2="260" class="conn-line"/>
-        <!-- Slack (top-left) -->
-        <line x1="140" y1="110" x2="300" y2="230" class="conn-line-glow"/>
-        <line x1="140" y1="110" x2="300" y2="230" class="conn-line"/>
+        <!-- Hub aura glow -->
+        <circle cx="460" cy="300" r="120" fill="url(#hubAura)"/>
 
-        <!-- Center Hub glow -->
-        <circle cx="350" cy="260" r="55" class="hub-glow"/>
-        <circle cx="350" cy="260" r="45" fill="rgba(164,0,17,0.3)" stroke="rgba(255,150,147,0.4)" stroke-width="2"/>
+        <!-- 9 connection lines: hub-edge (r=72) → platform-inner-edge (r=215) -->
+        <!-- Glow backing -->
+        <g>
+          <line x1="460" y1="228" x2="460" y2="85" class="cline-glow"/>
+          <line x1="506" y1="244" x2="598" y2="135" class="cline-glow"/>
+          <line x1="531" y1="287" x2="671" y2="263" class="cline-glow"/>
+          <line x1="522" y1="336" x2="646" y2="408" class="cline-glow"/>
+          <line x1="485" y1="368" x2="534" y2="504" class="cline-glow"/>
+          <line x1="435" y1="368" x2="386" y2="504" class="cline-glow"/>
+          <line x1="398" y1="336" x2="274" y2="408" class="cline-glow"/>
+          <line x1="389" y1="287" x2="249" y2="263" class="cline-glow"/>
+          <line x1="414" y1="244" x2="322" y2="135" class="cline-glow"/>
+        </g>
+        <!-- Animated dashed lines -->
+        <g>
+          <line x1="460" y1="228" x2="460" y2="85" class="cline"/>
+          <line x1="506" y1="244" x2="598" y2="135" class="cline"/>
+          <line x1="531" y1="287" x2="671" y2="263" class="cline"/>
+          <line x1="522" y1="336" x2="646" y2="408" class="cline"/>
+          <line x1="485" y1="368" x2="534" y2="504" class="cline"/>
+          <line x1="435" y1="368" x2="386" y2="504" class="cline"/>
+          <line x1="398" y1="336" x2="274" y2="408" class="cline"/>
+          <line x1="389" y1="287" x2="249" y2="263" class="cline"/>
+          <line x1="414" y1="244" x2="322" y2="135" class="cline"/>
+        </g>
       </svg>
 
-      <!-- Center Hub node (HTML overlay) -->
-      <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; z-index:5;">
-        <div class="pulse-glow" style="width:clamp(70px,10vw,100px); height:clamp(70px,10vw,100px); border-radius:50%; background:linear-gradient(135deg, rgba(164,0,17,0.6), rgba(80,0,11,0.8)); border:2px solid rgba(255,150,147,0.4); display:flex; align-items:center; justify-content:center; flex-direction:column;">
-          <svg style="height:clamp(1rem,2vw,1.5rem); fill:var(--im8-flamingo);"><use href="#im8-logo"/></svg>
-          <span style="font-family:var(--font-caption); font-size:clamp(0.6rem,1vw,0.8rem); font-weight:700; color:#fff; letter-spacing:0.1em; margin-top:2px;">HUB</span>
+      <!-- Center Hub (HTML overlay, positioned at 50%/50% = 460/300 of viewBox) -->
+      <div class="integ-hub pulse-glow">
+        <svg class="integ-hub-logo"><use href="#im8-logo"/></svg>
+        <span class="integ-hub-label">HUB</span>
+      </div>
+
+      <!-- 9 Platform nodes — positions match SVG line endpoints -->
+      <!-- 1. Shopify (12 o'clock) -->
+      <div class="integ-node" style="left: 50%; top: 9.2%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 24 24" fill="#95BF47"><path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/></svg>
         </div>
+        <span class="integ-name">Shopify</span>
+        <span class="integ-sub">Orders · Products</span>
       </div>
 
-      <!-- Platform nodes (positioned absolutely around the hub) -->
-      <!-- Shopify (top) -->
-      <div style="position:absolute; left:50%; top:2%; transform:translateX(-50%); text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 24 24" style="width:clamp(24px,2.8vw,32px); height:clamp(24px,2.8vw,32px);" fill="#95BF47"><path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">Shopify</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">Orders · Products</span>
+      <!-- 2. Stord (1–2 o'clock) -->
+      <div class="integ-node" style="left: 65%; top: 18.8%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 60 24" class="badge-svg"><rect width="60" height="24" rx="4" fill="#1B2D5B"/><text x="30" y="16" text-anchor="middle" fill="#fff" font-family="Arial" font-size="12" font-weight="700">STORD</text></svg>
+        </div>
+        <span class="integ-name">Stord</span>
+        <span class="integ-sub">3PL · Inventory</span>
       </div>
 
-      <!-- Stord (top-right) — no public icon, styled text badge -->
-      <div style="position:absolute; right:8%; top:12%; text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 60 24" style="width:clamp(36px,3.5vw,48px); height:clamp(14px,1.4vw,20px);"><rect width="60" height="24" rx="4" fill="#1B2D5B"/><text x="30" y="16" text-anchor="middle" fill="#fff" font-family="Arial" font-size="12" font-weight="700">STORD</text></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">Stord</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">3PL · Inventory</span>
+      <!-- 3. D365 (3 o'clock) -->
+      <div class="integ-node" style="left: 73%; top: 43.8%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 24 24" fill="#0B53CE"><path d="M15.805 11.322v4.889a2.536 2.536 0 0 1-1.643 2.374l-1.732.652a.507.507 0 0 1-.686-.475v-5.956l-3.392 1.239a1.015 1.015 0 0 0-.664.953v7.986c0 .705.7 1.195 1.363.953l10.161-3.713a2.535 2.535 0 0 0 1.666-2.382V7.696a2.537 2.537 0 0 1-1.666 2.381l-3.407 1.245Zm0-.532V9.323a2.537 2.537 0 0 0-1.645-2.375l-1.728-.65a.508.508 0 0 0-.686.475v4.59c0 .701-.695 1.191-1.355.956L3.795 9.963a1.015 1.015 0 0 1-.674-.956V1.015c0-.701.695-1.191 1.356-.955l14.718 5.256A2.538 2.538 0 0 1 20.83 7.21c-.136.861-1.05 2.128-1.79 2.398l-3.235 1.182Z"/></svg>
+        </div>
+        <span class="integ-name">D365</span>
+        <span class="integ-sub">ERP · Production</span>
       </div>
 
-      <!-- D365 (right) -->
-      <div style="position:absolute; right:2%; top:42%; text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 24 24" style="width:clamp(24px,2.8vw,32px); height:clamp(24px,2.8vw,32px);" fill="#0B53CE"><path d="M15.805 11.322v4.889a2.536 2.536 0 0 1-1.643 2.374l-1.732.652a.507.507 0 0 1-.686-.475v-5.956l-3.392 1.239a1.015 1.015 0 0 0-.664.953v7.986c0 .705.7 1.195 1.363.953l10.161-3.713a2.535 2.535 0 0 0 1.666-2.382V7.696a2.537 2.537 0 0 1-1.666 2.381l-3.407 1.245Zm0-.532V9.323a2.537 2.537 0 0 0-1.645-2.375l-1.728-.65a.508.508 0 0 0-.686.475v4.59c0 .701-.695 1.191-1.355.956L3.795 9.963a1.015 1.015 0 0 1-.674-.956V1.015c0-.701.695-1.191 1.356-.955l14.718 5.256A2.538 2.538 0 0 1 20.83 7.21c-.136.861-1.05 2.128-1.79 2.398l-3.235 1.182Z"/></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">D365</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">ERP · Production</span>
+      <!-- 4. AfterShip (4–5 o'clock) -->
+      <div class="integ-node" style="left: 70.2%; top: 68%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 24 24" fill="#FF6B2B"><path d="M22.549 9.604a10.462 10.462 0 0 0-3.388-6.838A10.632 10.632 0 0 0 12 0a10.64 10.64 0 0 0-7.16 2.764 10.465 10.465 0 0 0-3.428 7.74c0 2.371.81 4.672 2.298 6.529a10.617 10.617 0 0 0 5.895 3.698L12 24l2.395-3.27a10.593 10.593 0 0 0 5.895-3.697 10.442 10.442 0 0 0 2.26-7.43zm-11.306 6.28a.26.26 0 0 1-.034.125.254.254 0 0 1-.347.092l-3.906-2.237a1.005 1.005 0 0 1-.505-.865V8.624a.26.26 0 0 1 .033-.126.254.254 0 0 1 .347-.092l3.907 2.237c.152.089.281.214.368.366.09.151.135.324.135.5v4.372zM12 9.48c-.176 0-.35-.047-.503-.133L7.5 7.057a.241.241 0 0 1-.09-.092.249.249 0 0 1 .09-.342l3.997-2.289a1.025 1.025 0 0 1 1.007 0l3.996 2.29a.24.24 0 0 1 .09.092.247.247 0 0 1 0 .25.271.271 0 0 1-.09.092l-3.997 2.289A1.005 1.005 0 0 1 12 9.48ZM17.546 13a.996.996 0 0 1-.503.866l-3.908 2.237a.254.254 0 0 1-.38-.218V11.51c0-.175.047-.348.135-.501.089-.152.216-.28.368-.366l3.907-2.238a.254.254 0 0 1 .38.219z"/></svg>
+        </div>
+        <span class="integ-name">AfterShip</span>
+        <span class="integ-sub">Delivery Tracking</span>
       </div>
 
-      <!-- AfterShip (bottom-right) -->
-      <div style="position:absolute; right:8%; bottom:10%; text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 24 24" style="width:clamp(24px,2.8vw,32px); height:clamp(24px,2.8vw,32px);" fill="#FF6B2B"><path d="M22.549 9.604a10.462 10.462 0 0 0-3.388-6.838A10.632 10.632 0 0 0 12 0a10.64 10.64 0 0 0-7.16 2.764 10.465 10.465 0 0 0-3.428 7.74c0 2.371.81 4.672 2.298 6.529a10.617 10.617 0 0 0 5.895 3.698L12 24l2.395-3.27a10.593 10.593 0 0 0 5.895-3.697 10.442 10.442 0 0 0 2.26-7.43zm-11.306 6.28a.26.26 0 0 1-.034.125.254.254 0 0 1-.347.092l-3.906-2.237a1.005 1.005 0 0 1-.505-.865V8.624a.26.26 0 0 1 .033-.126.254.254 0 0 1 .347-.092l3.907 2.237c.152.089.281.214.368.366.09.151.135.324.135.5v4.372zM12 9.48c-.176 0-.35-.047-.503-.133L7.5 7.057a.241.241 0 0 1-.09-.092.249.249 0 0 1 .09-.342l3.997-2.289a1.025 1.025 0 0 1 1.007 0l3.996 2.29a.24.24 0 0 1 .09.092.247.247 0 0 1 0 .25.271.271 0 0 1-.09.092l-3.997 2.289A1.005 1.005 0 0 1 12 9.48ZM17.546 13a.996.996 0 0 1-.503.866l-3.908 2.237a.254.254 0 0 1-.38-.218V11.51c0-.175.047-.348.135-.501.089-.152.216-.28.368-.366l3.907-2.238a.254.254 0 0 1 .38.219z"/></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">AfterShip</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">Delivery Tracking</span>
+      <!-- 5. FedEx (5 o'clock, bottom-right) -->
+      <div class="integ-node" style="left: 58%; top: 84%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 24 24" fill="#4D148C"><path d="M22.498 14.298c-.016-.414.345-.751.75-.755a.745.745 0 0 1 .752.755.755.755 0 0 1-.751.745c-.395.002-.759-.346-.751-.745zm.759-.083c.067-.02.164-.042.162-.13.007-.09-.086-.133-.162-.134h-.163v.263c0 .001.165-.002.163.001zm-.163.107v.418h-.14v-.91h.327c.156-.021.294.092.286.253a.218.218 0 0 1-.156.19c.162.083.108.322.173.467h-.156a2.355 2.355 0 0 1-.04-.205c-.018-.093-.047-.229-.17-.213h-.124zm.76-.024a.603.603 0 0 0-.605-.632c-.338-.012-.62.302-.605.632a.619.619 0 0 0 .605.622.61.61 0 0 0 .605-.622zm-5.052-.579l-.878 1.008h-1.306l1.559-1.745-1.56-1.75h1.355l.902.997.878-.998h1.306l-1.543 1.743 1.559 1.753h-1.371l-.901-1.008zm-4.703-.352v-.827h1.904v-1.506l1.724 1.948-1.724 1.941v-1.556h-1.904zm1.56 1.36h-3.2V9.044h3.224v1.024H13.77v1.163h1.888v.958h-1.904v1.522h1.904v1.016zm-5.705-.655c-.54.017-.878-.552-.877-1.04-.01-.507.307-1.123.878-1.105.579-.025.871.6.845 1.103.023.501-.29 1.062-.846 1.042zM4.743 12.41c.076-.358.403-.67.78-.663a.788.788 0 0 1 .803.663H4.743zm15.182.564l1.815-2.047h-2.125l-.74.844-.763-.844h-4.037v-.548h1.912V8.741H10.84v2.58c-.362-.448-.981-.559-1.526-.492-.782.123-1.427.762-1.634 1.514-.254-.958-1.179-1.588-2.157-1.554-.781.009-1.6.365-1.987 1.071v-.818h-1.87v-.9h2.043v-1.4H0v6.287h1.666v-2.644h1.666a7.59 7.59 0 0 0-.082.622c-.013 1.232 1.042 2.27 2.274 2.236a2.204 2.204 0 0 0 2.157-1.432H6.254c-.14.268-.441.38-.73.36-.457.009-.83-.417-.829-.86h2.914c.083 1.027.988 1.966 2.043 1.947a1.53 1.53 0 0 0 1.19-.639v.41h7.215l.754-.86.754.86h2.192l-1.832-2.055z"/></svg>
+        </div>
+        <span class="integ-name">FedEx</span>
+        <span class="integ-sub">Invoices · Rates</span>
       </div>
 
-      <!-- FedEx (bottom) -->
-      <div style="position:absolute; left:50%; bottom:2%; transform:translateX(-50%); text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 24 24" style="width:clamp(24px,2.8vw,32px); height:clamp(24px,2.8vw,32px);" fill="#4D148C"><path d="M22.498 14.298c-.016-.414.345-.751.75-.755a.745.745 0 0 1 .752.755.755.755 0 0 1-.751.745c-.395.002-.759-.346-.751-.745zm.759-.083c.067-.02.164-.042.162-.13.007-.09-.086-.133-.162-.134h-.163v.263c0 .001.165-.002.163.001zm-.163.107v.418h-.14v-.91h.327c.156-.021.294.092.286.253a.218.218 0 0 1-.156.19c.162.083.108.322.173.467h-.156a2.355 2.355 0 0 1-.04-.205c-.018-.093-.047-.229-.17-.213h-.124zm.76-.024a.603.603 0 0 0-.605-.632c-.338-.012-.62.302-.605.632a.619.619 0 0 0 .605.622.61.61 0 0 0 .605-.622zm-5.052-.579l-.878 1.008h-1.306l1.559-1.745-1.56-1.75h1.355l.902.997.878-.998h1.306l-1.543 1.743 1.559 1.753h-1.371l-.901-1.008zm-4.703-.352v-.827h1.904v-1.506l1.724 1.948-1.724 1.941v-1.556h-1.904zm1.56 1.36h-3.2V9.044h3.224v1.024H13.77v1.163h1.888v.958h-1.904v1.522h1.904v1.016zm-5.705-.655c-.54.017-.878-.552-.877-1.04-.01-.507.307-1.123.878-1.105.579-.025.871.6.845 1.103.023.501-.29 1.062-.846 1.042zM4.743 12.41c.076-.358.403-.67.78-.663a.788.788 0 0 1 .803.663H4.743zm15.182.564l1.815-2.047h-2.125l-.74.844-.763-.844h-4.037v-.548h1.912V8.741H10.84v2.58c-.362-.448-.981-.559-1.526-.492-.782.123-1.427.762-1.634 1.514-.254-.958-1.179-1.588-2.157-1.554-.781.009-1.6.365-1.987 1.071v-.818h-1.87v-.9h2.043v-1.4H0v6.287h1.666v-2.644h1.666a7.59 7.59 0 0 0-.082.622c-.013 1.232 1.042 2.27 2.274 2.236a2.204 2.204 0 0 0 2.157-1.432H6.254c-.14.268-.441.38-.73.36-.457.009-.83-.417-.829-.86h2.914c.083 1.027.988 1.966 2.043 1.947a1.53 1.53 0 0 0 1.19-.639v.41h7.215l.754-.86.754.86h2.192l-1.832-2.055z"/></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">FedEx</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">Invoices · Rates</span>
+      <!-- 6. Spaceship (7 o'clock, bottom-left) -->
+      <div class="integ-node" style="left: 42%; top: 84%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 24 24" fill="#394EFF"><path d="M11.9997 1.2529c1.0445 0 1.956.5689 2.441 1.4125l4.5883 7.9314 4.45 7.6915c.0466.074.2105.3585.27.4938.2216.4677.2505.9472.251 1.1595 0 1.5496-1.2587 2.8056-2.8116 2.8056-.2949 0-.579-.045-.8457-.129l-7.9011-2.6061a1.406 1.406 0 0 0-.4413-.0705 1.413 1.413 0 0 0-.442.0705L3.658 22.6183l-.1623.0456a2.8398 2.8398 0 0 1-.6838.0831c-1.5531 0-2.8119-1.256-2.8119-2.8056.002-.243.0234-.5533.168-.9578.0294-.0911.0743-.176.1115-.264.0712-.1487.1607-.2875.2411-.4313l4.4493-7.6916 4.5883-7.9313c.485-.8437 1.3971-1.4126 2.4416-1.4126z"/></svg>
+        </div>
+        <span class="integ-name">Spaceship</span>
+        <span class="integ-sub">HK AWB · SF Express</span>
       </div>
 
-      <!-- Spaceship (bottom-left) -->
-      <div style="position:absolute; left:8%; bottom:10%; text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 24 24" style="width:clamp(24px,2.8vw,32px); height:clamp(24px,2.8vw,32px);" fill="#394EFF"><path d="M11.9997 1.2529c1.0445 0 1.956.5689 2.441 1.4125l4.5883 7.9314 4.45 7.6915c.0466.074.2105.3585.27.4938.2216.4677.2505.9472.251 1.1595 0 1.5496-1.2587 2.8056-2.8116 2.8056-.2949 0-.579-.045-.8457-.129l-7.9011-2.6061a1.406 1.406 0 0 0-.4413-.0705 1.413 1.413 0 0 0-.442.0705L3.658 22.6183l-.1623.0456a2.8398 2.8398 0 0 1-.6838.0831c-1.5531 0-2.8119-1.256-2.8119-2.8056.002-.243.0234-.5533.168-.9578.0294-.0911.0743-.176.1115-.264.0712-.1487.1607-.2875.2411-.4313l4.4493-7.6916 4.5883-7.9313c.485-.8437 1.3971-1.4126 2.4416-1.4126z"/></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">Spaceship</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">HK AWB · SF Express</span>
+      <!-- 7. GPS/XLWMS (7–8 o'clock) -->
+      <div class="integ-node" style="left: 29.8%; top: 68%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 60 24" class="badge-svg"><rect width="60" height="24" rx="4" fill="#2D5F2D"/><text x="30" y="10" text-anchor="middle" fill="#fff" font-family="Arial" font-size="7" font-weight="700">XLWMS</text><text x="30" y="20" text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="Arial" font-size="6">GPS</text></svg>
+        </div>
+        <span class="integ-name">GPS / XLWMS</span>
+        <span class="integ-sub">UK · EU · MENA</span>
       </div>
 
-      <!-- GPS/XLWMS (left) — no public icon, styled text badge -->
-      <div style="position:absolute; left:2%; top:42%; text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 60 24" style="width:clamp(36px,3.5vw,48px); height:clamp(14px,1.4vw,20px);"><rect width="60" height="24" rx="4" fill="#2D5F2D"/><text x="30" y="10" text-anchor="middle" fill="#fff" font-family="Arial" font-size="7" font-weight="700">XLWMS</text><text x="30" y="20" text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="Arial" font-size="6">GPS</text></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">GPS / XLWMS</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">UK · EU · MENA</span>
+      <!-- 8. WhatsApp (9 o'clock) — AI Agent -->
+      <div class="integ-node" style="left: 27%; top: 43.8%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <span class="integ-name">WhatsApp</span>
+        <span class="integ-sub">Jarvis AI Agent</span>
       </div>
 
-      <!-- Slack (top-left) -->
-      <div style="position:absolute; left:8%; top:12%; text-align:center; z-index:5;">
-        <div style="width:clamp(48px,5.5vw,64px); height:clamp(48px,5.5vw,64px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 4px;"><svg viewBox="0 0 24 24" style="width:clamp(24px,2.8vw,32px); height:clamp(24px,2.8vw,32px);" fill="#E01E5A"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg></div>
-        <span style="font-family:var(--font-caption); font-weight:600; font-size:clamp(0.65rem,1vw,0.82rem); color:#fff;">Slack</span><br>
-        <span style="font-size:clamp(0.5rem,0.75vw,0.62rem); color:var(--im8-flamingo);">Alerts · Approvals</span>
+      <!-- 9. Slack (10–11 o'clock) -->
+      <div class="integ-node" style="left: 35%; top: 18.8%;">
+        <div class="integ-icon">
+          <svg viewBox="0 0 24 24" fill="#E01E5A"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
+        </div>
+        <span class="integ-name">Slack</span>
+        <span class="integ-sub">Alerts · Approvals</span>
       </div>
     </div>
 
@@ -1134,6 +1337,7 @@ p, li {
       <span class="flamingo">70+</span> API endpoints &nbsp;·&nbsp; Webhook-driven &nbsp;·&nbsp; Real-time sync
     </p>
   </div>
+  <span class="slide-num">04 / 24</span>
 </section>
 
 <!-- SLIDE 6c: PRODUCT TOUR (real page screenshots) -->
