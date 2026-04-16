@@ -416,10 +416,138 @@ p, li {
   margin: 0 auto;
 }
 
+/* === PAY-TO-UNLOCK GATE === */
+.gate-slide {
+  background: linear-gradient(160deg, #50000B 0%, #2D0006 55%, #1A0004 100%);
+}
+.gate {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.gate-lock {
+  font-size: clamp(4rem, 8vw, 6rem);
+  animation: lockBounce 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(164, 0, 17, 0.5));
+}
+@keyframes lockBounce {
+  0%, 100% { transform: rotate(-5deg) scale(1); }
+  25% { transform: rotate(5deg) scale(1.05); }
+  50% { transform: rotate(-3deg) scale(1); }
+  75% { transform: rotate(3deg) scale(1.02); }
+}
+.gate-module {
+  font-family: var(--font-caption);
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--im8-flamingo);
+  margin-top: clamp(1rem, 2vh, 1.5rem);
+}
+.gate-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  color: #fff;
+  margin-top: clamp(0.5rem, 1vh, 0.8rem);
+  text-shadow: 0 0 40px rgba(164, 0, 17, 0.4);
+}
+.gate-price {
+  font-family: var(--font-caption);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: var(--im8-stone);
+  margin-top: clamp(1rem, 1.5vh, 1.2rem);
+  letter-spacing: 0.1em;
+}
+.gate-price span {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--im8-flamingo);
+}
+.gate-btns {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(1.5rem, 3vh, 2.5rem);
+}
+.gate-btn {
+  font-family: var(--font-caption);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 12px;
+  padding: clamp(0.8rem, 1.5vh, 1.2rem) clamp(1.5rem, 3vw, 2.5rem);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+.gate-btn--yes {
+  background: linear-gradient(135deg, var(--im8-red-algae), #D4003A);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(164, 0, 17, 0.5), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+.gate-btn--yes:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 50px rgba(164, 0, 17, 0.7), 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+.gate-btn--no {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+}
+.gate-btn--no:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+}
+.gate-coins {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.coin {
+  position: absolute;
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  opacity: 0;
+  animation: coinFall 3s ease-in infinite;
+}
+@keyframes coinFall {
+  0% { opacity: 0; transform: translateY(-5vh) rotate(0deg); }
+  10% { opacity: 0.8; }
+  80% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(105vh) rotate(720deg); }
+}
+.gate-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--im8-flamingo);
+  border-radius: 50%;
+  animation: sparkle 1.5s ease-in-out infinite;
+  box-shadow: 0 0 6px var(--im8-flamingo);
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .float { animation: none; }
   .pulse-glow { animation: none; }
+  .gate-lock { animation: none; }
+  .coin { animation: none; }
+  .gate-sparkle { animation: none; }
   html { scroll-behavior: auto; }
 }
 </style>
@@ -455,7 +583,7 @@ p, li {
       One platform &nbsp;·&nbsp; All operations &nbsp;·&nbsp; Real-time visibility
     </p>
   </div>
-  <span class="slide-num">01 / 17</span>
+  <span class="slide-num">01 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -493,7 +621,7 @@ p, li {
       Every decision requires jumping between 4+ systems — no single source of truth
     </p>
   </div>
-  <span class="slide-num">02 / 17</span>
+  <span class="slide-num">02 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -528,7 +656,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">03 / 17</span>
+  <span class="slide-num">03 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -564,7 +692,7 @@ p, li {
       From scattered spreadsheets to a unified operations platform — in months, not years.
     </p>
   </div>
-  <span class="slide-num">04 / 17</span>
+  <span class="slide-num">04 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -599,7 +727,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">05 / 17</span>
+  <span class="slide-num">05 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -632,7 +760,88 @@ p, li {
       <div class="flow-node"><div class="icon">⚠️</div><div class="label">Risk Flags</div><div class="sub">Proactive alerts</div></div>
     </div>
   </div>
-  <span class="slide-num">06 / 17</span>
+  <span class="slide-num">06 / 26</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 6B: PLATFORM CONNECTIONS                -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-6b">
+  <div class="content flex-col gap-md text-center" style="align-items: center;">
+    <div>
+      <span class="badge badge-flamingo reveal caption">Integrations</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">
+        <span class="gradient-text">8 Platforms</span>, One Hub
+      </h2>
+    </div>
+    <!-- Platform grid -->
+    <div class="grid-4 reveal reveal-delay-2" style="max-width: 900px; margin-top: clamp(0.5rem, 1.5vh, 1rem);">
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">🛒</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">Shopify</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">Orders · Products · Webhooks</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">📦</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">Stord</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">3PL · Inventory · WOs · ASNs</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">🏭</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">D365</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">ERP · Production · Finance</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">📡</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">AfterShip</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">Delivery Tracking · KPIs</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">✈️</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">FedEx</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">Invoices · Rate Cards</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">🚀</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">Spaceship</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">HK AWB · SF Express</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">🌐</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">GPS / XLWMS</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">UK · EU · MENA Warehouses</p>
+      </div>
+      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
+        <div style="font-size: clamp(1.6rem, 3vh, 2.2rem); margin-bottom: 0.4rem;">💬</div>
+        <h3 style="font-size: clamp(0.8rem, 1.3vw, 1rem);">Slack</h3>
+        <p style="font-size: clamp(0.6rem, 0.9vw, 0.72rem); color: var(--text-muted);">Alerts · Approvals · Summaries</p>
+      </div>
+    </div>
+    <div class="highlight-box reveal reveal-delay-3" style="max-width: 700px;">
+      <p style="font-size: clamp(0.75rem, 1.2vw, 0.9rem); text-align: center;">
+        <span class="flamingo">70+</span> API endpoints &nbsp;·&nbsp; Webhook-driven &nbsp;·&nbsp; Real-time sync every 4 hours
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- GATE 1: MASTER DATA -->
+<section class="slide gate-slide" id="gate-7">
+<div class="gate-coins"><span class="coin" style="left:10%;animation-delay:0s">💰</span><span class="coin" style="left:25%;animation-delay:.7s">🪙</span><span class="coin" style="left:45%;animation-delay:1.4s">💰</span><span class="coin" style="left:65%;animation-delay:.3s">🪙</span><span class="coin" style="left:80%;animation-delay:1.8s">💰</span><span class="coin" style="left:90%;animation-delay:1.1s">🪙</span></div>
+<div class="gate-sparkle" style="top:20%;left:15%;animation-delay:0s"></div>
+<div class="gate-sparkle" style="top:30%;right:20%;animation-delay:.5s"></div>
+<div class="gate-sparkle" style="bottom:25%;left:25%;animation-delay:1s"></div>
+<div class="gate-sparkle" style="top:15%;right:10%;animation-delay:1.5s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 1</div>
+  <div class="gate-title">Master Data</div>
+  <div class="gate-price">Unlock for <span>$49,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-7','gate-7')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-8')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -667,7 +876,24 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Replaced Airtable — all creates/updates now go through Hub with full audit trail</p>
     </div>
   </div>
-  <span class="slide-num">07 / 17</span>
+  <span class="slide-num">07 / 26</span>
+</section>
+
+<!-- GATE 2: INVENTORY & RISK -->
+<section class="slide gate-slide" id="gate-8">
+<div class="gate-coins"><span class="coin" style="left:12%;animation-delay:.2s">💰</span><span class="coin" style="left:35%;animation-delay:1s">🪙</span><span class="coin" style="left:55%;animation-delay:.5s">💰</span><span class="coin" style="left:75%;animation-delay:1.6s">🪙</span><span class="coin" style="left:88%;animation-delay:.8s">💰</span></div>
+<div class="gate-sparkle" style="top:18%;left:20%;animation-delay:.3s"></div>
+<div class="gate-sparkle" style="top:35%;right:15%;animation-delay:.8s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 2</div>
+  <div class="gate-title">Inventory & Risk</div>
+  <div class="gate-price">Unlock for <span>$39,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-8','gate-8')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-9')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -703,7 +929,24 @@ p, li {
       <li>One-click BOM risk assessment across all finished goods</li>
     </ul>
   </div>
-  <span class="slide-num">08 / 17</span>
+  <span class="slide-num">08 / 26</span>
+</section>
+
+<!-- GATE 3: DEMAND FORECAST -->
+<section class="slide gate-slide" id="gate-9">
+<div class="gate-coins"><span class="coin" style="left:8%;animation-delay:.4s">💰</span><span class="coin" style="left:30%;animation-delay:1.2s">🪙</span><span class="coin" style="left:50%;animation-delay:.1s">💰</span><span class="coin" style="left:70%;animation-delay:1.5s">🪙</span><span class="coin" style="left:92%;animation-delay:.6s">💰</span></div>
+<div class="gate-sparkle" style="top:22%;right:25%;animation-delay:.2s"></div>
+<div class="gate-sparkle" style="bottom:20%;left:18%;animation-delay:1.2s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 3</div>
+  <div class="gate-title">Demand Forecast</div>
+  <div class="gate-price">Unlock for <span>$29,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-9','gate-9')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-10')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -735,7 +978,24 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">09 / 17</span>
+  <span class="slide-num">09 / 26</span>
+</section>
+
+<!-- GATE 4: WORK ORDERS -->
+<section class="slide gate-slide" id="gate-10">
+<div class="gate-coins"><span class="coin" style="left:18%;animation-delay:.1s">🎉</span><span class="coin" style="left:38%;animation-delay:1.1s">✨</span><span class="coin" style="left:58%;animation-delay:.7s">🎉</span><span class="coin" style="left:78%;animation-delay:1.4s">✨</span><span class="coin" style="left:88%;animation-delay:.4s">🎉</span></div>
+<div class="gate-sparkle" style="top:20%;right:18%;animation-delay:.4s"></div>
+<div class="gate-sparkle" style="bottom:22%;left:12%;animation-delay:.9s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 4</div>
+  <div class="gate-title">Stord Work Orders</div>
+  <div class="gate-price">Unlock for <span>$19,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-10','gate-10')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-11')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -769,7 +1029,24 @@ p, li {
       </p>
     </div>
   </div>
-  <span class="slide-num">10 / 17</span>
+  <span class="slide-num">10 / 26</span>
+</section>
+
+<!-- GATE 5: ASN INBOUND -->
+<section class="slide gate-slide" id="gate-11">
+<div class="gate-coins"><span class="coin" style="left:15%;animation-delay:.9s">🎁</span><span class="coin" style="left:40%;animation-delay:.3s">💰</span><span class="coin" style="left:60%;animation-delay:1.3s">🪙</span><span class="coin" style="left:82%;animation-delay:.5s">🎁</span></div>
+<div class="gate-sparkle" style="top:25%;left:30%;animation-delay:.6s"></div>
+<div class="gate-sparkle" style="bottom:30%;right:22%;animation-delay:1.1s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 5</div>
+  <div class="gate-title">ASN Inbound</div>
+  <div class="gate-price">Unlock for <span>$44,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-11','gate-11')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-12')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -809,7 +1086,24 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">11 / 17</span>
+  <span class="slide-num">11 / 26</span>
+</section>
+
+<!-- GATE 6: HK FULFILMENT -->
+<section class="slide gate-slide" id="gate-12">
+<div class="gate-coins"><span class="coin" style="left:20%;animation-delay:.6s">🏭</span><span class="coin" style="left:42%;animation-delay:1.3s">💰</span><span class="coin" style="left:62%;animation-delay:.2s">🪙</span><span class="coin" style="left:85%;animation-delay:1s">🏭</span></div>
+<div class="gate-sparkle" style="top:28%;left:22%;animation-delay:.7s"></div>
+<div class="gate-sparkle" style="bottom:18%;right:28%;animation-delay:1.3s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 6</div>
+  <div class="gate-title">HK Fulfilment</div>
+  <div class="gate-price">Unlock for <span>$34,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-12','gate-12')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-13')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -829,7 +1123,24 @@ p, li {
       <div class="card"><h3><span style="color: #34d399;">📥 Excel Export</span></h3><p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">D365 fulfillment with OTP SKU mapping</p></div>
     </div>
   </div>
-  <span class="slide-num">12 / 17</span>
+  <span class="slide-num">12 / 26</span>
+</section>
+
+<!-- GATE 7: SHIPPING & COST -->
+<section class="slide gate-slide" id="gate-13">
+<div class="gate-coins"><span class="coin" style="left:14%;animation-delay:.3s">📊</span><span class="coin" style="left:36%;animation-delay:1.5s">💰</span><span class="coin" style="left:56%;animation-delay:.8s">🪙</span><span class="coin" style="left:76%;animation-delay:.1s">📊</span><span class="coin" style="left:90%;animation-delay:1.2s">💰</span></div>
+<div class="gate-sparkle" style="top:16%;left:28%;animation-delay:.5s"></div>
+<div class="gate-sparkle" style="bottom:24%;right:16%;animation-delay:1s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 7</div>
+  <div class="gate-title">Shipping & Cost</div>
+  <div class="gate-price">Unlock for <span>$24,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-13','gate-13')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-14')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -853,7 +1164,24 @@ p, li {
       <li>Slack alerts for cost anomalies and overcharges</li>
     </ul>
   </div>
-  <span class="slide-num">13 / 17</span>
+  <span class="slide-num">13 / 26</span>
+</section>
+
+<!-- GATE 8: PO MANAGEMENT -->
+<section class="slide gate-slide" id="gate-14">
+<div class="gate-coins"><span class="coin" style="left:10%;animation-delay:.5s">✨</span><span class="coin" style="left:32%;animation-delay:1.1s">💰</span><span class="coin" style="left:52%;animation-delay:.2s">🪙</span><span class="coin" style="left:72%;animation-delay:1.6s">✨</span><span class="coin" style="left:88%;animation-delay:.7s">💰</span></div>
+<div class="gate-sparkle" style="top:20%;right:20%;animation-delay:.3s"></div>
+<div class="gate-sparkle" style="bottom:28%;left:15%;animation-delay:1.4s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 8</div>
+  <div class="gate-title">PO Management</div>
+  <div class="gate-price">Unlock for <span>$9,999</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-14','gate-14')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('slide-15')">🚫 No Thanks</a>
+  </div>
+</div>
 </section>
 
 <!-- ============================================ -->
@@ -882,7 +1210,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> 2-way Stord sync — RECEIVED_SHORT and RECEIVED_OVER auto-update</p>
     </div>
   </div>
-  <span class="slide-num">14 / 17</span>
+  <span class="slide-num">14 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -919,7 +1247,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">15 / 17</span>
+  <span class="slide-num">15 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -957,7 +1285,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Continuously evolving — new modules ship every sprint</p>
     </div>
   </div>
-  <span class="slide-num">16 / 17</span>
+  <span class="slide-num">16 / 26</span>
 </section>
 
 <!-- ============================================ -->
@@ -979,7 +1307,7 @@ p, li {
       im8hub.com
     </p>
   </div>
-  <span class="slide-num">17 / 17</span>
+  <span class="slide-num">17 / 26</span>
 </section>
 
 <!-- === JAVASCRIPT === -->
@@ -1050,6 +1378,37 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 document.querySelectorAll('.counter-grid').forEach(grid => counterObserver.observe(grid));
+
+/* === PAY-TO-UNLOCK GATE === */
+function unlockModule(moduleId, gateId) {
+  const gate = document.getElementById(gateId);
+  const mod = document.getElementById(moduleId);
+  if (!gate || !mod) return;
+
+  const lock = gate.querySelector('.gate-lock');
+  const btns = gate.querySelector('.gate-btns');
+  if (lock) {
+    lock.style.transition = 'all .6s';
+    lock.style.transform = 'scale(1.5) rotate(20deg)';
+    lock.innerHTML = '🔓';
+  }
+  if (btns) btns.style.opacity = '0.3';
+
+  const msg = document.createElement('div');
+  msg.style.cssText = 'font-family:Rajdhani,sans-serif;font-size:clamp(1.2rem,2vw,1.6rem);color:#4ADE80;font-weight:700;letter-spacing:.2em;margin-top:2vh;opacity:0;transform:translateY(10px);transition:all .4s ease';
+  msg.textContent = '✅ PAYMENT ACCEPTED';
+  gate.querySelector('.gate').appendChild(msg);
+  requestAnimationFrame(() => { msg.style.opacity = '1'; msg.style.transform = 'translateY(0)'; });
+
+  setTimeout(() => {
+    mod.scrollIntoView({ behavior: 'smooth' });
+  }, 1200);
+}
+
+function skipModule(nextId) {
+  const next = document.getElementById(nextId);
+  if (next) next.scrollIntoView({ behavior: 'smooth' });
+}
 </script>
 </body>
 </html>
