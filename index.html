@@ -551,6 +551,135 @@ p, li {
   html { scroll-behavior: auto; }
 }
 
+/* === MODULE GRID (slide-4 "What IM8 Hub Delivers") === */
+.mod-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.45rem, 1vh, 0.7rem) clamp(0.5rem, 1vw, 0.8rem);
+  width: 100%;
+}
+.mod-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 150, 147, 0.12);
+  border-radius: clamp(0.4rem, 0.8vw, 0.6rem);
+  padding: clamp(0.5rem, 1.1vh, 0.8rem) clamp(0.6rem, 1vw, 0.9rem);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.mod-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 150, 147, 0.3);
+  transform: translateY(-2px);
+}
+.mod-ico {
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  line-height: 1;
+}
+.mod-name {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(0.8rem, 1.2vw, 0.98rem);
+  color: #fff;
+  letter-spacing: 0.005em;
+  line-height: 1.15;
+}
+.mod-desc {
+  font-size: clamp(0.58rem, 0.85vw, 0.72rem);
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+/* === BEFORE vs AFTER (slide-2) === */
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: clamp(0.6rem, 1.5vw, 1.2rem);
+  align-items: stretch;
+  width: 100%;
+}
+.ba-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.35rem, 0.9vh, 0.55rem);
+  padding: clamp(0.8rem, 1.6vh, 1.2rem) clamp(0.9rem, 1.5vw, 1.3rem);
+  border-radius: clamp(0.6rem, 1vw, 0.9rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+}
+.ba-col--prob {
+  background: linear-gradient(160deg, rgba(164, 0, 17, 0.18), rgba(164, 0, 17, 0.04) 60%);
+  border-color: rgba(255, 107, 107, 0.2);
+}
+.ba-col--sol {
+  background: linear-gradient(160deg, rgba(52, 211, 153, 0.12), rgba(52, 211, 153, 0.03) 60%);
+  border-color: rgba(52, 211, 153, 0.22);
+}
+.ba-col-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: clamp(0.4rem, 1vh, 0.6rem);
+  margin-bottom: clamp(0.2rem, 0.6vh, 0.4rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ba-col-icon {
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.ba-col-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  color: #fff;
+  line-height: 1.15;
+}
+.ba-col-sub {
+  font-family: var(--font-caption);
+  font-size: clamp(0.58rem, 0.85vw, 0.7rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+.ba-row {
+  display: grid;
+  grid-template-columns: clamp(100px, 11vw, 140px) 1fr;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+  align-items: baseline;
+  padding: clamp(0.3rem, 0.7vh, 0.5rem) 0;
+}
+.ba-col--prob .ba-row + .ba-row,
+.ba-col--sol .ba-row + .ba-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.ba-mod {
+  font-family: var(--font-caption);
+  font-weight: 600;
+  font-size: clamp(0.68rem, 1vw, 0.82rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--im8-flamingo);
+}
+.ba-col--sol .ba-mod { color: #8ef0c6; }
+.ba-desc {
+  font-size: clamp(0.66rem, 0.98vw, 0.8rem);
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+.ba-arrow {
+  width: clamp(36px, 3.5vw, 56px);
+  align-self: center;
+  opacity: 0.9;
+  animation: baPulse 2.4s ease-in-out infinite;
+}
+@keyframes baPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
 /* === PRODUCT TOUR MOSAIC (slide-6c) === */
 .prev-grid {
   display: grid;
@@ -667,166 +796,177 @@ p, li {
 <!-- SLIDE 1: COVER                               -->
 <!-- ============================================ -->
 <section class="slide bg-burgundy" id="slide-1">
-  <div class="content flex-col gap-md text-center" style="align-items: center;">
+  <div class="content flex-col gap-sm text-center" style="align-items: center;">
     <div class="reveal float">
       <svg class="im8-logo-large"><use href="#im8-logo"/></svg>
     </div>
-    <h1 class="reveal reveal-delay-1" style="margin-top: clamp(0.5rem, 2vh, 1rem);">
-      <span class="gradient-text">Hub</span>
+    <h1 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1.5vh, 0.8rem); letter-spacing: 0.02em;">
+      <span class="gradient-text">IM8 HUB</span>
     </h1>
-    <p class="reveal reveal-delay-2" style="font-family: var(--font-title); font-size: clamp(1.1rem, 2.2vw, 1.6rem); color: var(--im8-stone); font-weight: 300;">
-      Unified Operations Platform
+    <p class="reveal reveal-delay-2" style="font-family: var(--font-title); font-size: clamp(1.1rem, 2.2vw, 1.6rem); color: var(--im8-stone); font-weight: 300; font-style: italic; max-width: 820px;">
+      One platform. Every operation. Zero manual work.
     </p>
-    <div class="divider reveal reveal-delay-3" style="margin: clamp(0.5rem, 1.5vh, 1rem) auto;"></div>
-    <p class="reveal reveal-delay-4 caption muted" style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">
-      One platform &nbsp;·&nbsp; All operations &nbsp;·&nbsp; Real-time visibility
+    <div class="divider reveal reveal-delay-3" style="margin: clamp(0.4rem, 1vh, 0.8rem) auto;"></div>
+
+    <!-- Mini stats strip -->
+    <div class="reveal reveal-delay-3" style="display: grid; grid-template-columns: repeat(4, auto); gap: clamp(1.2rem, 3.5vw, 2.8rem); align-items: baseline;">
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1; background: linear-gradient(135deg, var(--im8-flamingo), var(--im8-sand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">12+</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.55rem, 0.85vw, 0.7rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.3rem;">Modules</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1; background: linear-gradient(135deg, var(--im8-flamingo), var(--im8-sand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.55rem, 0.85vw, 0.7rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.3rem;">Warehouse Regions</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1; background: linear-gradient(135deg, var(--im8-flamingo), var(--im8-sand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">70+</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.55rem, 0.85vw, 0.7rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.3rem;">API Integrations</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1; background: linear-gradient(135deg, var(--im8-flamingo), var(--im8-sand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">10+</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.55rem, 0.85vw, 0.7rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.3rem;">Daily Users</div>
+      </div>
+    </div>
+
+    <p class="reveal reveal-delay-4 caption muted" style="font-size: clamp(0.62rem, 0.95vw, 0.75rem); margin-top: clamp(1rem, 2.5vh, 1.8rem); letter-spacing: 0.22em;">
+      Presented to the CEO &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Marco Tsze
     </p>
   </div>
-  <span class="slide-num">01 / 26</span>
+  <span class="slide-num">01 / 24</span>
 </section>
 
 <!-- ============================================ -->
-<!-- SLIDE 2: THE PROBLEM                         -->
+<!-- SLIDE 2: BEFORE vs AFTER (merged problem+solution) -->
 <!-- ============================================ -->
 <section class="slide bg-dark bg-pattern" id="slide-2">
-  <div class="content flex-col gap-md">
-    <div>
-      <span class="badge badge-rose reveal caption">The Problem</span>
-      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">Fragmented Data.<br>Manual Processes. <span class="flamingo">Slow Decisions.</span></h2>
-    </div>
-    <div class="grid-2 reveal reveal-delay-2" style="margin-top: clamp(0.5rem, 1.5vh, 1rem);">
-      <div class="card">
-        <div class="card-icon" style="background: rgba(255, 150, 147, 0.1);"><svg viewBox="0 0 24 24" width="18" height="18" fill="#95BF47"><path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/></svg></div>
-        <h3>Shopify</h3>
-        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Orders scattered across admin panels</p>
-      </div>
-      <div class="card">
-        <div class="card-icon" style="background: rgba(225, 203, 185, 0.1);"><svg viewBox="0 0 60 24" width="36" height="14"><rect width="60" height="24" rx="4" fill="#1B2D5B"/><text x="30" y="16" text-anchor="middle" fill="#fff" font-family="Arial" font-size="12" font-weight="700">STORD</text></svg></div>
-        <h3>Stord</h3>
-        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Inventory in separate warehouse portal</p>
-      </div>
-      <div class="card">
-        <div class="card-icon" style="background: rgba(255, 233, 216, 0.1);"><svg viewBox="0 0 24 24" width="18" height="18" fill="#0B53CE"><path d="M15.805 11.322v4.889a2.536 2.536 0 0 1-1.643 2.374l-1.732.652a.507.507 0 0 1-.686-.475v-5.956l-3.392 1.239a1.015 1.015 0 0 0-.664.953v7.986c0 .705.7 1.195 1.363.953l10.161-3.713a2.535 2.535 0 0 0 1.666-2.382V7.696a2.537 2.537 0 0 1-1.666 2.381l-3.407 1.245Zm0-.532V9.323a2.537 2.537 0 0 0-1.645-2.375l-1.728-.65a.508.508 0 0 0-.686.475v4.59c0 .701-.695 1.191-1.355.956L3.795 9.963a1.015 1.015 0 0 1-.674-.956V1.015c0-.701.695-1.191 1.356-.955l14.718 5.256A2.538 2.538 0 0 1 20.83 7.21c-.136.861-1.05 2.128-1.79 2.398l-3.235 1.182Z"/></svg></div>
-        <h3>D365</h3>
-        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Production orders in ERP silo</p>
-      </div>
-      <div class="card">
-        <div class="card-icon" style="background: rgba(255, 150, 147, 0.1);">📊</div>
-        <h3>Google Sheets</h3>
-        <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">Manual tracking, stale data, version chaos</p>
-      </div>
-    </div>
-    <p class="reveal reveal-delay-3 muted text-center" style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);">
-      Every decision requires jumping between 4+ systems — no single source of truth
-    </p>
-  </div>
-  <span class="slide-num">02 / 26</span>
-</section>
-
-<!-- ============================================ -->
-<!-- SLIDE 3: THE SOLUTION                        -->
-<!-- ============================================ -->
-<section class="slide bg-burgundy" id="slide-3">
-  <div class="content flex-col gap-lg text-center" style="align-items: center;">
-    <div>
-      <span class="badge badge-flamingo reveal caption">The Solution</span>
-      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">
-        One Dashboard.<br><span class="gradient-text">All Systems Connected.</span>
+  <div class="content flex-col gap-sm" style="max-width: 1280px; width: 100%;">
+    <div class="text-center">
+      <span class="badge badge-flamingo reveal caption">Before &nbsp;→&nbsp; After</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.3rem, 0.8vh, 0.5rem);">
+        From <span class="flamingo">Fragmented Manual Work</span> to <span class="gradient-text">One Unified Hub</span>
       </h2>
     </div>
-    <p class="reveal reveal-delay-2" style="max-width: 620px; font-size: clamp(0.85rem, 1.4vw, 1rem);">
-      IM8 Hub pulls real-time data from Shopify, Stord, D365, and Skio into a single operations dashboard — eliminating manual syncing, spreadsheet chaos, and blind spots.
-    </p>
-    <div class="grid-3 reveal reveal-delay-3" style="max-width: 680px;">
-      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
-        <div style="font-size: clamp(1.4rem, 3vh, 2rem); margin-bottom: 0.3rem;">⚡</div>
-        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Real-Time</h3>
-        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Webhook-driven data</p>
+
+    <div class="ba-grid reveal reveal-delay-2">
+      <!-- LEFT: PROBLEM -->
+      <div class="ba-col ba-col--prob">
+        <div class="ba-col-head">
+          <span class="ba-col-icon" style="color: #ff6b6b;">⚠</span>
+          <div>
+            <div class="ba-col-title">Too Many Platforms</div>
+            <div class="ba-col-sub">Too much manual work</div>
+          </div>
+        </div>
+        <div class="ba-row"><div class="ba-mod">Inventory</div><div class="ba-desc">Check D365, Stord, GPS separately for each SKU across 5 warehouses</div></div>
+        <div class="ba-row"><div class="ba-mod">Sales Data</div><div class="ba-desc">Download from Shopify manually, long wait times, manual analysis</div></div>
+        <div class="ba-row"><div class="ba-mod">Order Status</div><div class="ba-desc">Cross-check Shopify, Stord, D365 manually to find issues</div></div>
+        <div class="ba-row"><div class="ba-mod">Gifting</div><div class="ba-desc">Manual placement on each warehouse platform separately</div></div>
+        <div class="ba-row"><div class="ba-mod">Shipping Costs</div><div class="ba-desc">No automated reconciliation, no duplicate detection</div></div>
+        <div class="ba-row"><div class="ba-mod">Stord Operations</div><div class="ba-desc">Limited visibility in Stord portal, hard to track production orders</div></div>
       </div>
-      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
-        <div style="font-size: clamp(1.4rem, 3vh, 2rem); margin-bottom: 0.3rem;">◆</div>
-        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Unified</h3>
-        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">One source of truth</p>
+
+      <!-- ARROW -->
+      <div class="ba-arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="100%" height="100%">
+          <defs>
+            <linearGradient id="baArrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#FF9693" stop-opacity="1"/>
+            </linearGradient>
+          </defs>
+          <circle cx="20" cy="20" r="18" fill="none" stroke="url(#baArrowGrad)" stroke-width="1.5"/>
+          <path d="M12 20 L26 20 M22 16 L26 20 L22 24" fill="none" stroke="#FF9693" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <div class="card text-center" style="padding: clamp(0.8rem, 1.5vh, 1.2rem);">
-        <div style="font-size: clamp(1.4rem, 3vh, 2rem); margin-bottom: 0.3rem;">🔔</div>
-        <h3 style="font-size: clamp(0.75rem, 1.2vw, 0.9rem);">Proactive</h3>
-        <p style="font-size: clamp(0.65rem, 1vw, 0.75rem);">Slack alerts & flags</p>
+
+      <!-- RIGHT: SOLUTION -->
+      <div class="ba-col ba-col--sol">
+        <div class="ba-col-head">
+          <span class="ba-col-icon" style="color: #34d399;">✓</span>
+          <div>
+            <div class="ba-col-title">One Hub, Every Operation</div>
+            <div class="ba-col-sub">Automated, real-time, searchable</div>
+          </div>
+        </div>
+        <div class="ba-row"><div class="ba-mod">Inventory</div><div class="ba-desc">Unified view across 5 warehouses, auto D365 sync, stockout alerts, one-click Watchlist &amp; D365 upload</div></div>
+        <div class="ba-row"><div class="ba-mod">Sales Data</div><div class="ba-desc">Pre-built dashboards, live Shopify sync, flavor/product-line breakdowns, 12-week demand forecast</div></div>
+        <div class="ba-row"><div class="ba-mod">Order Status</div><div class="ba-desc">Auto-reconciliation of Shopify + Stord + D365, discrepancy flags, one-click D365 upload</div></div>
+        <div class="ba-row"><div class="ba-mod">Gifting</div><div class="ba-desc">Self-serve form auto-routes to correct warehouse API, tracking sync, Slack approval workflow</div></div>
+        <div class="ba-row"><div class="ba-mod">Shipping Costs</div><div class="ba-desc">3-carrier invoice parsers, duplicate detection, rate-card validation, Slack overcharge alerts</div></div>
+        <div class="ba-row"><div class="ba-mod">Stord Operations</div><div class="ba-desc">Live work orders, ASN tracking, D365 PO cross-check, inbound receipts — all in one dashboard</div></div>
       </div>
     </div>
+
+    <p class="reveal reveal-delay-3 muted text-center" style="font-size: clamp(0.68rem, 1vw, 0.8rem); letter-spacing: 0.08em;">
+      <span class="flamingo" style="font-weight: 600;">Hours saved every week</span> &nbsp;·&nbsp; Zero platform-hopping &nbsp;·&nbsp; Decisions in minutes, not days
+    </p>
   </div>
-  <span class="slide-num">03 / 26</span>
+  <span class="slide-num">02 / 24</span>
 </section>
 
 <!-- ============================================ -->
-<!-- SLIDE 4: EXECUTIVE SUMMARY (NEW)             -->
+<!-- SLIDE 4: WHAT IM8 HUB DELIVERS (merged exec summary + impact) -->
 <!-- ============================================ -->
 <section class="slide bg-burgundy" id="slide-4">
-  <div class="content flex-col gap-lg text-center" style="align-items: center;">
-    <div>
-      <span class="badge badge-flamingo reveal caption">At a Glance</span>
-      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">
-        Executive <span class="gradient-text">Summary</span>
+  <div class="content flex-col gap-sm" style="max-width: 1280px; width: 100%;">
+    <div class="text-center">
+      <span class="badge badge-flamingo reveal caption">What IM8 Hub Delivers</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.3rem, 0.8vh, 0.5rem);">
+        <span class="gradient-text">12 Modules</span>, Every Supply-Chain Operation
       </h2>
     </div>
-    <div class="counter-grid reveal reveal-delay-2">
-      <div>
-        <div class="counter" data-target="12" data-suffix="+">0</div>
-        <div class="counter-label">Modules</div>
+
+    <!-- Compact stats strip -->
+    <div class="reveal reveal-delay-2" style="display: flex; justify-content: center; gap: clamp(1.5rem, 4vw, 3.5rem); padding: clamp(0.5rem, 1vh, 0.8rem) 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.2rem, 2.4vw, 1.8rem); line-height: 1; color: var(--im8-flamingo);">12+</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.15rem;">Modules</div>
       </div>
-      <div>
-        <div class="counter" data-target="5" data-suffix="">0</div>
-        <div class="counter-label">Warehouses</div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.2rem, 2.4vw, 1.8rem); line-height: 1; color: var(--im8-flamingo);">5</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.15rem;">Warehouses</div>
       </div>
-      <div>
-        <div class="counter" data-target="70" data-suffix="+">0</div>
-        <div class="counter-label">API Integrations</div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.2rem, 2.4vw, 1.8rem); line-height: 1; color: var(--im8-flamingo);">70+</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.15rem;">APIs</div>
       </div>
-      <div>
-        <div class="counter" data-target="10" data-suffix="+">0</div>
-        <div class="counter-label">Active Users</div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.2rem, 2.4vw, 1.8rem); line-height: 1; color: var(--im8-flamingo);">10+</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.15rem;">Daily Users</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.2rem, 2.4vw, 1.8rem); line-height: 1; color: var(--im8-flamingo);">3</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.15rem;">Carriers Parsed</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-title); font-weight: 500; font-size: clamp(1.2rem, 2.4vw, 1.8rem); line-height: 1; color: var(--im8-flamingo);">24/7</div>
+        <div style="font-family: var(--font-caption); font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.15rem;">Webhook Sync</div>
       </div>
     </div>
-    <p class="reveal reveal-delay-3" style="max-width: 650px; font-size: clamp(0.85rem, 1.4vw, 1.05rem); font-family: var(--font-title); font-weight: 300; color: var(--im8-stone);">
-      From scattered spreadsheets to a unified operations platform — in months, not years.
+
+    <!-- Module grid: 4 cols × 3 rows = 12 modules -->
+    <div class="mod-grid reveal reveal-delay-2">
+      <div class="mod-card"><div class="mod-ico">🗂</div><div class="mod-name">Master Data</div><div class="mod-desc">SKU Catalog · BOM · Product Bible · Vendors · Warehouse Routing · Bundles</div></div>
+      <div class="mod-card"><div class="mod-ico">📦</div><div class="mod-name">Inventory</div><div class="mod-desc">Unified view across 5 WH · Watchlist · one-click D365 upload · stockout alerts</div></div>
+      <div class="mod-card"><div class="mod-ico">📊</div><div class="mod-name">Sales &amp; Usage</div><div class="mod-desc">Shopify/Skio dashboards · SKU usage · production plan · starter distribution</div></div>
+      <div class="mod-card"><div class="mod-ico">🔄</div><div class="mod-name">SO Consolidation</div><div class="mod-desc">Auto-reconcile Shopify + Stord + D365 · discrepancy flags · D365 upload</div></div>
+
+      <div class="mod-card"><div class="mod-ico">📈</div><div class="mod-name">Demand Forecast</div><div class="mod-desc">12-week projection · RM/CON runway · flavor mix · campaign calendar · Meta Ads</div></div>
+      <div class="mod-card"><div class="mod-ico">🚚</div><div class="mod-name">Delivery Performance</div><div class="mod-desc">SLA by route · P90 transit · carrier scorecard · problem-destination flags · PDF export</div></div>
+      <div class="mod-card"><div class="mod-ico">🎁</div><div class="mod-name">Gifting</div><div class="mod-desc">Self-serve form · auto-route to warehouse API · Slack approval · tracking sync</div></div>
+      <div class="mod-card"><div class="mod-ico">💰</div><div class="mod-name">Shipping &amp; Invoices</div><div class="mod-desc">3-carrier parsers · duplicate detection · rate-card validation · Slack overcharge alerts</div></div>
+
+      <div class="mod-card"><div class="mod-ico">⚙</div><div class="mod-name">Stord Operations</div><div class="mod-desc">Live work orders · ASN tracking · D365 PO cross-check · kitting receipts</div></div>
+      <div class="mod-card"><div class="mod-ico">📥</div><div class="mod-name">Inbound</div><div class="mod-desc">PO management · Stord + XLWMS receipt sync · inbound calendar · shipment forms</div></div>
+      <div class="mod-card"><div class="mod-ico">📅</div><div class="mod-name">HK Fulfilment</div><div class="mod-desc">Batch AWB via Spaceship · auto-buy cron 9AM · carrier-split PDFs · D365 SKU mapping</div></div>
+      <div class="mod-card"><div class="mod-ico">🏗</div><div class="mod-name">Build Planner</div><div class="mod-desc">Production plan · sticks forecast · starter distribution · warehouse balance</div></div>
+    </div>
+
+    <p class="reveal reveal-delay-3 muted text-center" style="font-size: clamp(0.65rem, 0.95vw, 0.78rem); letter-spacing: 0.08em;">
+      <span class="flamingo" style="font-weight: 600;">+ Slack integration</span> · <span class="flamingo" style="font-weight: 600;">+ Product Quiz</span> · <span class="flamingo" style="font-weight: 600;">+ User RBAC &amp; audit log</span> · <span class="flamingo" style="font-weight: 600;">+ Jarvis AI chat</span>
     </p>
   </div>
-  <span class="slide-num">04 / 26</span>
-</section>
-
-<!-- ============================================ -->
-<!-- SLIDE 5: KEY IMPACT (moved from 13)          -->
-<!-- ============================================ -->
-<section class="slide bg-dark bg-pattern" id="slide-5">
-  <div class="content flex-col gap-md">
-    <div class="text-center">
-      <span class="badge badge-green reveal caption">Impact</span>
-      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">What IM8 Hub <span class="gradient-text">Delivers</span></h2>
-    </div>
-    <div class="flex-col gap-sm reveal reveal-delay-2" style="max-width: 750px; margin: 0 auto;">
-      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
-        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">📊</span>
-        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Eliminated manual spreadsheet tracking</strong> — all data flows automatically</p>
-      </div>
-      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
-        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">🌍</span>
-        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Real-time visibility across 5 warehouses</strong> — globally, in one view</p>
-      </div>
-      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
-        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">💰</span>
-        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Automated invoice validation</strong> — catches overcharges in hours, not weeks</p>
-      </div>
-      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
-        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">⚡</span>
-        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">Webhook-driven data</strong> — no manual syncing, always current</p>
-      </div>
-      <div class="card" style="display: flex; align-items: center; gap: 1rem; padding: clamp(0.7rem, 1.5vh, 1rem);">
-        <span style="font-size: clamp(1.1rem, 2.2vh, 1.5rem);">🛡️</span>
-        <p style="font-size: clamp(0.78rem, 1.2vw, 0.92rem);"><strong style="color: var(--text-primary);">One-click BOM risk assessment</strong> — proactive stockout prevention</p>
-      </div>
-    </div>
-  </div>
-  <span class="slide-num">05 / 26</span>
+  <span class="slide-num">03 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -859,7 +999,7 @@ p, li {
       <div class="flow-node"><div class="icon">⚠️</div><div class="label">Risk Flags</div><div class="sub">Proactive alerts</div></div>
     </div>
   </div>
-  <span class="slide-num">06 / 26</span>
+  <span class="slide-num">04 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -1072,7 +1212,7 @@ p, li {
       ▶ Follow along — next 8 slides walk through each module
     </p>
   </div>
-  <span class="slide-num">06c / 26</span>
+  <span class="slide-num">04c / 24</span>
 </section>
 
 <!-- GATE 1: MASTER DATA -->
@@ -1126,7 +1266,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Replaced Airtable — all creates/updates now go through Hub with full audit trail</p>
     </div>
   </div>
-  <span class="slide-num">07 / 26</span>
+  <span class="slide-num">05 / 24</span>
 </section>
 
 <!-- GATE 2: INVENTORY & RISK -->
@@ -1179,7 +1319,7 @@ p, li {
       <li>One-click BOM risk assessment across all finished goods</li>
     </ul>
   </div>
-  <span class="slide-num">08 / 26</span>
+  <span class="slide-num">06 / 24</span>
 </section>
 
 <!-- GATE 3: DEMAND FORECAST -->
@@ -1228,7 +1368,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">09 / 26</span>
+  <span class="slide-num">07 / 24</span>
 </section>
 
 <!-- GATE 4: WORK ORDERS -->
@@ -1279,7 +1419,7 @@ p, li {
       </p>
     </div>
   </div>
-  <span class="slide-num">10 / 26</span>
+  <span class="slide-num">08 / 24</span>
 </section>
 
 <!-- GATE 5: ASN INBOUND -->
@@ -1336,7 +1476,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">11 / 26</span>
+  <span class="slide-num">09 / 24</span>
 </section>
 
 <!-- GATE 6: HK FULFILMENT -->
@@ -1373,7 +1513,7 @@ p, li {
       <div class="card"><h3><span style="color: #34d399;">📥 Excel Export</span></h3><p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">D365 fulfillment with OTP SKU mapping</p></div>
     </div>
   </div>
-  <span class="slide-num">12 / 26</span>
+  <span class="slide-num">10 / 24</span>
 </section>
 
 <!-- GATE 7: SHIPPING & COST -->
@@ -1414,7 +1554,7 @@ p, li {
       <li>Slack alerts for cost anomalies and overcharges</li>
     </ul>
   </div>
-  <span class="slide-num">13 / 26</span>
+  <span class="slide-num">11 / 24</span>
 </section>
 
 <!-- GATE 8: PO MANAGEMENT -->
@@ -1460,7 +1600,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> 2-way Stord sync — RECEIVED_SHORT and RECEIVED_OVER auto-update</p>
     </div>
   </div>
-  <span class="slide-num">14 / 26</span>
+  <span class="slide-num">12 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -1497,7 +1637,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">15 / 26</span>
+  <span class="slide-num">13 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -1535,7 +1675,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Continuously evolving — new modules ship every sprint</p>
     </div>
   </div>
-  <span class="slide-num">16 / 26</span>
+  <span class="slide-num">14 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -1557,7 +1697,7 @@ p, li {
       im8hub.com
     </p>
   </div>
-  <span class="slide-num">17 / 26</span>
+  <span class="slide-num">15 / 24</span>
 </section>
 
 <!-- === JAVASCRIPT === -->
