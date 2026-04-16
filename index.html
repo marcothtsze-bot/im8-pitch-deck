@@ -702,10 +702,10 @@ p, li {
 /* === INTEGRATIONS HUB (slide-6b) === */
 .integ-wrap {
   position: relative;
-  width: min(85vw, 920px);
-  aspect-ratio: 920 / 600;
-  max-height: 66vh;
-  margin: 0 auto;
+  width: min(92vw, 1120px);
+  aspect-ratio: 1120 / 760;
+  max-height: 74vh;
+  margin: clamp(0.3rem, 1vh, 0.8rem) auto 0;
 }
 .integ-svg {
   width: 100%;
@@ -734,8 +734,8 @@ p, li {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(80px, 10vw, 120px);
-  height: clamp(80px, 10vw, 120px);
+  width: clamp(100px, 12vw, 150px);
+  height: clamp(100px, 12vw, 150px);
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, rgba(255, 150, 147, 0.35), rgba(164, 0, 17, 0.85) 60%, rgba(80, 0, 11, 0.95) 100%);
   border: 2px solid rgba(255, 150, 147, 0.5);
@@ -747,17 +747,17 @@ p, li {
   box-shadow: 0 0 50px rgba(164, 0, 17, 0.5), inset 0 0 20px rgba(255, 150, 147, 0.2);
 }
 .integ-hub-logo {
-  height: clamp(1.1rem, 2vw, 1.6rem);
+  height: clamp(1.4rem, 2.4vw, 2rem);
   fill: var(--im8-flamingo);
-  filter: drop-shadow(0 0 6px rgba(255, 150, 147, 0.5));
+  filter: drop-shadow(0 0 8px rgba(255, 150, 147, 0.55));
 }
 .integ-hub-label {
   font-family: var(--font-caption);
-  font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+  font-size: clamp(0.65rem, 1vw, 0.85rem);
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   color: #fff;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
 .integ-node {
@@ -765,12 +765,12 @@ p, li {
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 4;
-  width: clamp(75px, 9vw, 110px);
+  width: clamp(90px, 10.5vw, 130px);
 }
 .integ-icon {
-  width: clamp(42px, 5vw, 56px);
-  height: clamp(42px, 5vw, 56px);
-  border-radius: 14px;
+  width: clamp(52px, 6vw, 72px);
+  height: clamp(52px, 6vw, 72px);
+  border-radius: 16px;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
   border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
@@ -787,29 +787,29 @@ p, li {
   box-shadow: 0 6px 18px rgba(164, 0, 17, 0.3);
 }
 .integ-icon svg {
-  width: clamp(22px, 2.6vw, 30px);
-  height: clamp(22px, 2.6vw, 30px);
+  width: clamp(28px, 3.2vw, 38px);
+  height: clamp(28px, 3.2vw, 38px);
 }
 .integ-icon .badge-svg {
-  width: clamp(32px, 3.8vw, 44px);
+  width: clamp(40px, 4.6vw, 56px);
   height: auto;
 }
 .integ-name {
   display: block;
   font-family: var(--font-caption);
   font-weight: 600;
-  font-size: clamp(0.62rem, 0.95vw, 0.78rem);
+  font-size: clamp(0.72rem, 1.05vw, 0.9rem);
   color: #fff;
   line-height: 1.2;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 .integ-sub {
   display: block;
-  font-size: clamp(0.5rem, 0.72vw, 0.62rem);
+  font-size: clamp(0.56rem, 0.82vw, 0.7rem);
   color: var(--im8-flamingo);
-  opacity: 0.85;
-  line-height: 1.25;
-  margin-top: 2px;
+  opacity: 0.9;
+  line-height: 1.3;
+  margin-top: 3px;
   letter-spacing: 0.04em;
 }
 
@@ -1199,48 +1199,48 @@ p, li {
       </h2>
     </div>
 
-    <!-- Hub-and-spoke: 920x600 viewBox, aspect-ratio locked, SVG + HTML overlays aligned -->
+    <!-- Hub-and-spoke: 1120x760 viewBox, aspect-ratio locked, SVG + HTML overlays aligned -->
     <div class="integ-wrap reveal reveal-delay-2">
-      <svg viewBox="0 0 920 600" class="integ-svg" preserveAspectRatio="xMidYMid meet">
+      <svg viewBox="0 0 1120 760" class="integ-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
           <radialGradient id="hubAura" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(255,150,147,0.35)"/>
+            <stop offset="0%" stop-color="rgba(255,150,147,0.38)"/>
             <stop offset="60%" stop-color="rgba(164,0,17,0.12)"/>
             <stop offset="100%" stop-color="rgba(164,0,17,0)"/>
           </radialGradient>
         </defs>
 
         <!-- Orbital rings -->
-        <circle cx="460" cy="300" r="215" fill="none" stroke="rgba(255,150,147,0.1)" stroke-width="1"/>
-        <circle cx="460" cy="300" r="255" fill="none" stroke="rgba(255,150,147,0.07)" stroke-width="1" stroke-dasharray="3 6"/>
+        <circle cx="560" cy="380" r="285" fill="none" stroke="rgba(255,150,147,0.1)" stroke-width="1"/>
+        <circle cx="560" cy="380" r="335" fill="none" stroke="rgba(255,150,147,0.07)" stroke-width="1" stroke-dasharray="3 6"/>
 
         <!-- Hub aura glow -->
-        <circle cx="460" cy="300" r="120" fill="url(#hubAura)"/>
+        <circle cx="560" cy="380" r="165" fill="url(#hubAura)"/>
 
-        <!-- 9 connection lines: hub-edge (r=72) → platform-inner-edge (r=215) -->
+        <!-- 9 connection lines: hub-edge (r=95) → platform-inner-edge (r=285), angles at -90,-50,-10,30,70,110,150,190,230 -->
         <!-- Glow backing -->
         <g>
-          <line x1="460" y1="228" x2="460" y2="85" class="cline-glow"/>
-          <line x1="506" y1="244" x2="598" y2="135" class="cline-glow"/>
-          <line x1="531" y1="287" x2="671" y2="263" class="cline-glow"/>
-          <line x1="522" y1="336" x2="646" y2="408" class="cline-glow"/>
-          <line x1="485" y1="368" x2="534" y2="504" class="cline-glow"/>
-          <line x1="435" y1="368" x2="386" y2="504" class="cline-glow"/>
-          <line x1="398" y1="336" x2="274" y2="408" class="cline-glow"/>
-          <line x1="389" y1="287" x2="249" y2="263" class="cline-glow"/>
-          <line x1="414" y1="244" x2="322" y2="135" class="cline-glow"/>
+          <line x1="560" y1="285" x2="560" y2="95" class="cline-glow"/>
+          <line x1="621" y1="307" x2="743" y2="162" class="cline-glow"/>
+          <line x1="654" y1="363" x2="841" y2="330" class="cline-glow"/>
+          <line x1="642" y1="427" x2="807" y2="523" class="cline-glow"/>
+          <line x1="593" y1="469" x2="657" y2="648" class="cline-glow"/>
+          <line x1="527" y1="469" x2="463" y2="648" class="cline-glow"/>
+          <line x1="478" y1="427" x2="313" y2="523" class="cline-glow"/>
+          <line x1="466" y1="363" x2="279" y2="330" class="cline-glow"/>
+          <line x1="499" y1="307" x2="377" y2="162" class="cline-glow"/>
         </g>
         <!-- Animated dashed lines -->
         <g>
-          <line x1="460" y1="228" x2="460" y2="85" class="cline"/>
-          <line x1="506" y1="244" x2="598" y2="135" class="cline"/>
-          <line x1="531" y1="287" x2="671" y2="263" class="cline"/>
-          <line x1="522" y1="336" x2="646" y2="408" class="cline"/>
-          <line x1="485" y1="368" x2="534" y2="504" class="cline"/>
-          <line x1="435" y1="368" x2="386" y2="504" class="cline"/>
-          <line x1="398" y1="336" x2="274" y2="408" class="cline"/>
-          <line x1="389" y1="287" x2="249" y2="263" class="cline"/>
-          <line x1="414" y1="244" x2="322" y2="135" class="cline"/>
+          <line x1="560" y1="285" x2="560" y2="95" class="cline"/>
+          <line x1="621" y1="307" x2="743" y2="162" class="cline"/>
+          <line x1="654" y1="363" x2="841" y2="330" class="cline"/>
+          <line x1="642" y1="427" x2="807" y2="523" class="cline"/>
+          <line x1="593" y1="469" x2="657" y2="648" class="cline"/>
+          <line x1="527" y1="469" x2="463" y2="648" class="cline"/>
+          <line x1="478" y1="427" x2="313" y2="523" class="cline"/>
+          <line x1="466" y1="363" x2="279" y2="330" class="cline"/>
+          <line x1="499" y1="307" x2="377" y2="162" class="cline"/>
         </g>
       </svg>
 
@@ -1252,7 +1252,7 @@ p, li {
 
       <!-- 9 Platform nodes — positions match SVG line endpoints -->
       <!-- 1. Shopify (12 o'clock) -->
-      <div class="integ-node" style="left: 50%; top: 9.2%;">
+      <div class="integ-node" style="left: 50%; top: 8.5%;">
         <div class="integ-icon">
           <svg viewBox="0 0 24 24" fill="#95BF47"><path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/></svg>
         </div>
@@ -1261,7 +1261,7 @@ p, li {
       </div>
 
       <!-- 2. Stord (1–2 o'clock) -->
-      <div class="integ-node" style="left: 65%; top: 18.8%;">
+      <div class="integ-node" style="left: 68.1%; top: 18.3%;">
         <div class="integ-icon">
           <svg viewBox="0 0 60 24" class="badge-svg"><rect width="60" height="24" rx="4" fill="#1B2D5B"/><text x="30" y="16" text-anchor="middle" fill="#fff" font-family="Arial" font-size="12" font-weight="700">STORD</text></svg>
         </div>
@@ -1270,7 +1270,7 @@ p, li {
       </div>
 
       <!-- 3. D365 (3 o'clock) -->
-      <div class="integ-node" style="left: 73%; top: 43.8%;">
+      <div class="integ-node" style="left: 77.7%; top: 42.8%;">
         <div class="integ-icon">
           <svg viewBox="0 0 24 24" fill="#0B53CE"><path d="M15.805 11.322v4.889a2.536 2.536 0 0 1-1.643 2.374l-1.732.652a.507.507 0 0 1-.686-.475v-5.956l-3.392 1.239a1.015 1.015 0 0 0-.664.953v7.986c0 .705.7 1.195 1.363.953l10.161-3.713a2.535 2.535 0 0 0 1.666-2.382V7.696a2.537 2.537 0 0 1-1.666 2.381l-3.407 1.245Zm0-.532V9.323a2.537 2.537 0 0 0-1.645-2.375l-1.728-.65a.508.508 0 0 0-.686.475v4.59c0 .701-.695 1.191-1.355.956L3.795 9.963a1.015 1.015 0 0 1-.674-.956V1.015c0-.701.695-1.191 1.356-.955l14.718 5.256A2.538 2.538 0 0 1 20.83 7.21c-.136.861-1.05 2.128-1.79 2.398l-3.235 1.182Z"/></svg>
         </div>
@@ -1279,7 +1279,7 @@ p, li {
       </div>
 
       <!-- 4. AfterShip (4–5 o'clock) -->
-      <div class="integ-node" style="left: 70.2%; top: 68%;">
+      <div class="integ-node" style="left: 74.4%; top: 70.7%;">
         <div class="integ-icon">
           <svg viewBox="0 0 24 24" fill="#FF6B2B"><path d="M22.549 9.604a10.462 10.462 0 0 0-3.388-6.838A10.632 10.632 0 0 0 12 0a10.64 10.64 0 0 0-7.16 2.764 10.465 10.465 0 0 0-3.428 7.74c0 2.371.81 4.672 2.298 6.529a10.617 10.617 0 0 0 5.895 3.698L12 24l2.395-3.27a10.593 10.593 0 0 0 5.895-3.697 10.442 10.442 0 0 0 2.26-7.43zm-11.306 6.28a.26.26 0 0 1-.034.125.254.254 0 0 1-.347.092l-3.906-2.237a1.005 1.005 0 0 1-.505-.865V8.624a.26.26 0 0 1 .033-.126.254.254 0 0 1 .347-.092l3.907 2.237c.152.089.281.214.368.366.09.151.135.324.135.5v4.372zM12 9.48c-.176 0-.35-.047-.503-.133L7.5 7.057a.241.241 0 0 1-.09-.092.249.249 0 0 1 .09-.342l3.997-2.289a1.025 1.025 0 0 1 1.007 0l3.996 2.29a.24.24 0 0 1 .09.092.247.247 0 0 1 0 .25.271.271 0 0 1-.09.092l-3.997 2.289A1.005 1.005 0 0 1 12 9.48ZM17.546 13a.996.996 0 0 1-.503.866l-3.908 2.237a.254.254 0 0 1-.38-.218V11.51c0-.175.047-.348.135-.501.089-.152.216-.28.368-.366l3.907-2.238a.254.254 0 0 1 .38.219z"/></svg>
         </div>
@@ -1288,7 +1288,7 @@ p, li {
       </div>
 
       <!-- 5. FedEx (5 o'clock, bottom-right) -->
-      <div class="integ-node" style="left: 58%; top: 84%;">
+      <div class="integ-node" style="left: 59.6%; top: 89%;">
         <div class="integ-icon">
           <svg viewBox="0 0 24 24" fill="#4D148C"><path d="M22.498 14.298c-.016-.414.345-.751.75-.755a.745.745 0 0 1 .752.755.755.755 0 0 1-.751.745c-.395.002-.759-.346-.751-.745zm.759-.083c.067-.02.164-.042.162-.13.007-.09-.086-.133-.162-.134h-.163v.263c0 .001.165-.002.163.001zm-.163.107v.418h-.14v-.91h.327c.156-.021.294.092.286.253a.218.218 0 0 1-.156.19c.162.083.108.322.173.467h-.156a2.355 2.355 0 0 1-.04-.205c-.018-.093-.047-.229-.17-.213h-.124zm.76-.024a.603.603 0 0 0-.605-.632c-.338-.012-.62.302-.605.632a.619.619 0 0 0 .605.622.61.61 0 0 0 .605-.622zm-5.052-.579l-.878 1.008h-1.306l1.559-1.745-1.56-1.75h1.355l.902.997.878-.998h1.306l-1.543 1.743 1.559 1.753h-1.371l-.901-1.008zm-4.703-.352v-.827h1.904v-1.506l1.724 1.948-1.724 1.941v-1.556h-1.904zm1.56 1.36h-3.2V9.044h3.224v1.024H13.77v1.163h1.888v.958h-1.904v1.522h1.904v1.016zm-5.705-.655c-.54.017-.878-.552-.877-1.04-.01-.507.307-1.123.878-1.105.579-.025.871.6.845 1.103.023.501-.29 1.062-.846 1.042zM4.743 12.41c.076-.358.403-.67.78-.663a.788.788 0 0 1 .803.663H4.743zm15.182.564l1.815-2.047h-2.125l-.74.844-.763-.844h-4.037v-.548h1.912V8.741H10.84v2.58c-.362-.448-.981-.559-1.526-.492-.782.123-1.427.762-1.634 1.514-.254-.958-1.179-1.588-2.157-1.554-.781.009-1.6.365-1.987 1.071v-.818h-1.87v-.9h2.043v-1.4H0v6.287h1.666v-2.644h1.666a7.59 7.59 0 0 0-.082.622c-.013 1.232 1.042 2.27 2.274 2.236a2.204 2.204 0 0 0 2.157-1.432H6.254c-.14.268-.441.38-.73.36-.457.009-.83-.417-.829-.86h2.914c.083 1.027.988 1.966 2.043 1.947a1.53 1.53 0 0 0 1.19-.639v.41h7.215l.754-.86.754.86h2.192l-1.832-2.055z"/></svg>
         </div>
@@ -1297,7 +1297,7 @@ p, li {
       </div>
 
       <!-- 6. Spaceship (7 o'clock, bottom-left) -->
-      <div class="integ-node" style="left: 42%; top: 84%;">
+      <div class="integ-node" style="left: 40.4%; top: 89%;">
         <div class="integ-icon">
           <svg viewBox="0 0 24 24" fill="#394EFF"><path d="M11.9997 1.2529c1.0445 0 1.956.5689 2.441 1.4125l4.5883 7.9314 4.45 7.6915c.0466.074.2105.3585.27.4938.2216.4677.2505.9472.251 1.1595 0 1.5496-1.2587 2.8056-2.8116 2.8056-.2949 0-.579-.045-.8457-.129l-7.9011-2.6061a1.406 1.406 0 0 0-.4413-.0705 1.413 1.413 0 0 0-.442.0705L3.658 22.6183l-.1623.0456a2.8398 2.8398 0 0 1-.6838.0831c-1.5531 0-2.8119-1.256-2.8119-2.8056.002-.243.0234-.5533.168-.9578.0294-.0911.0743-.176.1115-.264.0712-.1487.1607-.2875.2411-.4313l4.4493-7.6916 4.5883-7.9313c.485-.8437 1.3971-1.4126 2.4416-1.4126z"/></svg>
         </div>
@@ -1306,7 +1306,7 @@ p, li {
       </div>
 
       <!-- 7. GPS/XLWMS (7–8 o'clock) -->
-      <div class="integ-node" style="left: 29.8%; top: 68%;">
+      <div class="integ-node" style="left: 25.6%; top: 70.7%;">
         <div class="integ-icon">
           <svg viewBox="0 0 60 24" class="badge-svg"><rect width="60" height="24" rx="4" fill="#2D5F2D"/><text x="30" y="10" text-anchor="middle" fill="#fff" font-family="Arial" font-size="7" font-weight="700">XLWMS</text><text x="30" y="20" text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="Arial" font-size="6">GPS</text></svg>
         </div>
@@ -1315,7 +1315,7 @@ p, li {
       </div>
 
       <!-- 8. WhatsApp (9 o'clock) — AI Agent -->
-      <div class="integ-node" style="left: 27%; top: 43.8%;">
+      <div class="integ-node" style="left: 22.3%; top: 42.8%;">
         <div class="integ-icon">
           <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </div>
@@ -1324,7 +1324,7 @@ p, li {
       </div>
 
       <!-- 9. Slack (10–11 o'clock) -->
-      <div class="integ-node" style="left: 35%; top: 18.8%;">
+      <div class="integ-node" style="left: 31.9%; top: 18.3%;">
         <div class="integ-icon">
           <svg viewBox="0 0 24 24" fill="#E01E5A"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
         </div>
