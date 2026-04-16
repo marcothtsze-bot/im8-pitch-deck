@@ -1500,6 +1500,182 @@ p, li {
   margin-bottom: 0.3rem;
 }
 .jarvis-chat--user .jarvis-chat-from { color: var(--im8-sand); }
+
+/* === JARVIS AI — SYSTEM PANEL (FRIDAY STYLE) === */
+.jarvis-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.7rem, 1.6vh, 1.1rem);
+  background: linear-gradient(160deg, rgba(30, 0, 6, 0.92) 0%, rgba(12, 0, 4, 0.95) 100%);
+  border: 1px solid rgba(255, 90, 110, 0.28);
+  border-radius: clamp(16px, 2vw, 22px);
+  padding: clamp(1rem, 2vh, 1.5rem) clamp(1rem, 1.8vw, 1.5rem);
+  box-shadow: 0 0 40px rgba(164, 0, 17, 0.18) inset;
+}
+.jarvis-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: clamp(0.6rem, 1.2vh, 0.9rem);
+  border-bottom: 1px solid rgba(255, 90, 110, 0.18);
+}
+.jarvis-panel-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  color: #fff;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(255, 90, 110, 0.4);
+}
+.jarvis-panel-sub {
+  font-family: var(--font-caption);
+  font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 220, 225, 0.55);
+  margin-top: 0.3rem;
+}
+.jarvis-panel-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-caption);
+  font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 240, 0.85);
+  white-space: nowrap;
+}
+.jarvis-sysgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.5rem, 1vh, 0.75rem);
+}
+.jarvis-syscell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.6rem, 1vw, 0.9rem);
+  background: rgba(255, 90, 110, 0.05);
+  border: 1px solid rgba(255, 90, 110, 0.15);
+  border-radius: 10px;
+}
+.jarvis-syslabel {
+  font-family: var(--font-caption);
+  font-size: clamp(0.55rem, 0.75vw, 0.66rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 220, 225, 0.55);
+}
+.jarvis-sysval {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  color: #fff;
+}
+.jarvis-waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2px, 0.3vw, 4px);
+  height: clamp(44px, 7vh, 64px);
+  padding: 0 clamp(0.5rem, 1vw, 0.8rem);
+  background: rgba(10, 0, 4, 0.6);
+  border: 1px solid rgba(255, 90, 110, 0.15);
+  border-radius: 10px;
+}
+.jarvis-waveform span {
+  display: block;
+  width: clamp(3px, 0.6vw, 5px);
+  height: 18%;
+  background: linear-gradient(to top, var(--im8-red-algae), var(--im8-flamingo));
+  border-radius: 999px;
+  opacity: 0.45;
+  transition: height 0.12s ease;
+}
+.jarvis-waveform.is-speaking span {
+  animation: jarvisWave 0.9s ease-in-out infinite;
+  opacity: 1;
+}
+.jarvis-waveform.is-speaking span:nth-child(2n) { animation-delay: 0.08s; animation-duration: 1.1s; }
+.jarvis-waveform.is-speaking span:nth-child(3n) { animation-delay: 0.15s; animation-duration: 0.75s; }
+.jarvis-waveform.is-speaking span:nth-child(5n) { animation-delay: 0.22s; animation-duration: 1.3s; }
+.jarvis-waveform.is-speaking span:nth-child(7n) { animation-delay: 0.3s; animation-duration: 0.65s; }
+@keyframes jarvisWave {
+  0%, 100% { height: 18%; }
+  30% { height: 78%; }
+  60% { height: 38%; }
+  80% { height: 92%; }
+}
+.jarvis-transcript {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: clamp(0.7rem, 1.4vh, 1rem) clamp(0.8rem, 1.2vw, 1rem);
+  background: rgba(10, 0, 4, 0.5);
+  border: 1px solid rgba(255, 90, 110, 0.15);
+  border-radius: 10px;
+  min-height: clamp(90px, 14vh, 140px);
+}
+.jarvis-transcript-label {
+  font-family: var(--font-caption);
+  font-size: clamp(0.55rem, 0.75vw, 0.66rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--im8-flamingo);
+}
+.jarvis-transcript-text {
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 1.1vw, 0.95rem);
+  line-height: 1.55;
+  color: rgba(255, 245, 240, 0.95);
+  min-height: 2.4em;
+}
+.jarvis-transcript-text .cursor {
+  display: inline-block;
+  width: 0.6ch;
+  background: var(--im8-flamingo);
+  color: transparent;
+  margin-left: 1px;
+  animation: jarvisBlink 0.9s ease-in-out infinite;
+}
+.jarvis-activate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: clamp(0.7rem, 1.5vh, 1rem) clamp(1rem, 2vw, 1.5rem);
+  background: linear-gradient(135deg, var(--im8-red-algae), #D4003A);
+  color: #fff;
+  font-family: var(--font-caption);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(255, 90, 110, 0.35);
+}
+.jarvis-activate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 90, 110, 0.55);
+}
+.jarvis-activate.is-active {
+  background: rgba(30, 0, 6, 0.7);
+  border-color: rgba(74, 222, 128, 0.5);
+  color: #4ADE80;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.25);
+}
+.jarvis-activate-icon { font-size: 1.2em; animation: jarvisBreath 2s ease-in-out infinite; }
+.jarvis-stage.is-speaking .jarvis-orb { animation: jarvisBreath 1.4s ease-in-out infinite; }
+.jarvis-stage.is-speaking .jarvis-ring--1,
+.jarvis-stage.is-speaking .jarvis-ring--2 { animation-duration: 1.2s; }
 </style>
 </head>
 <body>
@@ -2770,44 +2946,43 @@ p, li {
           <span class="jarvis-particle jarvis-particle--b"></span>
           <span class="jarvis-particle jarvis-particle--c"></span>
         </div>
-        <div class="jarvis-chat jarvis-chat--user">
-          <div class="jarvis-chat-from">Marco · WhatsApp</div>
-          "What's stock for FG-000035 in AMS?"
-        </div>
-        <div class="jarvis-chat">
-          <div class="jarvis-chat-from">Jarvis</div>
-          AMS on-hand: <strong>2,410</strong> · available: <strong>1,870</strong> · 2 POs inbound (ETA Apr 28 / May 06).
-        </div>
         <div class="jarvis-status">
           <span class="jarvis-status-dot"></span>
-          <span>Online · Listening</span>
+          <span id="jarvisStageStatus">Awaiting Activation</span>
         </div>
       </div>
-      <div class="md-ba">
-        <div class="ba-card ba-card--before">
-          <div class="ba-card-head">
-            <span class="ba-card-icon">⚠</span>
-            <div><div class="ba-card-label">Before</div><div class="ba-card-sub">Context-switching tax</div></div>
+      <div class="jarvis-panel">
+        <div class="jarvis-panel-head">
+          <div>
+            <div class="jarvis-panel-title">JARVIS</div>
+            <div class="jarvis-panel-sub">Operations Intelligence · v1.0</div>
           </div>
-          <ul class="ba-card-list">
-            <li>Ops pings the backend team on Slack every time they need stock, PO or shipment status</li>
-            <li>Log in, click through 3–5 dashboards to answer a single question</li>
-            <li>Answers delayed by hours — or blocked while someone is offline / on a flight</li>
-            <li>Non-technical stakeholders can't self-serve data, even when it's right there in the Hub</li>
-          </ul>
-        </div>
-        <div class="ba-card ba-card--after">
-          <div class="ba-card-head">
-            <span class="ba-card-icon">✓</span>
-            <div><div class="ba-card-label">After</div><div class="ba-card-sub">Ask Jarvis, get answers</div></div>
+          <div class="jarvis-panel-status">
+            <span class="jarvis-status-dot"></span>
+            <span id="jarvisState">STANDBY</span>
           </div>
-          <ul class="ba-card-list">
-            <li>Chat in plain English on WhatsApp — no app, no login, no training</li>
-            <li>Jarvis reads live data from every IM8 Hub module: inventory, PO, shipping, forecast</li>
-            <li>Instant answers 24/7 — across time zones, for any team member with access</li>
-            <li>Proactive alerts: low stock, late POs, abnormal shipping spend pushed to the right thread</li>
-          </ul>
         </div>
+
+        <div class="jarvis-sysgrid">
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Modules Online</span><span class="jarvis-sysval">12 / 12</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Data Sources</span><span class="jarvis-sysval">9</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Language</span><span class="jarvis-sysval">Natural</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Channel</span><span class="jarvis-sysval">WhatsApp</span></div>
+        </div>
+
+        <div class="jarvis-waveform" id="jarvisWave">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="jarvis-transcript">
+          <div class="jarvis-transcript-label">▸ Voice Transcript</div>
+          <div class="jarvis-transcript-text" id="jarvisTranscript">Press <strong>Activate</strong> to let Jarvis introduce itself.</div>
+        </div>
+
+        <button class="jarvis-activate" id="jarvisActivate" onclick="activateJarvis()">
+          <span class="jarvis-activate-icon">◉</span>
+          <span class="jarvis-activate-text">ACTIVATE JARVIS</span>
+        </button>
       </div>
     </div>
   </div>
@@ -3110,6 +3285,99 @@ function unlockModule(moduleId, gateId) {
 function skipModule(nextId) {
   const next = document.getElementById(nextId);
   if (next) next.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* === JARVIS AI — VOICE INTRO === */
+const JARVIS_SCRIPT = "Hello, IM8 Team. I am Jarvis, your operations intelligence. I am connected to every module of the IM8 Hub — inventory, purchase orders, shipping, forecasting, and fulfilment. Ask me anything on WhatsApp, in plain English, and I will answer in seconds. I am online, listening, and at your service.";
+
+function pickJarvisVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices || !voices.length) return null;
+  // Prefer high-quality female en-GB (FRIDAY-esque), then any en-GB, then any female en, then any en
+  const byName = (patterns) => voices.find(v => patterns.some(p => new RegExp(p, 'i').test(v.name)));
+  return (
+    byName(['Google UK English Female', 'Microsoft Libby', 'Microsoft Sonia', 'Samantha', 'Karen', 'Serena']) ||
+    voices.find(v => /en-GB/i.test(v.lang) && /female|woman/i.test(v.name)) ||
+    voices.find(v => /en-GB/i.test(v.lang)) ||
+    voices.find(v => /en[-_]?US/i.test(v.lang) && /female|woman|samantha|karen|moira/i.test(v.name)) ||
+    voices.find(v => /^en/i.test(v.lang)) ||
+    voices[0]
+  );
+}
+
+function typeTranscript(text, el, done) {
+  el.textContent = '';
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+  cursor.textContent = '▍';
+  el.appendChild(cursor);
+  let i = 0;
+  const speed = 28; // ms per char
+  const tick = () => {
+    if (i < text.length) {
+      cursor.insertAdjacentText('beforebegin', text[i]);
+      i++;
+      setTimeout(tick, speed);
+    } else {
+      cursor.remove();
+      if (done) done();
+    }
+  };
+  tick();
+}
+
+let jarvisPlaying = false;
+function activateJarvis() {
+  if (jarvisPlaying) return;
+  if (!('speechSynthesis' in window)) {
+    alert('Sorry, this browser does not support speech synthesis.');
+    return;
+  }
+  jarvisPlaying = true;
+
+  const stage = document.querySelector('#slide-jarvis .jarvis-stage');
+  const wave = document.getElementById('jarvisWave');
+  const state = document.getElementById('jarvisState');
+  const stageStatus = document.getElementById('jarvisStageStatus');
+  const transcript = document.getElementById('jarvisTranscript');
+  const btn = document.getElementById('jarvisActivate');
+  const btnText = btn.querySelector('.jarvis-activate-text');
+
+  stage.classList.add('is-speaking');
+  wave.classList.add('is-speaking');
+  btn.classList.add('is-active');
+  btnText.textContent = 'SPEAKING…';
+  state.textContent = 'SPEAKING';
+  stageStatus.textContent = 'Online · Broadcasting';
+
+  // Start voice + typed transcript together
+  const utter = new SpeechSynthesisUtterance(JARVIS_SCRIPT);
+  utter.rate = 0.95;
+  utter.pitch = 0.95;
+  utter.volume = 1;
+  const voice = pickJarvisVoice();
+  if (voice) utter.voice = voice;
+
+  utter.onend = () => {
+    jarvisPlaying = false;
+    stage.classList.remove('is-speaking');
+    wave.classList.remove('is-speaking');
+    btn.classList.remove('is-active');
+    btnText.textContent = 'REPLAY JARVIS';
+    state.textContent = 'ONLINE';
+    stageStatus.textContent = 'Online · Listening';
+  };
+  utter.onerror = utter.onend;
+
+  typeTranscript(JARVIS_SCRIPT, transcript);
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
+}
+
+// Prime voices list (some browsers load async)
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+  window.speechSynthesis.getVoices();
 }
 </script>
 </body>
