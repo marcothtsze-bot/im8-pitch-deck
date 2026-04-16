@@ -1124,101 +1124,101 @@ p, li {
   white-space: nowrap;
 }
 
-/* === SUPPLY CHAIN FLOW (slide-9sc) === */
-.sc-flow {
+/* === PROCUREMENT FLOW (slide-9sc: Forecast → PO) === */
+.proc-flow {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: clamp(0.4rem, 0.9vw, 0.8rem);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.55rem, 1.2vw, 1rem);
   width: 100%;
   position: relative;
 }
-.sc-stage {
+.proc-step {
   position: relative;
-  background: linear-gradient(160deg, rgba(255, 150, 147, 0.12), rgba(164, 0, 17, 0.06) 70%);
-  border: 1px solid rgba(255, 150, 147, 0.32);
+  background: linear-gradient(160deg, rgba(255, 150, 147, 0.08), rgba(164, 0, 17, 0.03) 70%);
+  border: 1px solid rgba(255, 150, 147, 0.28);
   border-radius: clamp(0.5rem, 1vw, 0.8rem);
-  padding: clamp(0.85rem, 1.9vh, 1.25rem) clamp(0.65rem, 1.3vw, 1rem);
-  text-align: center;
+  padding: clamp(0.85rem, 1.7vh, 1.2rem) clamp(0.85rem, 1.4vw, 1.1rem);
   display: flex;
   flex-direction: column;
-  gap: clamp(0.25rem, 0.6vh, 0.4rem);
+  gap: clamp(0.35rem, 0.8vh, 0.55rem);
   backdrop-filter: blur(8px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 150, 147, 0.05) inset;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(255, 150, 147, 0.05) inset;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
-.sc-stage:hover {
+.proc-step:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 150, 147, 0.55);
-  box-shadow: 0 10px 28px rgba(164, 0, 17, 0.35), 0 0 0 1px rgba(255, 150, 147, 0.1) inset;
+  border-color: rgba(255, 150, 147, 0.5);
+  box-shadow: 0 10px 28px rgba(164, 0, 17, 0.32), 0 0 0 1px rgba(255, 150, 147, 0.1) inset;
 }
-.sc-stage:not(:last-child)::after {
+.proc-step:not(:last-child)::after {
   content: '→';
   position: absolute;
-  right: calc(clamp(0.4rem, 0.9vw, 0.8rem) * -0.5);
-  top: 50%;
-  transform: translate(50%, -50%);
+  right: calc(clamp(0.55rem, 1.2vw, 1rem) * -0.55);
+  top: clamp(2.5rem, 5vh, 3.5rem);
+  transform: translate(50%, 0);
   color: var(--im8-flamingo);
-  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.35rem);
   font-weight: 700;
   line-height: 1;
   z-index: 2;
-  text-shadow: 0 0 12px rgba(255, 150, 147, 0.5);
+  text-shadow: 0 0 10px rgba(255, 150, 147, 0.55);
   pointer-events: none;
 }
-.sc-step {
+.proc-head {
+  text-align: center;
+  padding-bottom: clamp(0.5rem, 1vh, 0.7rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: clamp(0.4rem, 0.9vh, 0.6rem);
+}
+.proc-num {
   font-family: var(--font-caption);
-  font-size: clamp(0.55rem, 0.8vw, 0.68rem);
+  font-size: clamp(0.6rem, 0.9vw, 0.72rem);
   letter-spacing: 0.22em;
   color: var(--im8-flamingo);
   font-weight: 700;
-  opacity: 0.85;
 }
-.sc-icon {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+.proc-icon {
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  margin: clamp(0.2rem, 0.5vh, 0.35rem) 0;
   line-height: 1;
-  margin: 0.1rem 0;
 }
-.sc-title {
+.proc-title {
   font-family: var(--font-title);
-  font-size: clamp(0.85rem, 1.3vw, 1.08rem);
+  font-size: clamp(0.9rem, 1.35vw, 1.12rem);
   font-weight: 600;
   color: #fff;
   line-height: 1.2;
 }
-.sc-desc {
-  font-size: clamp(0.58rem, 0.88vw, 0.72rem);
-  line-height: 1.35;
-  color: var(--text-secondary);
+.proc-sub {
+  font-size: clamp(0.58rem, 0.85vw, 0.7rem);
+  color: var(--text-muted);
   margin-top: 0.15rem;
+  font-style: italic;
 }
-.sc-lane {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: clamp(0.4rem, 0.9vw, 0.8rem);
-  margin-top: clamp(0.8rem, 1.8vh, 1.2rem);
-}
-.sc-lane-item {
-  text-align: center;
-  padding: clamp(0.5rem, 1.1vh, 0.75rem) clamp(0.4rem, 0.9vw, 0.7rem);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: clamp(0.4rem, 0.8vw, 0.6rem);
+.proc-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: clamp(0.3rem, 0.7vh, 0.45rem);
 }
-.sc-lane-label {
-  font-family: var(--font-caption);
-  font-size: clamp(0.52rem, 0.78vw, 0.62rem);
-  letter-spacing: 0.15em;
-  color: var(--text-muted);
-  text-transform: uppercase;
+.proc-list li {
+  font-size: clamp(0.64rem, 0.93vw, 0.77rem);
+  line-height: 1.38;
+  color: rgba(255, 245, 240, 0.92);
+  padding-left: 1.1rem;
+  position: relative;
 }
-.sc-lane-value {
-  font-family: var(--font-title);
-  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
-  font-weight: 600;
+.proc-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0.28em;
+  color: var(--im8-flamingo);
+  font-size: 0.7em;
+}
+.proc-list li strong {
   color: var(--im8-sand);
+  font-weight: 600;
 }
 </style>
 </head>
@@ -1965,102 +1965,10 @@ p, li {
   <div class="gate-tagline">End-to-end flow from demand forecast through sourcing, receiving, stocking and shipping — every step connected, every hand-off automated.</div>
   <div class="gate-price">Unlock for <span>$40,000</span></div>
   <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-9sc','gate-9')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-9','gate-9')">💳 Yes, Pay Now</a>
     <a class="gate-btn gate-btn--no" onclick="skipModule('gate-10')">🚫 No Thanks</a>
   </div>
 </div>
-</section>
-
-<!-- ============================================ -->
-<!-- SLIDE 9SC: SUPPLY CHAIN FLOW (NEW)           -->
-<!-- ============================================ -->
-<section class="slide bg-burgundy" id="slide-9sc">
-  <div class="content flex-col gap-md" style="max-width: 1320px;">
-    <div class="text-center">
-      <span class="badge badge-flamingo reveal caption">Module 4 · How It Works</span>
-      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.3rem, 0.8vh, 0.5rem);">
-        The <span class="gradient-text">Supply Chain System</span>, End-to-End
-      </h2>
-      <p class="reveal reveal-delay-2 muted" style="font-size: clamp(0.75rem, 1.1vw, 0.9rem); margin-top: clamp(0.25rem, 0.6vh, 0.4rem); max-width: 820px; margin-left: auto; margin-right: auto;">
-        One platform connects every step — from forecasting demand to auditing the final invoice. No spreadsheet hand-offs.
-      </p>
-    </div>
-
-    <!-- 6-stage horizontal flow -->
-    <div class="sc-flow reveal reveal-delay-3">
-      <div class="sc-stage">
-        <div class="sc-step">01 · Plan</div>
-        <div class="sc-icon">📊</div>
-        <div class="sc-title">Demand Forecast</div>
-        <div class="sc-desc">12-week projection from Skio + Shopify, per-warehouse, flavor mix</div>
-      </div>
-      <div class="sc-stage">
-        <div class="sc-step">02 · Source</div>
-        <div class="sc-icon">📋</div>
-        <div class="sc-title">PO Management</div>
-        <div class="sc-desc">Create PO, allocate to warehouses, auto-sync to Stord</div>
-      </div>
-      <div class="sc-stage">
-        <div class="sc-step">03 · Receive</div>
-        <div class="sc-icon">📦</div>
-        <div class="sc-title">ASN &amp; Work Orders</div>
-        <div class="sc-desc">5-state lifecycle, live webhook sync, D365 PO mapping</div>
-      </div>
-      <div class="sc-stage">
-        <div class="sc-step">04 · Stock</div>
-        <div class="sc-icon">🏭</div>
-        <div class="sc-title">Inventory</div>
-        <div class="sc-desc">Unified view across ATL · RENO · AMS · HK · UK + D365</div>
-      </div>
-      <div class="sc-stage">
-        <div class="sc-step">05 · Ship</div>
-        <div class="sc-icon">🚚</div>
-        <div class="sc-title">SO &amp; HK Fulfilment</div>
-        <div class="sc-desc">Auto-reconcile Shopify, batch AWB via Spaceship</div>
-      </div>
-      <div class="sc-stage">
-        <div class="sc-step">06 · Audit</div>
-        <div class="sc-icon">💰</div>
-        <div class="sc-title">Shipping &amp; Cost</div>
-        <div class="sc-desc">Parse invoices, rate-card validation, overcharge alerts</div>
-      </div>
-    </div>
-
-    <!-- Integration lane -->
-    <div class="sc-lane reveal reveal-delay-4">
-      <div class="sc-lane-item">
-        <span class="sc-lane-label">Data source</span>
-        <span class="sc-lane-value">Skio · Shopify</span>
-      </div>
-      <div class="sc-lane-item">
-        <span class="sc-lane-label">Sync</span>
-        <span class="sc-lane-value">D365 · Stord</span>
-      </div>
-      <div class="sc-lane-item">
-        <span class="sc-lane-label">Webhook</span>
-        <span class="sc-lane-value">Stord · GPS</span>
-      </div>
-      <div class="sc-lane-item">
-        <span class="sc-lane-label">3PL</span>
-        <span class="sc-lane-value">5 warehouses</span>
-      </div>
-      <div class="sc-lane-item">
-        <span class="sc-lane-label">Carriers</span>
-        <span class="sc-lane-value">Spaceship · SF</span>
-      </div>
-      <div class="sc-lane-item">
-        <span class="sc-lane-label">Invoices</span>
-        <span class="sc-lane-value">3 carriers</span>
-      </div>
-    </div>
-
-    <div class="reveal reveal-delay-5 highlight-box text-center" style="max-width: 920px; margin: 0 auto;">
-      <p style="font-size: clamp(0.75rem, 1.1vw, 0.88rem);">
-        <span class="flamingo">◆</span> One source of truth — every step is visible to every team, and every hand-off is automated
-      </p>
-    </div>
-  </div>
-  <span class="slide-num">09 / 18</span>
 </section>
 
 <!-- ============================================ -->
@@ -2069,9 +1977,9 @@ p, li {
 <section class="slide bg-burgundy" id="slide-9">
   <div class="content flex-col gap-md" style="max-width: 1240px;">
     <div>
-      <span class="module-badge badge badge-amber reveal">Supply Chain · Step 1</span>
+      <span class="module-badge badge badge-amber reveal">Module 4 · Part 1</span>
       <h2 class="reveal reveal-delay-1">Demand Forecast</h2>
-      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Data-driven demand planning with subscription intelligence — the first step of the supply chain system</p>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Data-driven demand planning with subscription intelligence</p>
     </div>
     <div class="md-layout reveal reveal-delay-3">
       <div class="md-shot">
@@ -2107,6 +2015,100 @@ p, li {
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+  <span class="slide-num">09 / 18</span>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 9SC: DEMAND FORECAST → PROCUREMENT     -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-9sc">
+  <div class="content flex-col gap-md" style="max-width: 1340px;">
+    <div class="text-center">
+      <span class="badge badge-flamingo reveal caption">Module 4 · Part 2 · How It Works</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.3rem, 0.8vh, 0.5rem);">
+        From <span class="gradient-text">Demand Signal</span> to <span class="gradient-text">Purchase Order</span>
+      </h2>
+      <p class="reveal reveal-delay-2 muted" style="font-size: clamp(0.75rem, 1.1vw, 0.9rem); margin-top: clamp(0.25rem, 0.6vh, 0.4rem); max-width: 880px; margin-left: auto; margin-right: auto;">
+        How the forecast number gets built, what alerts it triggers, and how one click becomes a PO.
+      </p>
+    </div>
+
+    <div class="proc-flow reveal reveal-delay-3">
+      <div class="proc-step">
+        <div class="proc-head">
+          <div class="proc-num">01 · Inputs</div>
+          <div class="proc-icon">📥</div>
+          <div class="proc-title">Where the numbers come from</div>
+          <div class="proc-sub">Live data across 6 sources</div>
+        </div>
+        <ul class="proc-list">
+          <li><strong>Skio</strong> — subscription billing cycles &amp; renewals</li>
+          <li><strong>Shopify</strong> — historical sales &amp; flavor mix</li>
+          <li><strong>D365</strong> — live inventory snapshots</li>
+          <li><strong>BOM</strong> — RM &amp; component requirements per SKU</li>
+          <li><strong>Vendor config</strong> — lead times per SKU</li>
+          <li><strong>Planning events</strong> — Loyalty, promos, campaigns</li>
+        </ul>
+      </div>
+
+      <div class="proc-step">
+        <div class="proc-head">
+          <div class="proc-num">02 · Calculate</div>
+          <div class="proc-icon">🧮</div>
+          <div class="proc-title">How the forecast is built</div>
+          <div class="proc-sub">Subscription-aware demand model</div>
+        </div>
+        <ul class="proc-list">
+          <li>12-week / 90-day projection window</li>
+          <li>Per SKU × per warehouse breakdown</li>
+          <li>3 billing-cycle subscription refill demand</li>
+          <li>Shopify one-time sales trend</li>
+          <li>Flavor mix + production balance</li>
+          <li>Event-adjusted impact (Loyalty, promos)</li>
+        </ul>
+      </div>
+
+      <div class="proc-step">
+        <div class="proc-head">
+          <div class="proc-num">03 · Alert</div>
+          <div class="proc-icon">🔔</div>
+          <div class="proc-title">What it tells us to do</div>
+          <div class="proc-sub">Proactive, not reactive</div>
+        </div>
+        <ul class="proc-list">
+          <li>Stockout warnings below runway threshold</li>
+          <li>RM runway — reorder before production gap</li>
+          <li>Per-warehouse runway in days</li>
+          <li>Flavor mix imbalance flags</li>
+          <li>Suggested reorder quantities per SKU</li>
+          <li><strong>Slack alerts</strong> for critical items</li>
+        </ul>
+      </div>
+
+      <div class="proc-step">
+        <div class="proc-head">
+          <div class="proc-num">04 · Procure</div>
+          <div class="proc-icon">📋</div>
+          <div class="proc-title">How it becomes a PO</div>
+          <div class="proc-sub">One click, fully wired</div>
+        </div>
+        <ul class="proc-list">
+          <li>Click <strong>Create PO</strong> — quantities pre-filled from forecast</li>
+          <li>Auto-allocates across warehouses by demand</li>
+          <li>Generates <strong>Stord PO</strong> via API</li>
+          <li>Creates inbound shipment record</li>
+          <li>2-way sync on RECEIVED_SHORT / OVER</li>
+          <li>D365 updates when stock lands</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-4 highlight-box text-center" style="max-width: 980px; margin: 0 auto;">
+      <p style="font-size: clamp(0.72rem, 1.05vw, 0.85rem);">
+        <span class="flamingo">◆</span> 6 data sources in &nbsp;→&nbsp; forecast calculated &nbsp;→&nbsp; alerts fire &nbsp;→&nbsp; <span class="flamingo" style="font-weight: 600;">one click turns insight into a PO</span>
+      </p>
     </div>
   </div>
   <span class="slide-num">10 / 18</span>
