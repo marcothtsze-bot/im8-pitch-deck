@@ -816,9 +816,9 @@ p, li {
 /* === PRODUCT TOUR MOSAIC (slide-6c) === */
 .prev-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.5rem, 1vw, 0.9rem);
+  gap: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.4rem, 0.9vw, 0.8rem);
   width: 100%;
   height: clamp(340px, 62vh, 640px);
 }
@@ -881,6 +881,21 @@ p, li {
   object-fit: cover;
   object-position: top left;
   display: block;
+}
+.prev-shot.prev-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(255, 150, 147, 0.14), transparent 60%),
+    linear-gradient(160deg, #1a0408 0%, #0a0103 100%);
+}
+.prev-placeholder-icon {
+  width: 44%;
+  aspect-ratio: 1;
+  color: var(--im8-flamingo);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 20px rgba(255, 150, 147, 0.3));
 }
 .prev-caption {
   position: absolute;
@@ -1351,6 +1366,13 @@ p, li {
 
     <div class="prev-grid">
       <div class="prev-card reveal reveal-delay-2">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/master-data</span></div>
+        <div class="prev-shot prev-placeholder">
+          <svg class="prev-placeholder-icon"><use href="#ico-master-data"/></svg>
+          <div class="prev-caption"><span class="prev-name">Master Data</span><span class="prev-path">SKU · BOM · VENDORS</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-2">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/inventory</span></div>
         <div class="prev-shot">
           <img src="screenshots/inventory.png" alt="Unified Inventory page">
@@ -1406,13 +1428,20 @@ p, li {
           <div class="prev-caption"><span class="prev-name">BOM Master</span><span class="prev-path">VERSIONED · DRAFT → PUBLISH</span></div>
         </div>
       </div>
+      <div class="prev-card reveal reveal-delay-5">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/hk-fulfilment</span></div>
+        <div class="prev-shot prev-placeholder">
+          <svg class="prev-placeholder-icon"><use href="#ico-fulfilment"/></svg>
+          <div class="prev-caption"><span class="prev-name">HK Fulfilment</span><span class="prev-path">BATCH AWB · SPACESHIP</span></div>
+        </div>
+      </div>
     </div>
 
     <p class="reveal reveal-delay-5 muted text-center" style="font-size: clamp(0.62rem, 0.85vw, 0.72rem); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.2rem;">
       ▶ Follow along — next 8 slides walk through each module
     </p>
   </div>
-  <span class="slide-num">04c / 24</span>
+  <span class="slide-num">05 / 24</span>
 </section>
 
 <!-- GATE 1: MASTER DATA -->
@@ -1466,7 +1495,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Replaced Airtable — all creates/updates now go through Hub with full audit trail</p>
     </div>
   </div>
-  <span class="slide-num">05 / 24</span>
+  <span class="slide-num">06 / 24</span>
 </section>
 
 <!-- GATE 2: INVENTORY & RISK -->
@@ -1519,7 +1548,7 @@ p, li {
       <li>One-click BOM risk assessment across all finished goods</li>
     </ul>
   </div>
-  <span class="slide-num">06 / 24</span>
+  <span class="slide-num">07 / 24</span>
 </section>
 
 <!-- GATE 3: DEMAND FORECAST -->
@@ -1568,7 +1597,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">07 / 24</span>
+  <span class="slide-num">08 / 24</span>
 </section>
 
 <!-- GATE 4: WORK ORDERS -->
@@ -1619,7 +1648,7 @@ p, li {
       </p>
     </div>
   </div>
-  <span class="slide-num">08 / 24</span>
+  <span class="slide-num">09 / 24</span>
 </section>
 
 <!-- GATE 5: ASN INBOUND -->
@@ -1676,7 +1705,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">09 / 24</span>
+  <span class="slide-num">10 / 24</span>
 </section>
 
 <!-- GATE 6: HK FULFILMENT -->
@@ -1713,7 +1742,7 @@ p, li {
       <div class="card"><h3><span style="color: #34d399;">📥 Excel Export</span></h3><p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem); margin-top: 0.4rem;">D365 fulfillment with OTP SKU mapping</p></div>
     </div>
   </div>
-  <span class="slide-num">10 / 24</span>
+  <span class="slide-num">11 / 24</span>
 </section>
 
 <!-- GATE 7: SHIPPING & COST -->
@@ -1754,7 +1783,7 @@ p, li {
       <li>Slack alerts for cost anomalies and overcharges</li>
     </ul>
   </div>
-  <span class="slide-num">11 / 24</span>
+  <span class="slide-num">12 / 24</span>
 </section>
 
 <!-- GATE 8: PO MANAGEMENT -->
@@ -1800,7 +1829,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> 2-way Stord sync — RECEIVED_SHORT and RECEIVED_OVER auto-update</p>
     </div>
   </div>
-  <span class="slide-num">12 / 24</span>
+  <span class="slide-num">13 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -1837,7 +1866,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">13 / 24</span>
+  <span class="slide-num">14 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -1875,7 +1904,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Continuously evolving — new modules ship every sprint</p>
     </div>
   </div>
-  <span class="slide-num">14 / 24</span>
+  <span class="slide-num">15 / 24</span>
 </section>
 
 <!-- ============================================ -->
@@ -1897,7 +1926,7 @@ p, li {
       im8hub.com
     </p>
   </div>
-  <span class="slide-num">15 / 24</span>
+  <span class="slide-num">16 / 24</span>
 </section>
 
 <!-- === JAVASCRIPT === -->
