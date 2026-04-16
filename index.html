@@ -2047,6 +2047,16 @@ p, li {
 </head>
 <body>
 
+<!-- Thanos-snap dissolve filter (used on gate "No Thanks") -->
+<svg width="0" height="0" style="position: absolute; pointer-events: none;" aria-hidden="true">
+  <defs>
+    <filter id="thanos-dissolve" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="42" id="thanos-turb"/>
+      <feDisplacementMap id="thanos-displacement" in="SourceGraphic" scale="0"/>
+    </filter>
+  </defs>
+</svg>
+
 <!-- Nav dots -->
 <nav class="nav-dots" id="navDots"></nav>
 
@@ -2577,7 +2587,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$10,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-7','gate-7')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-8')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-8', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -2657,7 +2667,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$10,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-8','gate-8')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-13')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-13', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -2789,7 +2799,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$40,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-9','gate-9')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-10')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-10', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -3016,7 +3026,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$8,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-10','gate-10')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-11')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-11', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -3082,7 +3092,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$10,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-11','gate-11')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-12')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-12', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -3148,7 +3158,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$18,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-12','gate-12')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-16')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-16', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -3214,7 +3224,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$15,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-gifting','gate-16')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-17')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-17', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -3280,7 +3290,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$10,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-delivery','gate-17')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-15')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('gate-15', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -3348,7 +3358,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$30,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-jarvis','gate-15')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('slide-15')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="dismissModule('slide-15', this)">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -3778,6 +3788,82 @@ function unlockModule(moduleId, gateId) {
 function skipModule(nextId) {
   const next = document.getElementById(nextId);
   if (next) next.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* === THANOS-SNAP DISMISS (gate "No Thanks") === */
+function thanosSnap(element, onDone) {
+  const disp = document.getElementById('thanos-displacement');
+  const turb = document.getElementById('thanos-turb');
+  if (!disp) {
+    // Fallback — plain fade if SVG filter unavailable
+    element.style.transition = 'opacity 1.4s ease-out';
+    element.style.opacity = '0';
+    setTimeout(() => onDone && onDone(), 1400);
+    return;
+  }
+
+  // Randomize the noise seed each snap for variety
+  if (turb) turb.setAttribute('seed', String(Math.floor(Math.random() * 999)));
+
+  element.style.filter = 'url(#thanos-dissolve)';
+  element.style.willChange = 'transform, opacity, filter';
+
+  const duration = 2000;
+  const start = performance.now();
+
+  function frame(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = t * t;                      // ease-in quadratic
+    disp.setAttribute('scale', String(eased * 60));
+    // Drift up and slightly right, like ash on a breeze
+    element.style.transform = `translate3d(${eased * 30}px, ${-eased * 18}px, 0) rotate(${eased * 2.2}deg)`;
+    // Opacity holds then fades
+    element.style.opacity = t < 0.18 ? '1' : String(Math.max(0, 1 - (t - 0.18) / 0.82));
+
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      disp.setAttribute('scale', '0');
+      if (onDone) onDone();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function resetThanosGate(element) {
+  element.style.filter = '';
+  element.style.transform = '';
+  element.style.opacity = '';
+  element.style.transition = '';
+  element.style.willChange = '';
+}
+
+function dismissModule(nextId, btn) {
+  const next = document.getElementById(nextId);
+  if (!next) return;
+  const gateSlide = btn && btn.closest ? btn.closest('.gate-slide') : null;
+  const gateContent = gateSlide ? gateSlide.querySelector('.gate') : null;
+
+  if (!gateContent) {
+    next.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  // Freeze the lock so it doesn't bounce during snap
+  const lock = gateContent.querySelector('.gate-lock');
+  if (lock) lock.style.animation = 'none';
+  // Disable both buttons so they can't be spammed mid-snap
+  gateContent.querySelectorAll('.gate-btn').forEach(b => { b.style.pointerEvents = 'none'; });
+
+  thanosSnap(gateContent, () => {
+    next.scrollIntoView({ behavior: 'smooth' });
+    // Restore the gate after the user has scrolled past (so they can revisit)
+    setTimeout(() => {
+      resetThanosGate(gateContent);
+      if (lock) lock.style.animation = '';
+      gateContent.querySelectorAll('.gate-btn').forEach(b => { b.style.pointerEvents = ''; });
+    }, 1200);
+  });
 }
 
 /* === JARVIS AI — VOICE INTRO (ElevenLabs "Hale" audio file) === */
