@@ -815,6 +815,19 @@ p, li {
   object-position: top left;
   display: block;
 }
+/* Live iframe: render at 2x then scale down so Hub gets desktop-width layout */
+.md-shot-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  border: 0;
+  display: block;
+  background: #fff;
+  transform: scale(0.5);
+  transform-origin: top left;
+}
 .md-ba {
   display: flex;
   flex-direction: column;
@@ -1002,7 +1015,8 @@ p, li {
   background: #0a0103;
   min-height: 0;
 }
-.prev-shot img {
+.prev-shot img,
+.prev-shot video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1496,56 +1510,56 @@ p, li {
       <div class="prev-card reveal reveal-delay-2">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/master-data</span></div>
         <div class="prev-shot">
-          <img src="screenshots/master-data.png" alt="Master Data page">
+          <video src="videos/master-data.webm" autoplay loop muted playsinline poster="screenshots/master-data.png"></video>
           <div class="prev-caption"><span class="prev-name">Master Data</span><span class="prev-path">SKU · BOM · VENDORS</span></div>
         </div>
       </div>
       <div class="prev-card reveal reveal-delay-2">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/inventory</span></div>
         <div class="prev-shot">
-          <img src="screenshots/inventory.png" alt="Unified Inventory page">
+          <video src="videos/inventory.webm" autoplay loop muted playsinline poster="screenshots/inventory.png"></video>
           <div class="prev-caption"><span class="prev-name">Unified Inventory</span><span class="prev-path">5 WH · LIVE</span></div>
         </div>
       </div>
       <div class="prev-card reveal reveal-delay-2">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/order-consolidation</span></div>
         <div class="prev-shot">
-          <img src="screenshots/order-consolidation.png" alt="Sales Order Consolidation page">
+          <video src="videos/order-consolidation.webm" autoplay loop muted playsinline poster="screenshots/order-consolidation.png"></video>
           <div class="prev-caption"><span class="prev-name">SO Consolidation</span><span class="prev-path">SHOPIFY · STORD · D365</span></div>
         </div>
       </div>
       <div class="prev-card reveal reveal-delay-3">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/outbound/delivery</span></div>
         <div class="prev-shot">
-          <img src="screenshots/delivery.png" alt="Delivery Performance page">
+          <video src="videos/delivery.webm" autoplay loop muted playsinline poster="screenshots/delivery.png"></video>
           <div class="prev-caption"><span class="prev-name">Delivery Performance</span><span class="prev-path">SLA · P90 · CARRIERS</span></div>
         </div>
       </div>
       <div class="prev-card reveal reveal-delay-3">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/gifting/manage</span></div>
         <div class="prev-shot">
-          <img src="screenshots/gifting.png" alt="Gifting page">
+          <video src="videos/gifting.webm" autoplay loop muted playsinline poster="screenshots/gifting.png"></video>
           <div class="prev-caption"><span class="prev-name">Gifting</span><span class="prev-path">SELF-SERVE · AUTO-FULFIL</span></div>
         </div>
       </div>
       <div class="prev-card reveal reveal-delay-4">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/shipping</span></div>
         <div class="prev-shot">
-          <img src="screenshots/shipping.png" alt="Shipping Cost Analysis page">
+          <video src="videos/shipping.webm" autoplay loop muted playsinline poster="screenshots/shipping.png"></video>
           <div class="prev-caption"><span class="prev-name">Shipping &amp; Invoices</span><span class="prev-path">3 CARRIERS · VALIDATION</span></div>
         </div>
       </div>
       <div class="prev-card reveal reveal-delay-4">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/stord-operations</span></div>
         <div class="prev-shot">
-          <img src="screenshots/stord-operations.png" alt="Stord Operations page">
+          <video src="videos/stord-operations.webm" autoplay loop muted playsinline poster="screenshots/stord-operations.png"></video>
           <div class="prev-caption"><span class="prev-name">Stord Operations</span><span class="prev-path">WORK ORDERS · KITTING</span></div>
         </div>
       </div>
       <div class="prev-card reveal reveal-delay-5">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/demand-forecast</span></div>
         <div class="prev-shot">
-          <img src="screenshots/demand-forecast.png" alt="Demand Forecast page">
+          <video src="videos/demand-forecast.webm" autoplay loop muted playsinline poster="screenshots/demand-forecast.png"></video>
           <div class="prev-caption"><span class="prev-name">Demand Forecast</span><span class="prev-path">12-WEEK · RM RUNWAY</span></div>
         </div>
       </div>
@@ -1559,7 +1573,7 @@ p, li {
       <div class="prev-card reveal reveal-delay-5">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/hk-fulfilment</span></div>
         <div class="prev-shot">
-          <img src="screenshots/hk-fulfilment.png" alt="HK Fulfilment page">
+          <video src="videos/hk-fulfilment.webm" autoplay loop muted playsinline poster="screenshots/hk-fulfilment.png"></video>
           <div class="prev-caption"><span class="prev-name">HK Fulfilment</span><span class="prev-path">BATCH AWB · SPACESHIP</span></div>
         </div>
       </div>
@@ -1610,7 +1624,7 @@ p, li {
           <span class="prev-url">im8hub.com/master-data</span>
         </div>
         <div class="md-shot-img">
-          <video src="videos/master-data.webm" autoplay loop muted playsinline poster="screenshots/master-data.png"></video>
+          <iframe class="md-shot-iframe" src="https://im8hub.com/master-data" loading="lazy" title="Master Data — live"></iframe>
         </div>
       </div>
 
@@ -1683,7 +1697,7 @@ p, li {
       <div class="md-shot">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/inventory</span></div>
         <div class="md-shot-img">
-          <video src="videos/inventory.webm" autoplay loop muted playsinline poster="screenshots/inventory.png"></video>
+          <iframe class="md-shot-iframe" src="https://im8hub.com/inventory" loading="lazy" title="Inventory — live"></iframe>
         </div>
       </div>
       <div class="md-ba">
@@ -1748,7 +1762,7 @@ p, li {
       <div class="md-shot">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/demand-forecast</span></div>
         <div class="md-shot-img">
-          <video src="videos/demand-forecast.webm" autoplay loop muted playsinline poster="screenshots/demand-forecast.png"></video>
+          <iframe class="md-shot-iframe" src="https://im8hub.com/demand-forecast" loading="lazy" title="Demand Forecast — live"></iframe>
         </div>
       </div>
       <div class="md-ba">
@@ -1813,7 +1827,7 @@ p, li {
       <div class="md-shot">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/stord-operations</span></div>
         <div class="md-shot-img">
-          <video src="videos/stord-operations.webm" autoplay loop muted playsinline poster="screenshots/stord-operations.png"></video>
+          <iframe class="md-shot-iframe" src="https://im8hub.com/stord-operations" loading="lazy" title="Stord Work Orders — live"></iframe>
         </div>
       </div>
       <div class="md-ba">
@@ -1878,7 +1892,7 @@ p, li {
       <div class="md-shot">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/inbound</span></div>
         <div class="md-shot-img">
-          <video src="videos/inbound.webm" autoplay loop muted playsinline></video>
+          <iframe class="md-shot-iframe" src="https://im8hub.com/inbound" loading="lazy" title="ASN Inbound — live"></iframe>
         </div>
       </div>
       <div class="md-ba">
@@ -1943,7 +1957,7 @@ p, li {
       <div class="md-shot">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/hk-fulfilment</span></div>
         <div class="md-shot-img">
-          <video src="videos/hk-fulfilment.webm" autoplay loop muted playsinline poster="screenshots/hk-fulfilment.png"></video>
+          <iframe class="md-shot-iframe" src="https://im8hub.com/hk-fulfilment" loading="lazy" title="HK Fulfilment — live"></iframe>
         </div>
       </div>
       <div class="md-ba">
@@ -2008,7 +2022,7 @@ p, li {
       <div class="md-shot">
         <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/shipping</span></div>
         <div class="md-shot-img">
-          <video src="videos/shipping.webm" autoplay loop muted playsinline poster="screenshots/shipping.png"></video>
+          <iframe class="md-shot-iframe" src="https://im8hub.com/shipping" loading="lazy" title="Shipping & Cost — live"></iframe>
         </div>
       </div>
       <div class="md-ba">
