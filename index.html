@@ -6,7 +6,7 @@
 <title>IM8 Hub — Pitch Deck</title>
 
 <!-- IM8 Brand Fonts: Cormorant Garamond (titles) + Raleway (body) + Rajdhani (captions) -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 /* === IM8 BRAND COLORS (Brand Book v1.0) === */
@@ -2003,7 +2003,7 @@ p, li {
   align-items: center;
   gap: 2rem;
 }
-.invoice-sigbox { flex: 1; max-width: 320px; }
+.invoice-sigbox { flex: 1; max-width: 320px; position: relative; }
 .invoice-sigline {
   height: 1px;
   background: rgba(42, 0, 8, 0.6);
@@ -2043,6 +2043,194 @@ p, li {
   0%, 100% { transform: rotate(-8deg) scale(1); }
   50% { transform: rotate(-6deg) scale(1.02); }
 }
+
+/* === THANOS-SNAP DELETION MESSAGE === */
+.thanos-msg {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(60, 0, 10, 0.55) 0%, rgba(10, 0, 4, 0) 70%);
+  transition: opacity 0.5s ease-out;
+}
+.thanos-msg.is-active {
+  opacity: 1;
+}
+.thanos-msg-icon {
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--im8-flamingo);
+  text-shadow: 0 0 30px rgba(255, 90, 110, 0.9), 0 0 60px rgba(164, 0, 17, 0.7);
+  animation: thanosMsgIcon 1.8s ease-in-out infinite;
+  margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
+}
+@keyframes thanosMsgIcon {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+  50% { transform: scale(1.15) rotate(-4deg); opacity: 1; }
+}
+.thanos-msg-line1 {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(0.9rem, 1.6vw, 1.25rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 220, 225, 0.85);
+  margin-bottom: clamp(0.2rem, 0.5vh, 0.3rem);
+}
+.thanos-msg-line2 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 0.08em;
+  color: var(--im8-flamingo);
+  text-shadow: 0 0 40px rgba(255, 90, 110, 0.85), 0 0 80px rgba(164, 0, 17, 0.6);
+  margin: clamp(0.1rem, 0.4vh, 0.3rem) 0;
+  animation: thanosMsgGlitch 0.18s steps(2) infinite;
+}
+@keyframes thanosMsgGlitch {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+.thanos-msg-sub {
+  font-family: var(--font-caption);
+  font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 240, 0.75);
+  margin-top: clamp(0.3rem, 0.7vh, 0.5rem);
+}
+.thanos-msg-blink {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  color: var(--im8-flamingo);
+  margin-top: clamp(0.5rem, 1.2vh, 0.8rem);
+  animation: thanosMsgBlink 0.5s steps(2) infinite;
+}
+@keyframes thanosMsgBlink {
+  50% { opacity: 0; }
+}
+
+/* === INVOICE SIGNATURE INTERACTIVE === */
+.invoice-sigclick {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: clamp(38px, 5vh, 52px);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: clamp(0.15rem, 0.4vh, 0.25rem);
+  cursor: pointer;
+  text-align: left;
+}
+.invoice-sigclick:disabled { cursor: default; }
+.invoice-sighint {
+  display: inline-block;
+  font-family: var(--font-caption);
+  font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--im8-red-algae);
+  padding: 0.3rem 0.6rem;
+  border: 1px dashed var(--im8-red-algae);
+  border-radius: 5px;
+  background: rgba(164, 0, 17, 0.06);
+  animation: sighintPulse 1.6s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+@keyframes sighintPulse {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-2px); opacity: 0.75; }
+}
+.invoice-sigclick.is-signed .invoice-sighint {
+  opacity: 0;
+  pointer-events: none;
+}
+.invoice-sigtext {
+  display: inline-block;
+  position: absolute;
+  left: 4px;
+  bottom: 0;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2rem, 3.6vw, 2.8rem);
+  color: #1a2b8a;
+  line-height: 1;
+  padding-bottom: 2px;
+  text-shadow: 0 1px 0 rgba(26, 43, 138, 0.1);
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  -webkit-clip-path: inset(0 100% 0 0);
+  transform: rotate(-3deg);
+  transform-origin: left bottom;
+  pointer-events: none;
+}
+.invoice-sigclick.is-signed .invoice-sigtext {
+  opacity: 1;
+  animation: sigWrite 1.4s cubic-bezier(0.55, 0.15, 0.35, 1) forwards;
+}
+@keyframes sigWrite {
+  from { clip-path: inset(0 100% 0 0); -webkit-clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); -webkit-clip-path: inset(0 0 0 0); }
+}
+
+/* Approved stamp state */
+.invoice-stamp.is-approved {
+  color: #1a8a4a;
+  border-color: #1a8a4a;
+  box-shadow: 0 0 0 2px rgba(26, 138, 74, 0.15) inset, 0 0 20px rgba(26, 138, 74, 0.3);
+  transform: rotate(8deg) scale(1.08);
+  animation: stampApproved 0.55s cubic-bezier(0.2, 1.4, 0.6, 1) forwards;
+  opacity: 1;
+}
+@keyframes stampApproved {
+  0% { transform: rotate(-8deg) scale(1); }
+  40% { transform: rotate(10deg) scale(1.25); }
+  100% { transform: rotate(8deg) scale(1.08); }
+}
+.invoice-thanks {
+  margin-top: clamp(0.6rem, 1.2vh, 1rem);
+  padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.8rem, 1.4vw, 1.2rem);
+  background: rgba(26, 138, 74, 0.1);
+  border: 1px solid rgba(26, 138, 74, 0.4);
+  border-radius: 8px;
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: clamp(0.8rem, 1.15vw, 0.95rem);
+  color: #0f6a38;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.5s ease 0.4s;
+  pointer-events: none;
+}
+.invoice-thanks.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Confetti burst */
+.invoice-confetti {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0;
+}
+.invoice-confetti.is-burst {
+  animation: confettiFly 1.4s ease-out forwards;
+}
+@keyframes confettiFly {
+  0% { transform: translate(-50%, -50%) scale(0.4) rotate(0deg); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 200px))) scale(1) rotate(var(--r, 360deg)); opacity: 0; }
+}
 </style>
 </head>
 <body>
@@ -2056,6 +2244,15 @@ p, li {
     </filter>
   </defs>
 </svg>
+
+<!-- Thanos-snap deletion message overlay -->
+<div class="thanos-msg" id="thanosMsg" aria-hidden="true">
+  <div class="thanos-msg-icon">⚠</div>
+  <div class="thanos-msg-line1">THIS MODULE WILL BE</div>
+  <div class="thanos-msg-line2">DELETED</div>
+  <div class="thanos-msg-sub">from the IM8 HUB</div>
+  <div class="thanos-msg-blink">_</div>
+</div>
 
 <!-- Nav dots -->
 <nav class="nav-dots" id="navDots"></nav>
@@ -3653,10 +3850,17 @@ p, li {
 
       <div class="invoice-signature">
         <div class="invoice-sigbox">
+          <button type="button" class="invoice-sigclick" id="invoiceSigClick" onclick="approveInvoice()">
+            <span class="invoice-sighint">✍ Click here to sign</span>
+            <span class="invoice-sigtext" id="invoiceSigText">Samantha</span>
+          </button>
           <div class="invoice-sigline"></div>
-          <div class="invoice-siglabel">Approved by Samantha Kwok Ting Ting</div>
+          <div class="invoice-siglabel" id="invoiceSigLabel">Approved by Samantha Kwok Ting Ting</div>
         </div>
-        <div class="invoice-stamp">PENDING<br><span>APPROVAL</span></div>
+        <div class="invoice-stamp" id="invoiceStamp">PENDING<br><span>APPROVAL</span></div>
+      </div>
+      <div class="invoice-thanks" id="invoiceThanks" aria-hidden="true">
+        🎉 Approved — thank you, boss! Let's keep shipping. 🚀
       </div>
     </div>
   </div>
@@ -3855,15 +4059,71 @@ function dismissModule(nextId, btn) {
   // Disable both buttons so they can't be spammed mid-snap
   gateContent.querySelectorAll('.gate-btn').forEach(b => { b.style.pointerEvents = 'none'; });
 
+  // Show deletion message overlay mid-snap
+  const msg = document.getElementById('thanosMsg');
+  if (msg) {
+    setTimeout(() => msg.classList.add('is-active'), 650);
+  }
+
   thanosSnap(gateContent, () => {
-    next.scrollIntoView({ behavior: 'smooth' });
+    // Hide the deletion message, then scroll
+    if (msg) msg.classList.remove('is-active');
+    setTimeout(() => {
+      next.scrollIntoView({ behavior: 'smooth' });
+    }, 350);
     // Restore the gate after the user has scrolled past (so they can revisit)
     setTimeout(() => {
       resetThanosGate(gateContent);
       if (lock) lock.style.animation = '';
       gateContent.querySelectorAll('.gate-btn').forEach(b => { b.style.pointerEvents = ''; });
-    }, 1200);
+    }, 1500);
   });
+}
+
+/* === INVOICE — SIGN & APPROVE === */
+function approveInvoice() {
+  const btn = document.getElementById('invoiceSigClick');
+  const stamp = document.getElementById('invoiceStamp');
+  const thanks = document.getElementById('invoiceThanks');
+  if (!btn || btn.classList.contains('is-signed')) return;
+
+  btn.classList.add('is-signed');
+  btn.disabled = true;
+
+  // Swap stamp text after a small delay (mid-signature-write)
+  setTimeout(() => {
+    if (stamp) {
+      stamp.innerHTML = 'APPROVED<br><span>✓ SIGNED</span>';
+      stamp.classList.add('is-approved');
+    }
+  }, 900);
+
+  // Show thanks message + confetti burst
+  setTimeout(() => {
+    if (thanks) thanks.classList.add('is-visible');
+    burstConfetti(btn);
+  }, 1400);
+}
+
+function burstConfetti(anchor) {
+  if (!anchor) return;
+  const host = anchor.parentElement || anchor;
+  const colors = ['#ff3b4c', '#ffb347', '#4ade80', '#60a5fa', '#ffd369', '#a78bfa', '#8ef0c6'];
+  for (let i = 0; i < 28; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'invoice-confetti';
+    const tx = (Math.random() - 0.5) * 320;
+    const ty = 120 + Math.random() * 160;
+    const r = (Math.random() - 0.5) * 720 + 'deg';
+    piece.style.setProperty('--tx', tx + 'px');
+    piece.style.setProperty('--ty', ty + 'px');
+    piece.style.setProperty('--r', r);
+    piece.style.background = colors[i % colors.length];
+    piece.style.animationDelay = (Math.random() * 0.2) + 's';
+    host.appendChild(piece);
+    requestAnimationFrame(() => piece.classList.add('is-burst'));
+    setTimeout(() => piece.remove(), 1800);
+  }
 }
 
 /* === JARVIS AI — VOICE INTRO (ElevenLabs "Hale" audio file) === */
