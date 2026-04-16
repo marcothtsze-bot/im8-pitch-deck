@@ -1856,6 +1856,193 @@ p, li {
 .jarvis-stage.is-speaking { border-color: rgba(255, 90, 110, 0.55); box-shadow: 0 0 80px rgba(164, 0, 17, 0.45) inset, 0 0 40px rgba(255, 90, 110, 0.3); }
 .jarvis-stage.is-speaking .jarvis-sonar { animation-duration: 1.8s; }
 .jarvis-stage.is-speaking .jarvis-scanline { animation-duration: 2.4s; }
+
+/* === INVOICE SLIDE === */
+.invoice {
+  position: relative;
+  background: linear-gradient(160deg, #FFF8F1 0%, #F7EADA 100%);
+  color: #2a0008;
+  border-radius: clamp(12px, 1.6vw, 18px);
+  padding: clamp(1rem, 2vh, 1.6rem) clamp(1.1rem, 2vw, 1.8rem);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(164, 0, 17, 0.15);
+  overflow: hidden;
+}
+.invoice::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(164, 0, 17, 0.02) 0 2px, transparent 2px 10px);
+  pointer-events: none;
+}
+.invoice-head {
+  display: flex;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 2rem);
+  padding-bottom: clamp(0.6rem, 1.2vh, 0.9rem);
+  border-bottom: 2px solid rgba(164, 0, 17, 0.35);
+  margin-bottom: clamp(0.7rem, 1.3vh, 1rem);
+}
+.invoice-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  color: #500010;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.invoice-meta {
+  font-family: var(--font-caption);
+  font-size: clamp(0.55rem, 0.75vw, 0.65rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(42, 0, 8, 0.6);
+  margin-top: 0.3rem;
+}
+.invoice-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.15rem, 0.4vh, 0.3rem);
+  text-align: right;
+  min-width: clamp(180px, 20vw, 260px);
+}
+.invoice-meta-col > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-size: clamp(0.6rem, 0.82vw, 0.72rem);
+  line-height: 1.4;
+}
+.invoice-k {
+  font-family: var(--font-caption);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(42, 0, 8, 0.55);
+  font-size: 0.88em;
+}
+.invoice-v { color: rgba(42, 0, 8, 0.92); font-weight: 500; }
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(0.7rem, 0.95vw, 0.82rem);
+}
+.invoice-table th {
+  text-align: left;
+  font-family: var(--font-caption);
+  font-size: clamp(0.55rem, 0.75vw, 0.65rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(42, 0, 8, 0.55);
+  padding: clamp(0.3rem, 0.8vh, 0.5rem) clamp(0.4rem, 0.8vw, 0.6rem);
+  border-bottom: 1px solid rgba(164, 0, 17, 0.25);
+}
+.invoice-table td {
+  padding: clamp(0.32rem, 0.85vh, 0.5rem) clamp(0.4rem, 0.8vw, 0.6rem);
+  border-bottom: 1px dashed rgba(164, 0, 17, 0.15);
+  color: rgba(42, 0, 8, 0.92);
+}
+.invoice-table td:first-child {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  color: rgba(42, 0, 8, 0.55);
+  width: clamp(40px, 5vw, 60px);
+}
+.invoice-amt {
+  text-align: right;
+  font-family: var(--font-title);
+  font-weight: 600;
+  width: clamp(110px, 13vw, 150px);
+}
+.invoice-paid {
+  color: #1a8a4a;
+  font-family: var(--font-caption);
+  letter-spacing: 0.18em;
+  font-size: 0.85em;
+}
+.invoice-totals {
+  margin-top: clamp(0.6rem, 1vh, 0.8rem);
+  padding-top: clamp(0.5rem, 1vh, 0.8rem);
+  border-top: 2px solid rgba(164, 0, 17, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.2rem, 0.5vh, 0.35rem);
+}
+.invoice-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-title);
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  color: rgba(42, 0, 8, 0.9);
+}
+.invoice-row--credit { color: #1a8a4a; font-style: italic; }
+.invoice-row--total {
+  margin-top: clamp(0.3rem, 0.8vh, 0.5rem);
+  padding-top: clamp(0.35rem, 0.8vh, 0.5rem);
+  border-top: 1px solid rgba(164, 0, 17, 0.3);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  color: #500010;
+  letter-spacing: 0.02em;
+}
+.invoice-note {
+  margin-top: clamp(0.7rem, 1.2vh, 1rem);
+  padding: clamp(0.55rem, 1vh, 0.8rem) clamp(0.8rem, 1.4vw, 1.1rem);
+  background: rgba(164, 0, 17, 0.06);
+  border-left: 3px solid var(--im8-red-algae);
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: clamp(0.68rem, 0.95vw, 0.8rem);
+  color: rgba(42, 0, 8, 0.85);
+  font-style: italic;
+  line-height: 1.5;
+}
+.invoice-note .flamingo { color: var(--im8-red-algae); font-style: normal; }
+.invoice-signature {
+  margin-top: clamp(0.8rem, 1.4vh, 1.2rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+.invoice-sigbox { flex: 1; max-width: 320px; }
+.invoice-sigline {
+  height: 1px;
+  background: rgba(42, 0, 8, 0.6);
+  margin-bottom: 0.35rem;
+}
+.invoice-siglabel {
+  font-family: var(--font-caption);
+  font-size: clamp(0.55rem, 0.8vw, 0.68rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(42, 0, 8, 0.55);
+}
+.invoice-stamp {
+  font-family: var(--font-caption);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.18em;
+  text-align: center;
+  color: var(--im8-red-algae);
+  border: 3px solid var(--im8-red-algae);
+  border-radius: 6px;
+  padding: clamp(0.3rem, 0.8vh, 0.5rem) clamp(0.8rem, 1.4vw, 1.2rem);
+  transform: rotate(-8deg);
+  text-transform: uppercase;
+  line-height: 1;
+  opacity: 0.85;
+  box-shadow: 0 0 0 2px rgba(164, 0, 17, 0.15) inset;
+  animation: stampWobble 2.4s ease-in-out infinite;
+}
+.invoice-stamp span {
+  font-size: 0.75em;
+  letter-spacing: 0.25em;
+  display: inline-block;
+  margin-top: 0.15rem;
+}
+@keyframes stampWobble {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50% { transform: rotate(-6deg) scale(1.02); }
+}
 </style>
 </head>
 <body>
@@ -3399,41 +3586,68 @@ p, li {
 </section>
 
 <!-- ============================================ -->
-<!-- SLIDE 16: ROADMAP                            -->
+<!-- SLIDE 16: THE INVOICE                        -->
 <!-- ============================================ -->
 <section class="slide bg-dark bg-pattern" id="slide-16">
-  <div class="content flex-col gap-md">
+  <div class="content flex-col gap-md" style="max-width: 920px;">
     <div class="text-center">
-      <span class="badge badge-amber reveal caption">Roadmap</span>
-      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.4rem, 1vh, 0.8rem);">What's Live & What's Next</h2>
+      <span class="badge badge-flamingo reveal caption">The Bill</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.3rem, 0.8vh, 0.5rem);">
+        <span class="gradient-text">Official Invoice</span>
+      </h2>
+      <p class="reveal reveal-delay-2 muted" style="font-size: clamp(0.72rem, 1vw, 0.85rem); margin-top: clamp(0.2rem, 0.5vh, 0.35rem); font-style: italic;">
+        All 10 modules — live on production, waiting to be paid for.
+      </p>
     </div>
-    <div class="flex-col gap-md reveal reveal-delay-2" style="max-width: 800px; margin: clamp(0.5rem, 2vh, 1rem) auto 0;">
-      <div>
-        <h3 style="margin-bottom: clamp(0.4rem, 1vh, 0.6rem);"><span style="color: #34d399;">● Live on Production</span></h3>
-        <div class="roadmap-track">
-          <span class="roadmap-item roadmap-live">Master Data</span>
-          <span class="roadmap-item roadmap-live">Inventory</span>
-          <span class="roadmap-item roadmap-live">SO Consolidation</span>
-          <span class="roadmap-item roadmap-live">Demand Forecast</span>
-          <span class="roadmap-item roadmap-live">Delivery Performance</span>
-          <span class="roadmap-item roadmap-live">Shipping &amp; Cost</span>
-          <span class="roadmap-item roadmap-live">Stord Work Orders</span>
-          <span class="roadmap-item roadmap-live">ASN Inbound</span>
-          <span class="roadmap-item roadmap-live">HK Fulfilment</span>
-          <span class="roadmap-item roadmap-live">Gifting</span>
+
+    <div class="invoice reveal reveal-delay-3">
+      <div class="invoice-head">
+        <div>
+          <div class="invoice-brand">IM8 HUB</div>
+          <div class="invoice-meta">Invoice · IM8-HUB-001</div>
+        </div>
+        <div class="invoice-meta-col">
+          <div><span class="invoice-k">From</span><span class="invoice-v">Marco &amp; Raymond · IM8 Ops</span></div>
+          <div><span class="invoice-k">To</span><span class="invoice-v">Office of the CEO · Prenetics</span></div>
+          <div><span class="invoice-k">Date</span><span class="invoice-v">16 Apr 2026</span></div>
         </div>
       </div>
-      <div>
-        <h3 style="margin-bottom: clamp(0.4rem, 1vh, 0.6rem);"><span style="color: #f59e0b;">◐ Coming Soon</span></h3>
-        <div class="roadmap-track">
-          <span class="roadmap-item roadmap-soon">RM Analysis &amp; Alert</span>
-          <span class="roadmap-item roadmap-soon">Jarvis AI (WhatsApp + Hub Chat)</span>
-          <span class="roadmap-item roadmap-soon">Subscription Churn Modelling</span>
-        </div>
+
+      <table class="invoice-table">
+        <thead>
+          <tr><th>Module</th><th>Description</th><th class="invoice-amt">Amount</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td>Master Data</td><td class="invoice-amt">$10,000</td></tr>
+          <tr><td>02</td><td>Inventory Management</td><td class="invoice-amt">$5,000</td></tr>
+          <tr><td>03</td><td>Shipping &amp; Cost</td><td class="invoice-amt invoice-paid">PAID ✓</td></tr>
+          <tr><td>04</td><td>Supply Chain System (Forecast → PO)</td><td class="invoice-amt">$40,000</td></tr>
+          <tr><td>05</td><td>Stord Work Orders</td><td class="invoice-amt">$5,000</td></tr>
+          <tr><td>06</td><td>ASN Inbound</td><td class="invoice-amt">$10,000</td></tr>
+          <tr><td>07</td><td>HK Fulfilment</td><td class="invoice-amt">$10,000</td></tr>
+          <tr><td>08</td><td>Gifting</td><td class="invoice-amt">$10,000</td></tr>
+          <tr><td>09</td><td>Delivery Performance</td><td class="invoice-amt">$10,000</td></tr>
+          <tr><td>10</td><td>Jarvis — AI Agent</td><td class="invoice-amt">$15,000</td></tr>
+        </tbody>
+      </table>
+
+      <div class="invoice-totals">
+        <div class="invoice-row"><span>Subtotal</span><span>$125,000</span></div>
+        <div class="invoice-row invoice-row--credit"><span>Shipping credit (already paid)</span><span>– $10,000</span></div>
+        <div class="invoice-row invoice-row--total"><span>AMOUNT DUE</span><span>$115,000</span></div>
       </div>
-    </div>
-    <div class="highlight-box reveal reveal-delay-3 text-center" style="max-width: 800px; margin: 0 auto;">
-      <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Continuously evolving — new modules ship every sprint</p>
+
+      <div class="invoice-note">
+        <span class="flamingo">◆</span> Market rate for this scope: <strong>$500,000+</strong>. You are paying <strong style="color: #8ef0c6;">23%</strong> — for software already running in production.
+      </div>
+
+      <div class="invoice-signature">
+        <div class="invoice-sigbox">
+          <div class="invoice-sigline"></div>
+          <div class="invoice-siglabel">Approved by CEO</div>
+        </div>
+        <div class="invoice-stamp">PENDING<br><span>APPROVAL</span></div>
+      </div>
     </div>
   </div>
   <span class="slide-num">20 / 21</span>
@@ -3456,8 +3670,8 @@ p, li {
     </p>
     <div class="reveal reveal-delay-4" style="margin-top: clamp(1rem, 2.5vh, 1.8rem); display: flex; flex-direction: column; gap: clamp(0.3rem, 0.8vh, 0.5rem); align-items: center;">
       <span class="badge badge-flamingo caption" style="letter-spacing: 0.22em;">Questions?</span>
-      <p style="font-family: var(--font-title); font-size: clamp(1rem, 1.6vw, 1.2rem); font-weight: 500; color: var(--im8-off-white);">Marco Tsze</p>
-      <p class="muted" style="font-size: clamp(0.65rem, 0.95vw, 0.75rem);">Backend / Architect · IM8 Ops</p>
+      <p style="font-family: var(--font-title); font-size: clamp(1rem, 1.6vw, 1.2rem); font-weight: 500; color: var(--im8-off-white);">Marco Tsze &nbsp;&amp;&nbsp; Raymond</p>
+      <p class="muted" style="font-size: clamp(0.65rem, 0.95vw, 0.75rem);">Architects · IM8 Ops</p>
       <p class="caption muted" style="font-size: clamp(0.6rem, 0.9vw, 0.7rem); margin-top: clamp(0.3rem, 0.8vh, 0.5rem); letter-spacing: 0.2em;">
         im8hub.com &nbsp;·&nbsp; marco.th.tsze@prenetics.com
       </p>
