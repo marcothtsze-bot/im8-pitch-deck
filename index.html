@@ -455,6 +455,18 @@ p, li {
   margin-top: clamp(0.5rem, 1vh, 0.8rem);
   text-shadow: 0 0 40px rgba(164, 0, 17, 0.4);
 }
+.gate-tagline {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+  color: var(--im8-stone);
+  max-width: 560px;
+  line-height: 1.45;
+  margin-top: clamp(0.7rem, 1.4vh, 1rem);
+  opacity: 0.92;
+  padding: 0 clamp(0.8rem, 2vw, 1.5rem);
+}
 .gate-price {
   font-family: var(--font-caption);
   font-size: clamp(1rem, 1.8vw, 1.4rem);
@@ -1597,6 +1609,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 1</div>
   <div class="gate-title">Master Data</div>
+  <div class="gate-tagline">One source of truth for every SKU, BOM, vendor and bundle — no more Airtable chaos, and outsiders can finally look up what they need.</div>
   <div class="gate-price">Unlock for <span>$10,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-7','gate-7')">💳 Yes, Pay Now</a>
@@ -1635,14 +1648,14 @@ p, li {
             <span class="ba-card-icon">⚠</span>
             <div>
               <div class="ba-card-label">Before</div>
-              <div class="ba-card-sub">Data chaos</div>
+              <div class="ba-card-sub">No central control</div>
             </div>
           </div>
           <ul class="ba-card-list">
-            <li>Airtable + scattered spreadsheets</li>
-            <li>Manual SKU catalog updates, hard to sync with Shopify</li>
-            <li>No BOM version control</li>
-            <li>No audit trail on changes</li>
+            <li>No master control for BOM or SKU</li>
+            <li>No Bundle Structure list for the team to reference</li>
+            <li>No BOM list for other teams to look up</li>
+            <li>No visibility for outsiders — they have to ask every time</li>
           </ul>
         </div>
         <div class="ba-card ba-card--after">
@@ -1654,10 +1667,11 @@ p, li {
             </div>
           </div>
           <ul class="ba-card-list">
-            <li>Unified SKU catalog — auto-synced from Shopify</li>
-            <li>Version-controlled BOM with draft → publish workflow</li>
-            <li>Side-by-side version comparison</li>
+            <li>Easy BOM management — new components update everywhere at once</li>
+            <li>BOM review &amp; approve workflow with better control</li>
+            <li>Side-by-side version comparison between any two BOM versions</li>
             <li>Full audit trail on every create &amp; update</li>
+            <li>Outsiders can view BOM &amp; Bundle details without asking</li>
           </ul>
         </div>
       </div>
@@ -1675,6 +1689,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 2</div>
   <div class="gate-title">Inventory & Risk</div>
+  <div class="gate-tagline">Real-time stock across 5 warehouses with proactive stockout alerts, per-SKU ATL/RENO split, and one-click BOM risk scoring.</div>
   <div class="gate-price">Unlock for <span>$39,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-8','gate-8')">💳 Yes, Pay Now</a>
@@ -1740,6 +1755,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 3</div>
   <div class="gate-title">Demand Forecast</div>
+  <div class="gate-tagline">90-day subscription projection from Skio, flavor mix analysis, and raw material runway alerts so you reorder before stockouts hit.</div>
   <div class="gate-price">Unlock for <span>$29,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-9','gate-9')">💳 Yes, Pay Now</a>
@@ -1805,6 +1821,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 4</div>
   <div class="gate-title">Stord Work Orders</div>
+  <div class="gate-tagline">Live webhook sync of every kitting WO with inline D365 Production Order mapping and missing-PO alerts — no more portal hopping.</div>
   <div class="gate-price">Unlock for <span>$19,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-10','gate-10')">💳 Yes, Pay Now</a>
@@ -1870,6 +1887,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 5</div>
   <div class="gate-title">ASN Inbound</div>
+  <div class="gate-tagline">Full 5-state lifecycle tracking from Planned → Received, with inline HAWB/MAWB edits, visual calendar and a KPI dashboard.</div>
   <div class="gate-price">Unlock for <span>$44,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-11','gate-11')">💳 Yes, Pay Now</a>
@@ -1935,6 +1953,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 6</div>
   <div class="gate-title">HK Fulfilment</div>
+  <div class="gate-tagline">Smart-batched AWBs via Spaceship, carrier-split PDFs auto-generated, and D365 Excel export with OTP SKU mapping.</div>
   <div class="gate-price">Unlock for <span>$34,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-12','gate-12')">💳 Yes, Pay Now</a>
@@ -2000,6 +2019,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 7</div>
   <div class="gate-title">Shipping & Cost</div>
+  <div class="gate-tagline">Every-4h cron ingests invoices from Stord, FedEx and Rexville — rate-card validation, duplicate-charge detection, Slack overcharge alerts.</div>
   <div class="gate-price">Unlock for <span>$24,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-13','gate-13')">💳 Yes, Pay Now</a>
@@ -2065,6 +2085,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 8</div>
   <div class="gate-title">PO Management</div>
+  <div class="gate-tagline">End-to-end PO lifecycle — create, allocate to warehouses, auto-generate inbound shipments, with 2-way Stord sync on receipts.</div>
   <div class="gate-price">Unlock for <span>$9,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-14','gate-14')">💳 Yes, Pay Now</a>
