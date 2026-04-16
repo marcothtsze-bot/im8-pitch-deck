@@ -1673,6 +1673,7 @@ p, li {
   box-shadow: 0 0 20px rgba(74, 222, 128, 0.25);
 }
 .jarvis-activate-icon { font-size: 1.2em; animation: jarvisBreath 2s ease-in-out infinite; }
+.jarvis-activate-hint { animation: jarvisBreath 1.4s ease-in-out infinite; border-color: var(--im8-flamingo); }
 .jarvis-stage.is-speaking .jarvis-orb { animation: jarvisBreath 1.4s ease-in-out infinite; }
 .jarvis-stage.is-speaking .jarvis-ring--1,
 .jarvis-stage.is-speaking .jarvis-ring--2 { animation-duration: 1.2s; }
@@ -1822,19 +1823,30 @@ p, li {
 }
 
 /* === JARVIS HUD — BOOT LOG === */
-.jarvis-transcript-text .boot-line {
+.jarvis-bootlog {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.3rem, 0.8vh, 0.5rem);
+  padding: clamp(0.7rem, 1.4vh, 1rem) clamp(0.9rem, 1.4vw, 1.2rem);
+  background: rgba(10, 0, 4, 0.5);
+  border: 1px solid rgba(255, 90, 110, 0.15);
+  border-radius: 10px;
+  min-height: clamp(80px, 12vh, 120px);
+  justify-content: center;
+}
+.boot-line {
   font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: clamp(0.68rem, 0.95vw, 0.82rem);
-  color: rgba(255, 220, 225, 0.6);
+  font-size: clamp(0.72rem, 1vw, 0.85rem);
+  color: rgba(255, 220, 225, 0.75);
   letter-spacing: 0.04em;
-  display: inline-block;
   opacity: 0;
   animation: bootLineIn 0.5s ease forwards;
 }
-.jarvis-transcript-text .boot-line:nth-of-type(1) { animation-delay: 0.2s; }
-.jarvis-transcript-text .boot-line:nth-of-type(2) { animation-delay: 0.9s; }
-.jarvis-transcript-text .boot-line:nth-of-type(3) { animation-delay: 1.6s; }
-.jarvis-transcript-text .boot-line.ok { color: #4ADE80; }
+.boot-line:nth-of-type(1) { animation-delay: 0.2s; }
+.boot-line:nth-of-type(2) { animation-delay: 0.9s; }
+.boot-line:nth-of-type(3) { animation-delay: 1.6s; }
+.boot-line.ok { color: #4ADE80; }
 @keyframes bootLineIn {
   from { opacity: 0; transform: translateX(-8px); }
   to { opacity: 1; transform: translateX(0); }
@@ -3171,14 +3183,15 @@ p, li {
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
 
-        <div class="jarvis-transcript">
-          <div class="jarvis-transcript-label">▸ Voice Stream · Live Transcript</div>
-          <div class="jarvis-transcript-text" id="jarvisTranscript"><span class="boot-line">&gt; initializing neural link…</span><br><span class="boot-line">&gt; 12/12 modules linked · 9 data sources bridged</span><br><span class="boot-line ok">&gt; systems online · awaiting activation</span></div>
+        <div class="jarvis-bootlog">
+          <span class="boot-line">&gt; initializing neural link…</span>
+          <span class="boot-line">&gt; 12/12 modules linked · 9 data sources bridged</span>
+          <span class="boot-line ok">&gt; systems online · listening</span>
         </div>
 
         <button class="jarvis-activate" id="jarvisActivate" onclick="activateJarvis()">
           <span class="jarvis-activate-icon">◉</span>
-          <span class="jarvis-activate-text">ACTIVATE JARVIS</span>
+          <span class="jarvis-activate-text">REPLAY JARVIS</span>
         </button>
         <audio id="jarvisAudio" src="./audio/jarvis.mp3" preload="auto" crossorigin="anonymous"></audio>
       </div>
@@ -3492,7 +3505,6 @@ let jarvisAudioCtx = null;
 let jarvisAnalyser = null;
 let jarvisSource = null;
 let jarvisRafId = null;
-let jarvisTypingTimer = null;
 
 function setupJarvisAudioGraph() {
   if (jarvisAudioCtx) return; // one-shot
@@ -3536,49 +3548,24 @@ function resetJarvisWave() {
   });
 }
 
-function typeTranscriptTimed(text, el, totalMs) {
-  if (jarvisTypingTimer) clearTimeout(jarvisTypingTimer);
-  el.textContent = '';
-  const cursor = document.createElement('span');
-  cursor.className = 'cursor';
-  cursor.textContent = '▍';
-  el.appendChild(cursor);
-  // Slightly lead the voice so text finishes ~400ms before audio ends
-  const speed = Math.max(14, (totalMs - 400) / text.length);
-  let i = 0;
-  const tick = () => {
-    if (i < text.length) {
-      cursor.insertAdjacentText('beforebegin', text[i]);
-      i++;
-      jarvisTypingTimer = setTimeout(tick, speed);
-    } else {
-      cursor.remove();
-    }
-  };
-  tick();
-}
-
 let jarvisPlaying = false;
 function activateJarvis() {
   const audio = document.getElementById('jarvisAudio');
-  if (!audio) return;
+  if (!audio) return Promise.resolve();
 
   const stage = document.querySelector('#slide-jarvis .jarvis-stage');
   const wave = document.getElementById('jarvisWave');
   const state = document.getElementById('jarvisState');
   const stageStatus = document.getElementById('jarvisStageStatus');
-  const transcript = document.getElementById('jarvisTranscript');
   const btn = document.getElementById('jarvisActivate');
   const btnText = btn.querySelector('.jarvis-activate-text');
 
   if (jarvisPlaying) {
-    // Allow pause/stop on second click
     audio.pause();
     audio.currentTime = 0;
-    return;
+    return Promise.resolve();
   }
 
-  // Build audio graph on first user-gesture (required by browsers)
   setupJarvisAudioGraph();
   if (jarvisAudioCtx && jarvisAudioCtx.state === 'suspended') {
     jarvisAudioCtx.resume();
@@ -3592,20 +3579,8 @@ function activateJarvis() {
   state.textContent = 'SPEAKING';
   stageStatus.textContent = 'Online · Broadcasting';
 
-  const startTyping = () => {
-    const dur = (audio.duration && isFinite(audio.duration)) ? audio.duration * 1000 : 30000;
-    typeTranscriptTimed(JARVIS_SCRIPT, transcript, dur);
-  };
-
-  if (audio.readyState >= 1 && isFinite(audio.duration)) {
-    startTyping();
-  } else {
-    audio.addEventListener('loadedmetadata', startTyping, { once: true });
-  }
-
-  // Real-time audio-reactive waveform
   if (jarvisAnalyser) {
-    wave.classList.remove('is-speaking'); // disable CSS fallback animation — we're driving heights directly
+    wave.classList.remove('is-speaking');
     drawJarvisWave();
   }
 
@@ -3625,11 +3600,42 @@ function activateJarvis() {
   audio.addEventListener('pause', onEnd);
 
   audio.currentTime = 0;
-  audio.play().catch((err) => {
-    console.warn('Jarvis audio play failed:', err);
+  return audio.play().catch((err) => {
+    console.warn('Jarvis auto-play blocked or failed:', err);
     onEnd();
+    // Surface a small hint to click the button
+    btnText.textContent = '▶ CLICK TO HEAR JARVIS';
+    btn.classList.add('jarvis-activate-hint');
+    throw err;
   });
 }
+
+// Auto-play when the Jarvis slide enters the viewport
+(function setupJarvisAutoPlay() {
+  const slide = document.getElementById('slide-jarvis');
+  if (!slide) return;
+  let hasPlayedOnce = false;
+  const autoObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
+        if (!jarvisPlaying && !hasPlayedOnce) {
+          hasPlayedOnce = true;
+          activateJarvis().catch(() => {
+            // Auto-play blocked — allow retry on next entry
+            hasPlayedOnce = false;
+          });
+        }
+      } else if (!entry.isIntersecting) {
+        // Leaving slide — pause audio so it doesn't bleed to other slides
+        const audio = document.getElementById('jarvisAudio');
+        if (audio && !audio.paused) audio.pause();
+        // Allow it to auto-play again when user returns
+        hasPlayedOnce = false;
+      }
+    });
+  }, { threshold: [0, 0.55, 1] });
+  autoObs.observe(slide);
+})();
 </script>
 </body>
 </html>
