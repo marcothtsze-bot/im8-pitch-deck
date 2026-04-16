@@ -2911,7 +2911,7 @@ p, li {
   <div class="gate-lock">🔒</div>
   <div class="gate-module">MODULE 9</div>
   <div class="gate-title">Jarvis — AI Agent</div>
-  <div class="gate-tagline">Ask your operations anything, in plain English — on WhatsApp. Jarvis reads every IM8 Hub module and answers in seconds, 24/7.</div>
+  <div class="gate-tagline">Ask your operations anything, in plain English — on WhatsApp or inside the IM8 Hub chat. Jarvis reads every module and answers in seconds, 24/7.</div>
   <div class="gate-price">Unlock for <span>$15,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-jarvis','gate-15')">💳 Yes, Pay Now</a>
@@ -2928,7 +2928,7 @@ p, li {
     <div>
       <span class="module-badge badge badge-flamingo reveal">Module · AI Agent</span>
       <h2 class="reveal reveal-delay-1">Jarvis — Your Operations Co-Pilot</h2>
-      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Natural-language access to every module — delivered where your team already lives: WhatsApp</p>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Natural-language access to every module — on WhatsApp or inside the IM8 Hub chat box</p>
     </div>
     <div class="md-layout reveal reveal-delay-3">
       <div class="jarvis-stage">
@@ -2967,7 +2967,7 @@ p, li {
           <div class="jarvis-syscell"><span class="jarvis-syslabel">Modules Online</span><span class="jarvis-sysval">12 / 12</span></div>
           <div class="jarvis-syscell"><span class="jarvis-syslabel">Data Sources</span><span class="jarvis-sysval">9</span></div>
           <div class="jarvis-syscell"><span class="jarvis-syslabel">Language</span><span class="jarvis-sysval">Natural</span></div>
-          <div class="jarvis-syscell"><span class="jarvis-syslabel">Channel</span><span class="jarvis-sysval">WhatsApp</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Channels</span><span class="jarvis-sysval">WhatsApp · Hub Chat</span></div>
         </div>
 
         <div class="jarvis-waveform" id="jarvisWave">
@@ -3148,7 +3148,7 @@ p, li {
         <h3 style="margin-bottom: clamp(0.4rem, 1vh, 0.6rem);"><span style="color: #f59e0b;">◐ Coming Soon</span></h3>
         <div class="roadmap-track">
           <span class="roadmap-item roadmap-soon">RM Analysis &amp; Alert</span>
-          <span class="roadmap-item roadmap-soon">Jarvis AI (WhatsApp)</span>
+          <span class="roadmap-item roadmap-soon">Jarvis AI (WhatsApp + Hub Chat)</span>
           <span class="roadmap-item roadmap-soon">Subscription Churn Modelling</span>
         </div>
       </div>
@@ -3288,7 +3288,7 @@ function skipModule(nextId) {
 }
 
 /* === JARVIS AI — VOICE INTRO === */
-const JARVIS_SCRIPT = "Hello, IM8 Team. I am Jarvis, your operations intelligence. I am connected to every module of the IM8 Hub — inventory, purchase orders, shipping, forecasting, and fulfilment. Ask me anything on WhatsApp, in plain English, and I will answer in seconds. I am online, listening, and at your service.";
+const JARVIS_SCRIPT = "Hello, IM8 Team. I am Jarvis, your operations intelligence. I am connected to every module of the IM8 Hub — inventory, purchase orders, shipping, forecasting, and fulfilment. You can talk to me on WhatsApp, or right here inside the IM8 Hub chat box. Ask me anything in plain English, and I will answer in seconds. I am online, listening, and at your service.";
 
 function pickJarvisVoice() {
   const voices = window.speechSynthesis.getVoices();
