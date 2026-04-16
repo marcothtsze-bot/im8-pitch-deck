@@ -553,6 +553,47 @@ p, li {
   50% { opacity: 1; transform: scale(1); }
 }
 
+/* === ALREADY-UNLOCKED gate (celebratory state) === */
+.gate-lock-unlocked {
+  animation: celebratePulse 2s ease-in-out infinite !important;
+  filter: drop-shadow(0 0 35px rgba(52, 211, 153, 0.55)) !important;
+}
+@keyframes celebratePulse {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  50% { transform: rotate(3deg) scale(1.08); }
+}
+.gate-unlocked-msg {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: rgba(255, 245, 240, 0.9);
+  text-align: center;
+  margin-top: clamp(0.8rem, 1.6vh, 1.2rem);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+.gate-unlocked-msg strong {
+  display: block;
+  font-family: var(--font-title);
+  font-style: normal;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 600;
+  color: #8ef0c6;
+  text-shadow: 0 0 28px rgba(142, 240, 198, 0.5);
+  margin-top: 0.4rem;
+  letter-spacing: -0.01em;
+}
+.gate-btn--unlocked {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(52, 211, 153, 0.55), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+.gate-btn--unlocked:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 55px rgba(52, 211, 153, 0.75), 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .float { animation: none; }
@@ -1693,7 +1734,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$5,000</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-8','gate-8')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-9')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-13')">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -1744,14 +1785,82 @@ p, li {
   <span class="slide-num">07 / 24</span>
 </section>
 
-<!-- GATE 3: DEMAND FORECAST -->
+<!-- GATE 3: SHIPPING & COST (already unlocked — congratulations!) -->
+<section class="slide gate-slide gate-unlocked" id="gate-13">
+<div class="gate-coins"><span class="coin" style="left:10%;animation-delay:.2s">🎉</span><span class="coin" style="left:30%;animation-delay:1.1s">🎊</span><span class="coin" style="left:50%;animation-delay:.6s">🎁</span><span class="coin" style="left:70%;animation-delay:1.4s">🎊</span><span class="coin" style="left:90%;animation-delay:.9s">🎉</span></div>
+<div class="gate-sparkle" style="top:18%;left:25%;animation-delay:.3s"></div>
+<div class="gate-sparkle" style="top:30%;right:22%;animation-delay:.7s"></div>
+<div class="gate-sparkle" style="bottom:22%;left:28%;animation-delay:1.1s"></div>
+<div class="gate-sparkle" style="bottom:30%;right:18%;animation-delay:1.6s"></div>
+<div class="gate">
+  <div class="gate-lock gate-lock-unlocked">🎉</div>
+  <div class="gate-module">MODULE 3</div>
+  <div class="gate-title">Shipping &amp; Cost</div>
+  <div class="gate-tagline">Every-4h cron ingests invoices from Stord, FedEx and Rexville — rate-card validation, duplicate-charge detection, Slack overcharge alerts.</div>
+  <div class="gate-price">Retail <span style="text-decoration: line-through; color: var(--text-muted); font-size: clamp(1.6rem, 2.6vw, 2.2rem);">$10,000</span></div>
+  <div class="gate-unlocked-msg">🎊 Congratulations!<br><strong>Already Unlocked — Free for You</strong></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--unlocked" onclick="skipModule('slide-13')">🎁 Enter Module →</a>
+  </div>
+</div>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 13: SHIPPING & COST                    -->
+<!-- ============================================ -->
+<section class="slide bg-burgundy" id="slide-13">
+  <div class="content flex-col gap-md" style="max-width: 1240px;">
+    <div>
+      <span class="module-badge badge badge-amber reveal">Module</span>
+      <h2 class="reveal reveal-delay-1">Shipping &amp; Cost</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Automated invoice validation across Stord · FedEx · Rexville</p>
+    </div>
+    <div class="md-layout reveal reveal-delay-3">
+      <div class="md-shot">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/shipping</span></div>
+        <div class="md-shot-img">
+          <iframe class="md-shot-iframe" src="https://im8hub.com/shipping" loading="lazy" title="Shipping & Cost — live"></iframe>
+        </div>
+      </div>
+      <div class="md-ba">
+        <div class="ba-card ba-card--before">
+          <div class="ba-card-head">
+            <span class="ba-card-icon">⚠</span>
+            <div><div class="ba-card-label">Before</div><div class="ba-card-sub">Invoices unchecked</div></div>
+          </div>
+          <ul class="ba-card-list">
+            <li>Invoices emailed, reviewed manually (when there's time)</li>
+            <li>No rate-card validation — overcharges slipped through</li>
+            <li>Duplicate charges went unnoticed</li>
+            <li>No cost anomaly alerts</li>
+          </ul>
+        </div>
+        <div class="ba-card ba-card--after">
+          <div class="ba-card-head">
+            <span class="ba-card-icon">✓</span>
+            <div><div class="ba-card-label">After</div><div class="ba-card-sub">Every charge audited</div></div>
+          </div>
+          <ul class="ba-card-list">
+            <li>Every-4h cron ingestion across 3 carriers</li>
+            <li>Rate-card validation flags wrong charges</li>
+            <li>Duplicate-charge detection with adjustment tracking</li>
+            <li>Slack alerts on cost anomalies &amp; overcharges</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">08 / 24</span>
+</section>
+
+<!-- GATE 4: DEMAND FORECAST -->
 <section class="slide gate-slide" id="gate-9">
 <div class="gate-coins"><span class="coin" style="left:8%;animation-delay:.4s">💰</span><span class="coin" style="left:30%;animation-delay:1.2s">🪙</span><span class="coin" style="left:50%;animation-delay:.1s">💰</span><span class="coin" style="left:70%;animation-delay:1.5s">🪙</span><span class="coin" style="left:92%;animation-delay:.6s">💰</span></div>
 <div class="gate-sparkle" style="top:22%;right:25%;animation-delay:.2s"></div>
 <div class="gate-sparkle" style="bottom:20%;left:18%;animation-delay:1.2s"></div>
 <div class="gate">
   <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 3</div>
+  <div class="gate-module">MODULE 4</div>
   <div class="gate-title">Demand Forecast</div>
   <div class="gate-tagline">90-day subscription projection from Skio, flavor mix analysis, and raw material runway alerts so you reorder before stockouts hit.</div>
   <div class="gate-price">Unlock for <span>$29,999</span></div>
@@ -1807,17 +1916,17 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">08 / 24</span>
+  <span class="slide-num">09 / 24</span>
 </section>
 
-<!-- GATE 4: WORK ORDERS -->
+<!-- GATE 5: WORK ORDERS -->
 <section class="slide gate-slide" id="gate-10">
 <div class="gate-coins"><span class="coin" style="left:18%;animation-delay:.1s">🎉</span><span class="coin" style="left:38%;animation-delay:1.1s">✨</span><span class="coin" style="left:58%;animation-delay:.7s">🎉</span><span class="coin" style="left:78%;animation-delay:1.4s">✨</span><span class="coin" style="left:88%;animation-delay:.4s">🎉</span></div>
 <div class="gate-sparkle" style="top:20%;right:18%;animation-delay:.4s"></div>
 <div class="gate-sparkle" style="bottom:22%;left:12%;animation-delay:.9s"></div>
 <div class="gate">
   <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 4</div>
+  <div class="gate-module">MODULE 5</div>
   <div class="gate-title">Stord Work Orders</div>
   <div class="gate-tagline">Live webhook sync of every kitting WO with inline D365 Production Order mapping and missing-PO alerts — no more portal hopping.</div>
   <div class="gate-price">Unlock for <span>$19,999</span></div>
@@ -1873,17 +1982,17 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">09 / 24</span>
+  <span class="slide-num">10 / 24</span>
 </section>
 
-<!-- GATE 5: ASN INBOUND -->
+<!-- GATE 6: ASN INBOUND -->
 <section class="slide gate-slide" id="gate-11">
 <div class="gate-coins"><span class="coin" style="left:15%;animation-delay:.9s">🎁</span><span class="coin" style="left:40%;animation-delay:.3s">💰</span><span class="coin" style="left:60%;animation-delay:1.3s">🪙</span><span class="coin" style="left:82%;animation-delay:.5s">🎁</span></div>
 <div class="gate-sparkle" style="top:25%;left:30%;animation-delay:.6s"></div>
 <div class="gate-sparkle" style="bottom:30%;right:22%;animation-delay:1.1s"></div>
 <div class="gate">
   <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 5</div>
+  <div class="gate-module">MODULE 6</div>
   <div class="gate-title">ASN Inbound</div>
   <div class="gate-tagline">Full 5-state lifecycle tracking from Planned → Received, with inline HAWB/MAWB edits, visual calendar and a KPI dashboard.</div>
   <div class="gate-price">Unlock for <span>$44,999</span></div>
@@ -1939,23 +2048,23 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">10 / 24</span>
+  <span class="slide-num">11 / 24</span>
 </section>
 
-<!-- GATE 6: HK FULFILMENT -->
+<!-- GATE 7: HK FULFILMENT -->
 <section class="slide gate-slide" id="gate-12">
 <div class="gate-coins"><span class="coin" style="left:20%;animation-delay:.6s">🏭</span><span class="coin" style="left:42%;animation-delay:1.3s">💰</span><span class="coin" style="left:62%;animation-delay:.2s">🪙</span><span class="coin" style="left:85%;animation-delay:1s">🏭</span></div>
 <div class="gate-sparkle" style="top:28%;left:22%;animation-delay:.7s"></div>
 <div class="gate-sparkle" style="bottom:18%;right:28%;animation-delay:1.3s"></div>
 <div class="gate">
   <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 6</div>
+  <div class="gate-module">MODULE 7</div>
   <div class="gate-title">HK Fulfilment</div>
   <div class="gate-tagline">Smart-batched AWBs via Spaceship, carrier-split PDFs auto-generated, and D365 Excel export with OTP SKU mapping.</div>
   <div class="gate-price">Unlock for <span>$34,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-12','gate-12')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-13')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-14')">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -2000,72 +2109,6 @@ p, li {
             <li>Bulk label buy via Spaceship API</li>
             <li>Carrier-split PDFs auto-generated for handoff</li>
             <li>D365 Excel export with OTP SKU mapping</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <span class="slide-num">11 / 24</span>
-</section>
-
-<!-- GATE 7: SHIPPING & COST -->
-<section class="slide gate-slide" id="gate-13">
-<div class="gate-coins"><span class="coin" style="left:14%;animation-delay:.3s">📊</span><span class="coin" style="left:36%;animation-delay:1.5s">💰</span><span class="coin" style="left:56%;animation-delay:.8s">🪙</span><span class="coin" style="left:76%;animation-delay:.1s">📊</span><span class="coin" style="left:90%;animation-delay:1.2s">💰</span></div>
-<div class="gate-sparkle" style="top:16%;left:28%;animation-delay:.5s"></div>
-<div class="gate-sparkle" style="bottom:24%;right:16%;animation-delay:1s"></div>
-<div class="gate">
-  <div class="gate-lock">🔒</div>
-  <div class="gate-module">MODULE 7</div>
-  <div class="gate-title">Shipping & Cost</div>
-  <div class="gate-tagline">Every-4h cron ingests invoices from Stord, FedEx and Rexville — rate-card validation, duplicate-charge detection, Slack overcharge alerts.</div>
-  <div class="gate-price">Unlock for <span>$24,999</span></div>
-  <div class="gate-btns">
-    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-13','gate-13')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-14')">🚫 No Thanks</a>
-  </div>
-</div>
-</section>
-
-<!-- ============================================ -->
-<!-- SLIDE 13: SHIPPING & COST                    -->
-<!-- ============================================ -->
-<section class="slide bg-burgundy" id="slide-13">
-  <div class="content flex-col gap-md" style="max-width: 1240px;">
-    <div>
-      <span class="module-badge badge badge-amber reveal">Module</span>
-      <h2 class="reveal reveal-delay-1">Shipping &amp; Cost</h2>
-      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Automated invoice validation across Stord · FedEx · Rexville</p>
-    </div>
-    <div class="md-layout reveal reveal-delay-3">
-      <div class="md-shot">
-        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/shipping</span></div>
-        <div class="md-shot-img">
-          <iframe class="md-shot-iframe" src="https://im8hub.com/shipping" loading="lazy" title="Shipping & Cost — live"></iframe>
-        </div>
-      </div>
-      <div class="md-ba">
-        <div class="ba-card ba-card--before">
-          <div class="ba-card-head">
-            <span class="ba-card-icon">⚠</span>
-            <div><div class="ba-card-label">Before</div><div class="ba-card-sub">Invoices unchecked</div></div>
-          </div>
-          <ul class="ba-card-list">
-            <li>Invoices emailed, reviewed manually (when there's time)</li>
-            <li>No rate-card validation — overcharges slipped through</li>
-            <li>Duplicate charges went unnoticed</li>
-            <li>No cost anomaly alerts</li>
-          </ul>
-        </div>
-        <div class="ba-card ba-card--after">
-          <div class="ba-card-head">
-            <span class="ba-card-icon">✓</span>
-            <div><div class="ba-card-label">After</div><div class="ba-card-sub">Every charge audited</div></div>
-          </div>
-          <ul class="ba-card-list">
-            <li>Every-4h cron ingestion across 3 carriers</li>
-            <li>Rate-card validation flags wrong charges</li>
-            <li>Duplicate-charge detection with adjustment tracking</li>
-            <li>Slack alerts on cost anomalies &amp; overcharges</li>
           </ul>
         </div>
       </div>
