@@ -1676,6 +1676,174 @@ p, li {
 .jarvis-stage.is-speaking .jarvis-orb { animation: jarvisBreath 1.4s ease-in-out infinite; }
 .jarvis-stage.is-speaking .jarvis-ring--1,
 .jarvis-stage.is-speaking .jarvis-ring--2 { animation-duration: 1.2s; }
+
+/* === JARVIS HUD — CORNER BRACKETS === */
+.hud-bracket {
+  position: absolute;
+  width: clamp(22px, 2.4vw, 32px);
+  height: clamp(22px, 2.4vw, 32px);
+  border: 2px solid var(--im8-flamingo);
+  opacity: 0.85;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(255, 90, 110, 0.6));
+  animation: hudPulse 2.6s ease-in-out infinite;
+}
+.hud-bracket--tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.hud-bracket--tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+.hud-bracket--bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+.hud-bracket--br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+@keyframes hudPulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* === JARVIS HUD — SCANLINE SWEEP === */
+.jarvis-scanline {
+  position: absolute;
+  left: 0; right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--im8-flamingo), transparent);
+  box-shadow: 0 0 12px rgba(255, 90, 110, 0.7);
+  opacity: 0.85;
+  pointer-events: none;
+  animation: scanSweep 4.5s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
+}
+@keyframes scanSweep {
+  0% { top: 4%; opacity: 0; }
+  8% { opacity: 0.9; }
+  92% { opacity: 0.9; }
+  100% { top: 96%; opacity: 0; }
+}
+
+/* === JARVIS HUD — SONAR PULSE === */
+.jarvis-sonar {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 90, 110, 0.5);
+  animation: sonarPulse 3.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes sonarPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* === JARVIS HUD — LABEL WITH SUB === */
+.jarvis-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.jarvis-sublabel {
+  font-size: 0.85em;
+  color: rgba(255, 220, 225, 0.45);
+  letter-spacing: 0.28em;
+  padding-left: 0.6rem;
+  border-left: 1px solid rgba(255, 90, 110, 0.35);
+  margin-left: 0.2rem;
+}
+
+/* === JARVIS HUD — TELEMETRY READOUT === */
+.jarvis-telemetry {
+  position: absolute;
+  top: clamp(0.8rem, 2vh, 1.3rem);
+  right: clamp(0.8rem, 2vw, 1.3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3px, 0.5vh, 5px);
+  padding: clamp(0.5rem, 1vh, 0.7rem) clamp(0.6rem, 1vw, 0.9rem);
+  background: rgba(10, 0, 4, 0.6);
+  border: 1px solid rgba(255, 90, 110, 0.18);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  min-width: clamp(140px, 14vw, 180px);
+}
+.jarvis-tel-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(0.55rem, 0.75vw, 0.65rem);
+  letter-spacing: 0.12em;
+}
+.jarvis-tel-k {
+  color: rgba(255, 220, 225, 0.45);
+  text-transform: uppercase;
+}
+.jarvis-tel-v {
+  color: rgba(255, 245, 240, 0.92);
+  font-weight: 600;
+}
+.jarvis-tel-v.ok { color: #4ADE80; text-shadow: 0 0 6px rgba(74, 222, 128, 0.5); }
+.jarvis-sysval.ok { color: #4ADE80; }
+
+/* === JARVIS HUD — DATA STREAM TICKER === */
+.jarvis-ticker {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(2.6rem, 5vh, 3.4rem);
+  height: clamp(20px, 2.8vh, 28px);
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent 0%, rgba(10,0,4,0.7) 8%, rgba(10,0,4,0.7) 92%, transparent 100%);
+  border-top: 1px solid rgba(255, 90, 110, 0.12);
+  border-bottom: 1px solid rgba(255, 90, 110, 0.12);
+  pointer-events: none;
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.jarvis-ticker-inner {
+  display: inline-flex;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding-left: 100%;
+  height: 100%;
+  align-items: center;
+  white-space: nowrap;
+  animation: tickerScroll 32s linear infinite;
+}
+.jarvis-ticker-inner span {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(0.6rem, 0.8vw, 0.7rem);
+  letter-spacing: 0.18em;
+  color: rgba(255, 180, 195, 0.75);
+  text-transform: uppercase;
+}
+.jarvis-ticker-inner span::before {
+  content: '▸ ';
+  color: var(--im8-flamingo);
+  margin-right: 0.3rem;
+}
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* === JARVIS HUD — BOOT LOG === */
+.jarvis-transcript-text .boot-line {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(0.68rem, 0.95vw, 0.82rem);
+  color: rgba(255, 220, 225, 0.6);
+  letter-spacing: 0.04em;
+  display: inline-block;
+  opacity: 0;
+  animation: bootLineIn 0.5s ease forwards;
+}
+.jarvis-transcript-text .boot-line:nth-of-type(1) { animation-delay: 0.2s; }
+.jarvis-transcript-text .boot-line:nth-of-type(2) { animation-delay: 0.9s; }
+.jarvis-transcript-text .boot-line:nth-of-type(3) { animation-delay: 1.6s; }
+.jarvis-transcript-text .boot-line.ok { color: #4ADE80; }
+@keyframes bootLineIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Active state: boost the orb when speaking */
+.jarvis-stage.is-speaking { border-color: rgba(255, 90, 110, 0.55); box-shadow: 0 0 80px rgba(164, 0, 17, 0.45) inset, 0 0 40px rgba(255, 90, 110, 0.3); }
+.jarvis-stage.is-speaking .jarvis-sonar { animation-duration: 1.8s; }
+.jarvis-stage.is-speaking .jarvis-scanline { animation-duration: 2.4s; }
 </style>
 </head>
 <body>
@@ -2932,8 +3100,29 @@ p, li {
     </div>
     <div class="md-layout reveal reveal-delay-3">
       <div class="jarvis-stage">
-        <div class="jarvis-label"><span class="flamingo">●</span> IM8 HUB · JARVIS</div>
+        <!-- HUD corner brackets -->
+        <span class="hud-bracket hud-bracket--tl"></span>
+        <span class="hud-bracket hud-bracket--tr"></span>
+        <span class="hud-bracket hud-bracket--bl"></span>
+        <span class="hud-bracket hud-bracket--br"></span>
+        <!-- Scanning line sweep -->
+        <span class="jarvis-scanline"></span>
+
+        <div class="jarvis-label">
+          <span class="flamingo">●</span> IM8 HUB · JARVIS
+          <span class="jarvis-sublabel">v1.0 · NEURAL LINK</span>
+        </div>
+
+        <!-- Top-right telemetry -->
+        <div class="jarvis-telemetry">
+          <div class="jarvis-tel-row"><span class="jarvis-tel-k">CORE</span><span class="jarvis-tel-v ok">● ACTIVE</span></div>
+          <div class="jarvis-tel-row"><span class="jarvis-tel-k">MODEL</span><span class="jarvis-tel-v">CLAUDE 4.6</span></div>
+          <div class="jarvis-tel-row"><span class="jarvis-tel-k">LATENCY</span><span class="jarvis-tel-v" id="jarvisLatency">0.31s</span></div>
+          <div class="jarvis-tel-row"><span class="jarvis-tel-k">UPTIME</span><span class="jarvis-tel-v ok">99.98%</span></div>
+        </div>
+
         <div class="jarvis-orb-wrap">
+          <div class="jarvis-sonar"></div>
           <div class="jarvis-ring jarvis-ring--3"></div>
           <div class="jarvis-ring jarvis-ring--1"></div>
           <div class="jarvis-ring jarvis-ring--2"></div>
@@ -2946,6 +3135,14 @@ p, li {
           <span class="jarvis-particle jarvis-particle--b"></span>
           <span class="jarvis-particle jarvis-particle--c"></span>
         </div>
+
+        <!-- Bottom data stream ticker -->
+        <div class="jarvis-ticker">
+          <div class="jarvis-ticker-inner" id="jarvisTicker">
+            <span>INVENTORY.SYNC: OK</span><span>PO.STREAM: 12 ACTIVE</span><span>SHIPMENT.FEED: LIVE</span><span>FORECAST.MODEL: v3.2</span><span>FULFILMENT.QUEUE: 48</span><span>INTEGRATIONS: 9/9</span><span>STORD.API: 200ms</span><span>D365.BRIDGE: OK</span><span>SHOPIFY.HOOK: OK</span><span>SLACK.BOT: ONLINE</span>
+          </div>
+        </div>
+
         <div class="jarvis-status">
           <span class="jarvis-status-dot"></span>
           <span id="jarvisStageStatus">Awaiting Activation</span>
@@ -2954,20 +3151,20 @@ p, li {
       <div class="jarvis-panel">
         <div class="jarvis-panel-head">
           <div>
-            <div class="jarvis-panel-title">JARVIS</div>
-            <div class="jarvis-panel-sub">Operations Intelligence · v1.0</div>
+            <div class="jarvis-panel-title">J.A.R.V.I.S.</div>
+            <div class="jarvis-panel-sub">Joint AI Response &amp; Value Intelligence System</div>
           </div>
           <div class="jarvis-panel-status">
             <span class="jarvis-status-dot"></span>
-            <span id="jarvisState">STANDBY</span>
+            <span id="jarvisState">NEURAL LINK · STANDBY</span>
           </div>
         </div>
 
         <div class="jarvis-sysgrid">
-          <div class="jarvis-syscell"><span class="jarvis-syslabel">Modules Online</span><span class="jarvis-sysval">12 / 12</span></div>
-          <div class="jarvis-syscell"><span class="jarvis-syslabel">Data Sources</span><span class="jarvis-sysval">9</span></div>
-          <div class="jarvis-syscell"><span class="jarvis-syslabel">Language</span><span class="jarvis-sysval">Natural</span></div>
-          <div class="jarvis-syscell"><span class="jarvis-syslabel">Channels</span><span class="jarvis-sysval">WhatsApp · Hub Chat</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Neural Core</span><span class="jarvis-sysval ok">● ONLINE</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Modules Linked</span><span class="jarvis-sysval">12 / 12</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Avg. Response</span><span class="jarvis-sysval">&lt; 1.2s</span></div>
+          <div class="jarvis-syscell"><span class="jarvis-syslabel">Channels</span><span class="jarvis-sysval">WhatsApp · Hub</span></div>
         </div>
 
         <div class="jarvis-waveform" id="jarvisWave">
@@ -2975,14 +3172,15 @@ p, li {
         </div>
 
         <div class="jarvis-transcript">
-          <div class="jarvis-transcript-label">▸ Voice Transcript</div>
-          <div class="jarvis-transcript-text" id="jarvisTranscript">Press <strong>Activate</strong> to let Jarvis introduce itself.</div>
+          <div class="jarvis-transcript-label">▸ Voice Stream · Live Transcript</div>
+          <div class="jarvis-transcript-text" id="jarvisTranscript"><span class="boot-line">&gt; initializing neural link…</span><br><span class="boot-line">&gt; 12/12 modules linked · 9 data sources bridged</span><br><span class="boot-line ok">&gt; systems online · awaiting activation</span></div>
         </div>
 
         <button class="jarvis-activate" id="jarvisActivate" onclick="activateJarvis()">
           <span class="jarvis-activate-icon">◉</span>
           <span class="jarvis-activate-text">ACTIVATE JARVIS</span>
         </button>
+        <audio id="jarvisAudio" src="./audio/jarvis.mp3" preload="auto" crossorigin="anonymous"></audio>
       </div>
     </div>
   </div>
@@ -3287,40 +3485,74 @@ function skipModule(nextId) {
   if (next) next.scrollIntoView({ behavior: 'smooth' });
 }
 
-/* === JARVIS AI — VOICE INTRO === */
+/* === JARVIS AI — VOICE INTRO (ElevenLabs "Hale" audio file) === */
 const JARVIS_SCRIPT = "Hello, IM8 Team. I am Jarvis, your operations intelligence. I am connected to every module of the IM8 Hub — inventory, purchase orders, shipping, forecasting, and fulfilment. You can talk to me on WhatsApp, or right here inside the IM8 Hub chat box. Ask me anything in plain English, and I will answer in seconds. I am online, listening, and at your service.";
 
-function pickJarvisVoice() {
-  const voices = window.speechSynthesis.getVoices();
-  if (!voices || !voices.length) return null;
-  // Prefer high-quality female en-GB (FRIDAY-esque), then any en-GB, then any female en, then any en
-  const byName = (patterns) => voices.find(v => patterns.some(p => new RegExp(p, 'i').test(v.name)));
-  return (
-    byName(['Google UK English Female', 'Microsoft Libby', 'Microsoft Sonia', 'Samantha', 'Karen', 'Serena']) ||
-    voices.find(v => /en-GB/i.test(v.lang) && /female|woman/i.test(v.name)) ||
-    voices.find(v => /en-GB/i.test(v.lang)) ||
-    voices.find(v => /en[-_]?US/i.test(v.lang) && /female|woman|samantha|karen|moira/i.test(v.name)) ||
-    voices.find(v => /^en/i.test(v.lang)) ||
-    voices[0]
-  );
+let jarvisAudioCtx = null;
+let jarvisAnalyser = null;
+let jarvisSource = null;
+let jarvisRafId = null;
+let jarvisTypingTimer = null;
+
+function setupJarvisAudioGraph() {
+  if (jarvisAudioCtx) return; // one-shot
+  const audio = document.getElementById('jarvisAudio');
+  try {
+    jarvisAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    jarvisSource = jarvisAudioCtx.createMediaElementSource(audio);
+    jarvisAnalyser = jarvisAudioCtx.createAnalyser();
+    jarvisAnalyser.fftSize = 128;
+    jarvisAnalyser.smoothingTimeConstant = 0.78;
+    jarvisSource.connect(jarvisAnalyser);
+    jarvisAnalyser.connect(jarvisAudioCtx.destination);
+  } catch (e) {
+    // Graph already built or blocked — silently fall back to CSS waveform animation
+    jarvisAudioCtx = null;
+  }
 }
 
-function typeTranscript(text, el, done) {
+function drawJarvisWave() {
+  if (!jarvisAnalyser) return;
+  const bars = document.querySelectorAll('#jarvisWave span');
+  const data = new Uint8Array(jarvisAnalyser.frequencyBinCount);
+  jarvisAnalyser.getByteFrequencyData(data);
+  // Map N frequency bins to bar count, biased to vocal range (low-mid)
+  const step = Math.max(1, Math.floor(data.length * 0.65 / bars.length));
+  bars.forEach((bar, i) => {
+    const v = data[i * step] || 0;
+    const pct = Math.max(14, Math.min(100, (v / 255) * 130));
+    bar.style.height = pct + '%';
+    bar.style.opacity = 0.55 + (v / 255) * 0.45;
+  });
+  jarvisRafId = requestAnimationFrame(drawJarvisWave);
+}
+
+function resetJarvisWave() {
+  if (jarvisRafId) cancelAnimationFrame(jarvisRafId);
+  jarvisRafId = null;
+  document.querySelectorAll('#jarvisWave span').forEach(bar => {
+    bar.style.height = '';
+    bar.style.opacity = '';
+  });
+}
+
+function typeTranscriptTimed(text, el, totalMs) {
+  if (jarvisTypingTimer) clearTimeout(jarvisTypingTimer);
   el.textContent = '';
   const cursor = document.createElement('span');
   cursor.className = 'cursor';
   cursor.textContent = '▍';
   el.appendChild(cursor);
+  // Slightly lead the voice so text finishes ~400ms before audio ends
+  const speed = Math.max(14, (totalMs - 400) / text.length);
   let i = 0;
-  const speed = 28; // ms per char
   const tick = () => {
     if (i < text.length) {
       cursor.insertAdjacentText('beforebegin', text[i]);
       i++;
-      setTimeout(tick, speed);
+      jarvisTypingTimer = setTimeout(tick, speed);
     } else {
       cursor.remove();
-      if (done) done();
     }
   };
   tick();
@@ -3328,12 +3560,8 @@ function typeTranscript(text, el, done) {
 
 let jarvisPlaying = false;
 function activateJarvis() {
-  if (jarvisPlaying) return;
-  if (!('speechSynthesis' in window)) {
-    alert('Sorry, this browser does not support speech synthesis.');
-    return;
-  }
-  jarvisPlaying = true;
+  const audio = document.getElementById('jarvisAudio');
+  if (!audio) return;
 
   const stage = document.querySelector('#slide-jarvis .jarvis-stage');
   const wave = document.getElementById('jarvisWave');
@@ -3343,6 +3571,20 @@ function activateJarvis() {
   const btn = document.getElementById('jarvisActivate');
   const btnText = btn.querySelector('.jarvis-activate-text');
 
+  if (jarvisPlaying) {
+    // Allow pause/stop on second click
+    audio.pause();
+    audio.currentTime = 0;
+    return;
+  }
+
+  // Build audio graph on first user-gesture (required by browsers)
+  setupJarvisAudioGraph();
+  if (jarvisAudioCtx && jarvisAudioCtx.state === 'suspended') {
+    jarvisAudioCtx.resume();
+  }
+
+  jarvisPlaying = true;
   stage.classList.add('is-speaking');
   wave.classList.add('is-speaking');
   btn.classList.add('is-active');
@@ -3350,15 +3592,24 @@ function activateJarvis() {
   state.textContent = 'SPEAKING';
   stageStatus.textContent = 'Online · Broadcasting';
 
-  // Start voice + typed transcript together
-  const utter = new SpeechSynthesisUtterance(JARVIS_SCRIPT);
-  utter.rate = 0.95;
-  utter.pitch = 0.95;
-  utter.volume = 1;
-  const voice = pickJarvisVoice();
-  if (voice) utter.voice = voice;
+  const startTyping = () => {
+    const dur = (audio.duration && isFinite(audio.duration)) ? audio.duration * 1000 : 30000;
+    typeTranscriptTimed(JARVIS_SCRIPT, transcript, dur);
+  };
 
-  utter.onend = () => {
+  if (audio.readyState >= 1 && isFinite(audio.duration)) {
+    startTyping();
+  } else {
+    audio.addEventListener('loadedmetadata', startTyping, { once: true });
+  }
+
+  // Real-time audio-reactive waveform
+  if (jarvisAnalyser) {
+    wave.classList.remove('is-speaking'); // disable CSS fallback animation — we're driving heights directly
+    drawJarvisWave();
+  }
+
+  const onEnd = () => {
     jarvisPlaying = false;
     stage.classList.remove('is-speaking');
     wave.classList.remove('is-speaking');
@@ -3366,18 +3617,18 @@ function activateJarvis() {
     btnText.textContent = 'REPLAY JARVIS';
     state.textContent = 'ONLINE';
     stageStatus.textContent = 'Online · Listening';
+    resetJarvisWave();
+    audio.removeEventListener('ended', onEnd);
+    audio.removeEventListener('pause', onEnd);
   };
-  utter.onerror = utter.onend;
+  audio.addEventListener('ended', onEnd);
+  audio.addEventListener('pause', onEnd);
 
-  typeTranscript(JARVIS_SCRIPT, transcript);
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utter);
-}
-
-// Prime voices list (some browsers load async)
-if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = () => {};
-  window.speechSynthesis.getVoices();
+  audio.currentTime = 0;
+  audio.play().catch((err) => {
+    console.warn('Jarvis audio play failed:', err);
+    onEnd();
+  });
 }
 </script>
 </body>
