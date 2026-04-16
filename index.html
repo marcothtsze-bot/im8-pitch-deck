@@ -550,6 +550,105 @@ p, li {
   .gate-sparkle { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* === PRODUCT TOUR MOSAIC (slide-6c) === */
+.prev-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.5rem, 1vw, 0.9rem);
+  width: 100%;
+  height: clamp(340px, 62vh, 640px);
+}
+.prev-card {
+  position: relative;
+  background: #0f0206;
+  border: 1px solid rgba(255, 150, 147, 0.18);
+  border-radius: clamp(0.4rem, 0.8vw, 0.7rem);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s, border-color 0.35s;
+  min-height: 0;
+}
+.prev-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: rgba(255, 150, 147, 0.45);
+  box-shadow: 0 12px 34px rgba(164, 0, 17, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+}
+.prev-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: clamp(0.25rem, 0.6vh, 0.4rem) clamp(0.4rem, 0.8vw, 0.7rem);
+  background: linear-gradient(180deg, #1a0408, #110206);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+.prev-bar .dd {
+  width: clamp(5px, 0.6vw, 7px);
+  height: clamp(5px, 0.6vw, 7px);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.prev-bar .dd:nth-child(1) { background: #ff5f57; }
+.prev-bar .dd:nth-child(2) { background: #ffbd2e; }
+.prev-bar .dd:nth-child(3) { background: #28ca41; }
+.prev-url {
+  font-family: var(--font-caption);
+  font-size: clamp(0.48rem, 0.62vw, 0.6rem);
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.02em;
+  margin-left: 0.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.prev-shot {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: #0a0103;
+  min-height: 0;
+}
+.prev-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+.prev-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: clamp(0.35rem, 0.9vh, 0.55rem) clamp(0.5rem, 1vw, 0.75rem);
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 1, 3, 0.65) 35%, rgba(10, 1, 3, 0.95) 100%);
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.prev-name {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(0.72rem, 1vw, 0.95rem);
+  color: #fff;
+  letter-spacing: 0.005em;
+}
+.prev-path {
+  font-family: var(--font-caption);
+  font-size: clamp(0.46rem, 0.6vw, 0.58rem);
+  color: var(--im8-flamingo);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -895,6 +994,85 @@ p, li {
       <span class="flamingo">70+</span> API endpoints &nbsp;·&nbsp; Webhook-driven &nbsp;·&nbsp; Real-time sync
     </p>
   </div>
+</section>
+
+<!-- SLIDE 6c: PRODUCT TOUR (real page screenshots) -->
+<section class="slide bg-dark bg-pattern" id="slide-6c">
+  <div class="content flex-col gap-sm" style="max-width: 1240px;">
+    <div class="text-center">
+      <span class="badge badge-flamingo reveal caption">Product Tour</span>
+      <h2 class="reveal reveal-delay-1" style="margin-top: clamp(0.3rem, 0.8vh, 0.5rem);">
+        See <span class="gradient-text">IM8 Hub</span> in Action
+      </h2>
+      <p class="reveal reveal-delay-2 muted" style="font-size: clamp(0.72rem, 1.05vw, 0.9rem); margin-top: clamp(0.2rem, 0.6vh, 0.4rem);">
+        Eight modules. One platform. Real screens from the live Hub.
+      </p>
+    </div>
+
+    <div class="prev-grid">
+      <div class="prev-card reveal reveal-delay-2">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/inventory</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/inventory.png" alt="Unified Inventory page">
+          <div class="prev-caption"><span class="prev-name">Unified Inventory</span><span class="prev-path">5 WH · LIVE</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-2">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/order-consolidation</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/order-consolidation.png" alt="Sales Order Consolidation page">
+          <div class="prev-caption"><span class="prev-name">SO Consolidation</span><span class="prev-path">SHOPIFY · STORD · D365</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-3">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/outbound/delivery</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/delivery.png" alt="Delivery Performance page">
+          <div class="prev-caption"><span class="prev-name">Delivery Performance</span><span class="prev-path">SLA · P90 · CARRIERS</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-3">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/gifting/manage</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/gifting.png" alt="Gifting page">
+          <div class="prev-caption"><span class="prev-name">Gifting</span><span class="prev-path">SELF-SERVE · AUTO-FULFIL</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-4">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/shipping</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/shipping.png" alt="Shipping Cost Analysis page">
+          <div class="prev-caption"><span class="prev-name">Shipping &amp; Invoices</span><span class="prev-path">3 CARRIERS · VALIDATION</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-4">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/stord-operations</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/stord-operations.png" alt="Stord Operations page">
+          <div class="prev-caption"><span class="prev-name">Stord Operations</span><span class="prev-path">WORK ORDERS · KITTING</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-5">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/demand-forecast</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/demand-forecast.png" alt="Demand Forecast page">
+          <div class="prev-caption"><span class="prev-name">Demand Forecast</span><span class="prev-path">12-WEEK · RM RUNWAY</span></div>
+        </div>
+      </div>
+      <div class="prev-card reveal reveal-delay-5">
+        <div class="prev-bar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="prev-url">im8hub.com/master-data/bom</span></div>
+        <div class="prev-shot">
+          <img src="screenshots/bom-master.png" alt="BOM Master page">
+          <div class="prev-caption"><span class="prev-name">BOM Master</span><span class="prev-path">VERSIONED · DRAFT → PUBLISH</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="reveal reveal-delay-5 muted text-center" style="font-size: clamp(0.62rem, 0.85vw, 0.72rem); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.2rem;">
+      ▶ Follow along — next 8 slides walk through each module
+    </p>
+  </div>
+  <span class="slide-num">06c / 26</span>
 </section>
 
 <!-- GATE 1: MASTER DATA -->
