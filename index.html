@@ -1330,6 +1330,176 @@ p, li {
   font-style: normal;
 }
 .plan-card--build .plan-arrow { color: var(--im8-sand); }
+
+/* === JARVIS AI — HOLOGRAPHIC ORB === */
+.jarvis-stage {
+  position: relative;
+  flex: 1;
+  min-height: clamp(320px, 48vh, 520px);
+  background: radial-gradient(circle at 50% 55%, #2A0007 0%, #14000A 55%, #080005 100%);
+  border: 1px solid rgba(255, 90, 110, 0.22);
+  border-radius: clamp(16px, 2vw, 22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(164, 0, 17, 0.25) inset, 0 0 30px rgba(0,0,0,0.6);
+}
+.jarvis-stage::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 90, 110, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 90, 110, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 75%);
+  opacity: 0.7;
+}
+.jarvis-orb-wrap {
+  position: relative;
+  width: clamp(240px, 32vw, 340px);
+  height: clamp(240px, 32vw, 340px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jarvis-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 90, 110, 0.35);
+  pointer-events: none;
+}
+.jarvis-ring--1 { inset: 0; animation: jarvisPulse 3s ease-in-out infinite; }
+.jarvis-ring--2 { inset: 8%; border-color: rgba(255, 140, 160, 0.28); animation: jarvisPulse 3s ease-in-out infinite .6s; }
+.jarvis-ring--3 {
+  inset: -6%;
+  border-style: dashed;
+  border-color: rgba(255, 90, 110, 0.18);
+  animation: jarvisSpin 18s linear infinite;
+}
+@keyframes jarvisPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.06); opacity: 0.35; }
+}
+@keyframes jarvisSpin {
+  to { transform: rotate(360deg); }
+}
+.jarvis-orb {
+  position: relative;
+  width: 78%;
+  height: 78%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, rgba(60, 0, 10, 0.4) 0%, rgba(20, 0, 6, 0.9) 80%);
+  box-shadow:
+    0 0 60px rgba(255, 90, 110, 0.55),
+    0 0 120px rgba(164, 0, 17, 0.45),
+    inset 0 0 40px rgba(255, 180, 180, 0.15);
+  animation: jarvisBreath 4s ease-in-out infinite;
+}
+.jarvis-orb-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 20px rgba(255, 90, 110, 0.5)) saturate(1.15);
+  mask-image: radial-gradient(circle, black 62%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle, black 62%, transparent 100%);
+}
+.jarvis-orb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 220, 225, 0.18) 90deg, transparent 180deg, rgba(255, 220, 225, 0.12) 270deg, transparent 360deg);
+  animation: jarvisSpin 8s linear infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+@keyframes jarvisBreath {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.04); filter: brightness(1.12); }
+}
+.jarvis-particle {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--im8-flamingo);
+  box-shadow: 0 0 12px var(--im8-flamingo), 0 0 24px rgba(255, 90, 110, 0.7);
+  top: 50%; left: 50%;
+  margin: -4px 0 0 -4px;
+}
+.jarvis-particle--a { animation: jarvisOrbit 8s linear infinite; }
+.jarvis-particle--b { animation: jarvisOrbit 11s linear infinite reverse; background: #FFD7D7; box-shadow: 0 0 12px #FFD7D7; }
+.jarvis-particle--c { animation: jarvisOrbit 14s linear infinite; background: var(--im8-sand); box-shadow: 0 0 12px var(--im8-sand); }
+@keyframes jarvisOrbit {
+  from { transform: rotate(0deg) translateX(clamp(120px, 16vw, 170px)) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(clamp(120px, 16vw, 170px)) rotate(-360deg); }
+}
+.jarvis-status {
+  position: absolute;
+  bottom: clamp(0.8rem, 2vh, 1.3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-caption);
+  font-size: clamp(0.62rem, 0.85vw, 0.72rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 220, 225, 0.8);
+}
+.jarvis-status-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #4ADE80;
+  box-shadow: 0 0 8px #4ADE80, 0 0 14px rgba(74, 222, 128, 0.6);
+  animation: jarvisBlink 1.6s ease-in-out infinite;
+}
+@keyframes jarvisBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.jarvis-label {
+  position: absolute;
+  top: clamp(0.8rem, 2vh, 1.3rem);
+  left: clamp(0.8rem, 2vw, 1.3rem);
+  font-family: var(--font-caption);
+  font-size: clamp(0.6rem, 0.85vw, 0.7rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 220, 225, 0.7);
+}
+.jarvis-label .flamingo { color: var(--im8-flamingo); }
+.jarvis-chat {
+  position: absolute;
+  right: clamp(0.8rem, 1.8vw, 1.3rem);
+  top: clamp(0.8rem, 1.8vh, 1.3rem);
+  width: clamp(170px, 22vw, 220px);
+  background: rgba(20, 0, 6, 0.85);
+  border: 1px solid rgba(255, 90, 110, 0.3);
+  border-radius: 10px;
+  padding: clamp(0.5rem, 1vh, 0.7rem) clamp(0.55rem, 1vw, 0.75rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.6rem, 0.8vw, 0.72rem);
+  color: rgba(255, 245, 240, 0.92);
+  line-height: 1.4;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.jarvis-chat--user { top: auto; bottom: clamp(3rem, 6vh, 4.2rem); right: auto; left: clamp(0.8rem, 1.8vw, 1.3rem); border-color: rgba(255, 180, 200, 0.25); background: rgba(40, 8, 14, 0.85); }
+.jarvis-chat-from {
+  font-family: var(--font-caption);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--im8-flamingo);
+  margin-bottom: 0.3rem;
+}
+.jarvis-chat--user .jarvis-chat-from { color: var(--im8-sand); }
 </style>
 </head>
 <body>
@@ -1470,7 +1640,7 @@ p, li {
       Presented to the CEO &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Marco Tsze
     </p>
   </div>
-  <span class="slide-num">01 / 19</span>
+  <span class="slide-num">01 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -1539,7 +1709,7 @@ p, li {
       <span class="flamingo" style="font-weight: 600;">Hours saved every week</span> &nbsp;·&nbsp; Zero platform-hopping &nbsp;·&nbsp; Decisions in minutes, not days
     </p>
   </div>
-  <span class="slide-num">02 / 19</span>
+  <span class="slide-num">02 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -1604,7 +1774,7 @@ p, li {
       <span class="flamingo" style="font-weight: 600;">+ Slack integration</span> · <span class="flamingo" style="font-weight: 600;">+ Product Quiz</span> · <span class="flamingo" style="font-weight: 600;">+ User RBAC &amp; audit log</span> · <span class="flamingo" style="font-weight: 600;">+ Jarvis AI chat</span>
     </p>
   </div>
-  <span class="slide-num">03 / 19</span>
+  <span class="slide-num">03 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -1753,7 +1923,7 @@ p, li {
       <span class="flamingo">70+</span> API endpoints &nbsp;·&nbsp; Webhook-driven &nbsp;·&nbsp; Real-time sync
     </p>
   </div>
-  <span class="slide-num">04 / 19</span>
+  <span class="slide-num">04 / 20</span>
 </section>
 
 <!-- SLIDE 6c: PRODUCT TOUR (real page screenshots) -->
@@ -1846,7 +2016,7 @@ p, li {
       ▶ Follow along — next 8 slides walk through each module
     </p>
   </div>
-  <span class="slide-num">05 / 19</span>
+  <span class="slide-num">05 / 20</span>
 </section>
 
 <!-- GATE 1: MASTER DATA -->
@@ -1928,7 +2098,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">06 / 19</span>
+  <span class="slide-num">06 / 20</span>
 </section>
 
 <!-- GATE 2: INVENTORY -->
@@ -1992,7 +2162,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">07 / 19</span>
+  <span class="slide-num">07 / 20</span>
 </section>
 
 <!-- GATE 3: SHIPPING & COST (already unlocked — congratulations!) -->
@@ -2060,7 +2230,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">08 / 19</span>
+  <span class="slide-num">08 / 20</span>
 </section>
 
 <!-- GATE 4: SUPPLY CHAIN SYSTEM -->
@@ -2127,7 +2297,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">09 / 19</span>
+  <span class="slide-num">09 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -2221,7 +2391,7 @@ p, li {
       </p>
     </div>
   </div>
-  <span class="slide-num">10 / 19</span>
+  <span class="slide-num">10 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -2287,7 +2457,7 @@ p, li {
       </p>
     </div>
   </div>
-  <span class="slide-num">11 / 19</span>
+  <span class="slide-num">11 / 20</span>
 </section>
 
 <!-- GATE 5: WORK ORDERS -->
@@ -2353,7 +2523,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">12 / 19</span>
+  <span class="slide-num">12 / 20</span>
 </section>
 
 <!-- GATE 6: ASN INBOUND -->
@@ -2419,7 +2589,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">13 / 19</span>
+  <span class="slide-num">13 / 20</span>
 </section>
 
 <!-- GATE 7: HK FULFILMENT -->
@@ -2485,7 +2655,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">14 / 19</span>
+  <span class="slide-num">14 / 20</span>
 </section>
 
 <!-- GATE 8: PO MANAGEMENT -->
@@ -2501,7 +2671,7 @@ p, li {
   <div class="gate-price">Unlock for <span>$9,999</span></div>
   <div class="gate-btns">
     <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-14','gate-14')">💳 Yes, Pay Now</a>
-    <a class="gate-btn gate-btn--no" onclick="skipModule('slide-15')">🚫 No Thanks</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('gate-15')">🚫 No Thanks</a>
   </div>
 </div>
 </section>
@@ -2551,7 +2721,97 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">15 / 19</span>
+  <span class="slide-num">15 / 20</span>
+</section>
+
+<!-- ============================================ -->
+<!-- GATE 15: MODULE 9 — JARVIS AI AGENT          -->
+<!-- ============================================ -->
+<section class="slide gate-slide" id="gate-15">
+<div class="gate-coins"><span class="coin" style="left:8%;animation-delay:.4s">✨</span><span class="coin" style="left:28%;animation-delay:1.2s">🤖</span><span class="coin" style="left:50%;animation-delay:.1s">💬</span><span class="coin" style="left:72%;animation-delay:1.5s">✨</span><span class="coin" style="left:90%;animation-delay:.8s">🪙</span></div>
+<div class="gate-sparkle" style="top:22%;right:18%;animation-delay:.4s"></div>
+<div class="gate-sparkle" style="bottom:26%;left:12%;animation-delay:1.3s"></div>
+<div class="gate">
+  <div class="gate-lock">🔒</div>
+  <div class="gate-module">MODULE 9</div>
+  <div class="gate-title">Jarvis — AI Agent</div>
+  <div class="gate-tagline">Ask your operations anything, in plain English — on WhatsApp. Jarvis reads every IM8 Hub module and answers in seconds, 24/7.</div>
+  <div class="gate-price">Unlock for <span>$15,000</span></div>
+  <div class="gate-btns">
+    <a class="gate-btn gate-btn--yes" onclick="unlockModule('slide-jarvis','gate-15')">💳 Yes, Pay Now</a>
+    <a class="gate-btn gate-btn--no" onclick="skipModule('slide-15')">🚫 No Thanks</a>
+  </div>
+</div>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 15B: JARVIS AI AGENT                   -->
+<!-- ============================================ -->
+<section class="slide bg-dark bg-pattern" id="slide-jarvis">
+  <div class="content flex-col gap-md" style="max-width: 1240px;">
+    <div>
+      <span class="module-badge badge badge-flamingo reveal">Module · AI Agent</span>
+      <h2 class="reveal reveal-delay-1">Jarvis — Your Operations Co-Pilot</h2>
+      <p class="reveal reveal-delay-2" style="margin-top: 0.3rem;">Natural-language access to every module — delivered where your team already lives: WhatsApp</p>
+    </div>
+    <div class="md-layout reveal reveal-delay-3">
+      <div class="jarvis-stage">
+        <div class="jarvis-label"><span class="flamingo">●</span> IM8 HUB · JARVIS</div>
+        <div class="jarvis-orb-wrap">
+          <div class="jarvis-ring jarvis-ring--3"></div>
+          <div class="jarvis-ring jarvis-ring--1"></div>
+          <div class="jarvis-ring jarvis-ring--2"></div>
+          <div class="jarvis-orb">
+            <video class="jarvis-orb-video" autoplay loop muted playsinline>
+              <source src="./videos/jarvis.mp4" type="video/mp4">
+            </video>
+          </div>
+          <span class="jarvis-particle jarvis-particle--a"></span>
+          <span class="jarvis-particle jarvis-particle--b"></span>
+          <span class="jarvis-particle jarvis-particle--c"></span>
+        </div>
+        <div class="jarvis-chat jarvis-chat--user">
+          <div class="jarvis-chat-from">Marco · WhatsApp</div>
+          "What's stock for FG-000035 in AMS?"
+        </div>
+        <div class="jarvis-chat">
+          <div class="jarvis-chat-from">Jarvis</div>
+          AMS on-hand: <strong>2,410</strong> · available: <strong>1,870</strong> · 2 POs inbound (ETA Apr 28 / May 06).
+        </div>
+        <div class="jarvis-status">
+          <span class="jarvis-status-dot"></span>
+          <span>Online · Listening</span>
+        </div>
+      </div>
+      <div class="md-ba">
+        <div class="ba-card ba-card--before">
+          <div class="ba-card-head">
+            <span class="ba-card-icon">⚠</span>
+            <div><div class="ba-card-label">Before</div><div class="ba-card-sub">Context-switching tax</div></div>
+          </div>
+          <ul class="ba-card-list">
+            <li>Ops pings the backend team on Slack every time they need stock, PO or shipment status</li>
+            <li>Log in, click through 3–5 dashboards to answer a single question</li>
+            <li>Answers delayed by hours — or blocked while someone is offline / on a flight</li>
+            <li>Non-technical stakeholders can't self-serve data, even when it's right there in the Hub</li>
+          </ul>
+        </div>
+        <div class="ba-card ba-card--after">
+          <div class="ba-card-head">
+            <span class="ba-card-icon">✓</span>
+            <div><div class="ba-card-label">After</div><div class="ba-card-sub">Ask Jarvis, get answers</div></div>
+          </div>
+          <ul class="ba-card-list">
+            <li>Chat in plain English on WhatsApp — no app, no login, no training</li>
+            <li>Jarvis reads live data from every IM8 Hub module: inventory, PO, shipping, forecast</li>
+            <li>Instant answers 24/7 — across time zones, for any team member with access</li>
+            <li>Proactive alerts: low stock, late POs, abnormal shipping spend pushed to the right thread</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">16 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -2643,7 +2903,7 @@ p, li {
       </p>
     </div>
   </div>
-  <span class="slide-num">16 / 19</span>
+  <span class="slide-num">17 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -2680,7 +2940,7 @@ p, li {
       </div>
     </div>
   </div>
-  <span class="slide-num">17 / 19</span>
+  <span class="slide-num">18 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -2722,7 +2982,7 @@ p, li {
       <p style="font-size: clamp(0.7rem, 1.1vw, 0.82rem);"><span class="flamingo">◆</span> Continuously evolving — new modules ship every sprint</p>
     </div>
   </div>
-  <span class="slide-num">18 / 19</span>
+  <span class="slide-num">19 / 20</span>
 </section>
 
 <!-- ============================================ -->
@@ -2749,7 +3009,7 @@ p, li {
       </p>
     </div>
   </div>
-  <span class="slide-num">19 / 19</span>
+  <span class="slide-num">20 / 20</span>
 </section>
 
 <!-- === JAVASCRIPT === -->
