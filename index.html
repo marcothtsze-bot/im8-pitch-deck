@@ -4617,14 +4617,31 @@ function activateJarvis() {
 </div>
 
 <script>
-// Loop only the last 4 seconds of jarvis video (skip startup)
+// Ping-pong loop: play forward 4→8, then reverse 8→4, seamless
 const jfVid = document.querySelector('#jf-presenter .jf-vid video');
 if (jfVid) {
-  jfVid.currentTime = 4;
-  jfVid.addEventListener('timeupdate', function() {
-    if (this.currentTime >= 7.9 || this.currentTime < 4) this.currentTime = 4;
+  jfVid.pause();
+  const START = 4, END = 7.9, SPEED = 1;
+  let dir = 1, lastT = 0;
+  jfVid.currentTime = START;
+
+  function jfPingPong(ts) {
+    if (!lastT) lastT = ts;
+    const dt = (ts - lastT) / 1000;
+    lastT = ts;
+
+    let t = jfVid.currentTime + dt * SPEED * dir;
+    if (t >= END) { t = END; dir = -1; }
+    if (t <= START) { t = START; dir = 1; }
+    jfVid.currentTime = t;
+    requestAnimationFrame(jfPingPong);
+  }
+
+  jfVid.addEventListener('loadeddata', function() {
+    this.currentTime = START;
+    requestAnimationFrame(jfPingPong);
   });
-  jfVid.addEventListener('loadeddata', function() { this.currentTime = 4; });
+  if (jfVid.readyState >= 2) requestAnimationFrame(jfPingPong);
 }
 
 let jfOn = true;
