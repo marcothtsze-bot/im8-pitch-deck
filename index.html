@@ -4618,31 +4618,28 @@ function activateJarvis() {
 
 <script>
 // Ping-pong loop: play forward 4→8, then reverse 8→4, seamless
-const jfVid = document.querySelector('#jf-presenter .jf-vid video');
-if (jfVid) {
-  jfVid.pause();
-  const START = 4, END = 7.9, SPEED = 1;
-  let dir = 1, lastT = 0;
-  jfVid.currentTime = START;
+(function() {
+  var vid = document.querySelector('#jf-presenter .jf-vid video');
+  if (!vid) return;
+  var S = 4, E = 7.9, d = 1, last = 0;
+  vid.currentTime = S;
+  vid.pause();
 
-  function jfPingPong(ts) {
-    if (!lastT) lastT = ts;
-    const dt = (ts - lastT) / 1000;
-    lastT = ts;
-
-    let t = jfVid.currentTime + dt * SPEED * dir;
-    if (t >= END) { t = END; dir = -1; }
-    if (t <= START) { t = START; dir = 1; }
-    jfVid.currentTime = t;
-    requestAnimationFrame(jfPingPong);
+  function tick(ts) {
+    if (!last) { last = ts; requestAnimationFrame(tick); return; }
+    var dt = (ts - last) / 1000;
+    last = ts;
+    var t = vid.currentTime + dt * d;
+    if (t >= E) { t = E; d = -1; }
+    if (t <= S) { t = S; d = 1; }
+    try { vid.currentTime = t; } catch(e) {}
+    requestAnimationFrame(tick);
   }
 
-  jfVid.addEventListener('loadeddata', function() {
-    this.currentTime = START;
-    requestAnimationFrame(jfPingPong);
-  });
-  if (jfVid.readyState >= 2) requestAnimationFrame(jfPingPong);
-}
+  function start() { last = 0; vid.currentTime = S; requestAnimationFrame(tick); }
+  vid.addEventListener('canplay', start, { once: true });
+  if (vid.readyState >= 3) start();
+})();
 
 let jfOn = true;
 function toggleJarvisFloat() {
