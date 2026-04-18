@@ -4617,28 +4617,16 @@ function activateJarvis() {
 </div>
 
 <script>
-// Ping-pong loop: play forward 4→8, then reverse 8→4, seamless
+// Loop video between 4s and 8s, slow playback for smooth feel
 (function() {
   var vid = document.querySelector('#jf-presenter .jf-vid video');
   if (!vid) return;
-  var S = 4, E = 7.9, d = 1, last = 0;
-  vid.currentTime = S;
-  vid.pause();
-
-  function tick(ts) {
-    if (!last) { last = ts; requestAnimationFrame(tick); return; }
-    var dt = (ts - last) / 1000;
-    last = ts;
-    var t = vid.currentTime + dt * d;
-    if (t >= E) { t = E; d = -1; }
-    if (t <= S) { t = S; d = 1; }
-    try { vid.currentTime = t; } catch(e) {}
-    requestAnimationFrame(tick);
-  }
-
-  function start() { last = 0; vid.currentTime = S; requestAnimationFrame(tick); }
-  vid.addEventListener('canplay', start, { once: true });
-  if (vid.readyState >= 3) start();
+  vid.playbackRate = 0.5;
+  vid.currentTime = 4;
+  vid.play().catch(function(){});
+  vid.addEventListener('timeupdate', function() {
+    if (this.currentTime >= 7.8 || this.currentTime < 3.9) this.currentTime = 4;
+  });
 })();
 
 let jfOn = true;
