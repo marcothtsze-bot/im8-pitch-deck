@@ -4603,7 +4603,7 @@ function activateJarvis() {
     <div class="jf-ring-outer"></div>
     <div class="jf-ring-inner"></div>
     <div class="jf-vid">
-      <video autoplay loop muted playsinline preload="auto" src="videos/jarvis.mp4"></video>
+      <video autoplay loop muted playsinline preload="auto" src="videos/jarvis-loop.mp4"></video>
     </div>
   </div>
   <div class="jf-wave">
@@ -4617,16 +4617,10 @@ function activateJarvis() {
 </div>
 
 <script>
-// Loop video between 4s and 8s, slow playback for smooth feel
+// Slow down for smooth living feel
 (function() {
   var vid = document.querySelector('#jf-presenter .jf-vid video');
-  if (!vid) return;
-  vid.playbackRate = 0.5;
-  vid.currentTime = 4;
-  vid.play().catch(function(){});
-  vid.addEventListener('timeupdate', function() {
-    if (this.currentTime >= 7.8 || this.currentTime < 3.9) this.currentTime = 4;
-  });
+  if (vid) { vid.playbackRate = 0.6; vid.play().catch(function(){}); }
 })();
 
 let jfOn = true;
