@@ -4442,26 +4442,208 @@ function activateJarvis() {
 })();
 </script>
 
-<!-- FLOATING JARVIS -->
-<div id="jarvisFloat" style="position:fixed !important; bottom:30px !important; right:30px !important; z-index:2147483647 !important; cursor:pointer; display:block !important; visibility:visible !important; opacity:1 !important; pointer-events:auto !important; width:120px; height:120px;" onclick="toggleJarvisFloat()">
-  <img id="jarvisFloatImg" src="screenshots/jarvis-orb.png" style="width:120px; height:120px; object-fit:contain; display:block !important; visibility:visible !important; opacity:1 !important; filter:drop-shadow(0 0 20px rgba(255,90,110,0.7));" alt="JARVIS">
+<!-- FLOATING JARVIS — Siri-style presenter -->
+<style>
+#jf-presenter {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  user-select: none;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* === ORB AREA === */
+.jf-orb-area {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sonar rings - always pulsing outward */
+.jf-sonar-1, .jf-sonar-2, .jf-sonar-3 {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 90, 110, 0.3);
+  animation: jfSonarPulse 3s ease-out infinite;
+}
+.jf-sonar-2 { animation-delay: 1s; }
+.jf-sonar-3 { animation-delay: 2s; }
+@keyframes jfSonarPulse {
+  0% { transform: scale(0.85); opacity: 0.8; border-color: rgba(255, 90, 110, 0.5); }
+  100% { transform: scale(1.5); opacity: 0; border-color: rgba(255, 90, 110, 0); }
+}
+
+/* Spinning dashed ring */
+.jf-spin-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 150, 147, 0.35);
+  animation: jfSpin 12s linear infinite;
+}
+@keyframes jfSpin { to { transform: rotate(360deg); } }
+
+/* Inner glow ring */
+.jf-glow-ring {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 150, 147, 0.5);
+  animation: jfRingPulse 2.5s ease-in-out infinite;
+}
+@keyframes jfRingPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* The image */
+.jf-orb-area img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  animation: jfBreath 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 90, 110, 0.8));
+}
+@keyframes jfBreath {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255, 90, 110, 0.8)); }
+  50% { transform: scale(1.06); filter: drop-shadow(0 0 35px rgba(255, 90, 110, 1)) brightness(1.15); }
+}
+
+/* === WAVEFORM BARS - Siri speaking effect === */
+.jf-waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 28px;
+  margin-top: -5px;
+}
+.jf-waveform span {
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(to top, #A40011, #FF9693);
+  box-shadow: 0 0 6px rgba(255, 150, 147, 0.5);
+}
+.jf-bar-1 { height: 8px; animation: jfWave1 0.8s ease-in-out infinite; }
+.jf-bar-2 { height: 14px; animation: jfWave2 0.7s ease-in-out infinite; }
+.jf-bar-3 { height: 20px; animation: jfWave3 0.9s ease-in-out infinite; }
+.jf-bar-4 { height: 26px; animation: jfWave4 0.6s ease-in-out infinite; }
+.jf-bar-5 { height: 18px; animation: jfWave5 0.85s ease-in-out infinite; }
+.jf-bar-6 { height: 24px; animation: jfWave6 0.75s ease-in-out infinite; }
+.jf-bar-7 { height: 12px; animation: jfWave7 0.65s ease-in-out infinite; }
+.jf-bar-8 { height: 20px; animation: jfWave8 0.8s ease-in-out infinite; }
+.jf-bar-9 { height: 16px; animation: jfWave9 0.7s ease-in-out infinite; }
+.jf-bar-10 { height: 10px; animation: jfWave10 0.9s ease-in-out infinite; }
+
+@keyframes jfWave1 { 0%,100% { height: 6px; } 50% { height: 18px; } }
+@keyframes jfWave2 { 0%,100% { height: 10px; } 50% { height: 24px; } }
+@keyframes jfWave3 { 0%,100% { height: 14px; } 50% { height: 8px; } }
+@keyframes jfWave4 { 0%,100% { height: 8px; } 50% { height: 26px; } }
+@keyframes jfWave5 { 0%,100% { height: 18px; } 50% { height: 10px; } }
+@keyframes jfWave6 { 0%,100% { height: 12px; } 50% { height: 22px; } }
+@keyframes jfWave7 { 0%,100% { height: 6px; } 50% { height: 16px; } }
+@keyframes jfWave8 { 0%,100% { height: 16px; } 50% { height: 6px; } }
+@keyframes jfWave9 { 0%,100% { height: 10px; } 50% { height: 20px; } }
+@keyframes jfWave10 { 0%,100% { height: 14px; } 50% { height: 8px; } }
+
+/* === STATUS LABEL === */
+.jf-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 4px 14px;
+  background: rgba(20, 0, 6, 0.85);
+  border: 1px solid rgba(255, 90, 110, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+}
+.jf-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ADE80;
+  box-shadow: 0 0 8px #4ADE80;
+  animation: jfDotPulse 1.2s ease-in-out infinite;
+}
+@keyframes jfDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.jf-status-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 240, 0.9);
+}
+</style>
+
+<div id="jf-presenter" onclick="toggleJarvisFloat()">
+  <!-- Orb with rings -->
+  <div class="jf-orb-area">
+    <div class="jf-sonar-1"></div>
+    <div class="jf-sonar-2"></div>
+    <div class="jf-sonar-3"></div>
+    <div class="jf-spin-ring"></div>
+    <div class="jf-glow-ring"></div>
+    <img src="screenshots/jarvis-orb.png" alt="JARVIS AI">
+  </div>
+
+  <!-- Waveform - like Siri speaking -->
+  <div class="jf-waveform">
+    <span class="jf-bar-1"></span>
+    <span class="jf-bar-2"></span>
+    <span class="jf-bar-3"></span>
+    <span class="jf-bar-4"></span>
+    <span class="jf-bar-5"></span>
+    <span class="jf-bar-6"></span>
+    <span class="jf-bar-7"></span>
+    <span class="jf-bar-8"></span>
+    <span class="jf-bar-9"></span>
+    <span class="jf-bar-10"></span>
+  </div>
+
+  <!-- Status -->
+  <div class="jf-status">
+    <div class="jf-status-dot"></div>
+    <span class="jf-status-text" id="jfStatusText">PRESENTING</span>
+  </div>
 </div>
 
 <script>
-let jfSpeaking = false;
+let jfSpeaking = true;
 function toggleJarvisFloat() {
   jfSpeaking = !jfSpeaking;
-  const img = document.getElementById('jarvisFloatImg');
+  const bars = document.querySelectorAll('.jf-waveform span');
+  const dot = document.querySelector('.jf-status-dot');
+  const txt = document.getElementById('jfStatusText');
   if (jfSpeaking) {
-    img.style.filter = 'drop-shadow(0 0 40px rgba(255,90,110,1)) brightness(1.3)';
-    img.style.transform = 'scale(1.1)';
+    bars.forEach(b => b.style.animationPlayState = 'running');
+    dot.style.background = '#4ADE80';
+    dot.style.boxShadow = '0 0 8px #4ADE80';
+    txt.textContent = 'PRESENTING';
   } else {
-    img.style.filter = 'drop-shadow(0 0 20px rgba(255,90,110,0.7))';
-    img.style.transform = 'scale(1)';
+    bars.forEach(b => b.style.animationPlayState = 'paused');
+    dot.style.background = '#FF9693';
+    dot.style.boxShadow = '0 0 8px #FF9693';
+    txt.textContent = 'PAUSED';
   }
 }
-window.jarvisSpeak = () => { jfSpeaking = true; const img = document.getElementById('jarvisFloatImg'); img.style.filter = 'drop-shadow(0 0 40px rgba(255,90,110,1)) brightness(1.3)'; img.style.transform = 'scale(1.1)'; };
-window.jarvisIdle = () => { jfSpeaking = false; const img = document.getElementById('jarvisFloatImg'); img.style.filter = 'drop-shadow(0 0 20px rgba(255,90,110,0.7))'; img.style.transform = 'scale(1)'; };
 </script>
 </body>
 </html>
