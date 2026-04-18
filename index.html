@@ -4617,6 +4617,16 @@ function activateJarvis() {
 </div>
 
 <script>
+// Loop only the last 4 seconds of jarvis video (skip startup)
+const jfVid = document.querySelector('#jf-presenter .jf-vid video');
+if (jfVid) {
+  jfVid.currentTime = 4;
+  jfVid.addEventListener('timeupdate', function() {
+    if (this.currentTime >= 7.9 || this.currentTime < 4) this.currentTime = 4;
+  });
+  jfVid.addEventListener('loadeddata', function() { this.currentTime = 4; });
+}
+
 let jfOn = true;
 function toggleJarvisFloat() {
   jfOn = !jfOn;
